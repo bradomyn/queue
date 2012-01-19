@@ -252,7 +252,8 @@ $O/WRClassifier_out.o: WRClassifier_out.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
-	WRClassifier_out.h
+	WRClassifier_out.h \
+	WRQueue.h
 $O/WRQueue.o: WRQueue.cc \
 	Job.h \
 	Job_m.h \

@@ -2730,3 +2730,6 @@ org.eclipse.swt.SWTException: Invalid thread access
 
 !ENTRY org.omnetpp.cdt 1 0 2012-01-19 09:34:42.669
 !MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-01-19 09:36:19.579
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?

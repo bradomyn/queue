@@ -10,6 +10,7 @@
 // SMa, 11.01.2012
 
 #include "WRClassifier_out.h"
+#include "WRQueue.h"
 #include "Job.h"
 
 namespace queueing {
@@ -40,12 +41,34 @@ void WRClassifier_out::handleMessage(cMessage *msg)
 	out = "out";
 	char buffer[3];
 
-    sprintf(buffer,"%d\0",priority);
+    sprintf(buffer,"%d",priority);
+    buffer[2]='\0';
 	//std::cout << "buf " << buffer << std::endl;
 	out += buffer;
 	std::cout << "Classifier out: send package with priority " << priority << " to " << out << std::endl;
 	cModule *targetModule = getParentModule()->getSubmodule(out.c_str());
 	sendDirect(msg, targetModule, "sendDirect");
+
+
+	// TODO check all queues, retrieve elements from queues
+	std::string queue;
+	//sprintf(queue, "wrQueue%d", priority);
+	queue = "wrQueue";
+	sprintf(buffer,"%d",priority);
+	buffer[2]='\0';
+	queue += buffer;
+	std::cout << "Check queue " << queue << std::endl;
+	cModule *queueModule = getParentModule()->getSubmodule(queue.c_str());
+
+	std::cout << queueModule->getModuleType()->getFullName() << std::endl;
+
+	/*WRQueue *wrqueue = queueModule->queue;
+	while( wrqueue->length()>0 ) {
+		Job *job = wrqueue->getFromQueue();
+		//startService(job);
+		std::cout << " queue length " << wrqueue->length() << std::endl;
+	}*/
+
 }
 
 }; //namespace

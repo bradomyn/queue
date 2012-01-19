@@ -99,7 +99,8 @@ void WRQueue::handleMessage(cMessage *msg)
         		std::string queue;
         		queue = "wrQueue";
         		char buffer[3];
-        		sprintf(buffer,"%d\0",i);
+        		sprintf(buffer,"%d",i);
+        		buffer[2]='\0';
 				queue += buffer;
         		WRQueue *q = check_and_cast<WRQueue *>( getParentModule()->findObject(queue.c_str(), true) );
 

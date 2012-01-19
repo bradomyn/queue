@@ -40,8 +40,8 @@ void WRClassifier_in::handleMessage(cMessage *msg)
 	queue = "wrQueue";
 	char buffer[3];
 
-    sprintf(buffer,"%d\0",priority);
-	std::cout << "buf " << buffer << std::endl;
+    sprintf(buffer,"%d",priority);
+    buffer[2]='\0';
 	queue += buffer;
 	std::cout << "Classifier in: send package with priority " << priority << " to " << queue << std::endl;
 	cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
