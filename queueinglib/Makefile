@@ -30,11 +30,11 @@ OBJS = \
     $O/Source.o \
     $O/WRClassifier_out.o \
     $O/PassiveQueue.o \
+    $O/WRClassifier_in.o \
     $O/ResourcePool.o \
     $O/Job.o \
     $O/WRSource.o \
     $O/Classifier.o \
-    $O/WRClassifier.o \
     $O/Join.o \
     $O/Delay.o \
     $O/Fork.o \
@@ -243,11 +243,11 @@ $O/Source.o: Source.cc \
 	Job_m.h \
 	QueueingDefs.h \
 	Source.h
-$O/WRClassifier.o: WRClassifier.cc \
+$O/WRClassifier_in.o: WRClassifier_in.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
-	WRClassifier.h
+	WRClassifier_in.h
 $O/WRClassifier_out.o: WRClassifier_out.cc \
 	Job.h \
 	Job_m.h \

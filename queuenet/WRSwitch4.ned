@@ -8,7 +8,7 @@
 //
 
 import org.omnetpp.queueing.Classifier;
-import org.omnetpp.queueing.WRClassifier;
+import org.omnetpp.queueing.WRClassifier_in;
 import org.omnetpp.queueing.Delay;
 import org.omnetpp.queueing.PassiveQueue;
 import org.omnetpp.queueing.WRServer;
@@ -28,40 +28,40 @@ import org.omnetpp.queueing.WRClassifier_out;
 network WhiteRabbitSwitch4
 {
     parameters:
-        @display("i=block/users;bgb=581,515");
+        @display("i=block/users;bgb=766,515");
     submodules:
         out0: Sink {
-            @display("p=528,35;i=block/departure");
+            @display("p=708,34;i=block/departure");
         }
-        classifier_in: WRClassifier {
+        classifier_in: WRClassifier_in {
             @display("p=201,259;b=27,28");
         }
         wrQueue0: WRQueue {
             @display("p=362,35");
         }
         out1: Sink {
-            @display("p=528,102;i=block/departure");
+            @display("p=708,101;i=block/departure");
         }
         out2: Sink {
-            @display("p=528,163;i=block/departure");
+            @display("p=708,162;i=block/departure");
         }
         out3: Sink {
-            @display("p=528,230;i=block/departure");
+            @display("p=708,229;i=block/departure");
         }
         out4: Sink {
-            @display("p=528,287;i=block/departure");
+            @display("p=708,286;i=block/departure");
         }
         out5: Sink {
-            @display("p=528,354;i=block/departure");
+            @display("p=708,353;i=block/departure");
         }
         out6: Sink {
-            @display("p=528,415;i=block/departure");
+            @display("p=708,414;i=block/departure");
         }
         out7: Sink {
-            @display("p=528,482;i=block/departure");
+            @display("p=708,482;i=block/departure");
         }
         classifier_out: WRClassifier_out {
-            @display("p=428,259;b=27,28");
+            @display("p=528,259;b=27,28");
         }
         wrQueue1: WRQueue {
             @display("p=362,93");

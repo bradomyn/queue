@@ -55,10 +55,6 @@ void WRSource::initialize()
     // schedule the first message timer for start time
     scheduleAt(startTime, new cMessage("newJobTimer"));
 
-    /*cMessage *msg = new cMessage("newJobTimer");
-	rtScheduler = check_and_cast<cSocketRTScheduler *>(simulation.getScheduler());
-    rtScheduler->setInterfaceModule(this, msg, recvBuffer, 4000, &numRecvBytes);
-*/
 }
 
 void WRSource::handleMessage(cMessage *msg)
@@ -72,8 +68,6 @@ void WRSource::handleMessage(cMessage *msg)
     if ((numJobs < 0 || numJobs > jobCounter) && (stopTime < 0 || stopTime > simTime()))
     {
         // reschedule the timer for the next message
-    	//scheduleAt(simTime() + par("interArrivalTime").doubleValue(), msg);
-    	// SMa, 12.01.2012
         scheduleAt(simTime()+ par("interArrivalTime").doubleValue(), msg);
 
         Job *job = createJob();

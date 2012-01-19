@@ -46,46 +46,6 @@ void WRClassifier_out::handleMessage(cMessage *msg)
 	std::cout << "Classifier out: send package with priority " << priority << " to " << out << std::endl;
 	cModule *targetModule = getParentModule()->getSubmodule(out.c_str());
 	sendDirect(msg, targetModule, "sendDirect");
-
-    // SMa, 13.01.2012
-    //if( priority<7 ) {
-    /*	if (outGateIndex < 0 || outGateIndex >= gateSize("out")) {
-			//send(job, "rest");
-			//error("outGateIndex < 0 || outGateIndex >= gateSize(out): %d (%d)", outGateIndex, gateSize("out"));
-			std::cout << " outGateIndex: " << outGateIndex << " prio " << priority << std::endl;
-			//send(job, "out", 0);	// danger of overriding something?
-
-
-		}*/
-    //} else {
-    	// packets with highest priority send immediately
-		//cModule *targetModule = getParentModule()->getSubmodule("switch");
-		//sendDirect(msg, targetModule, "sendDirect");
-    //}
-
-    /*
-    if (outGateIndex < 0 || outGateIndex >= gateSize("out")) {
-        //send(job, "rest");
-        //error("outGateIndex < 0 || outGateIndex >= gateSize(out): %d (%d)", outGateIndex, gateSize("out"));
-        std::cout << "outGateIndex: " << outGateIndex << std::endl;
-    	//send(job, "out", 0);	// danger of overriding something?
-
-        cModule *targetModule = getParentModule()->getSubmodule("wrQueue");
-    	sendDirect(msg, targetModule, "sendDirect");
-    }
-    else if (outGateIndex>=7) {
-    	// packets with highest priority send immediately
-    	//send(job, "out", 0);	// danger of overriding something?
-    	cModule *targetModule = getParentModule()->getSubmodule("switch");
-		sendDirect(msg, targetModule, "sendDirect");
-    }
-    else {
-    	// insert into queue that should be emptied if there is no high priority packet
-    	// TODO
-    	//send(job, "out", outGateIndex);
-    	cModule *targetModule = getParentModule()->getSubmodule("wrQueue");
-		sendDirect(msg, targetModule, "sendDirect");
-    }*/
 }
 
 }; //namespace
