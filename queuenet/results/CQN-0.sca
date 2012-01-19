@@ -1,0 +1,319 @@
+version 2
+run CQN-0-20120112-12:36:45-2592
+attr configname CQN
+attr datetime 20120112-12:36:45
+attr experiment CQN
+attr inifile omnetpp.ini
+attr iterationvars $numQueues=5
+attr iterationvars2 "$numQueues=5, $repetition=0"
+attr measurement $numQueues=5
+attr network ClosedQueueingNetwork
+attr numQueues 5
+attr processid 2592
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar . 	numQueues 	5
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[0] 	busy:timeavg 	0.29457672025994
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[0] 	queueingTime:mean 	5.8416665932681
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[0] 	queueingTime:max 	17.192685655958
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[0] 	queueLength:timeavg 	0.11162108675269
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[0] 	queueLength:max 	2
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[0] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[1] 	busy:timeavg 	0.11777187514955
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[1] 	queueingTime:mean 	0.71996584063643
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[1] 	queueingTime:max 	5.039760884455
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[1] 	queueLength:timeavg 	0.013756925061294
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[1] 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[1] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[2] 	busy:timeavg 	0.12637831544892
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[2] 	queueingTime:mean 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[2] 	queueingTime:max 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[2] 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[2] 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[2] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[3] 	busy:timeavg 	0.21390058403882
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[3] 	queueingTime:mean 	4.3996075356443
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[3] 	queueingTime:max 	25.799292559022
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[3] 	queueLength:timeavg 	0.072057074795335
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[3] 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[3] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[4] 	busy:timeavg 	0.11169333346314
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[4] 	queueingTime:mean 	1.9069029643676
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[4] 	queueingTime:max 	9.534514821838
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[4] 	queueLength:timeavg 	0.026026156579055
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[4] 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[0].queue[4] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[0] 	busy:timeavg 	0.158972677397
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[0] 	queueingTime:mean 	1.7971207769678
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[0] 	queueingTime:max 	8.985603884839
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[0] 	queueLength:timeavg 	0.024527806399602
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[0] 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[0] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[1] 	busy:timeavg 	0.17591288541228
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[1] 	queueingTime:mean 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[1] 	queueingTime:max 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[1] 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[1] 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[1] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[2] 	busy:timeavg 	0.095982342992324
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[2] 	queueingTime:mean 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[2] 	queueingTime:max 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[2] 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[2] 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[2] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[3] 	busy:timeavg 	0.045348642610841
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[3] 	queueingTime:mean 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[3] 	queueingTime:max 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[3] 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[3] 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[3] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[4] 	busy:timeavg 	0.081990970602222
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[4] 	queueingTime:mean 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[4] 	queueingTime:max 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[4] 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[4] 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[1].queue[4] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[0] 	busy:timeavg 	0.30378710914652
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[0] 	queueingTime:mean 	3.1807412031518
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[0] 	queueingTime:max 	12.559307580473
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[0] 	queueLength:timeavg 	0.052094398176029
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[0] 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[0] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[1] 	busy:timeavg 	0.097560546831201
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[1] 	queueingTime:mean 	1.52286510359
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[1] 	queueingTime:max 	9.13719062154
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[1] 	queueLength:timeavg 	0.02494158939941
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[1] 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[1] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[2] 	busy:timeavg 	0.089195210737308
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[2] 	queueingTime:mean 	1.0268416299455
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[2] 	queueingTime:max 	6.161049779673
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[2] 	queueLength:timeavg 	0.016817682834774
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[2] 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[2] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[3] 	busy:timeavg 	0.13703209560522
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[3] 	queueingTime:mean 	0.2122579636066
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[3] 	queueingTime:max 	1.061289818033
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[3] 	queueLength:timeavg 	0.052827418754041
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[3] 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[3] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[4] 	busy:timeavg 	0.072157259047887
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[4] 	queueingTime:mean 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[4] 	queueingTime:max 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[4] 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[4] 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar ClosedQueueingNetwork.tandemQueue[2].queue[4] 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"

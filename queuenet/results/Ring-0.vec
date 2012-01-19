@@ -1,0 +1,52 @@
+version 2
+run Ring-0-20120111-14:20:34-1460
+attr configname Ring
+attr datetime 20120111-14:20:34
+attr experiment Ring
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network RingQueue
+attr processid 1460
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  RingQueue.queue  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 1  RingQueue.queue1  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 2  RingQueue.queue2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 3  RingQueue.queue3  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 4  RingQueue.queue4  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+0	0	0	0
+0	5	0	1
+0	7	0	2
+0	9	0	3
+0	11	0	4
+0	13	0	5
+0	15	0	6
+0	17	0	7
+0	19	0	8
+0	21	0	9
+0	23	0	10
+0	25	0	11
+0	27	0	12
+0	29	0	13
+0	31	0	14
+0	32	1.591749009131	13
+1	0	0	0
+2	0	0	0
+3	0	0	0
+4	0	0	0

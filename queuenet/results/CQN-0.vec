@@ -1,0 +1,107 @@
+version 2
+run CQN-0-20120112-12:36:45-2592
+attr configname CQN
+attr datetime 20120112-12:36:45
+attr experiment CQN
+attr inifile omnetpp.ini
+attr iterationvars $numQueues=5
+attr iterationvars2 "$numQueues=5, $repetition=0"
+attr measurement $numQueues=5
+attr network ClosedQueueingNetwork
+attr numQueues 5
+attr processid 2592
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  ClosedQueueingNetwork.tandemQueue[0].queue[0]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 1  ClosedQueueingNetwork.tandemQueue[0].queue[1]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 2  ClosedQueueingNetwork.tandemQueue[0].queue[2]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 3  ClosedQueueingNetwork.tandemQueue[0].queue[3]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 4  ClosedQueueingNetwork.tandemQueue[0].queue[4]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 5  ClosedQueueingNetwork.tandemQueue[1].queue[0]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 6  ClosedQueueingNetwork.tandemQueue[1].queue[1]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 7  ClosedQueueingNetwork.tandemQueue[1].queue[2]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 8  ClosedQueueingNetwork.tandemQueue[1].queue[3]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 9  ClosedQueueingNetwork.tandemQueue[1].queue[4]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 10  ClosedQueueingNetwork.tandemQueue[2].queue[0]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 11  ClosedQueueingNetwork.tandemQueue[2].queue[1]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 12  ClosedQueueingNetwork.tandemQueue[2].queue[2]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 13  ClosedQueueingNetwork.tandemQueue[2].queue[3]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 14  ClosedQueueingNetwork.tandemQueue[2].queue[4]  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+0	0	0	0
+0	5	0	1
+0	10	7.958745045657	0
+0	138	320.325232002254	1
+0	140	326.232867157462	2
+0	143	337.517917658212	1
+0	147	341.973102608724	0
+1	0	0	0
+1	148	342.973102608724	1
+1	157	348.012863493179	0
+2	0	0	0
+3	0	0	0
+3	43	37.922399607262	1
+3	56	63.721692166284	0
+3	125	222.100172648174	1
+3	126	222.611502263003	0
+3	167	362.876248828866	1
+3	168	362.963271868881	0
+4	0	0	0
+4	59	65.633302427526	1
+4	64	75.167817249364	0
+5	0	0	0
+5	7	0	1
+5	12	8.985603884839	0
+6	0	0	0
+7	0	0	0
+8	0	0	0
+9	0	0	0
+10	0	0	0
+10	9	0	1
+10	14	12.559307580473	0
+10	139	325.408569637247	1
+10	141	331.933709275685	0
+11	0	0	0
+11	85	180.875475457717	1
+11	91	190.012666079257	0
+12	0	0	0
+12	94	192.559962884257	1
+12	102	198.72101266393	0
+13	0	0	0
+13	111	205.076669866208	1
+13	112	206.137959684241	0
+13	158	348.051863985099	1
+14	0	0	0

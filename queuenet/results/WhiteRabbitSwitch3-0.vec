@@ -1,0 +1,26 @@
+version 2
+run WhiteRabbitSwitch3-0-20120113-14:35:02-3340
+attr configname WhiteRabbitSwitch3
+attr datetime 20120113-14:35:02
+attr experiment WhiteRabbitSwitch3
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WhiteRabbitSwitch3
+attr processid 3340
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 1  WhiteRabbitSwitch3.wrQueue  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 0  WhiteRabbitSwitch3.out  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+0	4	43.773097751117	0
+1	0	0	0

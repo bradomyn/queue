@@ -1,0 +1,123 @@
+version 2
+run Ring-0-20120111-14:20:34-1460
+attr configname Ring
+attr datetime 20120111-14:20:34
+attr experiment Ring
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network RingQueue
+attr processid 1460
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar RingQueue.source1 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar RingQueue.source 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar RingQueue.queue 	busy:timeavg 	1
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar RingQueue.queue 	queueingTime:mean 	0.7958745045655
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar RingQueue.queue 	queueingTime:max 	1.591749009131
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar RingQueue.queue 	queueLength:timeavg 	14
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar RingQueue.queue 	queueLength:max 	14
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar RingQueue.queue 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar RingQueue.queue1 	busy:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar RingQueue.queue1 	queueingTime:mean 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar RingQueue.queue1 	queueingTime:max 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar RingQueue.queue1 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar RingQueue.queue1 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar RingQueue.queue1 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar RingQueue.queue2 	busy:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar RingQueue.queue2 	queueingTime:mean 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar RingQueue.queue2 	queueingTime:max 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar RingQueue.queue2 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar RingQueue.queue2 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar RingQueue.queue2 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar RingQueue.queue3 	busy:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar RingQueue.queue3 	queueingTime:mean 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar RingQueue.queue3 	queueingTime:max 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar RingQueue.queue3 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar RingQueue.queue3 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar RingQueue.queue3 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar RingQueue.queue4 	busy:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar RingQueue.queue4 	queueingTime:mean 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar RingQueue.queue4 	queueingTime:max 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar RingQueue.queue4 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar RingQueue.queue4 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar RingQueue.queue4 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"

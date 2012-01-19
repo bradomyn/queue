@@ -1,0 +1,192 @@
+version 2
+run Terminal-0-20120111-15:18:51-3272
+attr configname Terminal
+attr datetime 20120111-15:18:51
+attr experiment Terminal
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network Terminal
+attr processid 3272
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar Terminal.arrival 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar Terminal.toOtherTerminal 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar Terminal.toOtherTerminal 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar Terminal.toOtherTerminal 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar Terminal.toOtherTerminal 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar Terminal.toOtherTerminal 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar Terminal.toOtherTerminal 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar Terminal.toOtherTerminal 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar Terminal.toOtherTerminal 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar Terminal.toOtherTerminal 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar Terminal.toOtherTerminal 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar Terminal.toOtherTerminal 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar Terminal.toOtherTerminal 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar Terminal.toOtherTerminal 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar Terminal.toOtherTerminal 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar Terminal.delay1 	delayedJobs:timeavg 	0.075899353231835
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar Terminal.delay1 	delayedJobs:max 	1
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar Terminal.delay2 	delayedJobs:timeavg 	0.10105614131526
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar Terminal.delay2 	delayedJobs:max 	1
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar Terminal.delay3 	delayedJobs:timeavg 	0.069698301797977
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar Terminal.delay3 	delayedJobs:max 	1
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar Terminal.firstClass 	queueingTime:mean 	95.566409181603
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar Terminal.firstClass 	queueingTime:max 	248.97998676929
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar Terminal.firstClass 	queueLength:timeavg 	0.29099931330286
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar Terminal.firstClass 	queueLength:max 	2
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar Terminal.firstClass 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar Terminal.businessClass 	queueingTime:mean 	163.8147740182
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar Terminal.businessClass 	queueingTime:max 	410.57200637592
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar Terminal.businessClass 	queueLength:timeavg 	0.27208107091405
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar Terminal.businessClass 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar Terminal.businessClass 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar Terminal.economyClass 	queueingTime:mean 	231.54806166285
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar Terminal.economyClass 	queueingTime:max 	900.77041023245
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar Terminal.economyClass 	queueLength:timeavg 	0.76915949691207
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar Terminal.economyClass 	queueLength:max 	4
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar Terminal.economyClass 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar Terminal.checkin 	busy:timeavg 	0.78232541166531
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar Terminal.boarding 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar Terminal.boarding 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar Terminal.boarding 	delaysVisited:mean 	1
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar Terminal.boarding 	delaysVisited:max 	1
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar Terminal.boarding 	queuesVisited:mean 	1.6111111111111
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar Terminal.boarding 	queuesVisited:max 	2
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar Terminal.boarding 	totalServiceTime:mean 	78.503844515967
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar Terminal.boarding 	totalServiceTime:max 	321.60602101459
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar Terminal.boarding 	totalDelayTime:mean 	24.750916931522
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar Terminal.boarding 	totalDelayTime:max 	86.33745063833
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar Terminal.boarding 	totalQueueingTime:mean 	133.68599680725
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar Terminal.boarding 	totalQueueingTime:max 	900.77041023245
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar Terminal.boarding 	lifeTime:mean 	236.94075825474
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar Terminal.boarding 	lifeTime:max 	946.75447907712
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s

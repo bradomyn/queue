@@ -1,0 +1,39 @@
+version 2
+run SmallCQN-0-20120111-14:19:10-1140
+attr configname SmallCQN
+attr datetime 20120111-14:19:10
+attr experiment SmallCQN
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network SmallCQN
+attr processid 1140
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  SmallCQN.queue1  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 1  SmallCQN.queue2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+0	0	0	0
+0	3	0	1
+0	4	0	2
+0	5	0	3
+0	6	0	4
+0	7	0	5
+0	8	0	6
+0	9	0	7
+0	10	0	8
+0	11	0	9
+0	12	1	8
+0	15	1.795874504565	9
+0	16	2	8
+0	19	2.898560388483	9
+0	20	3	8
+1	0	0	0

@@ -1,0 +1,251 @@
+version 2
+run WhiteRabbitSwitch1-0-20120113-14:06:19-592
+attr configname WhiteRabbitSwitch1
+attr datetime 20120113-14:06:19
+attr experiment WhiteRabbitSwitch1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WhiteRabbitSwitch1
+attr processid 592
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar WhiteRabbitSwitch1.in 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch1.in1 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch1.in2 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch1.in3 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch1.in4 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch1.in5 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch1.in6 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch1.in7 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch1.out 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch1.out 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch1.out 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch1.out 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch1.out 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch1.out 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch1.out 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.out 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.out 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.out 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.out 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.out 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.out 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.out 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue 	busy:timeavg 	0.95111454646473
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch1.queue 	queueingTime:mean 	209.57615846227
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue 	queueingTime:max 	490.46790925946
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue 	queueLength:timeavg 	3.2251127697411
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch1.queue 	queueLength:max 	6
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch1.queue 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch1.queue1 	busy:timeavg 	0.94480721286099
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch1.queue1 	queueingTime:mean 	155.9531219905
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue1 	queueingTime:max 	353.59493059073
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue1 	queueLength:timeavg 	2.3217746164018
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch1.queue1 	queueLength:max 	6
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch1.queue1 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch1.queue2 	busy:timeavg 	0.92285624886358
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch1.queue2 	queueingTime:mean 	151.07957300733
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue2 	queueingTime:max 	280.77447628653
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue2 	queueLength:timeavg 	3.2216668167307
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch1.queue2 	queueLength:max 	6
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch1.queue2 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch1.queue3 	busy:timeavg 	0.88577647005671
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch1.queue3 	queueingTime:mean 	92.46729484027
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue3 	queueingTime:max 	208.54463813238
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue3 	queueLength:timeavg 	1.936725048737
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch1.queue3 	queueLength:max 	6
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch1.queue3 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch1.queue4 	busy:timeavg 	0.94329233913476
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch1.queue4 	queueingTime:mean 	140.68339044746
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue4 	queueingTime:max 	406.48180560241
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue4 	queueLength:timeavg 	2.4934521145355
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch1.queue4 	queueLength:max 	6
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch1.queue4 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch1.queue5 	busy:timeavg 	0.88012911798022
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch1.queue5 	queueingTime:mean 	204.4246777017
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue5 	queueingTime:max 	528.2658931492
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue5 	queueLength:timeavg 	3.2846946821452
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch1.queue5 	queueLength:max 	6
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch1.queue5 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch1.queue6 	busy:timeavg 	0.95164729548348
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch1.queue6 	queueingTime:mean 	174.12132615335
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue6 	queueingTime:max 	349.72427413394
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue6 	queueLength:timeavg 	2.9438596354097
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch1.queue6 	queueLength:max 	6
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch1.queue6 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch1.queue7 	busy:timeavg 	0.88458731943387
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch1.queue7 	queueingTime:mean 	193.6556743103
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue7 	queueingTime:max 	489.20813264751
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch1.queue7 	queueLength:timeavg 	2.0812493712676
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch1.queue7 	queueLength:max 	6
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch1.queue7 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
