@@ -7,16 +7,6 @@ scheduler-class = cRealTimeScheduler
 #**.vector-record-eventnumbers = false
 #scheduler-class = "WRScheduler"
 
-[Config WhiteRabbitSwitch6]
-description = "White Rabbit Switch 6"
-network = WhiteRabbitSwitch6
-**.stopTime = 3600s
-**.interArrivalTime = exponential(2s)
-**.jobType = intuniform(0,6)
-**.in.jobName = "packet"
-**.serviceTime = exponential(5s)
-**.fetchingAlgorithm = "currentWRSwitch"
-
 [Config WhiteRabbitSwitch5]
 description = "White Rabbit Switch 5"
 network = WhiteRabbitSwitch5
