@@ -58,7 +58,9 @@ void WRQueue::handleMessage(cMessage *msg)
             jobServiced = getFromQueue();
             emit(queueLengthSignal, length());
             simtime_t serviceTime = startService( jobServiced );
+
             scheduleAt( simTime()+serviceTime, endServiceMsg );
+
             // TODO if switch is not busy send packets
         }
     } else {
@@ -78,8 +80,6 @@ void WRQueue::handleMessage(cMessage *msg)
 
         // SMa, 12.01.2012
 		if( job->getPriority()>=7 ) {
-			//jobServiced = job;
-			//startService(job);	// send immediately out
 			// packets with highest priority send immediately
 			cModule *targetModule = getParentModule()->getSubmodule("classifier_out");
 			sendDirect(msg, targetModule, "sendDirect");
@@ -95,7 +95,7 @@ void WRQueue::handleMessage(cMessage *msg)
         	//std::cout << "objects in queue " << q0->getFullName() << ": " << q0->length() << std::endl;
 
         	// print number of packets in each queue
-        	for( int i=0; i<8; i++ ) {
+        	/*for( int i=0; i<8; i++ ) {
         		std::string queue;
         		queue = "wrQueue";
         		char buffer[3];
@@ -106,7 +106,7 @@ void WRQueue::handleMessage(cMessage *msg)
 
 				if( !q->queue.isEmpty() )
 					std::cout << "#objects in " << q->getFullName() << ": " << q->length() << std::endl;
-        	}
+        	}*/
 
 			arrival(job);
 

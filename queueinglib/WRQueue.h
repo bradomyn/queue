@@ -33,12 +33,17 @@ class QUEUEING_API WRQueue : public cSimpleModule
         int capacity;
         bool fifo;
 
-        Job *getFromQueue();
+
 
     public:
         WRQueue();
         virtual ~WRQueue();
         int length();
+
+        // SMa, 19.01.2012
+        Job *getFromQueue();
+        cQueue getQueue() { return queue; };
+        virtual simtime_t startService(Job *job);
 
     protected:
         virtual void initialize();
@@ -47,7 +52,7 @@ class QUEUEING_API WRQueue : public cSimpleModule
 
         // hook functions to (re)define behaviour
         virtual void arrival(Job *job);
-        virtual simtime_t startService(Job *job);
+
         virtual void endService(Job *job);
 };
 

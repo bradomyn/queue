@@ -14,6 +14,8 @@
 
 #include "QueueingDefs.h"
 
+#include "WRQueue.h"
+
 namespace queueing {
 
 /**
@@ -23,6 +25,9 @@ class QUEUEING_API WRClassifier_out : public cSimpleModule
 {
     private:
         const char *dispatchField;   // the message's field or parameter we are dispatching on
+
+        WRQueue *retrieveQueue(int index);
+
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);

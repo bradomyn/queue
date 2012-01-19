@@ -52,23 +52,42 @@ void WRClassifier_out::handleMessage(cMessage *msg)
 
 	// TODO check all queues, retrieve elements from queues
 	std::string queue;
-	//sprintf(queue, "wrQueue%d", priority);
 	queue = "wrQueue";
-	sprintf(buffer,"%d",priority);
+
+	for( int i=0; i<8; i++ ) {
+		WRQueue *q = retrieveQueue(i);
+
+		if( !q->getQueue().isEmpty() )
+			std::cout << "#objects in " << q->getQueue().getFullName() << ": " << q->getQueue().length() << std::endl;
+
+		if( i==7 ) {
+			if( q->getQueue().isEmpty() ) {
+				std::cout << "empty other queues " << std::endl;
+				// empty other queues
+				for( int j=0; j<7; j++ ) {
+					WRQueue *qq = retrieveQueue(j);
+					while( qq->getQueue().length()>0 ) {
+						Job *job = qq->getFromQueue();
+						qq->startService(job);
+					}
+				}
+			}
+		}
+
+	}
+}
+
+WRQueue *WRClassifier_out::retrieveQueue(int index) {
+	std::string queue;
+	queue = "wrQueue";
+	char buffer[3];
+	sprintf(buffer,"%d",index);
 	buffer[2]='\0';
 	queue += buffer;
-	std::cout << "Check queue " << queue << std::endl;
-	cModule *queueModule = getParentModule()->getSubmodule(queue.c_str());
-
-	std::cout << queueModule->getModuleType()->getFullName() << std::endl;
-
-	/*WRQueue *wrqueue = queueModule->queue;
-	while( wrqueue->length()>0 ) {
-		Job *job = wrqueue->getFromQueue();
-		//startService(job);
-		std::cout << " queue length " << wrqueue->length() << std::endl;
-	}*/
-
+	WRQueue *q = check_and_cast<WRQueue *>( getParentModule()->findObject(queue.c_str(), true) );
+	if( q!=NULL )
+		return q;
+	else return NULL;
 }
 
 }; //namespace

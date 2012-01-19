@@ -48,6 +48,7 @@ OBJS = \
     $O/SelectionStrategies.o \
     $O/Merge.o \
     $O/WRServer.o \
+    $O/WRTrigger.o \
     $O/Allocate.o \
     $O/Clone.o \
     $O/Deallocate.o \
@@ -280,4 +281,9 @@ $O/WRSource.o: WRSource.cc \
 	Job_m.h \
 	QueueingDefs.h \
 	WRSource.h
+$O/WRTrigger.o: WRTrigger.cc \
+	Job.h \
+	Job_m.h \
+	QueueingDefs.h \
+	WRTrigger.h
 

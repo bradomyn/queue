@@ -43,8 +43,8 @@ class QUEUEING_API WRSourceBase : public cSimpleModule
 class QUEUEING_API WRSource : public WRSourceBase
 {
     private:
-        simtime_t startTime;
-        simtime_t stopTime;
+        //simtime_t startTime;
+        //simtime_t stopTime;
         int numJobs;
 
         // SMa, 18.01.2012

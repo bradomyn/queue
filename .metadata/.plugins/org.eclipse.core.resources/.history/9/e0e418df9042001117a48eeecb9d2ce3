@@ -1,0 +1,137 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+import org.omnetpp.queueing.Classifier;
+import org.omnetpp.queueing.WRClassifier_in;
+import org.omnetpp.queueing.Delay;
+import org.omnetpp.queueing.PassiveQueue;
+import org.omnetpp.queueing.WRServer;
+import org.omnetpp.queueing.Sink;
+import org.omnetpp.queueing.Source;
+
+import org.omnetpp.queueing.WRRouter;
+import org.omnetpp.queueing.WRSource;
+import org.omnetpp.queueing.WRQueue;
+import org.omnetpp.queueing.WRClassifier_out;
+
+//
+// Second try to simulate the current scheduling within the White Rabbit Switch.
+// 
+//
+network WhiteRabbitSwitch5
+{
+    parameters:
+        @display("i=block/users;bgb=1058,668");
+    submodules:
+        out0: Sink {
+            @display("p=930,93;i=block/departure");
+        }
+        wrQueue0: WRQueue {
+            @display("p=584,94");
+        }
+        out1: Sink {
+            @display("p=930,160;i=block/departure");
+        }
+        out2: Sink {
+            @display("p=930,221;i=block/departure");
+        }
+        out3: Sink {
+            @display("p=930,288;i=block/departure");
+        }
+        out4: Sink {
+            @display("p=930,345;i=block/departure");
+        }
+        out5: Sink {
+            @display("p=930,412;i=block/departure");
+        }
+        out6: Sink {
+            @display("p=930,473;i=block/departure");
+        }
+        out7: Sink {
+            @display("p=930,541;i=block/departure");
+        }
+        classifier_out: WRClassifier_out {
+            @display("p=750,318;b=27,28");
+        }
+        wrQueue1: WRQueue {
+            @display("p=584,152");
+        }
+        wrQueue2: WRQueue {
+            @display("p=584,209");
+        }
+        wrQueue3: WRQueue {
+            @display("p=584,267");
+        }
+        wrQueue4: WRQueue {
+            @display("p=584,357");
+        }
+        wrQueue5: WRQueue {
+            @display("p=584,415");
+        }
+        wrQueue6: WRQueue {
+            @display("p=584,472");
+        }
+        wrQueue7: WRQueue {
+            @display("p=584,530");
+        }
+        source: WRSource {
+            @display("p=259,94;b=28,22");
+        }
+        source1: WRSource {
+            @display("p=259,152;b=28,22");
+        }
+        source2: WRSource {
+            @display("p=259,209;b=28,22");
+        }
+        source3: WRSource {
+            @display("p=259,267;b=28,22");
+        }
+        source4: WRSource {
+            @display("p=259,357;b=28,22");
+        }
+        source5: WRSource {
+            @display("p=259,415;b=28,22");
+        }
+        source6: WRSource {
+            @display("p=259,472;b=28,22");
+        }
+        source7: WRSource {
+            @display("p=259,530;b=28,22");
+        }
+        trigger: WRSource {
+            @display("p=103,318;b=32,31");
+        }
+    connections:
+        classifier_out.out++ --> out0.in++;
+        classifier_out.out++ --> out1.in++;
+        classifier_out.out++ --> out2.in++;
+        classifier_out.out++ --> out3.in++;
+        classifier_out.out++ --> out4.in++;
+        classifier_out.out++ --> out5.in++;
+        classifier_out.out++ --> out6.in++;
+        classifier_out.out++ --> out7.in++;
+        wrQueue0.out --> classifier_out.in++;
+        wrQueue1.out --> classifier_out.in++;
+        wrQueue2.out --> classifier_out.in++;
+        wrQueue3.out --> classifier_out.in++;
+        wrQueue4.out --> classifier_out.in++;
+        wrQueue5.out --> classifier_out.in++;
+        wrQueue6.out --> classifier_out.in++;
+        wrQueue7.out --> classifier_out.in++;
+        source.outv++ --> wrQueue0.in++;
+        trigger.outv++ --> source.in++;
+        trigger.outv++ --> source1.in++;
+        source1.outv++ --> wrQueue1.in++;
+        source2.outv++ --> wrQueue2.in++;
+        source3.outv++ --> wrQueue3.in++;
+        source4.outv++ --> wrQueue4.in++;
+        source5.outv++ --> wrQueue5.in++;
+        source6.outv++ --> wrQueue6.in++;
+        source7.outv++ --> wrQueue7.in++;
+}

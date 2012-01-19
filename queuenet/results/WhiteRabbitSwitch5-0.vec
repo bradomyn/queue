@@ -1,0 +1,45 @@
+version 2
+run WhiteRabbitSwitch5-0-20120119-14:36:06-14465
+attr configname WhiteRabbitSwitch5
+attr datetime 20120119-14:36:06
+attr experiment WhiteRabbitSwitch5
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WhiteRabbitSwitch5
+attr processid 14465
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 1  WhiteRabbitSwitch5.wrQueue0  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 9  WhiteRabbitSwitch5.wrQueue1  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 10  WhiteRabbitSwitch5.wrQueue2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 11  WhiteRabbitSwitch5.wrQueue3  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 12  WhiteRabbitSwitch5.wrQueue4  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 13  WhiteRabbitSwitch5.wrQueue5  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 14  WhiteRabbitSwitch5.wrQueue6  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 15  WhiteRabbitSwitch5.wrQueue7  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 8  WhiteRabbitSwitch5.out7  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s

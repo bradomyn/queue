@@ -19,6 +19,8 @@ import org.omnetpp.queueing.WRRouter;
 import org.omnetpp.queueing.WRSource;
 import org.omnetpp.queueing.WRQueue;
 import org.omnetpp.queueing.WRClassifier_out;
+import org.omnetpp.queueing.WRTrigger;
+
 
 //
 // Second try to simulate the current scheduling within the White Rabbit Switch.
@@ -27,82 +29,85 @@ import org.omnetpp.queueing.WRClassifier_out;
 network WhiteRabbitSwitch5
 {
     parameters:
-        @display("i=block/users;bgb=766,515");
+        @display("i=block/users;bgb=1058,668");
     submodules:
         out0: Sink {
-            @display("p=708,34;i=block/departure");
+            @display("p=930,93;i=block/departure");
         }
         wrQueue0: WRQueue {
-            @display("p=362,35");
+            @display("p=584,94");
         }
         out1: Sink {
-            @display("p=708,101;i=block/departure");
+            @display("p=930,160;i=block/departure");
         }
         out2: Sink {
-            @display("p=708,162;i=block/departure");
+            @display("p=930,221;i=block/departure");
         }
         out3: Sink {
-            @display("p=708,229;i=block/departure");
+            @display("p=930,288;i=block/departure");
         }
         out4: Sink {
-            @display("p=708,286;i=block/departure");
+            @display("p=930,345;i=block/departure");
         }
         out5: Sink {
-            @display("p=708,353;i=block/departure");
+            @display("p=930,412;i=block/departure");
         }
         out6: Sink {
-            @display("p=708,414;i=block/departure");
+            @display("p=930,473;i=block/departure");
         }
         out7: Sink {
-            @display("p=708,482;i=block/departure");
+            @display("p=930,541;i=block/departure");
         }
         classifier_out: WRClassifier_out {
-            @display("p=528,259;b=27,28");
+            @display("p=750,318;b=27,28");
         }
         wrQueue1: WRQueue {
-            @display("p=362,93");
+            @display("p=584,152");
         }
         wrQueue2: WRQueue {
-            @display("p=362,150");
+            @display("p=584,209");
         }
         wrQueue3: WRQueue {
-            @display("p=362,208");
+            @display("p=584,267");
         }
         wrQueue4: WRQueue {
-            @display("p=362,298");
+            @display("p=584,357");
         }
         wrQueue5: WRQueue {
-            @display("p=362,356");
+            @display("p=584,415");
         }
         wrQueue6: WRQueue {
-            @display("p=362,413");
+            @display("p=584,472");
         }
         wrQueue7: WRQueue {
-            @display("p=362,471");
+            @display("p=584,530");
         }
         source: WRSource {
-            @display("p=37,35;b=28,22");
+            @display("p=259,94;b=28,22");
         }
         source1: WRSource {
-            @display("p=37,93;b=28,22");
+            @display("p=259,152;b=28,22");
         }
         source2: WRSource {
-            @display("p=37,150;b=28,22");
+            @display("p=259,209;b=28,22");
         }
         source3: WRSource {
-            @display("p=37,208;b=28,22");
+            @display("p=259,267;b=28,22");
         }
         source4: WRSource {
-            @display("p=37,298;b=28,22");
+            @display("p=259,357;b=28,22");
         }
         source5: WRSource {
-            @display("p=37,356;b=28,22");
+            @display("p=259,415;b=28,22");
         }
         source6: WRSource {
-            @display("p=37,413;b=28,22");
+            @display("p=259,472;b=28,22");
         }
         source7: WRSource {
-            @display("p=37,471;b=28,22");
+            @display("p=259,530;b=28,22");
+        }
+        trigger: WRTrigger {
+            @display("p=103,318;b=32,31");
         }
     connections:
         classifier_out.out++ --> out0.in++;
@@ -129,4 +134,13 @@ network WhiteRabbitSwitch5
         source5.out --> wrQueue5.in++;
         source6.out --> wrQueue6.in++;
         source7.out --> wrQueue7.in++;
+
+        trigger.outv++ --> source.in;
+        trigger.outv++ --> source1.in;
+        trigger.outv++ --> source2.in;
+        trigger.outv++ --> source3.in;
+        trigger.outv++ --> source4.in;
+        trigger.outv++ --> source5.in;
+        trigger.outv++ --> source6.in;
+        trigger.outv++ --> source7.in;
 }
