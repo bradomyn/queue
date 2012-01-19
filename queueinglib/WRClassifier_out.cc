@@ -40,14 +40,8 @@ void WRClassifier_out::handleMessage(cMessage *msg)
 	out = "out";
 	char buffer[3];
 
-#ifdef __linux__
-		//itoa (i,buffer,10);
-        sprintf(buffer,"%d",priority);
-#else
-        itoa (priority,buffer,10);
-#endif
-	buffer[2]='\0';
-	std::cout << "buf " << buffer << std::endl;
+    sprintf(buffer,"%d\0",priority);
+	//std::cout << "buf " << buffer << std::endl;
 	out += buffer;
 	std::cout << "Classifier out: send package with priority " << priority << " to " << out << std::endl;
 	cModule *targetModule = getParentModule()->getSubmodule(out.c_str());

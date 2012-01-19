@@ -65,7 +65,7 @@ void WRQueue::handleMessage(cMessage *msg)
     	//std::cout << "else" << std::endl;
     	// SMa, 13.01.2012
     	if( queue.length()>5 ) {
-    		std::cout << " queue length " << queue.length() << std::endl;
+    		std::cout << " queue length " << queue.length() << " -- start emptying -- " << std::endl;
 			// empty queue
 			while( queue.length()>0 ) {
 				Job *job = getFromQueue();
@@ -99,13 +99,7 @@ void WRQueue::handleMessage(cMessage *msg)
         		std::string queue;
         		queue = "wrQueue";
         		char buffer[3];
-#ifdef __linux__
-				//itoa (i,buffer,10);
-        		sprintf(buffer,"%d",i);
-#else
-				itoa (i,buffer,10);
-#endif
-				buffer[2]='\0';
+        		sprintf(buffer,"%d\0",i);
 				queue += buffer;
         		WRQueue *q = check_and_cast<WRQueue *>( getParentModule()->findObject(queue.c_str(), true) );
 

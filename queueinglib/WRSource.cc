@@ -64,12 +64,11 @@ void WRSource::initialize()
 void WRSource::handleMessage(cMessage *msg)
 {
     ASSERT(msg->isSelfMessage());
-#if 1
+
     //should be done in a main method before setting up the network
     //cRealTimeScheduler *rts = new cRealTimeScheduler();
     //simulation.setScheduler(rts);
 
-    std::cout << "scheduler " << simulation.getScheduler()->getFullName() << std::endl;
     if ((numJobs < 0 || numJobs > jobCounter) && (stopTime < 0 || stopTime > simTime()))
     {
         // reschedule the timer for the next message
@@ -97,11 +96,7 @@ void WRSource::handleMessage(cMessage *msg)
         // finished
         delete msg;
     }
-#else
-    const char *reply = msg->getFullName(); ////telnetReply->getPayload();
-    std::cout << "reply " << reply << std::endl;
-    rtScheduler->sendBytes(reply, strlen(reply));
-#endif
+
 }
 
 //----

@@ -44,13 +44,7 @@ void WRClassifier::handleMessage(cMessage *msg)
 	queue = "wrQueue";
 	char buffer[3];
 
-#ifdef __linux__
-		//itoa (i,buffer,10);
-        sprintf(buffer,"%d",priority);
-#else
-        itoa (priority,buffer,10);
-#endif
-	buffer[2]='\0';
+    sprintf(buffer,"%d\0",priority);
 	std::cout << "buf " << buffer << std::endl;
 	queue += buffer;
 	std::cout << "Classifier in: send package with priority " << priority << " to " << queue << std::endl;

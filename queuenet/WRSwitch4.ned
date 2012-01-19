@@ -30,9 +30,6 @@ network WhiteRabbitSwitch4
     parameters:
         @display("i=block/users;bgb=581,515");
     submodules:
-        in: WRSource {
-            @display("p=37,259;i=block/arrival");
-        }
         out0: Sink {
             @display("p=528,35;i=block/departure");
         }
@@ -88,13 +85,30 @@ network WhiteRabbitSwitch4
             @display("p=362,471");
         }
         source: WRSource {
-            @display("p=37,102;b=28,22");
+            @display("p=37,35;b=28,22");
         }
         source1: WRSource {
+            @display("p=37,96;b=28,22");
+        }
+        source2: WRSource {
             @display("p=37,163;b=28,22");
         }
+        source3: WRSource {
+            @display("p=37,224;b=28,22");
+        }
+        source4: WRSource {
+            @display("p=37,293;b=28,22");
+        }
+        source5: WRSource {
+            @display("p=37,354;b=28,22");
+        }
+        source6: WRSource {
+            @display("p=37,421;b=28,22");
+        }
+        source7: WRSource {
+            @display("p=37,482;b=28,22");
+        }
     connections:
-        in.out --> classifier_in.in++;
         classifier_out.out++ --> out0.in++;
         classifier_out.out++ --> out1.in++;
         classifier_out.out++ --> out2.in++;
@@ -121,4 +135,10 @@ network WhiteRabbitSwitch4
         classifier_in.out++ --> wrQueue7.in++;
         source.out --> classifier_in.in++;
         source1.out --> classifier_in.in++;
+        source2.out --> classifier_in.in++;
+        source3.out --> classifier_in.in++;
+        source4.out --> classifier_in.in++;
+        source5.out --> classifier_in.in++;
+        source6.out --> classifier_in.in++;
+        source7.out --> classifier_in.in++;
 }
