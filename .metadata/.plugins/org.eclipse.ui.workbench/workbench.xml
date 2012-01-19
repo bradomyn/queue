@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="22" version="2.0">
+<workbench progressCount="23" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="0" y="26">
 <fastViewData fastViewLocation="1024"/>
+<intro standby="true"/>
 <perspectiveBar>
 <itemSize x="723"/>
 </perspectiveBar>
@@ -19,7 +20,7 @@
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.omnetpp.inifile.editor.editors.InifileEditor" itemType="typeToolBarContribution" x="94" y="28"/>
 <coolItem id="org.omnetpp.ned.editor" itemType="typeToolBarContribution" x="128" y="28"/>
-<coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -31,15 +32,59 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.omnetpp.ned.editor" name="WRSwitch4.ned" partName="WRSwitch4.ned" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queuenet/WRSwitch4.ned" title="WRSwitch4.ned" tooltip="queuenet/WRSwitch4.ned" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queuenet/WRSwitch4.ned"/>
+<editor activePart="true" focus="true" id="org.omnetpp.ned.editor" name="WRSwitch6.ned" partName="WRSwitch6.ned" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queuenet/WRSwitch6.ned" title="WRSwitch6.ned" tooltip="queuenet/WRSwitch6.ned" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queuenet/WRSwitch6.ned"/>
 </editor>
 <editor id="org.omnetpp.inifile.editor.editors.InifileEditor" name="omnetpp.ini" partName="omnetpp.ini" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queuenet/omnetpp.ini" title="omnetpp.ini" tooltip="queuenet/omnetpp.ini" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queuenet/omnetpp.ini"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRTrigger.cc" partName="WRTrigger.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRTrigger.cc" title="WRTrigger.cc" tooltip="queueinglib/WRTrigger.cc" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRTrigger.cc"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1362" selectionTopPixel="722"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRQueue.cc" partName="WRQueue.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRQueue.cc" title="WRQueue.cc" tooltip="queueinglib/WRQueue.cc" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRQueue.cc"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1402" selectionTopPixel="588"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRClassifier_out.cc" partName="WRClassifier_out.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRClassifier_out.cc" title="WRClassifier_out.cc" tooltip="queueinglib/WRClassifier_out.cc" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRClassifier_out.cc"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2057" selectionTopPixel="823"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRClassifier_in.cc" partName="WRClassifier_in.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRClassifier_in.cc" title="WRClassifier_in.cc" tooltip="queueinglib/WRClassifier_in.cc" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRClassifier_in.cc"/>
+<editorState selectionHorizontalPixel="0" selectionLength="348" selectionOffset="956" selectionTopPixel="126"/>
+</editor>
+<editor id="org.omnetpp.ned.editor" name="WRTrigger.ned" partName="WRTrigger.ned" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRTrigger.ned" title="WRTrigger.ned" tooltip="queueinglib/WRTrigger.ned" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRTrigger.ned"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRTrigger.h" partName="WRTrigger.h" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRTrigger.h" title="WRTrigger.h" tooltip="queueinglib/WRTrigger.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRTrigger.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="34" selectionOffset="671" selectionTopPixel="220"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource.cc" partName="WRSource.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRSource.cc" title="WRSource.cc" tooltip="queueinglib/WRSource.cc" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRSource.cc"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1518" selectionTopPixel="922"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource.h" partName="WRSource.h" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRSource.h" title="WRSource.h" tooltip="queueinglib/WRSource.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRSource.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="932" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="csimplemodule.h" partName="csimplemodule.h" title="csimplemodule.h" tooltip="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include/csimplemodule.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include/csimplemodule.h" project="queueinglib"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5075" selectionTopPixel="2103"/>
 </editor>
 </editors>
 <views>
@@ -51,7 +96,8 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (3 items)"/>
+<category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="120" org.eclipse.ui.ide.markerType="1491" org.eclipse.ui.ide.pathField="160" org.eclipse.ui.ide.resourceField="120" org.eclipse.ui.ide.severityAndDescriptionField="400"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -64,11 +110,17 @@
 <view id="org.eclipse.ui.console.ConsoleView" partName="Console">
 <viewState/>
 </view>
+<view id="org.eclipse.ui.internal.introview" partName="Welcome">
+<viewState>
+<presentation currentPage="root" restore="true"/>
+<standbyPart/>
+</viewState>
+</view>
 <view id="org.omnetpp.inifile.ModuleParameters" partName="NED Parameters">
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.omnetpp.ned.editor" activePerspective="org.omnetpp.main.OmnetppPerspective">
+<perspectives activePart="org.eclipse.ui.console.ConsoleView" activePerspective="org.omnetpp.main.OmnetppPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.omnetpp.ide.PerspectiveFactory" id="org.omnetpp.main.OmnetppPerspective" label="Simulation"/>
 <alwaysOnActionSet id="org.eclipse.egit.ui.navigation"/>
@@ -121,6 +173,7 @@
 <view id="org.omnetpp.inifile.ModuleParameters"/>
 <view id="org.omnetpp.inifile.NedInheritance"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.ui.internal.introview"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -134,15 +187,17 @@
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@709db0ad" ratio="0.7495049" ratioLeft="757" ratioRight="253" relationship="2" relative="left">
-<folder appearance="2" expanded="2">
+<folder activePageID="org.eclipse.ui.internal.introview" appearance="2" expanded="2">
+<page content="org.eclipse.ui.internal.introview" label="Welcome"/>
 <page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
-<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.14986269" ratioLeft="382" ratioRight="2167" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.68365693" ratioLeft="845" ratioRight="391" relationship="4" relative="org.eclipse.ui.editorss">
+<info part="org.eclipse.ui.editorss" ratio="0.11556912" ratioLeft="265" ratioRight="2028" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.72411" ratioLeft="895" ratioRight="341" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.omnetpp.inifile.ModuleHierarchy" label="Module Hierarchy"/>
@@ -176,30 +231,167 @@
 <workingSets/>
 <navigationHistory>
 <editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRSource.cc"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRQueue.cc"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/queuenet/WRSwitch4.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRSource.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRTrigger.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRTrigger.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.inifile.editor.editors.InifileEditor" path="/queuenet/omnetpp.ini"/>
+<editor factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include/csimplemodule.h" project="queueinglib"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Clone.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Allocate.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Deallocate.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Fork.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Fork.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/IPassiveQueue.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Job_m.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Job.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Merge.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/queuenet/WRSwitch5.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/queuenet/WRSwitch6.ned"/>
 </editors>
-<item historyLabel="WRQueue.cc" index="0">
+<item historyLabel="WRSource.h" index="2">
+<position info="not_deleted" x="932" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="494" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1955" y="0"/>
+</item>
+<item historyLabel="WRTrigger.cc" index="3">
+<position info="not_deleted" x="1030" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1147" y="0"/>
+</item>
+<item historyLabel="WRTrigger.cc" index="3">
+<position info="not_deleted" x="1030" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1682" y="0"/>
+</item>
+<item historyLabel="WRTrigger.cc" index="3">
+<position info="not_deleted" x="703" y="0"/>
+</item>
+<item historyLabel="WRTrigger.h" index="4">
+<position info="not_deleted" x="705" y="0"/>
+</item>
+<item historyLabel="WRTrigger.cc" index="3">
+<position info="not_deleted" x="542" y="160"/>
+</item>
+<item historyLabel="WRTrigger.h" index="4">
+<position info="not_deleted" x="671" y="34"/>
+</item>
+<item historyLabel="WRTrigger.cc" index="3">
+<position info="not_deleted" x="443" y="0"/>
+</item>
+<item historyLabel="WRQueue.cc" index="1">
+<position info="not_deleted" x="256" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1489" y="0"/>
+</item>
+<item historyLabel="WRQueue.cc" index="1">
+<position info="not_deleted" x="1402" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1849" y="0"/>
+</item>
+<item historyLabel="omnetpp.ini" index="5"/>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1849" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1754" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position/>
+</item>
+<item historyLabel="csimplemodule.h" index="6">
+<position info="not_deleted" x="14351" y="10"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1638" y="0"/>
+</item>
+<item historyLabel="WRTrigger.cc" index="3">
+<position info="not_deleted" x="1662" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1518" y="0"/>
+</item>
+<item historyLabel="Clone.cc" index="7">
+<position info="not_deleted" x="361" y="0"/>
+</item>
+<item historyLabel="Allocate.cc" index="8">
+<position info="not_deleted" x="349" y="0"/>
+</item>
+<item historyLabel="Deallocate.cc" index="9">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="WRQueue.cc" index="0">
-<position info="not_deleted" x="943" y="0"/>
+<item historyLabel="Fork.cc" index="10">
+<position info="not_deleted" x="516" y="0"/>
 </item>
-<item historyLabel="WRQueue.cc" index="0">
-<position info="not_deleted" x="2830" y="19"/>
+<item historyLabel="Fork.h" index="11">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="WRQueue.cc" index="0">
-<position info="not_deleted" x="571" y="0"/>
+<item historyLabel="IPassiveQueue.h" index="12">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="WRSwitch4.ned" index="1"/>
-<item historyLabel="WRSwitch4.ned" index="1"/>
-<item historyLabel="omnetpp.ini" index="2"/>
-<item historyLabel="WRSwitch4.ned" index="1"/>
-<item historyLabel="omnetpp.ini" index="2"/>
-<item historyLabel="WRSwitch4.ned" index="1"/>
-<item historyLabel="omnetpp.ini" index="2"/>
-<item active="true" historyLabel="WRSwitch4.ned" index="1"/>
+<item historyLabel="Job_m.cc" index="13">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Job.cc" index="14">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Merge.cc" index="15">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Job.cc" index="14">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Job_m.cc" index="13">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="IPassiveQueue.h" index="12">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Fork.h" index="11">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Fork.cc" index="10">
+<position info="not_deleted" x="516" y="0"/>
+</item>
+<item historyLabel="Deallocate.cc" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Allocate.cc" index="8">
+<position info="not_deleted" x="349" y="0"/>
+</item>
+<item historyLabel="Clone.cc" index="7">
+<position info="not_deleted" x="361" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="0">
+<position info="not_deleted" x="1518" y="0"/>
+</item>
+<item historyLabel="csimplemodule.h" index="6">
+<position info="not_deleted" x="5075" y="0"/>
+</item>
+<item historyLabel="WRTrigger.cc" index="3">
+<position info="not_deleted" x="1362" y="0"/>
+</item>
+<item historyLabel="WRSwitch5.ned" index="16"/>
+<item historyLabel="WRTrigger.cc" index="3">
+<position info="not_deleted" x="1362" y="0"/>
+</item>
+<item historyLabel="WRQueue.cc" index="1">
+<position info="not_deleted" x="1402" y="0"/>
+</item>
+<item historyLabel="omnetpp.ini" index="5"/>
+<item active="true" historyLabel="WRSwitch6.ned" index="17"/>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
@@ -217,14 +409,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.inifile.editor.editors.InifileEditor" name="omnetpp.ini" tooltip="queuenet/omnetpp.ini">
-<persistable path="/queuenet/omnetpp.ini"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Merge.cc" tooltip="queueinglib/Merge.cc">
+<persistable path="/queueinglib/Merge.cc"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRSwitch4.ned" tooltip="queuenet/WRSwitch4.ned">
-<persistable path="/queuenet/WRSwitch4.ned"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Job.cc" tooltip="queueinglib/Job.cc">
+<persistable path="/queueinglib/Job.cc"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRQueue.cc" tooltip="queueinglib/WRQueue.cc">
-<persistable path="/queueinglib/WRQueue.cc"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Job_m.cc" tooltip="queueinglib/Job_m.cc">
+<persistable path="/queueinglib/Job_m.cc"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="IPassiveQueue.h" tooltip="queueinglib/IPassiveQueue.h">
+<persistable path="/queueinglib/IPassiveQueue.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Fork.h" tooltip="queueinglib/Fork.h">
+<persistable path="/queueinglib/Fork.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Fork.cc" tooltip="queueinglib/Fork.cc">
+<persistable path="/queueinglib/Fork.cc"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Deallocate.cc" tooltip="queueinglib/Deallocate.cc">
+<persistable path="/queueinglib/Deallocate.cc"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Allocate.cc" tooltip="queueinglib/Allocate.cc">
+<persistable path="/queueinglib/Allocate.cc"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Clone.cc" tooltip="queueinglib/Clone.cc">
+<persistable path="/queueinglib/Clone.cc"/>
+</file>
+<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="csimplemodule.h" tooltip="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include/csimplemodule.h">
+<persistable path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include/csimplemodule.h" project="queueinglib"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource.h" tooltip="queueinglib/WRSource.h">
+<persistable path="/queueinglib/WRSource.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource.cc" tooltip="queueinglib/WRSource.cc">
+<persistable path="/queueinglib/WRSource.cc"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRSource.ned" tooltip="queueinglib/WRSource.ned">
+<persistable path="/queueinglib/WRSource.ned"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRRouter.ned" tooltip="queueinglib/WRRouter.ned">
+<persistable path="/queueinglib/WRRouter.ned"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRClassifier_in.ned" tooltip="queueinglib/WRClassifier_in.ned">
+<persistable path="/queueinglib/WRClassifier_in.ned"/>
 </file>
 </mruList>
 </workbench>
