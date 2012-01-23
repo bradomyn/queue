@@ -35,13 +35,13 @@ void Sink::handleMessage(cMessage *msg)
     Timer t;
 	timeval tv = t.currentTime();
 	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
-	std::cout << "QUEUE " << this->getName() << " :";
-	t.print();
+	//std::cout << "QUEUE " << this->getName() << " :";
+	//t.print();
 
 	// retrieve trigger time
 	WRTrigger *trg = check_and_cast<WRTrigger *>( getParentModule()->findObject("trigger", true) );
 	double triggerTime = trg->getTriggerTime();
-	std::cout << " total elapsed time " << arrivalTime-triggerTime << std::endl;
+	std::cout << "     received: " << job->getName() << ", total elapsed time " << arrivalTime-triggerTime << std::endl;
 
 
     // gather statistics

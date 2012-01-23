@@ -103,6 +103,7 @@ void WRQueue::handleMessage(cMessage *msg)
 
 		// TODO how to check on other queues?
         if( job->getPriority()<7 ){
+        	std::cerr << "priority < 7: " << job->getName() << std::endl;
         	//std::cout << "queue name: " << this->getFullName() << std::endl;
 
         	//WRQueue *q0 = check_and_cast<WRQueue *>( getParentModule()->findObject("wrQueue0", true) );
@@ -131,8 +132,10 @@ void WRQueue::handleMessage(cMessage *msg)
 				emit(busySignal, 1);
 				//simtime_t serviceTime = startService( jobServiced );
 				//scheduleAt( simTime()+serviceTime, endServiceMsg );
+				std::cerr << " start  " << job->getName() << std::endl;
 				startService(jobServiced);	// send immediately out
 			} else {
+				std::cerr << "store  " << job->getName() << std::endl;
 				// check for container capacity
 				if (capacity >=0 && queue.length() >= capacity) {
 					std::cout << "capacity " << capacity << std::endl;
@@ -153,8 +156,7 @@ void WRQueue::handleMessage(cMessage *msg)
 				queue.insert( job );
 				emit(queueLengthSignal, length());
 				job->setQueueCount(job->getQueueCount() + 1);
-//				//std::cout << " queue length " << queue.length() << " " << queue.getLength() << std::endl;
-
+				//std::cout << " queue length " << queue.length() << " " << queue.getLength() << std::endl;
 			}
         } //  if( job->getPriority()<7 )
     }

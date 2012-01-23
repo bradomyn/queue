@@ -25,7 +25,20 @@ void WRTriggerBase::initialize()
 
 	jobCounter = 0;
     WATCH(jobCounter);
+#if 1
     jobName = par("jobName").stringValue();
+#else
+    // SMa, 23.01.2012
+    Timer t;
+	timeval tv = t.currentTime();
+	double triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+	char jname[15];
+	sprintf(jname,"%f",triggerTime);
+	jname[14]='\0';
+	jobName = std::string(jname);
+#endif
+	std::cout << "jobname " << jobName << std::endl;
+
     if (jobName == "")
         jobName = getName();
 }
@@ -63,12 +76,6 @@ void WRTrigger::handleMessage(cMessage *msg)
 {
     if ((numJobs < 0 || numJobs > jobCounter) && (stopTime < 0 || stopTime > simTime()))
     {
-    	Timer t;
-    	timeval tv = t.currentTime();
-    	triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
-    	std::cout << "TRIGGER ";
-    	t.print(); std::cout << std::endl;
-
         // reschedule the timer for the next message
         scheduleAt(simTime()/*+ par("interArrivalTime").doubleValue()*/, msg);
 
@@ -80,6 +87,7 @@ void WRTrigger::handleMessage(cMessage *msg)
         for( int i=0; i<8; i++ ) {
         	//std::cout << "generate job " << i << std::endl;
         	Job *job = generateJob();
+        	std::cout << " created: " << job->getName() << std::endl;
         	send(job, "outv", i);
         }
 #endif
@@ -101,8 +109,15 @@ Job * WRTrigger::generateJob() {
 
 	// TODO work with a fixed, repeatable data set
 	job->setPriority(random);
-	char name[25];
-	sprintf(name, "id: %ld, priority: %d", job->getId(), random);
+
+	Timer t;
+	timeval tv = t.currentTime();
+	triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+	//std::cout << "TRIGGER "; t.print(); std::cout << std::endl;
+
+	char name[80];
+	sprintf(name, "id: %ld, priority: %d, %f", job->getId(), random, triggerTime);
+	name[79] = '\0';
 	job->setName(name);
 	//std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;
 

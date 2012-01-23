@@ -49,7 +49,7 @@ void WRClassifier_out::handleMessage(cMessage *msg)
 		std::cout << "Classifier out: send package with priority " << priority << " to " << out << std::endl;
 		cModule *targetModule = getParentModule()->getSubmodule(out.c_str());
 		sendDirect(msg, targetModule, "sendDirect");
-    } else {
+    //} else {
 
 		// TODO check all queues, retrieve elements from queues
 		std::string queue;
@@ -61,7 +61,9 @@ void WRClassifier_out::handleMessage(cMessage *msg)
 			if( !q->getQueue().isEmpty() )
 				std::cout << "#objects in " << q->getName() << ": " << q->getQueue().length() << std::endl;
 #if 1
+			// empty queues
 			while( q->getQueue().length()>0 ) {
+				std::cout << "empty all queues " << std::endl;
 				Job *job = q->getFromQueue();
 				q->startService(job);
 			}
@@ -83,6 +85,9 @@ void WRClassifier_out::handleMessage(cMessage *msg)
 			}
 #endif
 		}
+    } else {
+    	std::cout << "send to sink: " << job->getName() << std::endl;
+    	send(job, "out", outGateIndex);
     }
 }
 

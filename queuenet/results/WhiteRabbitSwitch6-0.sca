@@ -1,14 +1,14 @@
 version 2
-run WhiteRabbitSwitch6-0-20120123-12:16:24-4523
+run WhiteRabbitSwitch6-0-20120123-16:14:01-9992
 attr configname WhiteRabbitSwitch6
-attr datetime 20120123-12:16:24
+attr datetime 20120123-16:14:01
 attr experiment WhiteRabbitSwitch6
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WhiteRabbitSwitch6
-attr processid 4523
+attr processid 9992
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -79,7 +79,7 @@ attr unit  s
 scalar WhiteRabbitSwitch6.wrQueue0 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WhiteRabbitSwitch6.wrQueue0 	queueLength:max 	6
+scalar WhiteRabbitSwitch6.wrQueue0 	queueLength:max 	2
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WhiteRabbitSwitch6.wrQueue0 	dropped:count 	0
@@ -449,7 +449,7 @@ attr unit  s
 scalar WhiteRabbitSwitch6.wrQueue1 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WhiteRabbitSwitch6.wrQueue1 	queueLength:max 	6
+scalar WhiteRabbitSwitch6.wrQueue1 	queueLength:max 	2
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WhiteRabbitSwitch6.wrQueue1 	dropped:count 	0
@@ -469,7 +469,7 @@ attr unit  s
 scalar WhiteRabbitSwitch6.wrQueue2 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WhiteRabbitSwitch6.wrQueue2 	queueLength:max 	6
+scalar WhiteRabbitSwitch6.wrQueue2 	queueLength:max 	2
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WhiteRabbitSwitch6.wrQueue2 	dropped:count 	0
@@ -489,7 +489,7 @@ attr unit  s
 scalar WhiteRabbitSwitch6.wrQueue3 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WhiteRabbitSwitch6.wrQueue3 	queueLength:max 	6
+scalar WhiteRabbitSwitch6.wrQueue3 	queueLength:max 	2
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WhiteRabbitSwitch6.wrQueue3 	dropped:count 	0
@@ -509,7 +509,7 @@ attr unit  s
 scalar WhiteRabbitSwitch6.wrQueue4 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WhiteRabbitSwitch6.wrQueue4 	queueLength:max 	6
+scalar WhiteRabbitSwitch6.wrQueue4 	queueLength:max 	2
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WhiteRabbitSwitch6.wrQueue4 	dropped:count 	0
@@ -529,7 +529,7 @@ attr unit  s
 scalar WhiteRabbitSwitch6.wrQueue5 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WhiteRabbitSwitch6.wrQueue5 	queueLength:max 	6
+scalar WhiteRabbitSwitch6.wrQueue5 	queueLength:max 	2
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WhiteRabbitSwitch6.wrQueue5 	dropped:count 	0
@@ -549,7 +549,7 @@ attr unit  s
 scalar WhiteRabbitSwitch6.wrQueue6 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WhiteRabbitSwitch6.wrQueue6 	queueLength:max 	6
+scalar WhiteRabbitSwitch6.wrQueue6 	queueLength:max 	2
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WhiteRabbitSwitch6.wrQueue6 	dropped:count 	0
@@ -569,7 +569,7 @@ attr unit  s
 scalar WhiteRabbitSwitch6.wrQueue7 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WhiteRabbitSwitch6.wrQueue7 	queueLength:max 	6
+scalar WhiteRabbitSwitch6.wrQueue7 	queueLength:max 	2
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WhiteRabbitSwitch6.wrQueue7 	dropped:count 	0
