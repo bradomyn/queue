@@ -27,6 +27,7 @@ OBJS = \
     $O/WRScheduler.o \
     $O/WRQueue.o \
     $O/JobList.o \
+    $O/Timer.o \
     $O/Source.o \
     $O/WRClassifier_out.o \
     $O/PassiveQueue.o \
@@ -236,7 +237,9 @@ $O/Sink.o: Sink.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
-	Sink.h
+	Sink.h \
+	Timer.h \
+	WRTrigger.h
 $O/SocketRTScheduler.o: SocketRTScheduler.cc \
 	SocketRTScheduler.h
 $O/Source.o: Source.cc \
@@ -244,6 +247,8 @@ $O/Source.o: Source.cc \
 	Job_m.h \
 	QueueingDefs.h \
 	Source.h
+$O/Timer.o: Timer.cc \
+	Timer.h
 $O/WRClassifier_in.o: WRClassifier_in.cc \
 	Job.h \
 	Job_m.h \
@@ -253,13 +258,17 @@ $O/WRClassifier_out.o: WRClassifier_out.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
+	Timer.h \
 	WRClassifier_out.h \
-	WRQueue.h
+	WRQueue.h \
+	WRTrigger.h
 $O/WRQueue.o: WRQueue.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
-	WRQueue.h
+	Timer.h \
+	WRQueue.h \
+	WRTrigger.h
 $O/WRRouter.o: WRRouter.cc \
 	Job.h \
 	Job_m.h \
@@ -285,5 +294,6 @@ $O/WRTrigger.o: WRTrigger.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
+	Timer.h \
 	WRTrigger.h
 

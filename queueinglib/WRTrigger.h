@@ -12,7 +12,7 @@
 
 
 #include "QueueingDefs.h"
-
+#include "Timer.h"
 
 
 namespace queueing {
@@ -46,13 +46,17 @@ class QUEUEING_API WRTrigger : public WRTriggerBase
         simtime_t stopTime;
         int numJobs;
 
-        // SMa, 18.01.2012
-        //cSocketRTScheduler *rtScheduler;
+
+        double triggerTime;
 
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
         Job * generateJob();
+
+    public:
+        double getTriggerTime() { return triggerTime; };
+
 };
 
 

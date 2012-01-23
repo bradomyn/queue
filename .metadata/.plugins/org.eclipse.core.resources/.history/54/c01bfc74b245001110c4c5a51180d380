@@ -1,0 +1,214 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd.
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include "WRQueue.h"
+#include "Job.h"
+
+
+#ifdef __linux__
+#include <stdio.h>
+#include <stdlib.h>
+#endif
+
+namespace queueing {
+
+Define_Module(WRQueue);
+
+WRQueue::WRQueue()
+{
+    jobServiced = NULL;
+    endServiceMsg = NULL;
+}
+
+WRQueue::~WRQueue()
+{
+    delete jobServiced;
+    cancelAndDelete(endServiceMsg);
+}
+
+void WRQueue::initialize()
+{
+    droppedSignal = registerSignal("dropped");
+    queueingTimeSignal = registerSignal("queueingTime");
+    queueLengthSignal = registerSignal("queueLength");
+    emit(queueLengthSignal, 0);
+    busySignal = registerSignal("busy");
+    emit(busySignal, 0);
+
+    endServiceMsg = new cMessage("end-service");
+    fifo = par("fifo");
+    capacity = par("capacity");
+    queue.setName("queue");
+}
+
+void WRQueue::handleMessage(cMessage *msg)
+{
+    if (msg==endServiceMsg) {
+    	std::cout << endServiceMsg << std::endl;
+        endService( jobServiced );
+        if (queue.empty()) {
+            jobServiced = NULL;
+            emit(busySignal, 0);
+        } else {
+            jobServiced = getFromQueue();
+            emit(queueLengthSignal, length());
+            simtime_t serviceTime = startService( jobServiced );
+
+            scheduleAt( simTime()+serviceTime, endServiceMsg );
+
+            // TODO if switch is not busy send packets
+        }
+    } else {
+
+    	Timer t;
+    	timeval tv = t.currentTime();
+    	arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+    	std::cout << "QUEUE " << this->getName() << " :";
+    	t.print();
+
+    	// retrieve trigger time
+    	WRTrigger *trg = check_and_cast<WRTrigger *>( getParentModule()->findObject("trigger", true) );
+    	double triggerTime = trg->getTriggerTime();
+    	std::cout << "elapsed time " << arrivalTime-triggerTime << std::endl;
+
+    	//std::cout << "else" << std::endl;
+    	//std::cout << "queueing time " << simTime().str() << std::endl;
+    	// SMa, 13.01.2012
+    	if( queue.length()>5 ) {
+    		std::cout << " queue length " << queue.length() << " -- start emptying -- " << std::endl;
+			// empty queue
+			while( queue.length()>0 ) {
+				Job *job = getFromQueue();
+				startService(job);
+				std::cout << " queue length " << queue.length() << std::endl;
+			}
+    	}
+
+        Job *job = check_and_cast<Job *>(msg);
+
+        // SMa, 12.01.2012
+		if( job->getPriority()>=7 ) {
+			// packets with highest priority send immediately
+			cModule *targetModule = getParentModule()->getSubmodule("classifier_out");
+			sendDirect(msg, targetModule, "sendDirect");
+			//std::cout << "sent immediately: " << job->getName() << std::endl;
+			return;
+		}
+
+		// TODO how to check on other queues?
+        if( job->getPriority()<7 ){
+        	//std::cout << "queue name: " << this->getFullName() << std::endl;
+
+        	//WRQueue *q0 = check_and_cast<WRQueue *>( getParentModule()->findObject("wrQueue0", true) );
+        	//std::cout << "objects in queue " << q0->getFullName() << ": " << q0->length() << std::endl;
+
+        	// print number of packets in each queue
+        	/*for( int i=0; i<8; i++ ) {
+        		std::string queue;
+        		queue = "wrQueue";
+        		char buffer[3];
+        		sprintf(buffer,"%d",i);
+        		buffer[2]='\0';
+				queue += buffer;
+        		WRQueue *q = check_and_cast<WRQueue *>( getParentModule()->findObject(queue.c_str(), true) );
+
+				if( !q->queue.isEmpty() )
+					std::cout << "#objects in " << q->getFullName() << ": " << q->length() << std::endl;
+        	}*/
+
+			arrival(job);
+
+			if (!jobServiced)
+			{
+			// processor was idle
+				jobServiced = job;
+				emit(busySignal, 1);
+				//simtime_t serviceTime = startService( jobServiced );
+				//scheduleAt( simTime()+serviceTime, endServiceMsg );
+				startService(jobServiced);	// send immediately out
+			} else {
+				// check for container capacity
+				if (capacity >=0 && queue.length() >= capacity) {
+					std::cout << "capacity " << capacity << std::endl;
+					// SMa, 13.01.2012
+					// don't drop anything
+					// empty queue
+					while( queue.length()>0 ){
+						Job *job = getFromQueue();
+						startService(job);
+						//std::cout << " queue length " << queue.length() << std::endl;
+					}
+					//EV << "Capacity full! Job dropped.\n";
+					//if (ev.isGUI()) bubble("Dropped!");
+					//emit(droppedSignal, 1);
+					//delete job;
+					//return;
+				}
+				queue.insert( job );
+				emit(queueLengthSignal, length());
+				job->setQueueCount(job->getQueueCount() + 1);
+//				//std::cout << " queue length " << queue.length() << " " << queue.getLength() << std::endl;
+
+			}
+        } //  if( job->getPriority()<7 )
+    }
+    if (ev.isGUI()) getDisplayString().setTagArg("i",1, !jobServiced ? "" : "cyan3");
+}
+
+Job *WRQueue::getFromQueue()
+{
+    Job *job;
+    if (fifo) {
+        job = (Job *)queue.pop();
+    }
+    else {
+        job = (Job *)queue.back();
+        // FIXME this may have bad performance as remove uses linear search
+        queue.remove(job);
+    }
+    return job;
+}
+
+int WRQueue::length()
+{
+    return queue.length();
+}
+
+void WRQueue::arrival(Job *job)
+{
+    job->setTimestamp();
+}
+
+simtime_t WRQueue::startService(Job *job)
+{
+    // gather queueing time statistics
+    simtime_t d = simTime() - job->getTimestamp();
+    emit(queueingTimeSignal, d);
+    job->setTotalQueueingTime(job->getTotalQueueingTime() + d);
+    EV << "Starting service of " << job->getName() << endl;
+    std::cout << "Starting service of " << job->getName() << endl;
+    job->setTimestamp();
+    return par("serviceTime").doubleValue();
+}
+
+void WRQueue::endService(Job *job)
+{
+    EV << "Finishing service of " << job->getName() << endl;
+    std::cout << "Finishing service of " << job->getName() << endl;
+    simtime_t d = simTime() - job->getTimestamp();
+    job->setTotalServiceTime(job->getTotalServiceTime() + d);
+    send(job, "out");
+}
+
+void WRQueue::finish()
+{
+}
+
+}; //namespace
+

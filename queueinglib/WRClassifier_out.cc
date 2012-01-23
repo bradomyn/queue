@@ -37,44 +37,53 @@ void WRClassifier_out::handleMessage(cMessage *msg)
         error("invalid dispatchField parameter, must be \"type\" or \"priority\"");
     // TODO we could look for the value in the dynamically added parameters too
 
-	std::string out;
-	out = "out";
-	char buffer[3];
+    if( priority==7 ) {
+		std::string out;
+		out = "out";
+		char buffer[3];
 
-    sprintf(buffer,"%d",priority);
-    buffer[2]='\0';
-	//std::cout << "buf " << buffer << std::endl;
-	out += buffer;
-	std::cout << "Classifier out: send package with priority " << priority << " to " << out << std::endl;
-	cModule *targetModule = getParentModule()->getSubmodule(out.c_str());
-	sendDirect(msg, targetModule, "sendDirect");
+		sprintf(buffer,"%d",priority);
+		buffer[2]='\0';
+		//std::cout << "buf " << buffer << std::endl;
+		out += buffer;
+		std::cout << "Classifier out: send package with priority " << priority << " to " << out << std::endl;
+		cModule *targetModule = getParentModule()->getSubmodule(out.c_str());
+		sendDirect(msg, targetModule, "sendDirect");
+    } else {
 
+		// TODO check all queues, retrieve elements from queues
+		std::string queue;
+		queue = "wrQueue";
 
-	// TODO check all queues, retrieve elements from queues
-	std::string queue;
-	queue = "wrQueue";
+		for( int i=0; i<8; i++ ) {
+			WRQueue *q = retrieveQueue(i);
 
-	for( int i=0; i<8; i++ ) {
-		WRQueue *q = retrieveQueue(i);
-
-		if( !q->getQueue().isEmpty() )
-			std::cout << "#objects in " << q->getQueue().getFullName() << ": " << q->getQueue().length() << std::endl;
-
-		if( i==7 ) {
-			if( q->getQueue().isEmpty() ) {
-				std::cout << "empty other queues " << std::endl;
-				// empty other queues
-				for( int j=0; j<7; j++ ) {
-					WRQueue *qq = retrieveQueue(j);
-					while( qq->getQueue().length()>0 ) {
-						Job *job = qq->getFromQueue();
-						qq->startService(job);
+			if( !q->getQueue().isEmpty() )
+				std::cout << "#objects in " << q->getName() << ": " << q->getQueue().length() << std::endl;
+#if 1
+			while( q->getQueue().length()>0 ) {
+				Job *job = q->getFromQueue();
+				q->startService(job);
+			}
+#else
+			if( i==7 )
+			{
+				if( q->getQueue().isEmpty() )
+				{
+					std::cout << "empty other queues " << std::endl;
+					// empty other queues
+					for( int j=0; j<7; j++ ) {
+						WRQueue *qq = retrieveQueue(j);
+						while( qq->getQueue().length()>0 ) {
+							Job *job = qq->getFromQueue();
+							qq->startService(job);
+						}
 					}
 				}
 			}
+#endif
 		}
-
-	}
+    }
 }
 
 WRQueue *WRClassifier_out::retrieveQueue(int index) {

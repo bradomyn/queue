@@ -1,0 +1,22 @@
+/*
+ * Timer.h
+ *
+ *  Created on: Jan 23, 2012
+ *      Author: matthies
+ */
+
+#ifndef TIMER_H_
+#define TIMER_H_
+
+class Timer {
+public:
+	Timer();
+	virtual ~Timer();
+
+	struct timeval currentTime();
+
+	void print();
+
+};
+
+#endif /* TIMER_H_ */

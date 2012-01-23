@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;queueinglib/Timer.cpp&apos; to &apos;Timer.cc&apos;" description="Rename resource &apos;Timer.cpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Timer.cpp" name="Timer.cc" stamp="1327310701542" updateReferences="true"/>
+</session>

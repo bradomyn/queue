@@ -11,6 +11,11 @@
 #include "Job.h"
 #include <cscheduler.h>
 
+#ifdef __linux__
+#include <sys/time.h>
+#include <sys/types.h>
+#endif
+
 namespace queueing {
 
 
@@ -58,8 +63,14 @@ void WRTrigger::handleMessage(cMessage *msg)
 {
     if ((numJobs < 0 || numJobs > jobCounter) && (stopTime < 0 || stopTime > simTime()))
     {
+    	Timer t;
+    	timeval tv = t.currentTime();
+    	triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+    	std::cout << "TRIGGER ";
+    	t.print(); std::cout << std::endl;
+
         // reschedule the timer for the next message
-        scheduleAt(simTime()+ par("interArrivalTime").doubleValue(), msg);
+        scheduleAt(simTime()/*+ par("interArrivalTime").doubleValue()*/, msg);
 
 #if 0
         Job *job = generateJob();
@@ -67,7 +78,7 @@ void WRTrigger::handleMessage(cMessage *msg)
 #else
         // generate 8 jobs at once and send to sources
         for( int i=0; i<8; i++ ) {
-        	std::cout << "generate job " << i << std::endl;
+        	//std::cout << "generate job " << i << std::endl;
         	Job *job = generateJob();
         	send(job, "outv", i);
         }
@@ -93,7 +104,7 @@ Job * WRTrigger::generateJob() {
 	char name[25];
 	sprintf(name, "id: %ld, priority: %d", job->getId(), random);
 	job->setName(name);
-	std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;
+	//std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;
 
 	return job;
 }

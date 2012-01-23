@@ -11,6 +11,8 @@
 #define __QUEUEING_WRQUEUE_H
 
 #include "QueueingDefs.h"
+#include "Timer.h"
+#include "WRTrigger.h"
 
 namespace queueing {
 
@@ -54,6 +56,12 @@ class QUEUEING_API WRQueue : public cSimpleModule
         virtual void arrival(Job *job);
 
         virtual void endService(Job *job);
+
+    private:
+        double arrivalTime;
+    public:
+        double getArrivalTime() { return arrivalTime; };
+
 };
 
 }; //namespace

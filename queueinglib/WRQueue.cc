@@ -10,6 +10,7 @@
 #include "WRQueue.h"
 #include "Job.h"
 
+
 #ifdef __linux__
 #include <stdio.h>
 #include <stdlib.h>
@@ -64,7 +65,20 @@ void WRQueue::handleMessage(cMessage *msg)
             // TODO if switch is not busy send packets
         }
     } else {
+
+    	Timer t;
+    	timeval tv = t.currentTime();
+    	arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+    	std::cout << "QUEUE " << this->getName() << " :";
+    	t.print();
+
+    	// retrieve trigger time
+    	WRTrigger *trg = check_and_cast<WRTrigger *>( getParentModule()->findObject("trigger", true) );
+    	double triggerTime = trg->getTriggerTime();
+    	std::cout << "  elapsed time " << arrivalTime-triggerTime << std::endl;
+
     	//std::cout << "else" << std::endl;
+    	//std::cout << "queueing time " << simTime().str() << std::endl;
     	// SMa, 13.01.2012
     	if( queue.length()>5 ) {
     		std::cout << " queue length " << queue.length() << " -- start emptying -- " << std::endl;
@@ -83,13 +97,13 @@ void WRQueue::handleMessage(cMessage *msg)
 			// packets with highest priority send immediately
 			cModule *targetModule = getParentModule()->getSubmodule("classifier_out");
 			sendDirect(msg, targetModule, "sendDirect");
-			std::cout << "sent immediately: " << job->getName() << std::endl;
+			//std::cout << "sent immediately: " << job->getName() << std::endl;
 			return;
 		}
 
 		// TODO how to check on other queues?
         if( job->getPriority()<7 ){
-        	std::cout << "queue name: " << this->getFullName() << std::endl;
+        	//std::cout << "queue name: " << this->getFullName() << std::endl;
 
         	//WRQueue *q0 = check_and_cast<WRQueue *>( getParentModule()->findObject("wrQueue0", true) );
         	//std::cout << "objects in queue " << q0->getFullName() << ": " << q0->length() << std::endl;
@@ -128,7 +142,7 @@ void WRQueue::handleMessage(cMessage *msg)
 					while( queue.length()>0 ){
 						Job *job = getFromQueue();
 						startService(job);
-						std::cout << " queue length " << queue.length() << std::endl;
+						//std::cout << " queue length " << queue.length() << std::endl;
 					}
 					//EV << "Capacity full! Job dropped.\n";
 					//if (ev.isGUI()) bubble("Dropped!");
@@ -139,7 +153,7 @@ void WRQueue::handleMessage(cMessage *msg)
 				queue.insert( job );
 				emit(queueLengthSignal, length());
 				job->setQueueCount(job->getQueueCount() + 1);
-				std::cout << " queue length " << queue.length() << " " << queue.getLength() << std::endl;
+//				//std::cout << " queue length " << queue.length() << " " << queue.getLength() << std::endl;
 
 			}
         } //  if( job->getPriority()<7 )
