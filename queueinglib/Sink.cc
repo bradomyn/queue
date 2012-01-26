@@ -67,14 +67,20 @@ void Sink::handleMessage(cMessage *msg)
         delete msg;
 }
 
+// will be calles in the end
 void Sink::finish()
 {
     // TODO missing scalar statistics
 
+
 	std::map<int, double>::iterator it;
+	double avgTime=0.;
 	for( it=jobs.begin(); it!=jobs.end(); it++ ) {
-		std::cout << __FILE__ << " ID: " << it->first << " duration: " << it->second << std::endl;
+		std::cout << __FILE__ << " job ID: " << it->first << " duration: " << it->second << std::endl;
+		avgTime += it->second;
 	}
+	avgTime /= jobs.size();
+	std::cout << "average time " << avgTime << std::endl;
 }
 
 }; //namespace

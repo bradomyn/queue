@@ -1,14 +1,14 @@
 version 2
-run WhiteRabbitSwitch7-0-20120126-15:18:06-4400
+run WhiteRabbitSwitch7-0-20120126-15:42:49-22147
 attr configname WhiteRabbitSwitch7
-attr datetime 20120126-15:18:06
+attr datetime 20120126-15:42:49
 attr experiment WhiteRabbitSwitch7
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WhiteRabbitSwitch7
-attr processid 4400
+attr processid 22147
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -71,7 +71,16 @@ vector 15  WhiteRabbitSwitch7.out7  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-0	41	1	0
+0	329	1	0
+0	337	1	0
+0	345	1	0
+0	353	1	0
+0	361	1	0
+0	369	1	0
+0	377	1	0
+0	385	1	0
+0	393	1	0
+0	401	1	0
 1	0	0	0
 2	0	0	0
 3	0	0	0
@@ -80,10 +89,73 @@ attr unit  s
 6	0	0	0
 7	0	0	0
 8	0	0	0
-9	42	1	0
-10	43	1	0
-11	44	1	0
-12	45	1	0
-13	46	1	0
-14	47	1	0
-15	48	1	0
+9	330	1	0
+9	338	1	0
+9	346	1	0
+9	354	1	0
+9	362	1	0
+9	370	1	0
+9	378	1	0
+9	386	1	0
+9	394	1	0
+9	402	1	0
+10	331	1	0
+10	339	1	0
+10	347	1	0
+10	355	1	0
+10	363	1	0
+10	371	1	0
+10	379	1	0
+10	387	1	0
+10	395	1	0
+10	403	1	0
+11	332	1	0
+11	340	1	0
+11	348	1	0
+11	356	1	0
+11	364	1	0
+11	372	1	0
+11	380	1	0
+11	388	1	0
+11	396	1	0
+11	404	1	0
+12	333	1	0
+12	341	1	0
+12	349	1	0
+12	357	1	0
+12	365	1	0
+12	373	1	0
+12	381	1	0
+12	389	1	0
+12	397	1	0
+12	405	1	0
+13	334	1	0
+13	342	1	0
+13	350	1	0
+13	358	1	0
+13	366	1	0
+13	374	1	0
+13	382	1	0
+13	390	1	0
+13	398	1	0
+13	406	1	0
+14	335	1	0
+14	343	1	0
+14	351	1	0
+14	359	1	0
+14	367	1	0
+14	375	1	0
+14	383	1	0
+14	391	1	0
+14	399	1	0
+14	407	1	0
+15	336	1	0
+15	344	1	0
+15	352	1	0
+15	360	1	0
+15	368	1	0
+15	376	1	0
+15	384	1	0
+15	392	1	0
+15	400	1	0
+15	408	1	0

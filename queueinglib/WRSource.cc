@@ -103,7 +103,7 @@ void WRSource::handleMessage(cMessage *msg)
     {
         // reschedule the timer for the next message
         //scheduleAt(simTime() /*+ par("interArrivalTime").doubleValue()*/, msg);
-#if 1
+#if 0
         //Job *job = createJob();
     	Job *job = generateJob();
     	//for( int i=0; i<8; i++ ) {
@@ -112,11 +112,12 @@ void WRSource::handleMessage(cMessage *msg)
     	cModule *targetModule = getParentModule()->getSubmodule("classifier");
     	sendDirect(job, targetModule, "sendDirect");
 #else
-    	for( int i=0; i<8; i++ ) {
+    	// create more jobs per run
+    	for( int i=0; i<10; i++ ) {
     		//std::cout << "generate job " << i << std::endl;
     	    Job *job = generateJob();
-    	    std::cout << " created: " << job->getName() << std::endl;
-    	    send(job, "outv", i);
+    	    //std::cout << " created: " << job->getName() << std::endl;
+    	    //send(job, "outv", i);
 
     	    std::string queue;
     	    queue = "classifier";
@@ -125,7 +126,7 @@ void WRSource::handleMessage(cMessage *msg)
     	    //buffer[2]='\0';
     	    //queue += buffer;
     	    cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
-    	    sendDirect(msg, targetModule, "sendDirect");
+    	    sendDirect(job, targetModule, "sendDirect");
     	}
 
 #endif
