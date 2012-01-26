@@ -11,14 +11,16 @@
 #define __QUEUEING_WRSOURCE_H
 
 
-//#include "SocketRTScheduler.h"
+
 #include "QueueingDefs.h"
 
 #ifdef __linux__
 #include <sys/time.h>
 #include <sys/types.h>
 #endif
+
 #include "Timer.h"
+#include "WRPacket.h"
 
 namespace queueing {
 

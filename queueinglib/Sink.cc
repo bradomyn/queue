@@ -38,7 +38,7 @@ void Sink::handleMessage(cMessage *msg)
 	//std::cout << "arrivaltime " << arrivalTime << std::endl;
 
 	// extract time from jobname
-	std::string jobname = std::string(job->getName());
+	string jobname = std::string(job->getName());
 	size_t found;
 	found = jobname.find("; ");
 	//std::cout << "jobname " << jobname << " found " << found << std::endl;
@@ -52,7 +52,7 @@ void Sink::handleMessage(cMessage *msg)
 	}
 	//std::cout << job->getName() << " , duration " << (arrivalTime-triggerTime) << std::endl;
 
-	jobs.insert(std::pair<int,double>(job->getId(),(arrivalTime-triggerTime)));
+	jobs.push_back(WRPacket(job->getName(), job->getId(), job->getPriority(), triggerTime, arrivalTime));
 
     // gather statistics
     emit(lifeTimeSignal, simTime()- job->getCreationTime());
@@ -73,11 +73,12 @@ void Sink::finish()
     // TODO missing scalar statistics
 
 
-	std::map<int, double>::iterator it;
-	double avgTime=0.;
+	vector<WRPacket>::iterator it;
+	double duration=0., avgTime=0.;
 	for( it=jobs.begin(); it!=jobs.end(); it++ ) {
-		std::cout << __FILE__ << " job ID: " << it->first << " duration: " << it->second << std::endl;
-		avgTime += it->second;
+		duration = it->getEndTime()-it->getStartTime();
+		std::cout << __FILE__ << " job ID: " << it->getID() << " duration: " << duration << std::endl;
+		avgTime += duration;
 	}
 	avgTime /= jobs.size();
 	std::cout << "average time " << avgTime << std::endl;

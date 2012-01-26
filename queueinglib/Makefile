@@ -30,6 +30,7 @@ OBJS = \
     $O/JobList.o \
     $O/Timer.o \
     $O/Source.o \
+    $O/WRPacket.o \
     $O/WRClassifier_out.o \
     $O/PassiveQueue.o \
     $O/WRClassifier_in.o \
@@ -240,6 +241,7 @@ $O/Sink.o: Sink.cc \
 	QueueingDefs.h \
 	Sink.h \
 	Timer.h \
+	WRPacket.h \
 	WRTrigger.h
 $O/SocketRTScheduler.o: SocketRTScheduler.cc \
 	SocketRTScheduler.h
@@ -263,6 +265,8 @@ $O/WRClassifier_out.o: WRClassifier_out.cc \
 	WRClassifier_out.h \
 	WRQueue.h \
 	WRTrigger.h
+$O/WRPacket.o: WRPacket.cc \
+	WRPacket.h
 $O/WRPassiveQueue.o: WRPassiveQueue.cc \
 	IPassiveQueue.h \
 	Job.h \
@@ -298,6 +302,7 @@ $O/WRSource.o: WRSource.cc \
 	Job_m.h \
 	QueueingDefs.h \
 	Timer.h \
+	WRPacket.h \
 	WRSource.h
 $O/WRTrigger.o: WRTrigger.cc \
 	Job.h \

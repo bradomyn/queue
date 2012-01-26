@@ -1,14 +1,14 @@
 version 2
-run WhiteRabbitSwitch7-0-20120126-15:42:49-22147
+run WhiteRabbitSwitch7-0-20120126-16:41:15-891
 attr configname WhiteRabbitSwitch7
-attr datetime 20120126-15:42:49
+attr datetime 20120126-16:41:15
 attr experiment WhiteRabbitSwitch7
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WhiteRabbitSwitch7
-attr processid 22147
+attr processid 891
 attr repetition 0
 attr replication #0
 attr resultdir results

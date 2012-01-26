@@ -1,0 +1,21 @@
+/*
+ * WRPacket.cpp
+ *
+ *  Created on: Jan 26, 2012
+ *      Author: matthies
+ */
+
+#include "WRPacket.h"
+
+namespace queueing {
+
+WRPacket::WRPacket() {
+	// TODO Auto-generated constructor stub
+
+}
+
+WRPacket::~WRPacket() {
+	// TODO Auto-generated destructor stub
+}
+
+} /* namespace queueing */

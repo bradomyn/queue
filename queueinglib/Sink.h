@@ -10,7 +10,15 @@
 #ifndef __QUEUEING_SINK_H
 #define __QUEUEING_SINK_H
 
+#include <string>
+#include <vector>
+
 #include "QueueingDefs.h"
+#include "WRPacket.h"
+
+using std::string;
+using std::vector;
+using std::pair;
 
 namespace queueing {
 
@@ -35,7 +43,7 @@ class QUEUEING_API Sink : public cSimpleModule
     virtual void finish();
 
   private:
-    std::map<int, double> jobs;
+    vector<WRPacket> jobs;
 
 };
 

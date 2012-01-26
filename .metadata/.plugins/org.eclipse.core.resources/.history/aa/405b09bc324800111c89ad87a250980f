@@ -1,0 +1,20 @@
+/*
+ * WRPacket.h
+ *
+ *  Created on: Jan 26, 2012
+ *      Author: matthies
+ */
+
+#ifndef WRPACKET_H_
+#define WRPACKET_H_
+
+namespace queueing {
+
+class WRPacket {
+public:
+	WRPacket();
+	virtual ~WRPacket();
+};
+
+} /* namespace queueing */
+#endif /* WRPACKET_H_ */
