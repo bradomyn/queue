@@ -48,7 +48,7 @@ void WRClassifier_in::handleMessage(cMessage *msg)
     sprintf(buffer,"%d",priority);
     buffer[2]='\0';
 	queue += buffer;
-	std::cout << "Classifier in: send package with priority " << priority << " to " << queue << std::endl;
+	std::cout << __FILE__ << " send " << job->getName() << " to " << queue << std::endl;
 	cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
 	sendDirect(msg, targetModule, "sendDirect");
 

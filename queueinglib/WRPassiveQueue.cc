@@ -73,7 +73,7 @@ void WRPassiveQueue::handleMessage(cMessage *msg)
     else if (length() == 0)
     {
         // send through without queueing
-    	std:: cout << "send through without queueing" << std::endl;
+    	//std:: cout << "send through without queueing" << std::endl;
         send(job, "out", k);
     }
     else

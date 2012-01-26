@@ -73,7 +73,7 @@ void Sink::finish()
 
 	std::map<int, double>::iterator it;
 	for( it=jobs.begin(); it!=jobs.end(); it++ ) {
-		std::cout << "ID: " << it->first << " duration: " << it->second << std::endl;
+		std::cout << __FILE__ << " ID: " << it->first << " duration: " << it->second << std::endl;
 	}
 }
 

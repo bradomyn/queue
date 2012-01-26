@@ -72,7 +72,7 @@ void WRRouter::handleMessage(cMessage *msg)
         	//outGateIndex = msg->getArrivalGateId();
         	outGateIndex = rrCounter;
         	rrCounter = (rrCounter + 1) % gateSize("out");
-        	 std::cout << "outGateIndex " << outGateIndex << " rrCounter " << rrCounter  << " gateSize(out) " << gateSize("out") << std::endl;
+        	std::cout << __FILE__ << " outGateIndex " << outGateIndex << " rrCounter " << rrCounter  << " gateSize(out) " << gateSize("out") << std::endl;
         	//std::cout << msg->getId() << " " << msg->getArrivalGateId() << " priority " << msg->getSchedulingPriority() << std::endl;
         	//std::cout << "job " << job->getFullName() << " sent to sink" << std::endl;
 

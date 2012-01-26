@@ -1,89 +1,89 @@
 version 2
-run WhiteRabbitSwitch7-0-20120126-14:48:43-15148
+run WhiteRabbitSwitch7-0-20120126-15:18:06-4400
 attr configname WhiteRabbitSwitch7
-attr datetime 20120126-14:48:43
+attr datetime 20120126-15:18:06
 attr experiment WhiteRabbitSwitch7
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WhiteRabbitSwitch7
-attr processid 15148
+attr processid 4400
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
-vector 17  WhiteRabbitSwitch7.wrQueue0  queueLength:vector  ETV
+vector 1  WhiteRabbitSwitch7.wrQueue0  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 18  WhiteRabbitSwitch7.wrQueue1  queueLength:vector  ETV
+vector 2  WhiteRabbitSwitch7.wrQueue1  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 19  WhiteRabbitSwitch7.wrQueue2  queueLength:vector  ETV
+vector 3  WhiteRabbitSwitch7.wrQueue2  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 20  WhiteRabbitSwitch7.wrQueue3  queueLength:vector  ETV
+vector 4  WhiteRabbitSwitch7.wrQueue3  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 21  WhiteRabbitSwitch7.wrQueue4  queueLength:vector  ETV
+vector 5  WhiteRabbitSwitch7.wrQueue4  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 22  WhiteRabbitSwitch7.wrQueue5  queueLength:vector  ETV
+vector 6  WhiteRabbitSwitch7.wrQueue5  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 23  WhiteRabbitSwitch7.wrQueue6  queueLength:vector  ETV
+vector 7  WhiteRabbitSwitch7.wrQueue6  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 24  WhiteRabbitSwitch7.wrQueue7  queueLength:vector  ETV
+vector 8  WhiteRabbitSwitch7.wrQueue7  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 16  WhiteRabbitSwitch7.out0  lifeTime:vector  ETV
+vector 0  WhiteRabbitSwitch7.out0  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-vector 25  WhiteRabbitSwitch7.out1  lifeTime:vector  ETV
+vector 9  WhiteRabbitSwitch7.out1  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-vector 26  WhiteRabbitSwitch7.out2  lifeTime:vector  ETV
+vector 10  WhiteRabbitSwitch7.out2  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-vector 27  WhiteRabbitSwitch7.out3  lifeTime:vector  ETV
+vector 11  WhiteRabbitSwitch7.out3  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-vector 28  WhiteRabbitSwitch7.out4  lifeTime:vector  ETV
+vector 12  WhiteRabbitSwitch7.out4  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-vector 29  WhiteRabbitSwitch7.out5  lifeTime:vector  ETV
+vector 13  WhiteRabbitSwitch7.out5  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-vector 30  WhiteRabbitSwitch7.out6  lifeTime:vector  ETV
+vector 14  WhiteRabbitSwitch7.out6  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-vector 31  WhiteRabbitSwitch7.out7  lifeTime:vector  ETV
+vector 15  WhiteRabbitSwitch7.out7  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, vector"
 attr unit  s
-16	41	1	0
-17	0	0	0
-18	0	0	0
-19	0	0	0
-20	0	0	0
-21	0	0	0
-22	0	0	0
-23	0	0	0
-24	0	0	0
-25	42	1	0
-26	43	1	0
-27	44	1	0
-28	45	1	0
-29	46	1	0
-30	47	1	0
-31	48	1	0
+0	41	1	0
+1	0	0	0
+2	0	0	0
+3	0	0	0
+4	0	0	0
+5	0	0	0
+6	0	0	0
+7	0	0	0
+8	0	0	0
+9	42	1	0
+10	43	1	0
+11	44	1	0
+12	45	1	0
+13	46	1	0
+14	47	1	0
+15	48	1	0

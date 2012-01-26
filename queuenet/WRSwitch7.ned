@@ -25,88 +25,88 @@ import org.omnetpp.queueing.WRTrigger;
 network WhiteRabbitSwitch7
 {
     parameters:
-        @display("i=block/users;bgb=1058,668");
+        @display("i=block/users;bgb=1245,862");
     submodules:
         out0: Sink {
-            @display("p=953,94;i=block/departure");
+            @display("p=1148,63;i=block/departure");
         }
         wrQueue0: WRPassiveQueue {
-            @display("p=584,94");
+            @display("p=563,63");
         }
         wrQueue1: WRPassiveQueue {
-            @display("p=584,152");
+            @display("p=563,160");
         }
         wrQueue2: WRPassiveQueue {
-            @display("p=584,209");
+            @display("p=563,255");
         }
         wrQueue3: WRPassiveQueue {
-            @display("p=584,267");
+            @display("p=569,357");
         }
         wrQueue4: WRPassiveQueue {
-            @display("p=584,357");
+            @display("p=563,454");
         }
         wrQueue5: WRPassiveQueue {
-            @display("p=584,415");
+            @display("p=563,557");
         }
         wrQueue6: WRPassiveQueue {
-            @display("p=584,472");
+            @display("p=563,658");
         }
         wrQueue7: WRPassiveQueue {
-            @display("p=584,530");
+            @display("p=563,759");
         }
         wrServer: WRServer {
-            @display("p=765,318;b=40,40");
+            @display("p=752,396;b=40,40");
         }
         wrRouter: WRRouter {
-            @display("p=861,318;b=28,29");
+            @display("p=919,396;b=28,29");
         }
         source0: WRSource {
-            @display("p=149,94;b=35,37");
+            @display("p=60,63;b=35,37");
         }
         classifier: WRClassifier_in {
-            @display("p=346,308;b=31,33");
+            @display("p=342,396;b=31,33");
         }
         source1: WRSource {
-            @display("p=149,152;b=35,37");
+            @display("p=60,160;b=35,37");
         }
         source2: WRSource {
-            @display("p=149,209;b=35,37");
+            @display("p=60,255;b=35,37");
         }
         source3: WRSource {
-            @display("p=149,267;b=35,37");
+            @display("p=60,357;b=35,37");
         }
         source4: WRSource {
-            @display("p=149,357;b=35,37");
+            @display("p=60,454;b=35,37");
         }
         source5: WRSource {
-            @display("p=149,415;b=35,37");
+            @display("p=60,557;b=35,37");
         }
         source6: WRSource {
-            @display("p=149,472;b=35,37");
+            @display("p=60,658;b=35,37");
         }
         source7: WRSource {
-            @display("p=149,530;b=35,37");
+            @display("p=60,759;b=35,37");
         }
         out1: Sink {
-            @display("p=953,152;i=block/departure");
+            @display("p=1148,160;i=block/departure");
         }
         out2: Sink {
-            @display("p=953,209;i=block/departure");
+            @display("p=1148,255;i=block/departure");
         }
         out3: Sink {
-            @display("p=953,267;i=block/departure");
+            @display("p=1148,357;i=block/departure");
         }
         out4: Sink {
-            @display("p=953,357;i=block/departure");
+            @display("p=1148,454;i=block/departure");
         }
         out5: Sink {
-            @display("p=953,415;i=block/departure");
+            @display("p=1148,557;i=block/departure");
         }
         out6: Sink {
-            @display("p=953,472;i=block/departure");
+            @display("p=1148,658;i=block/departure");
         }
         out7: Sink {
-            @display("p=953,530;i=block/departure");
+            @display("p=1148,759;i=block/departure");
         }
     connections:
         wrQueue0.out++ --> wrServer.in++;
