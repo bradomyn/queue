@@ -14,7 +14,11 @@
 //#include "SocketRTScheduler.h"
 #include "QueueingDefs.h"
 
-
+#ifdef __linux__
+#include <sys/time.h>
+#include <sys/types.h>
+#endif
+#include "Timer.h"
 
 namespace queueing {
 
@@ -43,7 +47,7 @@ class QUEUEING_API WRSourceBase : public cSimpleModule
 class QUEUEING_API WRSource : public WRSourceBase
 {
     private:
-        //simtime_t startTime;
+        simtime_t startTime;
         //simtime_t stopTime;
         int numJobs;
 
@@ -53,6 +57,9 @@ class QUEUEING_API WRSource : public WRSourceBase
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
+        Job * generateJob();
+
+        double triggerTime;
 };
 
 

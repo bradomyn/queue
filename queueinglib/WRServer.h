@@ -36,6 +36,8 @@ class QUEUEING_API WRServer : public cSimpleModule, public IServer
         Job *jobServiced;
         cMessage *endServiceMsg;
 
+        std::vector<cMessage*> jobs;
+
     public:
         WRServer();
         virtual ~WRServer();

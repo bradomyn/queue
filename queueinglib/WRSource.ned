@@ -26,16 +26,18 @@ simple WRSource
         @display("i=block/source");
         
         // SMa, 12.01.2012
-        int numJobs = 100; //default(-1);               // number of jobs to be generated (-1 means no limit)
+        int numJobs = 1000; //default(-1);               // number of jobs to be generated (-1 means no limit)
         volatile double interArrivalTime @unit(s); // time between generated jobs
         string jobName = default("job");         // the base name of the generated job (will be the module name if left empty)
         volatile int jobType = default(0);       // the type attribute of the created job (used by classifers and other modules)
         // SMa, 12.01.2012
         volatile int jobPriority = uniform(0, 7); //(0);   // priority of the job
-        double startTime @unit(s) = default(interArrivalTime); // when the module sends out the first job
+        double startTime @unit(s) = default(1s);  //default(interArrivalTime); // when the module sends out the first job default(1s);  //
         double stopTime @unit(s) = default(-1s); // when the module stops the job generation (-1 means no limit)
     gates:
         output out;
-        input in;
+        //input in;
+        //input sendDirect @directIn;
+        
 }
 

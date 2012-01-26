@@ -1,0 +1,124 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+import org.omnetpp.queueing.Classifier;
+import org.omnetpp.queueing.Merge;
+import org.omnetpp.queueing.WRClassifier_in;
+import org.omnetpp.queueing.Delay;
+import org.omnetpp.queueing.WRPassiveQueue;
+import org.omnetpp.queueing.WRServer;
+import org.omnetpp.queueing.Sink;
+import org.omnetpp.queueing.Source;
+
+import org.omnetpp.queueing.WRRouter;
+import org.omnetpp.queueing.WRSource;
+import org.omnetpp.queueing.WRClassifier_out;
+import org.omnetpp.queueing.WRTrigger;
+
+
+//
+// Second try to simulate the current scheduling within the White Rabbit Switch.
+// 
+//
+network WhiteRabbitSwitch7
+{
+    parameters:
+        @display("i=block/users;bgb=1058,668");
+    submodules:
+        out0: Sink {
+            @display("p=946,318;i=block/departure");
+        }
+        wrQueue0: WRPassiveQueue {
+            @display("p=584,94");
+        }
+        wrQueue1: WRPassiveQueue {
+            @display("p=584,152");
+        }
+        wrQueue2: WRPassiveQueue {
+            @display("p=584,209");
+        }
+        wrQueue3: WRPassiveQueue {
+            @display("p=584,267");
+        }
+        wrQueue4: WRPassiveQueue {
+            @display("p=584,357");
+        }
+        wrQueue5: WRPassiveQueue {
+            @display("p=584,415");
+        }
+        wrQueue6: WRPassiveQueue {
+            @display("p=584,472");
+        }
+        wrQueue7: WRPassiveQueue {
+            @display("p=584,530");
+        }
+        wrServer: WRServer {
+            @display("p=765,318;b=40,40");
+        }
+        wrRouter: WRRouter {
+            @display("p=861,318;b=28,29");
+        }
+        source: WRSource {
+            @display("p=149,94;b=35,37");
+        }
+        classifier: Classifier {
+            @display("p=346,308;b=31,33");
+        }
+        source1: Source {
+            @display("p=149,152;b=35,37");
+        }
+        source2: Source {
+            @display("p=149,209;b=35,37");
+        }
+        source3: Source {
+            @display("p=149,267;b=35,37");
+        }
+        source4: Source {
+            @display("p=149,357;b=35,37");
+        }
+        source5: Source {
+            @display("p=149,415;b=35,37");
+        }
+        source6: Source {
+            @display("p=149,472;b=35,37");
+        }
+        source7: Source {
+            @display("p=149,530;b=35,37");
+        }
+        wrTrigger: WRTrigger {
+            @display("p=33,289;b=14,19");
+        }
+    connections:
+        wrQueue0.out++ --> wrServer.in++;
+        wrQueue1.out++ --> wrServer.in++;
+        wrQueue2.out++ --> wrServer.in++;
+        wrQueue3.out++ --> wrServer.in++;
+        wrQueue4.out++ --> wrServer.in++;
+        wrQueue5.out++ --> wrServer.in++;
+        wrQueue6.out++ --> wrServer.in++;
+        wrQueue7.out++ --> wrServer.in++;
+        source.out --> classifier.in++;
+        wrServer.out --> wrRouter.in++;
+        wrRouter.out++ --> out0.in++;
+        classifier.out++ --> wrQueue0.in++;
+        classifier.out++ --> wrQueue1.in++;
+        classifier.out++ --> wrQueue2.in++;
+        classifier.out++ --> wrQueue3.in++;
+        classifier.out++ --> wrQueue4.in++;
+        classifier.out++ --> wrQueue5.in++;
+        classifier.out++ --> wrQueue6.in++;
+        classifier.out++ --> wrQueue7.in++;
+        source1.out --> classifier.in++;
+        source2.out --> classifier.in++;
+        source3.out --> classifier.in++;
+        source4.out --> classifier.in++;
+        source5.out --> classifier.in++;
+        source6.out --> classifier.in++;
+        source7.out --> classifier.in++;
+}

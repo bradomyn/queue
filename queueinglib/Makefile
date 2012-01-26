@@ -25,6 +25,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc and .msg files
 OBJS = \
     $O/WRScheduler.o \
+    $O/WRPassiveQueue.o \
     $O/WRQueue.o \
     $O/JobList.o \
     $O/Timer.o \
@@ -262,6 +263,13 @@ $O/WRClassifier_out.o: WRClassifier_out.cc \
 	WRClassifier_out.h \
 	WRQueue.h \
 	WRTrigger.h
+$O/WRPassiveQueue.o: WRPassiveQueue.cc \
+	IPassiveQueue.h \
+	Job.h \
+	Job_m.h \
+	QueueingDefs.h \
+	SelectionStrategies.h \
+	WRPassiveQueue.h
 $O/WRQueue.o: WRQueue.cc \
 	Job.h \
 	Job_m.h \
@@ -289,6 +297,7 @@ $O/WRSource.o: WRSource.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
+	Timer.h \
 	WRSource.h
 $O/WRTrigger.o: WRTrigger.cc \
 	Job.h \

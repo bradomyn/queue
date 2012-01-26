@@ -46,12 +46,33 @@ void WRServer::initialize()
 
 void WRServer::handleMessage(cMessage *msg)
 {
+	//std::cout << __FILE__ << ": " << __FUNCTION__ << ": l " << __LINE__;
+	//std::cout << "msg " << msg->getName() << std::endl; //<< " " << endServiceMsg->getName() << std::endl;
+
+#if 1
+	// examine all input queues, and request a new job from a non empty queue
+	/*int k = selectionStrategy->select();
+	std::cout << "selection strategy " << k << std::endl;
+	if (k >= 0) {
+		EV << "requesting job from queue " << k << endl;
+		std::cout << "requesting job from queue " << k << endl;
+		cGate *gate = selectionStrategy->selectableGate(k);
+		check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+	}*/
+
+	//jobs.push_back(msg);
+
+	// pass through directly
+	cModule *targetModule = getParentModule()->getSubmodule("wrRouter");
+	sendDirect(msg, targetModule, "sendDirect");
+#else
     if (msg==endServiceMsg)
     {
         ASSERT(jobServiced!=NULL);
         simtime_t d = simTime() - endServiceMsg->getSendingTime();
         jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
         send(jobServiced, "out");
+        std::cout << "job sent " << std::endl;
         jobServiced = NULL;
         emit(busySignal, 0);
 
@@ -59,30 +80,29 @@ void WRServer::handleMessage(cMessage *msg)
 
         // examine all input queues, and request a new job from a non empty queue
         int k = selectionStrategy->select();
-        EV << "selected new job " << k << endl;
-
-        // TODO
-        // SMa, 11.01.2012 don't request packets from queues
+        std::cout << "selection strategy " << k << std::endl;
         if (k >= 0)
         {
-            EV << "selected new job " << k << endl;
-            //EV << "requesting job from queue " << k << endl;
-        //    cGate *gate = selectionStrategy->selectableGate(k);
-        //    check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+            EV << "requesting job from queue " << k << endl;
+            std::cout << "requesting job from queue " << k << endl;
+            cGate *gate = selectionStrategy->selectableGate(k);
+            check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
         }
     }
     else
     {
+    	std::cout << "job serviced " << jobServiced << std::endl;
         if (jobServiced)
             error("job arrived while already servicing one");
 
         jobServiced = check_and_cast<Job *>(msg);
         simtime_t serviceTime = par("serviceTime");
-        scheduleAt(simTime()+serviceTime, endServiceMsg);
+        //scheduleAt(simTime()+serviceTime, endServiceMsg);
         emit(busySignal, 1);
 
         if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
     }
+#endif
 }
 
 void WRServer::finish()

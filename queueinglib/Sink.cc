@@ -35,14 +35,24 @@ void Sink::handleMessage(cMessage *msg)
     Timer t;
 	timeval tv = t.currentTime();
 	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
-	//std::cout << "QUEUE " << this->getName() << " :";
-	//t.print();
+	//std::cout << "arrivaltime " << arrivalTime << std::endl;
 
-	// retrieve trigger time
-	WRTrigger *trg = check_and_cast<WRTrigger *>( getParentModule()->findObject("trigger", true) );
-	double triggerTime = trg->getTriggerTime();
-	std::cout << "     received: " << job->getName() << ", total elapsed time " << arrivalTime-triggerTime << std::endl;
+	// extract time from jobname
+	std::string jobname = std::string(job->getName());
+	size_t found;
+	found = jobname.find("; ");
+	//std::cout << "jobname " << jobname << " found " << found << std::endl;
+	double triggerTime=0.;
+	if( found!=std::string::npos ) {
+		std::string time = jobname.substr(found+2);
+	    std::istringstream stm;
+	    stm.str(time);
+	    stm >> triggerTime;
+	    //std::cout << "time " << time << " " << triggerTime << std::endl;
+	}
+	//std::cout << job->getName() << " , duration " << (arrivalTime-triggerTime) << std::endl;
 
+	jobs.insert(std::pair<int,double>(job->getId(),(arrivalTime-triggerTime)));
 
     // gather statistics
     emit(lifeTimeSignal, simTime()- job->getCreationTime());
@@ -60,6 +70,11 @@ void Sink::handleMessage(cMessage *msg)
 void Sink::finish()
 {
     // TODO missing scalar statistics
+
+	std::map<int, double>::iterator it;
+	for( it=jobs.begin(); it!=jobs.end(); it++ ) {
+		std::cout << "ID: " << it->first << " duration: " << it->second << std::endl;
+	}
 }
 
 }; //namespace

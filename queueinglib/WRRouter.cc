@@ -49,36 +49,43 @@ void WRRouter::handleMessage(cMessage *msg)
         case WR_ALG_ROUND_ROBIN:
             outGateIndex = rrCounter;
             rrCounter = (rrCounter + 1) % gateSize("out");
+            std::cout << "outGateIndex " << outGateIndex << " rrCounter " << rrCounter << std::endl;
             break;
         case WR_ALG_MIN_QUEUE_LENGTH:
+        	std::cout << "min queue " << std::endl;
             // TODO implementation missing
             outGateIndex = -1;
             break;
         case WR_ALG_MIN_DELAY:
+        	std::cout << "min delay " << std::endl;
             // TODO implementation missing
             outGateIndex = -1;
             break;
         case WR_ALG_MIN_SERVICE_TIME:
+        	std::cout << "min service time " << std::endl;
             // TODO implementation missing
             outGateIndex = -1;
             break;
         case ALG_WR_SWITCH_MACIEJ:
+        	//std::cout << "wr " << std::endl;
+        	// TODO
         	//outGateIndex = msg->getArrivalGateId();
         	outGateIndex = rrCounter;
         	rrCounter = (rrCounter + 1) % gateSize("out");
+        	 std::cout << "outGateIndex " << outGateIndex << " rrCounter " << rrCounter  << " gateSize(out) " << gateSize("out") << std::endl;
+        	//std::cout << msg->getId() << " " << msg->getArrivalGateId() << " priority " << msg->getSchedulingPriority() << std::endl;
+        	//std::cout << "job " << job->getFullName() << " sent to sink" << std::endl;
 
-        	std::cout << msg->getId() << " " << msg->getArrivalGateId() << " priority " << msg->getSchedulingPriority() << std::endl;
+        	// Time measurement
 
-
-        	std::cout << "job " << job->getFullName() << " sent to sink" << std::endl;
 
         	// TODO send immediately
-        	if( job->getPriority()>=7 ) {
+        	/*if( job->getPriority()>=7 ) {
         		outGateIndex = 0;
         	} else {
 
 
-        	}
+        	}*/
 
         	break;
         default:

@@ -25,7 +25,7 @@ simple Source
         @statistic[created](title="the number of jobs created";record=count;interpolationmode=none);
         @display("i=block/source");
         int numJobs = default(-1);               // number of jobs to be generated (-1 means no limit)
-        //volatile double interArrivalTime @unit(s); // time between generated jobs
+        volatile double interArrivalTime @unit(s); // time between generated jobs
         string jobName = default("job");         // the base name of the generated job (will be the module name if left empty)
         volatile int jobType = default(0);       // the type attribute of the created job (used by classifers and other modules)
         volatile int jobPriority = default(0);   // priority of the job

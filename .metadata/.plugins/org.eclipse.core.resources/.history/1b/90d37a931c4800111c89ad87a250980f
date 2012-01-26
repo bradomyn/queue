@@ -1,0 +1,89 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd.
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include "Sink.h"
+#include "Job.h"
+#include "WRTrigger.h"
+#include "Timer.h"
+
+namespace queueing {
+
+Define_Module(Sink);
+
+void Sink::initialize()
+{
+    lifeTimeSignal = registerSignal("lifeTime");
+    totalQueueingTimeSignal = registerSignal("totalQueueingTime");
+    queuesVisitedSignal = registerSignal("queuesVisited");
+    totalServiceTimeSignal = registerSignal("totalServiceTime");
+    totalDelayTimeSignal = registerSignal("totalDelayTime");
+    delaysVisitedSignal = registerSignal("delaysVisited");
+    generationSignal = registerSignal("generation");
+    keepJobs = par("keepJobs");
+}
+
+void Sink::handleMessage(cMessage *msg)
+{
+    Job *job = check_and_cast<Job *>(msg);
+
+    Timer t;
+	timeval tv = t.currentTime();
+	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+	//std::cout << "arrivaltime " << arrivalTime << std::endl;
+
+	// extract time from jobname
+	std::string jobname = std::string(job->getName());
+	size_t found;
+	found = jobname.find("; ");
+	std::cout << "jobname " << jobname << " found " << found << std::endl;
+	double triggerTime=0.;
+	if( found!=std::string::npos ) {
+		std::string time = jobname.substr(found+2);
+	    std::istringstream stm;
+	    stm.str(time);
+	    stm >> triggerTime;
+	    std::cout << "time " << time << " " << triggerTime << std::endl;
+	}
+	//std::cout << job->getName() << " , duration " << (arrivalTime-triggerTime) << std::endl;
+
+	std::map<int, double> jobs;
+	jobs.insert(std::pair<int,double>(job->getId(),(arrivalTime-triggerTime)));
+
+	std::map<int, double>::iterator it;
+	for( it=jobs.begin(); it!=jobs.end(); it++ ) {
+		std::cout << "ID: " << it->first << " duration: " << it->second << std::endl;
+	}
+	//t.print();
+
+	// retrieve trigger time
+	//WRTrigger *trg = check_and_cast<WRTrigger *>( getParentModule()->findObject("trigger", true) );
+	//double triggerTime = trg->getTriggerTime();
+	//std::cout << "     received: " << job->getName() << ", total elapsed time " << arrivalTime-triggerTime << std::endl;
+
+
+    // gather statistics
+    emit(lifeTimeSignal, simTime()- job->getCreationTime());
+    emit(totalQueueingTimeSignal, job->getTotalQueueingTime());
+    emit(queuesVisitedSignal, job->getQueueCount());
+    emit(totalServiceTimeSignal, job->getTotalServiceTime());
+    emit(totalDelayTimeSignal, job->getTotalDelayTime());
+    emit(delaysVisitedSignal, job->getDelayCount());
+    emit(generationSignal, job->getGeneration());
+
+    if (!keepJobs)
+        delete msg;
+}
+
+void Sink::finish()
+{
+    // TODO missing scalar statistics
+}
+
+}; //namespace
+

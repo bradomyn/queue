@@ -52,7 +52,7 @@ void WRQueue::handleMessage(cMessage *msg)
     if (msg==endServiceMsg) {
     	std::cout << endServiceMsg << std::endl;
         endService( jobServiced );
-        if (queue.empty()) {
+        /*if (queue.empty()) {
             jobServiced = NULL;
             emit(busySignal, 0);
         } else {
@@ -63,9 +63,9 @@ void WRQueue::handleMessage(cMessage *msg)
             scheduleAt( simTime()+serviceTime, endServiceMsg );
 
             // TODO if switch is not busy send packets
-        }
+        }*/
     } else {
-
+    	std::cout << "reg msg" << std::endl;
     	Timer t;
     	timeval tv = t.currentTime();
     	arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;

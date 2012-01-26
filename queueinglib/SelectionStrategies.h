@@ -96,6 +96,17 @@ class QUEUEING_API LongestQueueSelectionStrategy : public SelectionStrategy
         virtual int select();
 };
 
+/**
+ * Chooses the longest queue (where length>0 of course).
+ * Input strategy (for servers).
+ */
+class QUEUEING_API CurrentWRSwitch : public SelectionStrategy
+{
+    public:
+	CurrentWRSwitch(cSimpleModule *module, bool selectOnInGate);
+        virtual int select();
+};
+
 }; //namespace
 
 #endif

@@ -29,6 +29,7 @@ simple WRServer
     gates:
         input in[];
         output out;
+        input sendDirect @directIn;
 }
 
 

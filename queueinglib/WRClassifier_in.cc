@@ -35,6 +35,11 @@ void WRClassifier_in::handleMessage(cMessage *msg)
     else
         error("invalid dispatchField parameter, must be \"type\" or \"priority\"");
 
+//    if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
+//        send(job, "rest");
+//    else
+//        send(job, "out", outGateIndex);
+
     std::string queue;
 	//sprintf(queue, "wrQueue%d", priority);
 	queue = "wrQueue";
