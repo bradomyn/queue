@@ -35,12 +35,15 @@ void WRRouter::initialize()
     }
 
     rrCounter = 0;
-}
+} // initialize()
 
 void WRRouter::handleMessage(cMessage *msg)
 {
     int outGateIndex = -1;  // by default we drop the message
     Job *job = check_and_cast<Job *>(msg);
+    std::string module;
+    cModule *targetModule;
+
     switch (routingAlgorithm)
     {
         case WR_ALG_RANDOM:
@@ -69,23 +72,24 @@ void WRRouter::handleMessage(cMessage *msg)
         case ALG_WR_SWITCH_MACIEJ:
         	//std::cout << "wr " << std::endl;
         	// TODO
-        	//outGateIndex = msg->getArrivalGateId();
-        	outGateIndex = rrCounter;
-        	rrCounter = (rrCounter + 1) % gateSize("out");
-        	std::cout << __FILE__ << " outGateIndex " << outGateIndex << " rrCounter " << rrCounter  << " gateSize(out) " << gateSize("out") << std::endl;
-        	//std::cout << msg->getId() << " " << msg->getArrivalGateId() << " priority " << msg->getSchedulingPriority() << std::endl;
-        	//std::cout << "job " << job->getFullName() << " sent to sink" << std::endl;
 
-        	// Time measurement
+        	// RR
+        	//outGateIndex = rrCounter;
+        	//rrCounter = (rrCounter + 1) % gateSize("out");
+        	//std::cout << __FILE__ << " outGateIndex " << outGateIndex << " rrCounter " << rrCounter  << " gateSize(out) " << gateSize("out") << std::endl;
 
 
-        	// TODO send immediately
-        	/*if( job->getPriority()>=7 ) {
-        		outGateIndex = 0;
-        	} else {
+        	outGateIndex = job->getPriority();	// much faster than RR
 
 
-        	}*/
+        	module = "out";
+			char buffer[3];
+			sprintf(buffer,"%d", job->getPriority());
+			buffer[2]='\0';
+			module += buffer;
+			//std::cout << __FILE__ << " send " << job->getPriority() << " to " << module << std::endl;
+        	targetModule = getParentModule()->getSubmodule(module.c_str());
+        	sendDirect(msg, targetModule, "sendDirect");
 
         	break;
         default:
@@ -97,20 +101,24 @@ void WRRouter::handleMessage(cMessage *msg)
     if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
         error("Invalid output gate selected during routing");
 
-    send(msg, "out", outGateIndex);
+    //send(msg, "out", outGateIndex);
 
     // SMa, 13,01,2012
     numSent++;
     if (ev.isGUI())
       updateDisplay();
-}
+} // handleMessage()
 
 void WRRouter::updateDisplay()
 {
     char buf[40];
     sprintf(buf, "sent: %ld", numSent);
     getDisplayString().setTagArg("t",0,buf);
-}
+} // updateDisplay()
+
+void WRRouter::finish() {
+
+} // finish()
 
 }; //namespace
 

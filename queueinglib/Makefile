@@ -296,6 +296,7 @@ $O/WRServer.o: WRServer.cc \
 	Job_m.h \
 	QueueingDefs.h \
 	SelectionStrategies.h \
+	WRPassiveQueue.h \
 	WRServer.h
 $O/WRSource.o: WRSource.cc \
 	Job.h \

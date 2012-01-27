@@ -84,7 +84,7 @@ void WRSource::handleMessage(cMessage *msg)
     	    sendDirect(job, targetModule, "sendDirect");
     	}
 #else
-    	int num=5;
+    	int num=10;
     	std::vector<Job*> v = generateJobs(num);
     	std::vector<Job*>::iterator it;
     	for( it=v.begin(); it!=v.end(); it++ ) {

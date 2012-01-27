@@ -77,7 +77,7 @@ void Sink::finish()
 	double duration=0., avgTime=0.;
 	for( it=jobs.begin(); it!=jobs.end(); it++ ) {
 		duration = it->getEndTime()-it->getStartTime();
-		std::cout << __FILE__ << " job ID: " << it->getID() << ", prio: " << it->getPriority() << ", duration: " << duration << std::endl;
+		//std::cout << __FILE__ << " job ID: " << it->getID() << ", prio: " << it->getPriority() << ", duration: " << duration << std::endl;
 		avgTime += duration;
 	}
 	avgTime /= jobs.size();
