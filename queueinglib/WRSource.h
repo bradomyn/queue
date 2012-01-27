@@ -60,6 +60,7 @@ class QUEUEING_API WRSource : public WRSourceBase
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
         Job * generateJob();
+        std::vector<Job*> generateJobs(int number);
 
         double triggerTime;
 };

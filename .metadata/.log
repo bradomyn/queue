@@ -11246,3 +11246,36 @@ org.omnetpp.cdt.build.MakemakeException: you have both .cc and .cpp files -- spe
 
 !ENTRY org.omnetpp.cdt 1 0 2012-01-26 16:41:11.260
 !MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+!SESSION 2012-01-27 07:54:58.428 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.omnetpp.main 1 0 2012-01-27 07:55:15.926
+!MESSAGE OMNeT++ IDE 4.2.0.111116-7631e2d started.
+
+!ENTRY org.eclipse.cdt.core 1 0 2012-01-27 08:04:52.048
+!MESSAGE Indexed 'queueinglib' (32 sources, 331 headers) in 11.13 sec: 26,859 declarations; 42,873 references; 0 unresolved inclusions; 0 syntax errors; 63 unresolved names (0.09%)
+
+!ENTRY org.omnetpp.cdt 1 0 2012-01-27 08:13:11.857
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.eclipse.cdt.core 1 0 2012-01-27 08:13:18.806
+!MESSAGE Indexed 'wrs' (12 sources, 314 headers) in 6.39 sec: 26,091 declarations; 39,561 references; 0 unresolved inclusions; 10 syntax errors; 155 unresolved names (0.24%)
+
+!ENTRY org.omnetpp.cdt 1 0 2012-01-27 08:16:27.750
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-01-27 08:19:38.857
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-01-27 08:20:10.079
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-01-27 08:27:16.941
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-01-27 09:14:40.942
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
