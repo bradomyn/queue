@@ -41,13 +41,15 @@ void WRServer::initialize()
 	// store pointers to other queues
 	std::string module;
 	char buffer[3];
-	for( int i=0; i<7; i++ ) {
+	int priority = job->getPriority();
+	for( int i=6; i>-1; i-- ) {
 		module = "wrQueue";
-		sprintf(buffer,"%d", i);
+		sprintf(buffer,"%d", priority);
 		buffer[2]='\0';
 		module += buffer;
 		WRPassiveQueue *pq = check_and_cast<WRPassiveQueue *>( getParentModule()->findObject(module.c_str(), true) );
-		qs.push_back(pq);
+		if( pq->length()>0 )
+			pq->request(0);
 	}
 
     busySignal = registerSignal("busy");
@@ -95,16 +97,22 @@ void WRServer::handleMessage(cMessage *msg)
 
 
 		// check for packets with highest priority
-		//std::cout << "check queue " << q7->getName() << " " << q7->length() << std::endl;
 		if( q7->length()>0 ) {
 			q7->request(0);
 		} else {
 			// check other queues
-			std::vector<WRPassiveQueue *>::iterator it;
-			for( it=qs.begin(); it!=qs.end(); it++ ) {
-				//std::cout << "check queue " << (*it)->getName() << std::endl;
-				if( (*it)->length()>0 )
-					(*it)->request(0);
+			std::string module;
+			char buffer[3];
+			Job *job = check_and_cast<Job *>(msg);
+			int priority = job->getPriority();
+			for( int i=6; i>-1; i-- ) {
+				module = "wrQueue";
+				sprintf(buffer,"%d", priority);
+				buffer[2]='\0';
+				module += buffer;
+				WRPassiveQueue *pq = check_and_cast<WRPassiveQueue *>( getParentModule()->findObject(module.c_str(), true) );
+				if( pq->length()>0 )
+					pq->request(0);
 			}
 		 }
     }else {

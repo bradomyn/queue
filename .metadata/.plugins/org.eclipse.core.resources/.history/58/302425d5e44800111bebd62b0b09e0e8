@@ -95,14 +95,15 @@ void WRServer::handleMessage(cMessage *msg)
 
 
 		// check for packets with highest priority
-		//std::cout << "check queue " << q7->getName() << " " << q7->length() << std::endl;
 		if( q7->length()>0 ) {
 			q7->request(0);
 		} else {
 			// check other queues
+
 			std::vector<WRPassiveQueue *>::iterator it;
-			for( it=qs.begin(); it!=qs.end(); it++ ) {
-				//std::cout << "check queue " << (*it)->getName() << std::endl;
+
+			for( int it=qs.begin(); it!=qs.end(); it-- ) {
+
 				if( (*it)->length()>0 )
 					(*it)->request(0);
 			}

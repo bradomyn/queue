@@ -100,7 +100,9 @@ void WRServer::handleMessage(cMessage *msg)
 			q7->request(0);
 		} else {
 			// check other queues
+
 			std::vector<WRPassiveQueue *>::iterator it;
+
 			for( it=qs.begin(); it!=qs.end(); it++ ) {
 				//std::cout << "check queue " << (*it)->getName() << std::endl;
 				if( (*it)->length()>0 )

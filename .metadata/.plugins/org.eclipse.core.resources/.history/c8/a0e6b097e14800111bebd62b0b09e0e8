@@ -81,7 +81,7 @@ void WRRouter::handleMessage(cMessage *msg)
 
         	outGateIndex = job->getPriority();	// much faster than RR
 
-/*
+
         	module = "out";
 			char buffer[3];
 			sprintf(buffer,"%d", job->getPriority());
@@ -90,7 +90,7 @@ void WRRouter::handleMessage(cMessage *msg)
 			//std::cout << __FILE__ << " send " << job->getPriority() << " to " << module << std::endl;
         	targetModule = getParentModule()->getSubmodule(module.c_str());
         	sendDirect(msg, targetModule, "sendDirect");
-*/
+
         	break;
         default:
             outGateIndex = -1;
@@ -101,7 +101,7 @@ void WRRouter::handleMessage(cMessage *msg)
     if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
         error("Invalid output gate selected during routing");
 
-    send(msg, "out", outGateIndex);
+    //send(msg, "out", outGateIndex);
 
     // SMa, 13,01,2012
     numSent++;
