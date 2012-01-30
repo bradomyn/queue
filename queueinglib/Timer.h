@@ -27,6 +27,8 @@ public:
 
 	struct timeval _time;
 
+	double s2ms(double s);
+
 };
 
 #endif /* TIMER_H_ */

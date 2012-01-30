@@ -25,7 +25,7 @@ void WRClassifier_in::handleMessage(cMessage *msg)
 {
     Job *job = check_and_cast<Job *>(msg);
     int priority = job->getPriority();
-    int outGateIndex = -1;
+    /*int outGateIndex = -1;
     if (strcmp(dispatchField, "type") == 0)
         outGateIndex = job->getKind();
     else if (strcmp(dispatchField, "priority") == 0) {
@@ -33,7 +33,7 @@ void WRClassifier_in::handleMessage(cMessage *msg)
         std::cout << "priority " << job->getPriority() << std::endl;
     }
     else
-        error("invalid dispatchField parameter, must be \"type\" or \"priority\"");
+        error("invalid dispatchField parameter, must be \"type\" or \"priority\"");*/
 
 //    if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
 //        send(job, "rest");

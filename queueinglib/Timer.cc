@@ -16,6 +16,11 @@ Timer::~Timer() {
 	// TODO Auto-generated destructor stub
 }
 
+
+double Timer::s2ms(double s) {
+	return (s/10000.0);
+}
+
 #ifdef __linux__
 timeval Timer::currentTime() {
 	//struct timeval tp;

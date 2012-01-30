@@ -87,15 +87,15 @@ void WRSource::handleMessage(cMessage *msg)
     	int num=10;
     	std::vector<Job*> v = generateJobs(num);
     	std::vector<Job*>::iterator it;
+    	cModule *targetModule = getParentModule()->getSubmodule("classifier");
     	for( it=v.begin(); it!=v.end(); it++ ) {
-    		cModule *targetModule = getParentModule()->getSubmodule("classifier");
     		sendDirect(*it, targetModule, "sendDirect");
     	}
-    	std::cout << this->getName() << " sent " << num << " jobs: ";
+    	/*std::cout << this->getName() << " sent " << num << " jobs: ";
     	for( it=v.begin(); it!=v.end(); it++ ) {
     		std::cout << (*it)->getId() << ", ";
     	}
-    	std::cout << std::endl;
+    	std::cout << std::endl;*/
 #endif
 #endif
     } else {

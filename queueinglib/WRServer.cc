@@ -64,6 +64,11 @@ void WRServer::initialize()
     }
 }
 
+bool JobSortPredicateAscending(const Job* d1, const Job* d2)
+{
+  return d1->getPriority()>d2->getPriority();
+}
+
 void WRServer::handleMessage(cMessage *msg)
 {
 	//std::cout << __FILE__ << ": " << __FUNCTION__ << ": l " << __LINE__;
@@ -94,14 +99,15 @@ void WRServer::handleMessage(cMessage *msg)
 		emit(busySignal, 0);
 
 
-		// check for packets with highest priority
+		// check for packets with highest priority, serve 7 first
 		//std::cout << "check queue " << q7->getName() << " " << q7->length() << std::endl;
 		if( q7->length()>0 ) {
 			q7->request(0);
 		} else {
 			// check other queues
 			std::vector<WRPassiveQueue *>::iterator it;
-			for( it=qs.begin(); it!=qs.end(); it++ ) {
+			for( it=qs.end()-1; it!=qs.begin(); it-- ) {
+			//for( it=qs.begin(); it!=qs.end(); it++ ) {
 				//std::cout << "check queue " << (*it)->getName() << std::endl;
 				if( (*it)->length()>0 )
 					(*it)->request(0);
@@ -122,6 +128,8 @@ void WRServer::handleMessage(cMessage *msg)
 #endif
 
 } // handleMessage()
+
+
 
 void WRServer::finish()
 {

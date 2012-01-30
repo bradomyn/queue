@@ -1,0 +1,39 @@
+/*
+ * Timer.cc
+ *
+ *  Created on: Jan 23, 2012
+ *      Author: matthies
+ */
+
+#include "Timer.h"
+
+Timer::Timer() {
+	// TODO Auto-generated constructor stub
+
+}
+
+Timer::~Timer() {
+	// TODO Auto-generated destructor stub
+}
+
+#ifdef __linux__
+timeval Timer::currentTime() {
+	//struct timeval tp;
+	//double sec, usec, start, end;
+	gettimeofday( &_time, NULL );
+	//sec = static_cast<double>( tp.tv_sec );
+	//usec = static_cast<double>( tp.tv_usec )/1E6;
+	//start = sec + usec;
+	//end = sec + usec;
+	// Time calculation (in seconds)
+	//double time = end - start;
+	return _time;
+}
+
+void Timer::print() {
+	double sec, usec;
+	sec = static_cast<double>( _time.tv_sec );
+	usec = static_cast<double>( _time.tv_usec )/1E6;
+	std::cout << " sec " << sec << " usec " << usec; // << std::endl;
+}
+#endif
