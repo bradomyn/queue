@@ -35,6 +35,11 @@ class QUEUEING_API WRPassiveQueue : public cSimpleModule, public IPassiveQueue
 
         void queueLengthChanged();
 
+        long numSent;
+        long queued;
+        long dropped;
+        long requested;
+
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);

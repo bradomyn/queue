@@ -26,6 +26,15 @@ WRPassiveQueue::~WRPassiveQueue()
 
 void WRPassiveQueue::initialize()
 {
+	numSent = 0;
+	WATCH(numSent);
+	queued = 0;
+	WATCH(queued);
+	dropped = 0;
+	WATCH(dropped);
+	requested = 0;
+	WATCH(requested);
+
     droppedSignal = registerSignal("dropped");
     queueingTimeSignal = registerSignal("queueingTime");
     queueLengthSignal = registerSignal("queueLength");
@@ -49,6 +58,7 @@ void WRPassiveQueue::handleMessage(cMessage *msg)
     if( job->getPriority()==7 ) {
     	cModule *targetModule = getParentModule()->getSubmodule("wrServer");
     	sendDirect(msg, targetModule, "sendDirect");
+    	numSent++;
     	return;
     }
 
@@ -58,6 +68,7 @@ void WRPassiveQueue::handleMessage(cMessage *msg)
         EV << "Queue full! Job dropped.\n";
         if (ev.isGUI()) bubble("Dropped!");
         emit(droppedSignal, 1);
+        dropped++;
         delete msg;
         return;
     }
@@ -69,12 +80,14 @@ void WRPassiveQueue::handleMessage(cMessage *msg)
         queue.insert(job);
         emit(queueLengthSignal, length());
         job->setQueueCount(job->getQueueCount() + 1);
+        queued++;
     }
     else if (length() == 0)
     {
         // send through without queueing
     	//std:: cout << "send through without queueing" << std::endl;
         send(job, "out", k);
+        numSent++;
     }
     else
         error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
@@ -114,6 +127,7 @@ void WRPassiveQueue::request(int gateIndex)
     emit(queueingTimeSignal, d);
 
     send(job, "out", gateIndex);
+    requested++;
 
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");

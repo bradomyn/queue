@@ -79,7 +79,7 @@ void WRRouter::handleMessage(cMessage *msg)
         	//std::cout << __FILE__ << " outGateIndex " << outGateIndex << " rrCounter " << rrCounter  << " gateSize(out) " << gateSize("out") << std::endl;
 
 
-        	outGateIndex = job->getPriority();	// much faster than RR
+        	outGateIndex = job->getPriority();
 
 /*
         	module = "out";

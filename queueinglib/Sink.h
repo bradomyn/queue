@@ -12,6 +12,7 @@
 
 #include <string>
 #include <vector>
+#include <simutil.h>
 
 #include "QueueingDefs.h"
 #include "WRPacket.h"
@@ -42,8 +43,12 @@ class QUEUEING_API Sink : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
     virtual void finish();
 
+    //cOutVector endToEndDelay;
+
   private:
     vector<WRPacket> jobs;
+
+    long numReceived;
 
 };
 

@@ -14,6 +14,10 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#elif WIN32
+#include <ctime>
+#include <time.h>
+#include <sys/timeb.h>
 #endif
 
 class Timer {
@@ -21,11 +25,17 @@ public:
 	Timer();
 	virtual ~Timer();
 
+#ifdef __linux__
+	struct timeval _time;
 	timeval currentTime();
+#elif WIN32
+	struct timeval _time;
+	struct timeval currentTime();
+#endif
 
 	void print();
 
-	struct timeval _time;
+
 
 	double s2ms(double s);
 

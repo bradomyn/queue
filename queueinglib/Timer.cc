@@ -41,4 +41,18 @@ void Timer::print() {
 	usec = static_cast<double>( _time.tv_usec )/1E6;
 	std::cout << " sec " << sec << " usec " << usec; // << std::endl;
 }
+#elif WIN32
+struct timeval Timer::currentTime() {
+	struct _timeb timebuffer;
+	_ftime_s( &timebuffer );
+	t->tv_sec = (long)timebuffer.time;
+	t->tv_usec = 1000*timebuffer.millitm;
+	//_time = clock();
+	return _time;
+}
+
+void Timer::print() {
+	//double sec = _time/CLOCKS_PER_SEC;
+	std::cout << " sec " << _time->tv_sec << " usec " << _time->tv_usec; // << std::endl;
+}
 #endif

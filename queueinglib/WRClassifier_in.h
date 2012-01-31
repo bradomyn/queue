@@ -23,6 +23,9 @@ class QUEUEING_API WRClassifier_in : public cSimpleModule
 {
     private:
         const char *dispatchField;   // the message's field or parameter we are dispatching on
+
+        long numSent;
+
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);

@@ -18,6 +18,9 @@ Define_Module(WRClassifier_in);
 
 void WRClassifier_in::initialize()
 {
+	numSent = 0;
+	WATCH(numSent);
+
     dispatchField = par("dispatchField");
 }
 
@@ -50,6 +53,7 @@ void WRClassifier_in::handleMessage(cMessage *msg)
 	//std::cout << __FILE__ << " send " << job->getName() << " to " << queue << std::endl;
 	cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
 	sendDirect(msg, targetModule, "sendDirect");
+	numSent++;
 
 }
 

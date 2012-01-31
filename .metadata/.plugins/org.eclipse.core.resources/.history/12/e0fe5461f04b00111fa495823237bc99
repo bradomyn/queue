@@ -1,0 +1,124 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd.
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include "WRRouter.h"
+#include "Job.h"
+
+namespace queueing {
+
+Define_Module(WRRouter);
+
+void WRRouter::initialize()
+{
+	numSent = 0;
+	WATCH(numSent);
+
+    const char *algName = par("routingAlgorithm");
+    if (strcmp(algName, "random") == 0) {
+        routingAlgorithm = WR_ALG_RANDOM;
+    } else if (strcmp(algName, "roundRobin") == 0) {
+        routingAlgorithm = WR_ALG_ROUND_ROBIN;
+    } else if (strcmp(algName, "minQueueLength") == 0) {
+        routingAlgorithm = WR_ALG_MIN_QUEUE_LENGTH;
+    } else if (strcmp(algName, "minDelay") == 0) {
+        routingAlgorithm = WR_ALG_MIN_DELAY;
+    } else if (strcmp(algName, "minServiceTime") == 0) {
+        routingAlgorithm = WR_ALG_MIN_SERVICE_TIME;
+    } else if (strcmp(algName, "currentWRSwitch") == 0) {
+        routingAlgorithm = ALG_WR_SWITCH_MACIEJ;
+    }
+
+    rrCounter = 0;
+} // initialize()
+
+void WRRouter::handleMessage(cMessage *msg)
+{
+    int outGateIndex = -1;  // by default we drop the message
+    Job *job = check_and_cast<Job *>(msg);
+    std::string module;
+    cModule *targetModule;
+
+    switch (routingAlgorithm)
+    {
+        case WR_ALG_RANDOM:
+            outGateIndex = par("randomGateIndex");
+            break;
+        case WR_ALG_ROUND_ROBIN:
+            outGateIndex = rrCounter;
+            rrCounter = (rrCounter + 1) % gateSize("out");
+            std::cout << "outGateIndex " << outGateIndex << " rrCounter " << rrCounter << std::endl;
+            break;
+        case WR_ALG_MIN_QUEUE_LENGTH:
+        	std::cout << "min queue " << std::endl;
+            // TODO implementation missing
+            outGateIndex = -1;
+            break;
+        case WR_ALG_MIN_DELAY:
+        	std::cout << "min delay " << std::endl;
+            // TODO implementation missing
+            outGateIndex = -1;
+            break;
+        case WR_ALG_MIN_SERVICE_TIME:
+        	std::cout << "min service time " << std::endl;
+            // TODO implementation missing
+            outGateIndex = -1;
+            break;
+        case ALG_WR_SWITCH_MACIEJ:
+        	//std::cout << "wr " << std::endl;
+        	// TODO
+
+        	// RR
+        	//outGateIndex = rrCounter;
+        	//rrCounter = (rrCounter + 1) % gateSize("out");
+        	//std::cout << __FILE__ << " outGateIndex " << outGateIndex << " rrCounter " << rrCounter  << " gateSize(out) " << gateSize("out") << std::endl;
+
+
+        	outGateIndex = job->getPriority();	// much faster than RR
+
+/*
+        	module = "out";
+			char buffer[3];
+			sprintf(buffer,"%d", job->getPriority());
+			buffer[2]='\0';
+			module += buffer;
+			//std::cout << __FILE__ << " send " << job->getPriority() << " to " << module << std::endl;
+        	targetModule = getParentModule()->getSubmodule(module.c_str());
+        	sendDirect(msg, targetModule, "sendDirect");
+*/
+        	break;
+        default:
+            outGateIndex = -1;
+            break;
+    }
+
+    // send out if the index is legal
+    if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
+        error("Invalid output gate selected during routing");
+
+    send(msg, "out", outGateIndex);
+
+    // SMa, 13,01,2012
+    numSent++;
+    if (ev.isGUI())
+      updateDisplay();
+} // handleMessage()
+
+void WRRouter::updateDisplay()
+{
+    char buf[40];
+    sprintf(buf, "sent: %ld", numSent);
+    getDisplayString().setTagArg("t",0,buf);
+} // updateDisplay()
+
+void WRRouter::finish() {
+
+} // finish()
+
+}; //namespace
+

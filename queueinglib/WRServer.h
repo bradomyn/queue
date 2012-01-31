@@ -41,6 +41,10 @@ class QUEUEING_API WRServer : public cSimpleModule, public IServer
         WRPassiveQueue *q7;
         std::vector<WRPassiveQueue *> qs;
 
+        long numSent;
+        long numRequested;
+        long handled;
+
     public:
         WRServer();
         virtual ~WRServer();
