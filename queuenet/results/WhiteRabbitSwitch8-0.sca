@@ -1,0 +1,580 @@
+version 2
+run WhiteRabbitSwitch8-0-20120209-14:45:11-10444
+attr configname WhiteRabbitSwitch8
+attr datetime 20120209-14:45:11
+attr experiment WhiteRabbitSwitch8
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WhiteRabbitSwitch8
+attr processid 10444
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar WhiteRabbitSwitch8.out0 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out0 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch8.out0 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out0 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out0 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out0 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out0 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out0 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out0 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out0 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out0 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out0 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out0 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out0 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.source0 	created:count 	0
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch8.source1 	created:count 	0
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch8.source2 	created:count 	0
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch8.source3 	created:count 	0
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch8.source4 	created:count 	0
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch8.source5 	created:count 	0
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch8.source6 	created:count 	0
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch8.source7 	created:count 	0
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch8.out1 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out1 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch8.out1 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out1 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out1 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out1 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out1 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out1 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out1 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out1 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out1 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out1 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out1 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out1 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out2 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out2 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch8.out2 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out2 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out2 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out2 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out2 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out2 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out2 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out2 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out2 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out2 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out2 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out2 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out3 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out3 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch8.out3 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out3 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out3 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out3 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out3 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out3 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out3 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out3 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out3 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out3 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out3 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out3 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out4 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out4 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch8.out4 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out4 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out4 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out4 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out4 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out4 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out4 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out4 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out4 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out4 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out4 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out4 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out5 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out5 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch8.out5 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out5 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out5 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out5 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out5 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out5 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out5 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out5 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out5 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out5 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out5 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out5 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out6 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out6 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch8.out6 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out6 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out6 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out6 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out6 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out6 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out6 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out6 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out6 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out6 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out6 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out6 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out7 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out7 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch8.out7 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out7 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out7 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch8.out7 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch8.out7 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out7 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out7 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out7 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out7 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out7 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.out7 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.out7 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue0 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue0 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue0 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue0 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue0 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue1 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue1 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue1 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue1 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue1 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue2 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue2 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue2 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue2 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue2 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue3 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue3 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue3 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue3 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue3 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue4 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue4 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue4 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue4 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue4 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue5 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue5 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue5 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue5 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue5 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue6 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue6 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue6 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue6 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue6 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue7 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue7 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch8.wrSi.wrQueue7 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue7 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch8.wrSi.wrQueue7 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WhiteRabbitSwitch8.wrSi.wrServer 	busy:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"

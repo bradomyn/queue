@@ -1,0 +1,7 @@
+
+**** Build of configuration gcc-debug for project fifo ****
+
+make MODE=debug CONFIGNAME=gcc-debug all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****

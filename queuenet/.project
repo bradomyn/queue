@@ -3,7 +3,7 @@
 	<name>queuenet</name>
 	<comment></comment>
 	<projects>
-		<project>queueinglib</project>
+		<project>wrs</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

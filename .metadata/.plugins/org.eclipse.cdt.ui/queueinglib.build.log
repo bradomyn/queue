@@ -2,9 +2,8 @@
 **** Build of configuration gcc-debug for project queueinglib ****
 
 make MODE=debug CONFIGNAME=gcc-debug all 
-g++ -c -g -Wall -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT -DXMLPARSER=libxml -DWITH_PARSIM -DWITH_NETBUILDER  -I. -Itemplates -Itemplates/queueing -I/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include -o out/gcc-debug//WRRouter.o WRRouter.cc
-WRRouter.cc: In member function ‘virtual void queueing::WRRouter::handleMessage(cMessage*)’:
-WRRouter.cc:45: warning: unused variable ‘targetModule’
+opp_msgc -s _m.cc -I. -Itemplates -Itemplates/queueing Job.msg
+g++ -c -g -Wall -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT -DXMLPARSER=libxml -DWITH_PARSIM -DWITH_NETBUILDER  -I. -Itemplates -Itemplates/queueing -I/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include -o out/gcc-debug//Job_m.o Job_m.cc
 g++ -shared -fPIC -o out/gcc-debug//libqueueinglib.so  out/gcc-debug//WRScheduler.o out/gcc-debug//WRPassiveQueue.o out/gcc-debug//WRQueue.o out/gcc-debug//JobList.o out/gcc-debug//Timer.o out/gcc-debug//Source.o out/gcc-debug//WRPacket.o out/gcc-debug//WRClassifier_out.o out/gcc-debug//PassiveQueue.o out/gcc-debug//WRClassifier_in.o out/gcc-debug//ResourcePool.o out/gcc-debug//Job.o out/gcc-debug//WRSource.o out/gcc-debug//Classifier.o out/gcc-debug//Join.o out/gcc-debug//Delay.o out/gcc-debug//Fork.o out/gcc-debug//Queue.o out/gcc-debug//ResourceBasedQueue.o out/gcc-debug//Router.o out/gcc-debug//Server.o out/gcc-debug//SocketRTScheduler.o out/gcc-debug//Sink.o out/gcc-debug//WRRouter.o out/gcc-debug//SelectionStrategies.o out/gcc-debug//Merge.o out/gcc-debug//WRServer.o out/gcc-debug//WRTrigger.o out/gcc-debug//Allocate.o out/gcc-debug//Clone.o out/gcc-debug//Deallocate.o out/gcc-debug//Job_m.o   -L"/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib/gcc" -L"/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib" -loppenvird -loppsimd -ldl -lstdc++  -Wl,-rpath,/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib -Wl,-rpath,.
 opp_shlib_postprocess out/gcc-debug//libqueueinglib.so
 chcon -t textrel_shlib_t out/gcc-debug//libqueueinglib.so

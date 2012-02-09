@@ -1,0 +1,33 @@
+[General]
+ned-path = .;../wrs
+parallel-simulation = false
+simtime-scale=-18	#-6 micros, -12: ps resolution
+#scheduler-class = cRealTimeScheduler
+#debug-on-errors = true
+#record-eventlog = true
+#**.vector-record-eventnumbers = false
+#scheduler-class = "WRScheduler"
+
+[Config WhiteRabbitSwitch8]
+description = "White Rabbit Switch 8"
+network = WhiteRabbitSwitch8
+**.stopTime = 3600s
+**.interArrivalTime = 0 #exponential(1s)
+**.jobType = intuniform(0,6)
+**.wrSi.serviceTime = 1s
+**.sendingAlgorithm = "priority"
+**.fetchingAlgorithm = "priority"
+**.randomGateIndex = (intuniform(0, 9) == 0) ? 1 : 0
+
+
+[Config WhiteRabbitSwitch7]
+description = "White Rabbit Switch 7"
+network = WhiteRabbitSwitch7
+**.stopTime = 3600s
+**.interArrivalTime = 0 #exponential(1s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.serviceTime = 0s #exponential(1s)
+**.sendingAlgorithm = "priority"
+**.fetchingAlgorithm = "priority"
+**.randomGateIndex = (intuniform(0, 9) == 0) ? 1 : 0

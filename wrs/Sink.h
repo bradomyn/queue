@@ -10,7 +10,16 @@
 #ifndef __QUEUEING_SINK_H
 #define __QUEUEING_SINK_H
 
+#include <string>
+#include <vector>
+#include <simutil.h>
+
 #include "QueueingDefs.h"
+#include "WRPacket.h"
+
+using std::string;
+using std::vector;
+using std::pair;
 
 namespace queueing {
 
@@ -33,6 +42,14 @@ class QUEUEING_API Sink : public cSimpleModule
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
     virtual void finish();
+
+    //cOutVector endToEndDelay;
+
+  private:
+    vector<WRPacket> jobs;
+
+    long numReceived;
+
 };
 
 }; //namespace

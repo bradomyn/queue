@@ -7,7 +7,7 @@
 // `license' for details on this and other legal matters.
 //
 
-package org.omnetpp.queueing.sma;
+package org.omnetpp.queueing;
 
 // SMa, 11.01.2012
 
@@ -25,10 +25,11 @@ simple WRServer
 
         string fetchingAlgorithm @enum("priority","random","roundRobin","longestQueue","currentWRSwitch") = default("priority");
              // how the next job will be choosen from the attached queues
-        volatile double serviceTime @unit(s); // service time of a job
+        volatile double serviceTime = default(0s) @unit(s); // service time of a job
     gates:
         input in[];
         output out;
+        input sendDirect @directIn;
 }
 
 

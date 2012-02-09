@@ -1,0 +1,178 @@
+[General]
+ned-path = .;../queueinglib
+parallel-simulation = false
+simtime-scale=-18	#-6 micros, -12: ps resolution
+#scheduler-class = cRealTimeScheduler
+#debug-on-errors = true
+#record-eventlog = true
+#**.vector-record-eventnumbers = false
+#scheduler-class = "WRScheduler"
+
+[Config WhiteRabbitSwitch7]
+description = "White Rabbit Switch 7"
+network = WhiteRabbitSwitch7
+**.stopTime = 3600s
+**.interArrivalTime = 0 #exponential(1s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.serviceTime = 0s #exponential(1s)
+**.sendingAlgorithm = "priority"
+**.fetchingAlgorithm = "priority"
+**.randomGateIndex = (intuniform(0, 9) == 0) ? 1 : 0
+
+[Config WhiteRabbitSwitch6]
+description = "White Rabbit Switch 6"
+network = WhiteRabbitSwitch6
+**.stopTime = 3600s
+**.interArrivalTime = exponential(2s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.serviceTime = exponential(5s)
+**.fetchingAlgorithm = "currentWRSwitch"
+
+[Config WhiteRabbitSwitch5]
+description = "White Rabbit Switch 5"
+network = WhiteRabbitSwitch5
+**.stopTime = 3600s
+**.interArrivalTime = exponential(2s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.serviceTime = exponential(5s)
+**.fetchingAlgorithm = "currentWRSwitch"
+
+[Config WhiteRabbitSwitch4]
+description = "White Rabbit Switch 4"
+network = WhiteRabbitSwitch4
+**.stopTime = 3600s
+**.interArrivalTime = exponential(2s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.serviceTime = exponential(5s)
+**.fetchingAlgorithm = "currentWRSwitch"
+
+[Config WhiteRabbitSwitch3]
+description = "White Rabbit Switch 3"
+network = WhiteRabbitSwitch3
+**.stopTime = 3600s
+**.interArrivalTime = exponential(55s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.serviceTime = exponential(60s)
+**.fetchingAlgorithm = "currentWRSwitch"
+
+[Config WhiteRabbitSwitch2]
+description = "White Rabbit Switch 2"
+network = WhiteRabbitSwitch2
+**.stopTime = 3600s
+**.interArrivalTime = exponential(55s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.serviceTime = exponential(60s)
+**.fetchingAlgorithm = "currentWRSwitch"
+
+[Config WhiteRabbitSwitch1]
+description = "White Rabbit Switch 1"
+network = WhiteRabbitSwitch1
+**.stopTime = 3600s
+**.interArrivalTime = exponential(55s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.serviceTime = exponential(60s)
+**.fetchingAlgorithm = "currentWRSwitch"
+
+[Config WhiteRabbitSwitch]
+description = "White Rabbit Switch"
+network = WhiteRabbitSwitch
+**.stopTime = 3600s
+**.interArrivalTime = exponential(55s)
+**.jobType = intuniform(0,6)
+**.in.jobName = "packet"
+**.delay = exponential(30s)
+**.serviceTime = exponential(60s)
+**.fetchingAlgorithm = "priority"
+
+[Config Terminal]
+description = "flight terminal"
+network = Terminal
+**.stopTime = 3600s
+**.interArrivalTime = exponential(55s)
+**.jobType = intuniform(0,3)
+**.arrival.jobName = "passenger"
+**.delay = exponential(30s)
+**.serviceTime = exponential(60s)
+**.fetchingAlgorithm = "priority"
+
+[Config OneFifo]
+description = "a single queue"
+network = SimpleQueue
+**.numJobs = 100
+**.serviceTime = exponential(2s)
+**.capacity = 5
+**.interArrivalTime = exponential(2s)
+
+[Config TandemFifos]
+description = "several queues"
+network = TandemQueue
+**.interArrivalTime = exponential(2s)
+**.serviceTime = exponential(2s)
+
+[Config SmallCQN]
+description = "two queues in a closed queueing network"
+network = SmallCQN
+**.queue1.serviceTime = 1s
+**.queue2.serviceTime = exponential(1s)
+
+[Config Ring]
+description = "a server ring"
+network = RingQueue
+**.source.numJobs = 15
+**.source.interArrivalTime = 0
+**.source1.interArrivalTime = exponential(2s)
+**.source1.startTime = 20s
+**.source1.numJobs = 25
+**.serviceTime = exponential(2s)
+
+[Config CallCenter]
+description = "call center"
+network = CallCenter
+**.interArrivalTime = exponential(15s)
+**.serviceTime = exponential(40s)
+**.delay = 5s
+**.jobType = intuniform(0,3)
+**.incomingCall.jobName = "call"
+**.sendingAlgorithm = "priority"
+**.fetchingAlgorithm = "shortestQueue"
+**.randomGateIndex = (intuniform(0, 9) == 0) ? 1 : 0
+
+[Config ForkJoin]
+description = "splitting jobs and joining them again"
+network = ForkJoin
+**.interArrivalTime = 10s
+**.delay = exponential(10s)
+
+[Config ResourceAllocation]
+description = "two queues depending on a single resource"
+network = ResourceAllocation
+**.interArrivalTime = 2s
+**.serviceTime = 1s
+**.resourceModuleName = "resource"
+**.resource.amount = 1
+**.jobPriority = uniform(0, 5)
+**.resourcePriority = uniform(0, 5)
+
+[Config AllocDealloc]
+network = AllocDealloc
+**.interArrivalTime = exponential(1s)
+**.resourceModuleName = "resourcePool"
+**.delay = exponential(0.6s)
+**.resourcePool.amount = 2
+
+[Config CQN]
+description = "tandem queues in a closed queueing network"
+network = ClosedQueueingNetwork
+*.sDelay = 100s
+*.numTandems = 3
+*.tandemQueue[*].numQueues = ${numQueues=5,10,50}
+*.tandemQueue[*].queue[*].serviceTime = exponential(10s)
+*.tandemQueue[*].qDelay = 1s
+*.tandemQueue[*].initialSource.numJobs = 2

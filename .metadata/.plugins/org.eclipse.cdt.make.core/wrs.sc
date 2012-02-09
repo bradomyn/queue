@@ -14,9 +14,16 @@
 <includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib"/>
 <includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/templates"/>
 <includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/templates/queueing"/>
-<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/wrs"/>
-<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/wrs/templates"/>
-<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/wrs/templates/queueing"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/wrs" removed="true"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/wrs/templates" removed="true"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/wrs/templates/queueing" removed="true"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2_wrs/include"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2_wrs/samples/wrs" removed="true"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2_wrs/samples/wrs/templates" removed="true"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2_wrs/samples/wrs/templates/queueing" removed="true"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/wrs"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/wrs/templates"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/wrs/templates/queueing"/>
 <definedSymbol symbol="__STDC__=1"/>
 <definedSymbol symbol="__cplusplus=1"/>
 <definedSymbol symbol="__STDC_HOSTED__=1"/>

@@ -14,6 +14,7 @@
 #include "SelectionStrategies.h"
 #include "IPassiveQueue.h"
 
+
 namespace queueing {
 
 Define_Module(WRServer);
@@ -34,56 +35,125 @@ WRServer::~WRServer()
 
 void WRServer::initialize()
 {
+	numSent = 0;
+	WATCH(numSent);
+	numRequested = 0;
+	WATCH(numRequested);
+	handled = 0;
+	WATCH(handled);
+
+	// store pointer to queue 7
+	q7 = check_and_cast<WRPassiveQueue *>( getParentModule()->findObject("wrQueue7", true) );
+
+	// store pointers to other queues
+	std::string module;
+	char buffer[3];
+	for( int i=0; i<7; i++ ) {
+		module = "wrQueue";
+		sprintf(buffer,"%d", i);
+		buffer[2]='\0';
+		module += buffer;
+		WRPassiveQueue *pq = check_and_cast<WRPassiveQueue *>( getParentModule()->findObject(module.c_str(), true) );
+		qs.push_back(pq);
+	}
+
     busySignal = registerSignal("busy");
     emit(busySignal, 0);
 
     endServiceMsg = new cMessage("end-service");
     jobServiced = NULL;
     selectionStrategy = SelectionStrategy::create(par("fetchingAlgorithm"), this, true);
-    if (!selectionStrategy)
+
+    if (!selectionStrategy) {
         error("invalid selection strategy");
+    } else {
+    	std::cout << "selection strategy " << selectionStrategy->getName() << std::endl;
+    }
+}
+
+bool JobSortPredicateAscending(const Job* d1, const Job* d2)
+{
+  return d1->getPriority()>d2->getPriority();
 }
 
 void WRServer::handleMessage(cMessage *msg)
 {
-    if (msg==endServiceMsg)
-    {
-        ASSERT(jobServiced!=NULL);
-        simtime_t d = simTime() - endServiceMsg->getSendingTime();
-        jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
-        send(jobServiced, "out");
-        jobServiced = NULL;
-        emit(busySignal, 0);
+	//std::cout << __FILE__ << ": " << __FUNCTION__ << ": l " << __LINE__;
+	handled++;
+#if 0
+	// examine all input queues, and request a new job from a non empty queue
+	/*int k = selectionStrategy->select();
+	std::cout << "selection strategy " << k << std::endl;
+	if (k >= 0) {
+		EV << "requesting job from queue " << k << endl;
+		std::cout << "requesting job from queue " << k << endl;
+		cGate *gate = selectionStrategy->selectableGate(k);
+		check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+	}*/
 
-        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
+	//jobs.push_back(msg);
 
-        // examine all input queues, and request a new job from a non empty queue
-        int k = selectionStrategy->select();
-        EV << "selected new job " << k << endl;
+    //std::cout << "job serviced available: " << jobServiced << std::endl;
+	// this results in loss of half the packets!
+    if( jobServiced!=NULL ) {
+		send(jobServiced, "out");	// faster
+		numSent++;
 
-        // TODO
-        // SMa, 11.01.2012 don't request packets from queues
-        if (k >= 0)
-        {
-            EV << "selected new job " << k << endl;
-            //EV << "requesting job from queue " << k << endl;
-        //    cGate *gate = selectionStrategy->selectableGate(k);
-        //    check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
-        }
-    }
-    else
-    {
-        if (jobServiced)
-            error("job arrived while already servicing one");
+		// sending this direct takes more time (around 0.002 more)!
+		/*cMessage *msgs = check_and_cast<cMessage*>(jobServiced);
+    	cModule *targetModule = getParentModule()->getSubmodule("wrRouter");
+    	sendDirect(msgs, targetModule, "sendDirect");*/
+   		//std::cout << "sent to wrRouter" << std::endl;
+		jobServiced = NULL;
+		emit(busySignal, 0);
 
-        jobServiced = check_and_cast<Job *>(msg);
-        simtime_t serviceTime = par("serviceTime");
-        scheduleAt(simTime()+serviceTime, endServiceMsg);
-        emit(busySignal, 1);
 
-        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
-    }
-}
+		// check for packets with highest priority, serve 7 first
+		//std::cout << "check queue " << q7->getName() << " " << q7->length() << std::endl;
+		if( q7->length()>0 ) {
+
+			int length = q7->length();
+			for( int i=0; i<length; i++ ) {
+				q7->request(0);
+				numRequested++;
+			}
+		} else {
+			// check other queues
+			std::vector<WRPassiveQueue *>::iterator it;
+			for( it=qs.end()-1; it!=qs.begin(); it-- ) {
+			//for( it=qs.begin(); it!=qs.end(); it++ ) {
+				//std::cout << "check queue " << (*it)->getName() << std::endl;
+				if( (*it)->length()>0 ) {
+					int length = (*it)->length();
+					for( int i=0; i<length; i++ ) {
+						(*it)->request(0);
+						numRequested++;
+					}
+				}
+			}
+		 }
+    } else {
+		 if (jobServiced)
+			 error("job arrived while already servicing one");
+		 jobServiced = check_and_cast<Job *>(msg);
+		 simtime_t serviceTime = par("serviceTime");
+		 emit(busySignal, 1);
+		 if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
+	 }
+
+    //cModule *targetModule = getParentModule()->getSubmodule("wrRouter");
+    //sendDirect(msg, targetModule, "sendDirect");
+#else
+	// pass through directly without any scheduling attempts (fastest approach, no packet loss)
+	cModule *targetModule = getParentModule()->getSubmodule("wrRouter");
+	sendDirect(msg, targetModule, "sendDirect");
+	numSent++;
+#endif
+
+
+} // handleMessage()
+
+
 
 void WRServer::finish()
 {

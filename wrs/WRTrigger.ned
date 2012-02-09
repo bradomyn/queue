@@ -7,7 +7,7 @@
 // `license' for details on this and other legal matters.
 //
 
-package org.omnetpp.queueing.sma;
+package org.omnetpp.queueing;
 
 //
 // SMa, 12.01.2012: This is where the packets are simulated

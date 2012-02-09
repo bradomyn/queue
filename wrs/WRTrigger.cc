@@ -84,11 +84,22 @@ void WRTrigger::handleMessage(cMessage *msg)
         send(job, "outv", 0);
 #else
         // generate 8 jobs at once and send to sources
-        for( int i=0; i<8; i++ ) {
+        for( int i=7; i>-1; i-- )
+        {
         	//std::cout << "generate job " << i << std::endl;
         	Job *job = generateJob();
         	std::cout << " created: " << job->getName() << std::endl;
         	send(job, "outv", i);
+
+        	/*std::string queue;
+        	queue = "source";
+        	char buffer[3];
+        	sprintf(buffer,"%d",i);
+        	buffer[2]='\0';
+        	queue += buffer;
+        	cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
+        	sendDirect(msg, targetModule, "sendDirect");
+*/
         }
 #endif
 

@@ -7,7 +7,7 @@
 // `license' for details on this and other legal matters.
 //
 
-package org.omnetpp.queueing.sma;
+package org.omnetpp.queueing;
 
 //
 // Destroys (or optionally keep) the packets and collects statistics

@@ -16,24 +16,29 @@ Timer::~Timer() {
 	// TODO Auto-generated destructor stub
 }
 
-#ifdef __linux__
+
+double Timer::s2ms(double s) {
+	return (s/10000.0);
+}
+
 timeval Timer::currentTime() {
-	//struct timeval tp;
-	//double sec, usec, start, end;
 	gettimeofday( &_time, NULL );
-	//sec = static_cast<double>( tp.tv_sec );
-	//usec = static_cast<double>( tp.tv_usec )/1E6;
-	//start = sec + usec;
-	//end = sec + usec;
-	// Time calculation (in seconds)
-	//double time = end - start;
 	return _time;
 }
+
+#ifdef __linux__
+
 
 void Timer::print() {
 	double sec, usec;
 	sec = static_cast<double>( _time.tv_sec );
 	usec = static_cast<double>( _time.tv_usec )/1E6;
 	std::cout << " sec " << sec << " usec " << usec; // << std::endl;
+}
+#elif WIN32
+
+void Timer::print() {
+	//double sec = _time/CLOCKS_PER_SEC;
+	std::cout << " sec " << _time.tv_sec << " usec " << _time.tv_usec; // << std::endl;
 }
 #endif

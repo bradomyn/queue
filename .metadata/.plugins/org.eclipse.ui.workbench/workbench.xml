@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="23" version="2.0">
+<workbench progressCount="26" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="0" y="26">
 <fastViewData fastViewLocation="1024"/>
@@ -18,7 +18,7 @@
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="182" y="28"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.omnetpp.inifile.editor.editors.InifileEditor" itemType="typeToolBarContribution" x="94" y="28"/>
-<coolItem id="org.omnetpp.ned.editor" itemType="typePlaceholder" x="128" y="28"/>
+<coolItem id="org.omnetpp.ned.editor" itemType="typeToolBarContribution" x="128" y="28"/>
 <coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -31,61 +31,24 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
-<part id="3"/>
 <part id="2"/>
-<part id="6"/>
-<part id="5"/>
-<part id="4"/>
-<part id="7"/>
-<part id="8"/>
-<part id="9"/>
-<part id="10"/>
+<part id="3"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource.cc" partName="WRSource.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRSource.cc" title="WRSource.cc" tooltip="queueinglib/WRSource.cc" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRSource.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3425" selectionTopPixel="1890"/>
+<editor id="org.omnetpp.ned.editor" name="WRSwitch8.ned" partName="WRSwitch8.ned" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2_wrs/samples/queuenet/WRSwitch8.ned" title="WRSwitch8.ned" tooltip="queuenet/WRSwitch8.ned" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queuenet/WRSwitch8.ned"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRClassifier_in.cc" partName="WRClassifier_in.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRClassifier_in.cc" title="WRClassifier_in.cc" tooltip="queueinglib/WRClassifier_in.cc" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRClassifier_in.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="535" selectionTopPixel="337"/>
+<editor id="org.omnetpp.ned.editor" name="WRSi.ned" partName="WRSi.ned" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2_wrs/samples/wrs/WRSi.ned" title="WRSi.ned" tooltip="wrs/WRSi.ned" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wrs/WRSi.ned"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRServer.cc" partName="WRServer.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRServer.cc" title="WRServer.cc" tooltip="queueinglib/WRServer.cc" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRServer.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2912" selectionTopPixel="1738"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRPassiveQueue.cc" partName="WRPassiveQueue.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRPassiveQueue.cc" title="WRPassiveQueue.cc" tooltip="queueinglib/WRPassiveQueue.cc" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRPassiveQueue.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2266" selectionTopPixel="792"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRRouter.cc" partName="WRRouter.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRRouter.cc" title="WRRouter.cc" tooltip="queueinglib/WRRouter.cc" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRRouter.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2586" selectionTopPixel="773"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="Sink.cc" partName="Sink.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/Sink.cc" title="Sink.cc" tooltip="queueinglib/Sink.cc" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/Sink.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="917" selectionTopPixel="88"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRServer.h" partName="WRServer.h" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/WRServer.h" title="WRServer.h" tooltip="queueinglib/WRServer.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/WRServer.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="822" selectionTopPixel="418"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.h" partName="Timer.h" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/Timer.h" title="Timer.h" tooltip="queueinglib/Timer.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/Timer.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="360" selectionTopPixel="14"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.cc" partName="Timer.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/Timer.cc" title="Timer.cc" tooltip="queueinglib/Timer.cc" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/Timer.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="624" selectionTopPixel="356"/>
-</editor>
-<editor id="org.omnetpp.inifile.editor.editors.InifileEditor" name="omnetpp.ini" partName="omnetpp.ini" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queuenet/omnetpp.ini" title="omnetpp.ini" tooltip="queuenet/omnetpp.ini" workbook="DefaultEditorWorkbook">
+<editor id="org.omnetpp.inifile.editor.editors.InifileEditor" name="omnetpp.ini" partName="omnetpp.ini" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2_wrs/samples/queuenet/omnetpp.ini" title="omnetpp.ini" tooltip="queuenet/omnetpp.ini" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queuenet/omnetpp.ini"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Sink.h" partName="Sink.h" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/Sink.h" title="Sink.h" tooltip="queueinglib/Sink.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/queueinglib/Sink.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="950" selectionTopPixel="250"/>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="Sink.cc" partName="Sink.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2_wrs/samples/wrs/Sink.cc" title="Sink.cc" tooltip="wrs/Sink.cc" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wrs/Sink.cc"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2040" selectionTopPixel="852"/>
 </editor>
 </editors>
 <views>
@@ -106,7 +69,7 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Errors (1 item)"/>
+<category IMemento.internal.id="Errors (10 items)"/>
 <category IMemento.internal.id="Warnings"/>
 <category IMemento.internal.id="Errors"/>
 </expanded>
@@ -247,8 +210,8 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.11556912" ratioLeft="265" ratioRight="2028" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.6618123" ratioLeft="818" ratioRight="418" relationship="4" relative="org.eclipse.ui.editorss">
+<info part="org.eclipse.ui.editorss" ratio="0.15967046" ratioLeft="407" ratioRight="2142" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.68122977" ratioLeft="842" ratioRight="394" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.omnetpp.inifile.ModuleHierarchy" label="Module Hierarchy"/>
@@ -283,159 +246,120 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRServer.cc"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRSource.cc"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Sink.cc"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRClassifier_in.cc"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/WRServer.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Timer.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Timer.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/queuenet/WRSwitch7.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/queuenet/WRSwitch8.ned"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.inifile.editor.editors.InifileEditor" path="/queuenet/omnetpp.ini"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/queueinglib/Sink.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRSource.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/wrs/WRSi.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRServer.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRPassiveQueue.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRSource8.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRSource8.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRSource7.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRSource7.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/wrs/WRSource7.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/wrs/WRSource8.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/wrs/WRSi.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/wrs/WRSource7.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/wrs/WRPassiveQueue.ned"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.inifile.editor.editors.InifileEditor" path="/queuenet/omnetpp.ini"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRSource8.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/WRSource7.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/Sink.cc"/>
 </editors>
-<item historyLabel="WRServer.h" index="4">
-<position info="not_deleted" x="822" y="0"/>
+<item historyLabel="WRSi.ned" index="4"/>
+<item historyLabel="WRSwitch7.ned" index="0"/>
+<item historyLabel="WRSi.ned" index="4"/>
+<item historyLabel="WRSource.cc" index="3">
+<position info="not_deleted" x="904" y="24"/>
 </item>
-<item historyLabel="WRServer.cc" index="0">
-<position info="not_deleted" x="2912" y="0"/>
+<item historyLabel="WRSource.cc" index="3">
+<position info="not_deleted" x="1852" y="0"/>
 </item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="308" y="0"/>
-</item>
-<item historyLabel="Timer.h" index="5">
+<item historyLabel="WRServer.h" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="501" y="22"/>
+<item historyLabel="WRPassiveQueue.cc" index="6">
+<position info="not_deleted" x="264" y="16"/>
 </item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="272" y="0"/>
+<item historyLabel="omnetpp.ini" index="2"/>
+<item historyLabel="WRSource.cc" index="3">
+<position info="not_deleted" x="1852" y="0"/>
 </item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="308" y="0"/>
+<item historyLabel="WRSource8.h" index="7">
+<position info="not_deleted" x="301" y="25"/>
 </item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="3007" y="0"/>
+<item historyLabel="WRSource8.cc" index="8">
+<position info="not_deleted" x="255" y="0"/>
 </item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="501" y="22"/>
+<item historyLabel="WRSource8.h" index="7">
+<position info="not_deleted" x="1474" y="0"/>
 </item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="2995" y="0"/>
+<item historyLabel="WRSource8.cc" index="8">
+<position info="not_deleted" x="3355" y="0"/>
 </item>
-<item historyLabel="omnetpp.ini" index="7"/>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="501" y="22"/>
+<item historyLabel="WRSource8.h" index="7">
+<position info="not_deleted" x="1474" y="0"/>
 </item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="272" y="0"/>
+<item historyLabel="WRSource7.h" index="9">
+<position info="not_deleted" x="1474" y="0"/>
 </item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="2592" y="0"/>
+<item historyLabel="WRSource7.cc" index="10">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="WRServer.cc" index="0">
-<position info="not_deleted" x="2912" y="0"/>
+<item historyLabel="WRSource7.cc" index="10">
+<position info="not_deleted" x="3382" y="0"/>
 </item>
-<item historyLabel="WRSource.cc" index="1">
-<position info="not_deleted" x="2238" y="0"/>
+<item historyLabel="WRSource7.cc" index="10">
+<position info="not_deleted" x="2368" y="0"/>
 </item>
-<item historyLabel="WRClassifier_in.cc" index="3">
-<position info="not_deleted" x="1101" y="0"/>
+<item historyLabel="WRSwitch7.ned" index="0"/>
+<item historyLabel="WRSwitch8.ned" index="1"/>
+<item historyLabel="WRSource8.cc" index="8">
+<position info="not_deleted" x="3355" y="0"/>
 </item>
-<item historyLabel="WRServer.cc" index="0">
-<position info="not_deleted" x="2912" y="0"/>
+<item historyLabel="WRSource7.cc" index="10">
+<position info="not_deleted" x="1851" y="0"/>
 </item>
-<item historyLabel="WRClassifier_in.cc" index="3">
-<position info="not_deleted" x="535" y="0"/>
+<item historyLabel="WRSwitch7.ned" index="0"/>
+<item historyLabel="WRSource7.cc" index="10">
+<position info="not_deleted" x="927" y="0"/>
 </item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="219" y="0"/>
+<item historyLabel="WRSource7.ned" index="11"/>
+<item historyLabel="WRSource8.ned" index="12"/>
+<item historyLabel="WRSwitch8.ned" index="1"/>
+<item historyLabel="WRSi.ned" index="13"/>
+<item historyLabel="WRSwitch8.ned" index="1"/>
+<item historyLabel="WRSource7.ned" index="14"/>
+<item historyLabel="WRSi.ned" index="13"/>
+<item historyLabel="WRSource7.ned" index="14"/>
+<item historyLabel="WRSi.ned" index="13"/>
+<item historyLabel="WRPassiveQueue.ned" index="15"/>
+<item historyLabel="WRSi.ned" index="13"/>
+<item historyLabel="WRSwitch8.ned" index="1"/>
+<item historyLabel="omnetpp.ini" index="16"/>
+<item historyLabel="WRPassiveQueue.ned" index="15"/>
+<item historyLabel="WRSwitch8.ned" index="1"/>
+<item historyLabel="omnetpp.ini" index="16"/>
+<item historyLabel="WRPassiveQueue.ned" index="15"/>
+<item historyLabel="WRSi.ned" index="13"/>
+<item historyLabel="omnetpp.ini" index="16"/>
+<item historyLabel="WRSource8.cc" index="17">
+<position info="not_deleted" x="1413" y="0"/>
 </item>
-<item historyLabel="omnetpp.ini" index="7"/>
-<item historyLabel="WRServer.cc" index="0">
-<position info="not_deleted" x="2912" y="0"/>
+<item historyLabel="WRSource7.cc" index="18">
+<position info="not_deleted" x="1413" y="0"/>
 </item>
-<item historyLabel="WRSource.cc" index="1">
-<position info="not_deleted" x="2238" y="0"/>
+<item historyLabel="WRSource8.cc" index="17">
+<position info="not_deleted" x="1413" y="0"/>
 </item>
-<item historyLabel="omnetpp.ini" index="7"/>
-<item historyLabel="WRSource.cc" index="1">
-<position info="not_deleted" x="2443" y="0"/>
+<item historyLabel="omnetpp.ini" index="16"/>
+<item historyLabel="Sink.cc" index="19">
+<position info="not_deleted" x="383" y="0"/>
 </item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="1196" y="0"/>
-</item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="501" y="22"/>
-</item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="290" y="0"/>
-</item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="844" y="35"/>
-</item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="551" y="0"/>
-</item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="1044" y="0"/>
-</item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="442" y="0"/>
-</item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="858" y="0"/>
-</item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="458" y="0"/>
-</item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="851" y="7"/>
-</item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="458" y="0"/>
-</item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="1029" y="0"/>
-</item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="360" y="0"/>
-</item>
-<item historyLabel="Timer.cc" index="6">
-<position info="not_deleted" x="624" y="0"/>
-</item>
-<item historyLabel="Timer.h" index="5">
-<position info="not_deleted" x="360" y="0"/>
-</item>
-<item historyLabel="WRSource.cc" index="1">
-<position info="not_deleted" x="3405" y="16"/>
-</item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="1102" y="0"/>
-</item>
-<item historyLabel="WRSource.cc" index="1">
-<position info="not_deleted" x="3405" y="16"/>
-</item>
-<item historyLabel="WRSource.cc" index="1">
-<position info="not_deleted" x="3425" y="0"/>
-</item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="1102" y="0"/>
-</item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="249" y="0"/>
-</item>
-<item historyLabel="Sink.h" index="8">
-<position info="not_deleted" x="975" y="0"/>
-</item>
-<item historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="1275" y="0"/>
-</item>
-<item historyLabel="Sink.h" index="8">
-<position info="not_deleted" x="950" y="0"/>
-</item>
-<item active="true" historyLabel="Sink.cc" index="2">
-<position info="not_deleted" x="1275" y="0"/>
+<item historyLabel="omnetpp.ini" index="16"/>
+<item active="true" historyLabel="Sink.cc" index="19">
+<position info="not_deleted" x="383" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -454,50 +378,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Sink.h" tooltip="queueinglib/Sink.h">
-<persistable path="/queueinglib/Sink.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Sink.cc" tooltip="wrs/Sink.cc">
+<persistable path="/wrs/Sink.cc"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource7.cc" tooltip="wrs/WRSource7.cc">
+<persistable path="/wrs/WRSource7.cc"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource8.cc" tooltip="wrs/WRSource8.cc">
+<persistable path="/wrs/WRSource8.cc"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.inifile.editor.editors.InifileEditor" name="omnetpp.ini" tooltip="queuenet/omnetpp.ini">
 <persistable path="/queuenet/omnetpp.ini"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.cc" tooltip="queueinglib/Timer.cc">
-<persistable path="/queueinglib/Timer.cc"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRPassiveQueue.ned" tooltip="wrs/WRPassiveQueue.ned">
+<persistable path="/wrs/WRPassiveQueue.ned"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Timer.h" tooltip="queueinglib/Timer.h">
-<persistable path="/queueinglib/Timer.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRSi.ned" tooltip="wrs/WRSi.ned">
+<persistable path="/wrs/WRSi.ned"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRServer.h" tooltip="queueinglib/WRServer.h">
-<persistable path="/queueinglib/WRServer.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRSource7.ned" tooltip="wrs/WRSource7.ned">
+<persistable path="/wrs/WRSource7.ned"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRSource8.ned" tooltip="wrs/WRSource8.ned">
+<persistable path="/wrs/WRSource8.ned"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource7.h" tooltip="wrs/WRSource7.h">
+<persistable path="/wrs/WRSource7.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRPassiveQueue.cc" tooltip="wrs/WRPassiveQueue.cc">
+<persistable path="/wrs/WRPassiveQueue.cc"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRServer.h" tooltip="wrs/WRServer.h">
+<persistable path="/wrs/WRServer.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="WRSwitch7.ned" tooltip="queuenet/WRSwitch7.ned">
 <persistable path="/queuenet/WRSwitch7.ned"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRQueue.cc" tooltip="queueinglib/WRQueue.cc">
-<persistable path="/queueinglib/WRQueue.cc"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SelectionStrategies.cc" tooltip="wrs/SelectionStrategies.cc">
+<persistable path="/wrs/SelectionStrategies.cc"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SelectionStrategies.h" tooltip="queueinglib/SelectionStrategies.h">
-<persistable path="/queueinglib/SelectionStrategies.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="QueueingDefs.h" tooltip="wrs/QueueingDefs.h">
+<persistable path="/wrs/QueueingDefs.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SelectionStrategies.cc" tooltip="queueinglib/SelectionStrategies.cc">
-<persistable path="/queueinglib/SelectionStrategies.cc"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Server.cc" tooltip="queueinglib/Server.cc">
-<persistable path="/queueinglib/Server.cc"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="Sink.ned" tooltip="queueinglib/Sink.ned">
-<persistable path="/queueinglib/Sink.ned"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRRouter.h" tooltip="queueinglib/WRRouter.h">
-<persistable path="/queueinglib/WRRouter.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor.launcher" name="JobList.ned" tooltip="queueinglib/JobList.ned">
-<persistable path="/queueinglib/JobList.ned"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="JobList.cc" tooltip="queueinglib/JobList.cc">
-<persistable path="/queueinglib/JobList.cc"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource.h" tooltip="queueinglib/WRSource.h">
-<persistable path="/queueinglib/WRSource.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource.cc" tooltip="wrs/WRSource.cc">
+<persistable path="/wrs/WRSource.cc"/>
 </file>
 </mruList>
 </workbench>

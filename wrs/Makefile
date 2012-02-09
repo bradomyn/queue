@@ -25,14 +25,22 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc and .msg files
 OBJS = \
     $O/WRScheduler.o \
+    $O/WRPassiveQueue.o \
     $O/WRQueue.o \
+    $O/WRSource8.o \
+    $O/JobList.o \
     $O/Timer.o \
+    $O/WRPacket.o \
     $O/WRClassifier_out.o \
+    $O/PassiveQueue.o \
     $O/WRClassifier_in.o \
-    $O/WRSource.o \
-    $O/WR_Input.o \
+    $O/Job.o \
+    $O/WRSource7.o \
+    $O/WRSwitchinner.o \
+    $O/Server.o \
     $O/Sink.o \
     $O/WRRouter.o \
+    $O/SelectionStrategies.o \
     $O/WRServer.o \
     $O/WRTrigger.o \
     $O/Job_m.o
@@ -122,46 +130,118 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc templates/*.cc templates/queueing/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
+$O/Job.o: Job.cc \
+	Job.h \
+	JobList.h \
+	Job_m.h \
+	QueueingDefs.h
+$O/JobList.o: JobList.cc \
+	Job.h \
+	JobList.h \
+	Job_m.h \
+	QueueingDefs.h
 $O/Job_m.o: Job_m.cc \
 	Job_m.h \
 	QueueingDefs.h
+$O/PassiveQueue.o: PassiveQueue.cc \
+	IPassiveQueue.h \
+	Job.h \
+	Job_m.h \
+	PassiveQueue.h \
+	QueueingDefs.h \
+	SelectionStrategies.h
+$O/SelectionStrategies.o: SelectionStrategies.cc \
+	IPassiveQueue.h \
+	IServer.h \
+	PassiveQueue.h \
+	QueueingDefs.h \
+	SelectionStrategies.h \
+	Server.h
+$O/Server.o: Server.cc \
+	IPassiveQueue.h \
+	IServer.h \
+	Job.h \
+	Job_m.h \
+	QueueingDefs.h \
+	SelectionStrategies.h \
+	Server.h
 $O/Sink.o: Sink.cc \
+	Job.h \
+	Job_m.h \
 	QueueingDefs.h \
 	Sink.h \
 	Timer.h \
+	WRPacket.h \
 	WRTrigger.h
 $O/Timer.o: Timer.cc \
 	Timer.h
 $O/WRClassifier_in.o: WRClassifier_in.cc \
+	Job.h \
+	Job_m.h \
 	QueueingDefs.h \
 	WRClassifier_in.h
 $O/WRClassifier_out.o: WRClassifier_out.cc \
+	Job.h \
+	Job_m.h \
 	QueueingDefs.h \
 	Timer.h \
 	WRClassifier_out.h \
 	WRQueue.h \
 	WRTrigger.h
+$O/WRPacket.o: WRPacket.cc \
+	WRPacket.h
+$O/WRPassiveQueue.o: WRPassiveQueue.cc \
+	IPassiveQueue.h \
+	Job.h \
+	Job_m.h \
+	QueueingDefs.h \
+	SelectionStrategies.h \
+	WRPassiveQueue.h
 $O/WRQueue.o: WRQueue.cc \
+	Job.h \
+	Job_m.h \
 	QueueingDefs.h \
 	Timer.h \
 	WRQueue.h \
 	WRTrigger.h
 $O/WRRouter.o: WRRouter.cc \
+	Job.h \
+	Job_m.h \
 	QueueingDefs.h \
 	WRRouter.h
 $O/WRScheduler.o: WRScheduler.cc \
 	QueueingDefs.h \
 	WRScheduler.h
 $O/WRServer.o: WRServer.cc \
-	WRServer.h
-$O/WRSource.o: WRSource.cc \
+	IPassiveQueue.h \
+	IServer.h \
+	Job.h \
+	Job_m.h \
 	QueueingDefs.h \
-	WRSource.h
+	SelectionStrategies.h \
+	WRPassiveQueue.h \
+	WRServer.h
+$O/WRSource7.o: WRSource7.cc \
+	Job.h \
+	Job_m.h \
+	QueueingDefs.h \
+	Timer.h \
+	WRPacket.h \
+	WRSource7.h
+$O/WRSource8.o: WRSource8.cc \
+	Job.h \
+	Job_m.h \
+	QueueingDefs.h \
+	Timer.h \
+	WRPacket.h \
+	WRSource8.h
+$O/WRSwitchinner.o: WRSwitchinner.cc \
+	QueueingDefs.h \
+	WRSwitchinner.h
 $O/WRTrigger.o: WRTrigger.cc \
+	Job.h \
+	Job_m.h \
 	QueueingDefs.h \
 	Timer.h \
 	WRTrigger.h
-$O/WR_Input.o: WR_Input.cc \
-	QueueingDefs.h \
-	WR_Input.h
 

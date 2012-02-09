@@ -7,7 +7,7 @@
 // `license' for details on this and other legal matters.
 //
 
-package org.omnetpp.queueing.sma;
+package org.omnetpp.queueing;
 
 //
 // Sends the messages to different outputs depending on message type or priority.

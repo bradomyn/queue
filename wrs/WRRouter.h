@@ -42,6 +42,8 @@ class QUEUEING_API WRRouter : public cSimpleModule
 
         // SMa, 13.01.2012
         virtual void updateDisplay();
+
+        virtual void finish();
 };
 
 }; //namespace

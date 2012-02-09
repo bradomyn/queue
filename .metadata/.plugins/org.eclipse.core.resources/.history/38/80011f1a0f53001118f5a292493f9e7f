@@ -1,0 +1,82 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+import org.omnetpp.queueing.WRClassifier_in;
+import org.omnetpp.queueing.WRPassiveQueue;
+import org.omnetpp.queueing.WRServer;
+import org.omnetpp.queueing.Sink;
+
+import org.omnetpp.queueing.WRRouter;
+import org.omnetpp.queueing.WRSource;
+import org.omnetpp.queueing.WRClassifier_out;
+import org.omnetpp.queueing.WRTrigger;
+
+
+module WRSwitch_inner
+{
+            
+    gates:
+        input in[];
+        output out[];
+    
+    submodules:
+        classifier: WRClassifier_in {
+            @display("p=63,377;b=31,33");
+        }
+        wrQueue0: WRPassiveQueue {
+            @display("p=284,44");
+        }
+        wrQueue1: WRPassiveQueue {
+            @display("p=284,141");
+        }
+        wrQueue2: WRPassiveQueue {
+            @display("p=284,236");
+        }
+        wrQueue3: WRPassiveQueue {
+            @display("p=284,338");
+        }
+        wrQueue4: WRPassiveQueue {
+            @display("p=284,435");
+        }
+        wrQueue5: WRPassiveQueue {
+            @display("p=284,538");
+        }
+        wrQueue6: WRPassiveQueue {
+            @display("p=284,639");
+        }
+        wrQueue7: WRPassiveQueue {
+            @display("p=284,740");
+        }
+        wrRouter: WRRouter {
+            @display("p=640,377;b=28,29");
+        }
+        wrServer: WRServer {
+            @display("p=473,377;b=40,40");
+        }
+    connections:
+        wrQueue6.out++ --> wrServer.in++;
+        wrQueue3.out++ --> wrServer.in++;
+        classifier.out++ --> wrQueue0.in++;
+        classifier.out++ --> wrQueue1.in++;
+        classifier.out++ --> wrQueue2.in++;
+        classifier.out++ --> wrQueue3.in++;
+        classifier.out++ --> wrQueue4.in++;
+        classifier.out++ --> wrQueue5.in++;
+        classifier.out++ --> wrQueue6.in++;
+        classifier.out++ --> wrQueue7.in++;
+        wrQueue4.out++ --> wrServer.in++;
+        wrQueue0.out++ --> wrServer.in++;
+        wrQueue5.out++ --> wrServer.in++;
+        wrQueue2.out++ --> wrServer.in++;
+        wrServer.out --> wrRouter.in++;
+        wrQueue1.out++ --> wrServer.in++;
+        wrQueue7.out++ --> wrServer.in++;
+        
+}
+

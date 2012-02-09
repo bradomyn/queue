@@ -1,0 +1,97 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+package org.omnetpp.queueing;
+
+module WRSi
+{
+    @display("bgb=728,652");
+
+    gates:
+        input in[];
+        output out[];
+
+    submodules:
+        wrQueue0: WRPassiveQueue {
+            @display("p=307,32;b=22,31");
+        }
+        wrQueue1: WRPassiveQueue {
+            @display("p=307,108;b=22,31");
+        }
+        wrQueue2: WRPassiveQueue {
+            @display("p=307,182;b=22,31");
+        }
+        wrQueue3: WRPassiveQueue {
+            @display("p=307,258;b=22,31");
+        }
+        wrQueue4: WRPassiveQueue {
+            @display("p=307,337;b=22,31");
+        }
+        wrQueue5: WRPassiveQueue {
+            @display("p=307,413;b=22,31");
+        }
+        wrQueue6: WRPassiveQueue {
+            @display("p=307,487;b=22,31");
+        }
+        wrQueue7: WRPassiveQueue {
+            @display("p=307,563;b=22,31");
+        }
+        wrClassifier_in: WRClassifier_in {
+            @display("p=87,294;b=39,35");
+        }
+        wrRouter: WRRouter {
+            @display("p=595,294;b=34,37");
+        }
+        wrServer: WRServer {
+            @display("p=477,294;b=30,30");
+        }
+    connections:
+        wrClassifier_in.out++ --> wrQueue0.in++;
+        wrClassifier_in.out++ --> wrQueue1.in++;
+        wrClassifier_in.out++ --> wrQueue2.in++;
+        wrClassifier_in.out++ --> wrQueue3.in++;
+        wrClassifier_in.out++ --> wrQueue4.in++;
+        wrClassifier_in.out++ --> wrQueue5.in++;
+        wrClassifier_in.out++ --> wrQueue6.in++;
+        wrClassifier_in.out++ --> wrQueue7.in++;
+        wrServer.out --> wrRouter.in++;
+        
+        
+        wrQueue0.out++ --> wrServer.in++;
+        wrQueue1.out++ --> wrServer.in++;
+        wrQueue2.out++ --> wrServer.in++;
+        wrQueue3.out++ --> wrServer.in++;
+        wrQueue4.out++ --> wrServer.in++;
+        wrQueue5.out++ --> wrServer.in++;
+        wrQueue6.out++ --> wrServer.in++;
+        wrQueue7.out++ --> wrServer.in++;
+
+        wrRouter.out++ --> out++;
+        wrRouter.out++ --> out++;
+        wrRouter.out++ --> out++;
+        wrRouter.out++ --> out++;
+        wrRouter.out++ --> out++;
+        wrRouter.out++ --> out++;
+        wrRouter.out++ --> out++;
+        wrRouter.out++ --> out++;
+        in++ --> wrClassifier_in.in++;
+        in++ --> wrClassifier_in.in++;
+        in++ --> wrClassifier_in.in++;
+        in++ --> wrClassifier_in.in++;
+        in++ --> wrClassifier_in.in++;
+        in++ --> wrClassifier_in.in++;
+        in++ --> wrClassifier_in.in++;
+        in++ --> wrClassifier_in.in++;
+}

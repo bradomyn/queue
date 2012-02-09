@@ -14,6 +14,8 @@
 
 #include "IServer.h"
 
+#include "WRPassiveQueue.h"
+
 namespace queueing {
 
 class Job;
@@ -35,6 +37,13 @@ class QUEUEING_API WRServer : public cSimpleModule, public IServer
 
         Job *jobServiced;
         cMessage *endServiceMsg;
+
+        WRPassiveQueue *q7;
+        std::vector<WRPassiveQueue *> qs;
+
+        long numSent;
+        long numRequested;
+        long handled;
 
     public:
         WRServer();

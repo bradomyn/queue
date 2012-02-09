@@ -13,7 +13,7 @@ import org.omnetpp.queueing.WRServer;
 import org.omnetpp.queueing.Sink;
 
 import org.omnetpp.queueing.WRRouter;
-import org.omnetpp.queueing.WRSource;
+import org.omnetpp.queueing.WRSource7;
 import org.omnetpp.queueing.WRClassifier_out;
 import org.omnetpp.queueing.WRTrigger;
 
@@ -60,31 +60,31 @@ network WhiteRabbitSwitch7
         wrRouter: WRRouter {
             @display("p=919,396;b=28,29");
         }
-        source0: WRSource {
+        source0: WRSource7 {
             @display("p=60,63;b=35,37");
         }
         classifier: WRClassifier_in {
             @display("p=342,396;b=31,33");
         }
-        source1: WRSource {
+        source1: WRSource7 {
             @display("p=60,160;b=35,37");
         }
-        source2: WRSource {
+        source2: WRSource7 {
             @display("p=60,255;b=35,37");
         }
-        source3: WRSource {
+        source3: WRSource7 {
             @display("p=60,357;b=35,37");
         }
-        source4: WRSource {
+        source4: WRSource7 {
             @display("p=60,454;b=35,37");
         }
-        source5: WRSource {
+        source5: WRSource7 {
             @display("p=60,557;b=35,37");
         }
-        source6: WRSource {
+        source6: WRSource7 {
             @display("p=60,658;b=35,37");
         }
-        source7: WRSource {
+        source7: WRSource7 {
             @display("p=60,759;b=35,37");
         }
         out1: Sink {

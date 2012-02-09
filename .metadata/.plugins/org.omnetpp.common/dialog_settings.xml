@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="TemplateBasedWizard">
+		<item value="bundleentry://255.fwk1660962283/templates/emptycompoundmodule/" key="compoundmodule.template"/>
+	</section>
+</section>

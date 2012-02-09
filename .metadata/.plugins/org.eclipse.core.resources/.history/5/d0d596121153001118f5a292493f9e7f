@@ -1,0 +1,98 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+import org.omnetpp.queueing.WRClassifier_in;
+import org.omnetpp.queueing.WRPassiveQueue;
+import org.omnetpp.queueing.WRServer;
+import org.omnetpp.queueing.Sink;
+
+import org.omnetpp.queueing.WRRouter;
+import org.omnetpp.queueing.WRSource;
+import org.omnetpp.queueing.WRClassifier_out;
+import org.omnetpp.queueing.WRTrigger;
+
+
+//
+// Second try to simulate the current scheduling within the White Rabbit Switch.
+// 
+//
+network WhiteRabbitSwitch8
+{
+    parameters:
+        @display("i=block/users;bgb=1245,862");
+    submodules:
+        out0: Sink {
+            @display("p=1148,63;i=block/departure");
+        }
+        source0: WRSource {
+            @display("p=60,63;b=35,37");
+        }
+        source1: WRSource {
+            @display("p=60,160;b=35,37");
+        }
+        source2: WRSource {
+            @display("p=60,255;b=35,37");
+        }
+        source3: WRSource {
+            @display("p=60,357;b=35,37");
+        }
+        source4: WRSource {
+            @display("p=60,454;b=35,37");
+        }
+        source5: WRSource {
+            @display("p=60,557;b=35,37");
+        }
+        source6: WRSource {
+            @display("p=60,658;b=35,37");
+        }
+        source7: WRSource {
+            @display("p=60,759;b=35,37");
+        }
+        out1: Sink {
+            @display("p=1148,160;i=block/departure");
+        }
+        out2: Sink {
+            @display("p=1148,255;i=block/departure");
+        }
+        out3: Sink {
+            @display("p=1148,357;i=block/departure");
+        }
+        out4: Sink {
+            @display("p=1148,454;i=block/departure");
+        }
+        out5: Sink {
+            @display("p=1148,557;i=block/departure");
+        }
+        out6: Sink {
+            @display("p=1148,658;i=block/departure");
+        }
+        out7: Sink {
+            @display("p=1148,759;i=block/departure");
+        }
+        wrSwitch_inner: WRSi {
+            @display("p=574,415;b=268,282");
+        }
+    connections:
+        wrSwitch_inner.out++ --> out0.in++;
+        wrSwitch_inner.out++ --> out1.in++;
+        wrSwitch_inner.out++ --> out2.in++;
+        wrSwitch_inner.out++ --> out3.in++;
+        wrSwitch_inner.out++ --> out4.in++;
+        wrSwitch_inner.out++ --> out5.in++;
+        wrSwitch_inner.out++ --> out6.in++;
+        wrSwitch_inner.out++ --> out7.in++;
+        source0.out --> wrSwitch_inner.in++;
+        source1.out --> wrSwitch_inner.in++;
+        source2.out --> wrSwitch_inner.in++;
+        source3.out --> wrSwitch_inner.in++;
+        source4.out --> wrSwitch_inner.in++;
+        source5.out --> wrSwitch_inner.in++;
+        source6.out --> wrSwitch_inner.in++;
+        source7.out --> wrSwitch_inner.in++;
+}

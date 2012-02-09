@@ -1,0 +1,70 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include <omnetpp.h>
+#include "Timer.h"
+
+namespace fifo {
+
+/**
+ * Packet sink; see NED file for more info.
+ */
+class Sink : public cSimpleModule
+{
+  private:
+    simsignal_t lifetimeSignal;
+
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
+
+Define_Module( Sink );
+
+void Sink::initialize()
+{
+    lifetimeSignal = registerSignal("lifetime");
+}
+
+void Sink::handleMessage(cMessage *msg)
+{
+    simtime_t lifetime = simTime() - msg->getCreationTime();
+    EV << "Received " << msg->getName() << ", lifetime: " << lifetime << "s" << endl;
+    //std::cout << "		Received " << msg->getName() << ", lifetime: " << lifetime << "s" << std::endl;
+
+    Timer t;
+	timeval tv = t.currentTime();
+	std::cout << "		sink ";
+	t.print();
+	std::cout << std::endl;
+
+	//Job *job = check_and_cast<Job *>(msg);
+
+	// extract time from jobname
+	string jobname = std::string(msg->getName());
+	size_t found;
+	found = jobname.find("; ");
+	//std::cout << "jobname " << jobname << " found " << found << std::endl;
+	// extract time from jobname
+	double triggerTime=0.;
+	if( found!=std::string::npos ) {
+		std::string time = jobname.substr(found+2);
+		std::istringstream stm;
+		stm.str(time);
+		stm >> triggerTime;
+		//std::cout << "time " << time << " " << triggerTime << std::endl;
+	}
+
+
+    emit(lifetimeSignal, lifetime);
+    delete msg;
+}
+
+}; //namespace
+
