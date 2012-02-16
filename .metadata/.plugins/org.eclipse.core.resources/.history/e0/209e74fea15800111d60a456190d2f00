@@ -1,0 +1,166 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include <omnetpp.h>
+#include "../wrs/Job.h"
+#include "../wrs/Timer.h"
+
+#include <map>
+
+using namespace queueing;
+
+using std::multimap;
+using std::pair;
+using std::string;
+
+namespace fifo {
+
+/**
+ * Packet sink; see NED file for more info.
+ */
+class Sink : public cSimpleModule
+{
+  private:
+    simsignal_t lifetimeSignal;
+    multimap<int, double> mm;	// priority, time
+
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+    virtual void finish();
+};
+
+Define_Module( Sink );
+
+void Sink::initialize()
+{
+    lifetimeSignal = registerSignal("lifetime");
+}
+
+void Sink::handleMessage(cMessage *msg)
+{
+#if 0
+	//std::cout << __FUNCTION__ << std::endl;
+	Job *job = check_and_cast<Job *>(msg);
+
+    simtime_t lifetime = simTime() - msg->getCreationTime();
+    EV << "Received " << msg->getName() << ", lifetime: " << lifetime << "s" << endl;
+    std::cout << "  Received " << msg->getName() << ", ct " << msg->getCreationTime() << ", st " << simTime() << ", lifetime: " << lifetime << "s" << std::endl;
+
+    Timer t;
+	timeval tv = t.currentTime();
+	//std::cout << "		sink ";
+	//t.print();
+	//std::cout << std::endl;
+
+	//Job *job = check_and_cast<Job *>(msg);
+
+	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+
+	// extract time from jobname
+	std::string jobname = std::string(msg->getName());
+	size_t found;
+	found = jobname.find("; ");
+	//std::cout << "jobname " << jobname << " found " << found << std::endl;
+	// extract time from jobname
+	double triggerTime=0.;
+	if( found!=std::string::npos ) {
+		std::string time = jobname.substr(found+2);
+		std::istringstream stm;
+		stm.str(time);
+		stm >> triggerTime;
+		std::cout << "time " << time << " " << triggerTime << std::endl;
+	}
+	lifetime = simTime()- job->getCreationTime();
+	std::cout << msg->getName() << " , duration " << (arrivalTime-triggerTime) << " s = " << t.s2ms(arrivalTime-triggerTime) << " ms, lifetime " << lifetime << std::endl;
+	std::cout << std::endl;
+#else
+    simtime_t lifetime = simTime() - msg->getCreationTime();
+
+    Timer t;
+	timeval tv = t.currentTime();
+	//std::cout << "		sink ";
+	//t.print();
+	//std::cout << std::endl;
+
+	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+
+	// extract time from jobname
+	std::string jobname = std::string(msg->getName());
+	size_t found;
+	found = jobname.find("; ");
+	//std::cout << "jobname " << jobname << " found " << found << std::endl;
+	// extract time from jobname
+	double triggerTime=0.;
+	if( found!=std::string::npos ) {
+		std::string time = jobname.substr(found+2);
+		std::istringstream stm;
+		stm.str(time);
+		stm >> triggerTime;
+		//std::cout << "time " << time << " " << triggerTime << std::endl;
+	}
+	std::cout << msg->getName() << " , duration " << (arrivalTime-triggerTime) << " = " << t.s2ms(arrivalTime-triggerTime) << ", lifetime " << lifetime <<
+			", ct " << msg->getCreationTime() << ", st " << simTime()
+			<< std::endl;
+	std::cout << std::endl;
+
+	// extract priority from jobname
+	size_t found1;
+	found1 = jobname.find("y: ");
+	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
+	// extract priority from jobname
+	int prio=0;
+	if( found1!=std::string::npos ) {
+		std::string priority = jobname.substr(found1+2);
+		std::istringstream stm;
+		stm.str(priority);
+		stm >> prio;
+		//std::cout << "priority " << prio << std::endl;
+	}
+
+	mm.insert( pair<int, double>(prio, arrivalTime-triggerTime) );
+
+#endif
+    emit(lifetimeSignal, lifetime);
+    delete msg;
+}
+
+void Sink::finish() {
+	std::cout << __FUNCTION__ <<  ": " << this->getName() << ", " << mm.size() << std::endl;
+
+	double avg = 0., avg1 = 0., avg2 = 0., avg3 = 0., avg4 = 0., avg5 = 0., avg6 = 0., avg7 = 0.;
+
+	multimap<int, double>::iterator it;
+	for( it = mm.begin(); it!=mm.end(); it++ ) {
+		//std::cout << (*it).first << ", " << (*it).second << " " << std::endl;
+		switch( (*it).first ) {
+		case 0: avg += (*it).second; break;
+		case 1: avg1 += (*it).second; break;
+		case 2: avg2 += (*it).second; break;
+		case 3: avg3 += (*it).second; break;
+		case 4: avg4 += (*it).second; break;
+		case 5: avg5 += (*it).second; break;
+		case 6: avg6 += (*it).second; break;
+		case 7: avg7 += (*it).second; break;
+		default: break;
+		}
+	}
+	avg /= mm.count(0);
+	avg1 /= mm.count(1);
+	avg2 /= mm.count(2);
+	avg3 /= mm.count(3);
+	avg4 /= mm.count(4);
+	avg5 /= mm.count(5);
+	avg6 /= mm.count(6);
+	avg7 /= mm.count(7);
+	std:: cout << this->getName() << ": " << avg << ", " << avg1 << ", "<< avg2 << ", "<< avg3 << ", "<< avg4 << ", "<< avg5 << ", "<< avg6 << ", "<< avg7 << ", " << std::endl;
+}
+
+}; //namespace
+

@@ -52,6 +52,7 @@ void WRPassiveQueue::initialize()
 
 void WRPassiveQueue::handleMessage(cMessage *msg)
 {
+#if 0
     Job *job = check_and_cast<Job *>(msg);
     job->setTimestamp();
 
@@ -95,6 +96,26 @@ void WRPassiveQueue::handleMessage(cMessage *msg)
     // change the icon color
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
+#else
+    // extract priority from jobname
+	/*std::string jobname = std::string(msg->getName());
+	size_t found1;
+	found1 = jobname.find("y: ");
+	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
+	// extract priority from jobname
+	int prio=0;
+	if( found1!=std::string::npos ) {
+		std::string priority = jobname.substr(found1+2);
+		std::istringstream stm;
+		stm.str(priority);
+		stm >> prio;
+		//std::cout << "priority " << prio << std::endl;
+	}*/
+    //if( prio==7 ) {
+		cModule *targetModule = getParentModule()->getSubmodule("wrServer");
+		sendDirect(msg, targetModule, "sendDirect");
+		numSent++;
+#endif
 }
 
 int WRPassiveQueue::length()

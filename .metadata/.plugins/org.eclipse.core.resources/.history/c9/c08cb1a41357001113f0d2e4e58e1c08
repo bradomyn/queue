@@ -1,0 +1,35 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+import org.omnetpp.queueing.WRSi;
+
+
+//
+// Simple queueing network: generator + FIFO + sink.
+//
+network FifoNetWRS
+{
+    submodules:
+        gen: Source {
+            parameters:
+                @display("p=89,100");
+        }
+        sink: Sink {
+            parameters:
+                @display("p=329,100");
+        }
+        wrSi: WRSi {
+            @display("p=205,177;b=51,47");
+        }
+    connections:
+        gen.out --> wrSi.in++;
+        wrSi.out++ --> sink.in;
+}
+
+

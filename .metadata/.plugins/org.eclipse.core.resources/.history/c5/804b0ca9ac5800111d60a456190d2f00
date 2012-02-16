@@ -1,0 +1,39 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+
+#ifndef __WRS_H
+#define __WRS_H
+
+#include "AbstractFifo.h"
+#include "Sink.h"
+
+namespace wrs {
+
+/**
+ * Single-server queue with a given service time.
+ */
+class WRS : public AbstractFifo
+{
+public:
+	WRS();
+	virtual ~WRS();
+
+  protected:
+    virtual simtime_t startService(cMessage *msg);
+    virtual void endService(cMessage *msg);
+
+  private:
+    Sink *s7;
+    std::vector<Sink *> ss;
+};
+
+}; //namespace
+
+#endif

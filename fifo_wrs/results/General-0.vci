@@ -1,0 +1,27 @@
+file 989 1329224335                                             
+version 2
+run General-0-20120214-13:58:29-30573
+attr configname General
+attr datetime 20120214-13:58:29
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network FifoNet
+attr processid 30573
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  FifoNet.fifo  qlen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 1  FifoNet.fifo  queueingTime:vector  ETV
+attr interpolationmode  none
+attr title  "queueing time at dequeue, vector"
+attr unit  s
+0	615 366 0 76 0 0 38 0 37 703 17575
+1	981 8 2 2 0 0 1 0 0 0 0

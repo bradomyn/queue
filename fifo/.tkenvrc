@@ -1,0 +1,4 @@
+# Partial Tkenv config file -- see $HOME/.tkenvrc as well
+inspector "FifoNet" "FifoNet" "2" "607x338+5+78:normal"
+inspector "FifoNet.fifo" "BitFifo" "1" "460x312+15+363"
+

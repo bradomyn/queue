@@ -1,0 +1,90 @@
+file 370211 1329400844                                          
+version 2
+run FifoWRS-0-20120216-15:00:38-22374
+attr configname FifoWRS
+attr datetime 20120216-15:00:38
+attr experiment FifoWRS
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network FifoNetWRS
+attr processid 22374
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 8  FifoNetWRS.wrSi.wrQueue0  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 9  FifoNetWRS.wrSi.wrQueue1  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 10  FifoNetWRS.wrSi.wrQueue2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 11  FifoNetWRS.wrSi.wrQueue3  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 12  FifoNetWRS.wrSi.wrQueue4  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 13  FifoNetWRS.wrSi.wrQueue5  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 14  FifoNetWRS.wrSi.wrQueue6  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 15  FifoNetWRS.wrSi.wrQueue7  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 7  FifoNetWRS.sink7  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 2  FifoNetWRS.sink2  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 6  FifoNetWRS.sink6  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 1  FifoNetWRS.sink1  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 3  FifoNetWRS.sink3  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 5  FifoNetWRS.sink5  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 4  FifoNetWRS.sink4  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 0  FifoNetWRS.sink  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+0	2525 46949 141 137181 0.002 2.857 2919 0 0 0 0
+1	49474 46071 46 137184 0 2.857 2866 0 0 0 0
+2	95545 45894 42 137177 0 2.857 2855 0 0 0 0
+3	141439 46707 47 137085 0 2.855 2904 0 0 0 0
+4	188146 45428 92 137179 0.001 2.857 2825 0 0 0 0
+5	233574 45853 90 137083 0.001 2.855 2853 0 0 0 0
+6	279427 45756 45 137178 0 2.857 2844 0 0 0 0
+7	325183 44958 41 137183 0 2.857 2798 0 0 0 0
+8	370141 8 0 0 0 0 1 0 0 0 0
+9	370149 8 0 0 0 0 1 0 0 0 0
+10	370157 9 0 0 0 0 1 0 0 0 0
+11	370166 9 0 0 0 0 1 0 0 0 0
+12	370175 9 0 0 0 0 1 0 0 0 0
+13	370184 9 0 0 0 0 1 0 0 0 0
+14	370193 9 0 0 0 0 1 0 0 0 0
+15	370202 9 0 0 0 0 1 0 0 0 0

@@ -45,6 +45,10 @@ void WRSourceBase8::finish()
 
 Define_Module(WRSource8);
 
+WRSource8::~WRSource8() {
+	cancelAndDelete(sendMessageEvent);
+}
+
 void WRSource8::initialize()
 {
     WRSourceBase8::initialize();
@@ -55,6 +59,7 @@ void WRSource8::initialize()
     // schedule the first message timer for start time
     scheduleAt(startTime, new cMessage("newJobTimer"));
 
+    sendMessageEvent = new cMessage("sendMessageEvent");
     numSent = 0;
     WATCH(numSent);
 }
@@ -66,12 +71,23 @@ void WRSource8::handleMessage(cMessage *msg)
     if ((numJobs < 0 || numJobs > jobCounter) )  // && (stopTime < 0 || stopTime > simTime()))
     {
     	int num=10;
+#if 1
     	std::vector<Job*> v = generateJobs(num);
     	std::vector<Job*>::iterator it;
     	for( it=v.begin(); it!=v.end(); it++ ) {
     		send(*it, "out");	// WRSwitch8
+    		//scheduleAt(simTime(), sendMessageEvent);
     		numSent++;
     	}
+#else
+    	std::vector<cMessage*> v = generateMessages(num);
+		std::vector<cMessage*>::iterator it;
+		for( it=v.begin(); it!=v.end(); it++ ) {
+			send(*it, "out");	// WRSwitch8
+			//scheduleAt(simTime(), sendMessageEvent);
+			numSent++;
+		}
+#endif
     	/*std::cout << this->getName() << " sent " << num << " jobs: ";
     	for( it=v.begin(); it!=v.end(); it++ ) {
     		std::cout << (*it)->getId() << ", ";
@@ -101,6 +117,45 @@ Job * WRSource8::generateJob() {
 
 	// TODO work with a fixed, repeatable data set
 	job->setPriority(random);
+
+	Timer t;
+	timeval tv = t.currentTime();
+	triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+	//triggerTime = simTime().dbl();
+	//std::cout << "triggerTime " << triggerTime << std::endl;
+	//std::cout << "TRIGGER "; t.print(); std::cout << std::endl;
+
+	char name[80];
+	sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
+	name[79] = '\0';
+	job->setName(name);
+	//std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;
+
+	job->setTimestamp();
+	//simtime_t timeSource = job->getTimestamp();
+	//std::cout << "source " << timeSource.str().c_str() << std::endl;
+
+	return job;
+} // generateJob()
+
+std::vector<cMessage*> WRSource8::generateMessages(int number) {
+	std::vector<cMessage*> jobs;
+
+	for( int i=0; i<number; i++ ) {
+		jobs.push_back(generateMessage());
+	}
+
+	return jobs;
+} // generateJobs()
+
+cMessage * WRSource8::generateMessage() {
+	char buf[80];
+	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
+	cMessage *job = new cMessage();
+	int random = (int)(rand() / (((double)RAND_MAX + 1)/ (double)(7+1)));
+
+	// TODO work with a fixed, repeatable data set
+	//job->setPriority(random);
 
 	Timer t;
 	timeval tv = t.currentTime();

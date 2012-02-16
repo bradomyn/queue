@@ -1,90 +1,42 @@
-file 3209 1328795112                                            
+                                                                
 version 2
-run WhiteRabbitSwitch8-0-20120209-14:45:11-10444
+run WhiteRabbitSwitch8-0-20120214-15:09:48-18510
 attr configname WhiteRabbitSwitch8
-attr datetime 20120209-14:45:11
+attr datetime 20120214-15:09:48
 attr experiment WhiteRabbitSwitch8
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WhiteRabbitSwitch8
-attr processid 10444
+attr processid 18510
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
-vector 40  WhiteRabbitSwitch8.wrSi.wrQueue0  queueLength:vector  ETV
+vector 8  WhiteRabbitSwitch8.wrSi.wrQueue0  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 41  WhiteRabbitSwitch8.wrSi.wrQueue1  queueLength:vector  ETV
+vector 9  WhiteRabbitSwitch8.wrSi.wrQueue1  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 42  WhiteRabbitSwitch8.wrSi.wrQueue2  queueLength:vector  ETV
+vector 10  WhiteRabbitSwitch8.wrSi.wrQueue2  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 43  WhiteRabbitSwitch8.wrSi.wrQueue3  queueLength:vector  ETV
+vector 11  WhiteRabbitSwitch8.wrSi.wrQueue3  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 44  WhiteRabbitSwitch8.wrSi.wrQueue4  queueLength:vector  ETV
+vector 12  WhiteRabbitSwitch8.wrSi.wrQueue4  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 45  WhiteRabbitSwitch8.wrSi.wrQueue5  queueLength:vector  ETV
+vector 13  WhiteRabbitSwitch8.wrSi.wrQueue5  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 46  WhiteRabbitSwitch8.wrSi.wrQueue6  queueLength:vector  ETV
+vector 14  WhiteRabbitSwitch8.wrSi.wrQueue6  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 47  WhiteRabbitSwitch8.wrSi.wrQueue7  queueLength:vector  ETV
+vector 15  WhiteRabbitSwitch8.wrSi.wrQueue7  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 36  WhiteRabbitSwitch8.out4  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-vector 32  WhiteRabbitSwitch8.out0  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-vector 39  WhiteRabbitSwitch8.out7  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-vector 38  WhiteRabbitSwitch8.out6  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-vector 33  WhiteRabbitSwitch8.out1  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-vector 34  WhiteRabbitSwitch8.out2  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-vector 37  WhiteRabbitSwitch8.out5  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-vector 35  WhiteRabbitSwitch8.out3  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-32	2697 44 290 318 1 1 4 0 0 0 0
-33	2741 33 297 319 1 1 3 0 0 0 0
-34	2774 66 299 327 1 1 6 0 0 0 0
-35	2840 22 323 326 1 1 2 0 0 0 0
-36	2862 66 289 320 1 1 6 0 0 0 0
-37	2928 77 301 322 1 1 7 0 0 0 0
-38	3005 44 294 328 1 1 4 0 0 0 0
-39	3049 88 291 324 1 1 8 0 0 0 0
-40	3137 9 0 0 0 0 1 0 0 0 0
-41	3146 9 0 0 0 0 1 0 0 0 0
-42	3155 9 0 0 0 0 1 0 0 0 0
-43	3164 9 0 0 0 0 1 0 0 0 0
-44	3173 9 0 0 0 0 1 0 0 0 0
-45	3182 9 0 0 0 0 1 0 0 0 0
-46	3191 9 0 0 0 0 1 0 0 0 0
-47	3200 9 0 0 0 0 1 0 0 0 0

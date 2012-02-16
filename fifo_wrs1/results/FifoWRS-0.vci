@@ -1,0 +1,67 @@
+file 1195006 1329405780                                         
+version 2
+run FifoWRS-0-20120216-16:22:55-19444
+attr configname FifoWRS
+attr datetime 20120216-16:22:55
+attr experiment FifoWRS
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network FifoNetWRS
+attr processid 19444
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 8  FifoNetWRS.wrs  qlen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 9  FifoNetWRS.wrs  queueingTime:vector  ETV
+attr interpolationmode  none
+attr title  "queueing time at dequeue, vector"
+attr unit  s
+vector 7  FifoNetWRS.sink7  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 2  FifoNetWRS.sink2  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 1  FifoNetWRS.sink1  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 3  FifoNetWRS.sink3  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 5  FifoNetWRS.sink5  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 4  FifoNetWRS.sink4  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 0  FifoNetWRS.sink0  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 6  FifoNetWRS.sink6  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+0	1726 51680 87 71166 0.026 22.8484 2334 0.0012 0.0096 11.7216 0.074295359999999
+1	53406 50076 27 71164 0.006 22.8472 2267 0.0012 0.0096 11.2848 0.070395839999999
+2	103482 51514 21 71158 0.0024 22.8436 2328 0.0012 0.0096 11.6496 0.072374399999999
+3	154996 51493 29 71162 0.0072 22.846 2323 0.0012 0.0096 11.6712 0.073503359999999
+4	206489 49670 57 71131 0.0148 22.8348 2247 0.0012 0.0096 11.4864 0.073172159999999
+5	256159 50797 53 71095 0.0124 22.8236 2298 0.0012 0.0096 11.4912 0.072071999999999
+6	306956 6428 663 71125 0.2112 22.8312 286 0.0012 0.0012 0.3432 0.00041184
+7	313384 79476 17 71156 0 22.8424 4197 0 0.0096 11.1468 0.069651359999999
+8	392860 456942 0 71163 0 22.8472 28083 0 7 87965 377977
+9	849802 345204 9 71163 0 22.8472 16326 0 0.0084 61.2036 0.33547824000001

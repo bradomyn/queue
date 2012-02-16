@@ -1,0 +1,220 @@
+version 2
+run FifoWRS-0-20120216-15:00:38-22374
+attr configname FifoWRS
+attr datetime 20120216-15:00:38
+attr experiment FifoWRS
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network FifoNetWRS
+attr processid 22374
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar FifoNetWRS.sink 	lifetime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink 	lifetime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue0 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue0 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue0 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrSi.wrQueue0 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrSi.wrQueue0 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar FifoNetWRS.wrSi.wrQueue1 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue1 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue1 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrSi.wrQueue1 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrSi.wrQueue1 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar FifoNetWRS.wrSi.wrQueue2 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue2 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue2 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrSi.wrQueue2 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrSi.wrQueue2 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar FifoNetWRS.wrSi.wrQueue3 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue3 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue3 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrSi.wrQueue3 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrSi.wrQueue3 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar FifoNetWRS.wrSi.wrQueue4 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue4 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue4 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrSi.wrQueue4 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrSi.wrQueue4 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar FifoNetWRS.wrSi.wrQueue5 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue5 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue5 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrSi.wrQueue5 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrSi.wrQueue5 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar FifoNetWRS.wrSi.wrQueue6 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue6 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue6 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrSi.wrQueue6 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrSi.wrQueue6 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar FifoNetWRS.wrSi.wrQueue7 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue7 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrSi.wrQueue7 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrSi.wrQueue7 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrSi.wrQueue7 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar FifoNetWRS.wrSi.wrServer 	busy:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar FifoNetWRS.sink1 	lifetime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink1 	lifetime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink2 	lifetime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink2 	lifetime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink3 	lifetime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink3 	lifetime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink4 	lifetime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink4 	lifetime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink5 	lifetime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink5 	lifetime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink6 	lifetime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink6 	lifetime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink7 	lifetime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink7 	lifetime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s

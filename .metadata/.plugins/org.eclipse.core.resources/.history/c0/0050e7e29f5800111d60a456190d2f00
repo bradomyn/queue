@@ -1,0 +1,135 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include <omnetpp.h>
+#include "../wrs/Job.h"
+#include "../wrs/Timer.h"
+
+#include <map>
+
+using namespace queueing;
+
+using std::multimap;
+using std::pair;
+using std::string;
+
+namespace fifo {
+
+/**
+ * Packet sink; see NED file for more info.
+ */
+class Sink : public cSimpleModule
+{
+  private:
+    simsignal_t lifetimeSignal;
+    multimap<int, double> mm;	// priority, time
+
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+    virtual void finish();
+};
+
+Define_Module( Sink );
+
+void Sink::initialize()
+{
+    lifetimeSignal = registerSignal("lifetime");
+}
+
+void Sink::handleMessage(cMessage *msg)
+{
+#if 0
+	//std::cout << __FUNCTION__ << std::endl;
+	Job *job = check_and_cast<Job *>(msg);
+
+    simtime_t lifetime = simTime() - msg->getCreationTime();
+    EV << "Received " << msg->getName() << ", lifetime: " << lifetime << "s" << endl;
+    std::cout << "  Received " << msg->getName() << ", ct " << msg->getCreationTime() << ", st " << simTime() << ", lifetime: " << lifetime << "s" << std::endl;
+
+    Timer t;
+	timeval tv = t.currentTime();
+	//std::cout << "		sink ";
+	//t.print();
+	//std::cout << std::endl;
+
+	//Job *job = check_and_cast<Job *>(msg);
+
+	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+
+	// extract time from jobname
+	std::string jobname = std::string(msg->getName());
+	size_t found;
+	found = jobname.find("; ");
+	//std::cout << "jobname " << jobname << " found " << found << std::endl;
+	// extract time from jobname
+	double triggerTime=0.;
+	if( found!=std::string::npos ) {
+		std::string time = jobname.substr(found+2);
+		std::istringstream stm;
+		stm.str(time);
+		stm >> triggerTime;
+		std::cout << "time " << time << " " << triggerTime << std::endl;
+	}
+	lifetime = simTime()- job->getCreationTime();
+	std::cout << msg->getName() << " , duration " << (arrivalTime-triggerTime) << " s = " << t.s2ms(arrivalTime-triggerTime) << " ms, lifetime " << lifetime << std::endl;
+	std::cout << std::endl;
+#else
+    simtime_t lifetime = simTime() - msg->getCreationTime();
+
+    Timer t;
+	timeval tv = t.currentTime();
+	//std::cout << "		sink ";
+	//t.print();
+	//std::cout << std::endl;
+
+	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+
+	// extract time from jobname
+	std::string jobname = std::string(msg->getName());
+	size_t found;
+	found = jobname.find("; ");
+	//std::cout << "jobname " << jobname << " found " << found << std::endl;
+	// extract time from jobname
+	double triggerTime=0.;
+	if( found!=std::string::npos ) {
+		std::string time = jobname.substr(found+2);
+		std::istringstream stm;
+		stm.str(time);
+		stm >> triggerTime;
+		//std::cout << "time " << time << " " << triggerTime << std::endl;
+	}
+	std::cout << msg->getName() << " , duration " << (arrivalTime-triggerTime) << " = " << t.s2ms(arrivalTime-triggerTime) << ", lifetime " << lifetime <<
+			", ct " << msg->getCreationTime() << ", st " << simTime()
+			<< std::endl;
+	std::cout << std::endl;
+
+	// extract priority from jobname
+	size_t found1;
+	found1 = jobname.find("y: ");
+	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
+	// extract priority from jobname
+	int prio=0;
+	if( found1!=std::string::npos ) {
+		std::string priority = jobname.substr(found1+2);
+		std::istringstream stm;
+		stm.str(priority);
+		stm >> prio;
+		//std::cout << "priority " << prio << std::endl;
+	}
+
+	mm.insert( pair<int, double>(prio, arrivalTime-triggerTime) );
+
+#endif
+    emit(lifetimeSignal, lifetime);
+    delete msg;
+}
+
+}; //namespace
+

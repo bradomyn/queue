@@ -1,0 +1,14 @@
+/**
+ * Packet sink; see NED file for more info.
+ */
+class Sink : public cSimpleModule
+{
+  private:
+    simsignal_t lifetimeSignal;
+    vector<double> mm;	// time
+
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+    virtual void finish();
+};

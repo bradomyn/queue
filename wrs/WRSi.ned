@@ -17,12 +17,11 @@ package org.omnetpp.queueing;
 
 module WRSi
 {
-	parameters:
-	    double serviceTime = default(0.0012s) @unit(s);
-	    
-    @display("bgb=728,652");
-	
-    
+    parameters:
+        volatile double serviceTime @unit(s) = default(0.0012s);
+        
+        @display("bgb=680,617");
+
     gates:
         input in[];
         output out[];
@@ -71,7 +70,7 @@ module WRSi
         wrClassifier_in.out++ --> wrQueue6.in++;
         wrClassifier_in.out++ --> wrQueue7.in++;
         wrServer.out --> wrRouter.in++;
-               
+
         wrQueue0.out++ --> wrServer.in++;
         wrQueue1.out++ --> wrServer.in++;
         wrQueue2.out++ --> wrServer.in++;

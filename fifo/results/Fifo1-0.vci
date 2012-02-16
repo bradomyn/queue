@@ -1,0 +1,32 @@
+file 1600191 1329404788                                         
+version 2
+run Fifo1-0-20120216-16:04:43-5974
+attr configname Fifo1
+attr datetime 20120216-16:04:43
+attr experiment Fifo1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network FifoNet
+attr processid 5974
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  FifoNet.fifo  qlen:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 1  FifoNet.fifo  queueingTime:vector  ETV
+attr interpolationmode  none
+attr title  "queueing time at dequeue, vector"
+attr unit  s
+vector 2  FifoNet.sink  lifetime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+0	741 8 0 0 0 0 1 0 0 0 0
+1	749 660490 2 156434 0 391.08 39109 0 0 0 0
+2	661239 938952 4 156436 0.0012 391.0812 39109 0.0012 0.0012 46.93079999998 0.056316959999956

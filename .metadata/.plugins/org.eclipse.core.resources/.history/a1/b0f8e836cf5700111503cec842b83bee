@@ -1,0 +1,21 @@
+[General]
+network = FifoNetWRS
+sim-time-limit = 100h
+cpu-time-limit = 300s
+#debug-on-errors = true
+#record-eventlog = true
+
+[Config FifoWRS]
+description = "WRS test"
+**.gen.sendIaTime = 0s #exponential(0.02s)
+**.serviceTime = 0.0012s
+
+[Config Fifo1]
+description = "low job arrival rate"
+**.gen.sendIaTime = exponential(0.02s)
+**.fifo.serviceTime = 0.0012s
+
+#[Config Fifo2]
+#description = "high job arrival rate"
+#**.gen.sendIaTime = exponential(0.01s)
+#**.fifo.serviceTime = 0.01s

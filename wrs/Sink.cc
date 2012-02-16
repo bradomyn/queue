@@ -33,6 +33,9 @@ void Sink::initialize()
 
 void Sink::handleMessage(cMessage *msg)
 {
+
+	//std::cout << __FUNCTION__ << std::endl;
+
     Job *job = check_and_cast<Job *>(msg);
 
     Timer t;
@@ -65,11 +68,9 @@ void Sink::handleMessage(cMessage *msg)
 	numReceived++;
 
 	simtime_t lifetime = simTime()-msg->getCreationTime();
-	std::cout  << "Received " << msg->getName() << ", lifetime: " << lifetime << "s " << job->getTotalServiceTime() << std::endl;
+	std::cout  << "Received " << numReceived << " " << msg->getName() << ", lifetime: " << lifetime << "s " << job->getTotalServiceTime() << std::endl;
 
-	// TODO how to get serviceTime of compound module WRSi???
-
-    // gather statistics
+	// gather statistics
     emit(lifeTimeSignal, simTime()- job->getCreationTime());
     emit(totalQueueingTimeSignal, job->getTotalQueueingTime());
     emit(queuesVisitedSignal, job->getQueueCount());

@@ -39,6 +39,7 @@ void WRRouter::initialize()
 
 void WRRouter::handleMessage(cMessage *msg)
 {
+#if 0
     int outGateIndex = -1;  // by default we drop the message
     Job *job = check_and_cast<Job *>(msg);
     std::string module;
@@ -103,7 +104,25 @@ void WRRouter::handleMessage(cMessage *msg)
         error("Invalid output gate selected during routing");
 
     send(msg, "out", outGateIndex);
+#else
 
+	// extract priority from jobname
+    std::string jobname = std::string(msg->getName());
+	size_t found1;
+	found1 = jobname.find("y: ");
+	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
+	// extract priority from jobname
+	int prio=0;
+	if( found1!=std::string::npos ) {
+		std::string priority = jobname.substr(found1+2);
+		std::istringstream stm;
+		stm.str(priority);
+		stm >> prio;
+		//std::cout << "priority " << prio << std::endl;
+	}
+
+    send(msg, "out", prio);
+#endif
     // SMa, 13,01,2012
     numSent++;
     if (ev.isGUI())

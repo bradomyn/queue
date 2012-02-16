@@ -1,0 +1,98 @@
+version 2
+run FifoWRS-0-20120216-16:22:55-19444
+attr configname FifoWRS
+attr datetime 20120216-16:22:55
+attr experiment FifoWRS
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network FifoNetWRS
+attr processid 19444
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar FifoNetWRS.sink0 	lifetime:mean 	0.0050221079691517
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink0 	lifetime:max 	0.0096
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink1 	lifetime:mean 	0.004977856197618
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink1 	lifetime:max 	0.0096
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink2 	lifetime:mean 	0.0050041237113402
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink2 	lifetime:max 	0.0096
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink3 	lifetime:mean 	0.005024192854068
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink3 	lifetime:max 	0.0096
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink4 	lifetime:mean 	0.0051118825100133
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink4 	lifetime:max 	0.0096
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink5 	lifetime:mean 	0.0050005221932115
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink5 	lifetime:max 	0.0096
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink6 	lifetime:mean 	0.0012
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink6 	lifetime:max 	0.0012
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.sink7 	lifetime:mean 	0.0026558970693352
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar FifoNetWRS.sink7 	lifetime:max 	0.0096
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar FifoNetWRS.wrs 	queueingTime:mean 	0.003748842337376
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrs 	queueingTime:max 	0.0084
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrs 	busy:timeavg 	0.85738293216631
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar FifoNetWRS.wrs 	qlen:timeavg 	2.6784945295405
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrs 	qlen:max 	7
+attr interpolationmode  sample-hold
+attr title  "queue length, max"

@@ -1,0 +1,115 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+
+#include "AbstractWRS.h"
+
+namespace wrs {
+
+AbstractWRS::AbstractWRS()
+{
+    msgServiced = endServiceMsg = NULL;
+}
+
+AbstractWRS::~AbstractWRS()
+{
+    delete msgServiced;
+    cancelAndDelete(endServiceMsg);
+}
+
+void AbstractWRS::initialize()
+{
+    endServiceMsg = new cMessage("end-service");
+    queue.setName("queue");
+
+    qlenSignal = registerSignal("qlen");
+    busySignal = registerSignal("busy");
+    queueingTimeSignal = registerSignal("queueingTime");
+    emit(qlenSignal, queue.length());
+    emit(busySignal, 0);
+
+
+	// store pointer to sink 7
+	s7 = check_and_cast<WRSink *>( getParentModule()->findObject("sink7", true) );
+
+	// store pointers to other queues
+	std::string module;
+	char buffer[3];
+	for( int i=0; i<7; i++ ) {
+		module = "sink";
+		sprintf(buffer,"%d", i);
+		buffer[2]='\0';
+		module += buffer;
+		WRSink *pq = check_and_cast<WRSink *>( getParentModule()->findObject(module.c_str(), true) );
+		ss.push_back(pq);
+	}
+
+}
+
+void AbstractWRS::handleMessage(cMessage *msg)
+{
+    if (msg==endServiceMsg)
+    {
+        endService( msgServiced );
+        if (queue.empty())
+        {
+            msgServiced = NULL;
+            emit(busySignal, 0);
+        }
+        else
+        {
+            msgServiced = (cMessage *) queue.pop();
+            emit(qlenSignal, queue.length());
+            emit(queueingTimeSignal, simTime() - msgServiced->getTimestamp());
+            simtime_t serviceTime = startService( msgServiced );
+            scheduleAt( simTime()+serviceTime, endServiceMsg );
+        }
+    }
+    else if (!msgServiced)
+    {
+        arrival( msg );
+        msgServiced = msg;
+        emit(queueingTimeSignal, 0.0);
+        simtime_t serviceTime = startService( msgServiced );
+        scheduleAt( simTime()+serviceTime, endServiceMsg );
+        emit(busySignal, 1);
+    }
+    else
+    {
+        arrival( msg );
+
+        // TODO determine prio from name
+        int prio = getPriority( std::string(msg->getName()) );
+
+
+        queue.insert( msg );
+        std::cout << "!queued: " << msg->getName() << "    ql: " << queue.length() << std::endl;
+        msg->setTimestamp();
+        emit(qlenSignal, queue.length());
+    }
+}
+
+int AbstractWRS::getPriority(std::string name) {
+	size_t found1;
+	found1 = name.find("y: ");
+	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
+	// extract priority from jobname
+	int prio=0;
+	if( found1!=std::string::npos ) {
+		std::string priority = name.substr(found1+2);
+		std::istringstream stm;
+		stm.str(priority);
+		stm >> prio;
+		//std::cout << "priority " << prio << std::endl;
+	}
+	return prio;
+}
+
+}; //namespace
+

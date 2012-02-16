@@ -1,0 +1,102 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+import org.omnetpp.queueing.WRSi;
+
+
+//
+// Simple queueing network: generator + FIFO + sink.
+//
+network FifoNetWRS
+{
+    @display("bgb=422,615");
+    submodules:
+        gen: Source {
+            parameters:
+                @display("p=83,100");
+        }
+        sink: Sink {
+            parameters:
+                @display("p=329,100");
+        }
+        wrSi: WRSi {
+            @display("p=205,177;b=51,47");
+        }
+        gen1: Source {
+            parameters:
+                @display("p=83,174");
+        }
+        gen2: Source {
+            parameters:
+                @display("p=83,240");
+        }
+        gen3: Source {
+            parameters:
+                @display("p=83,307");
+        }
+        gen4: Source {
+            parameters:
+                @display("p=83,368");
+        }
+        gen5: Source {
+            parameters:
+                @display("p=83,442");
+        }
+        gen6: Source {
+            parameters:
+                @display("p=83,508");
+        }
+        gen7: Source {
+            parameters:
+                @display("p=83,575");
+        }
+        sink1: Sink {
+            parameters:
+                @display("p=329,162");
+        }
+        sink2: Sink {
+            parameters:
+                @display("p=329,220");
+        }
+        sink3: Sink {
+            parameters:
+                @display("p=329,282");
+        }
+        sink4: Sink {
+            parameters:
+                @display("p=329,345");
+        }
+        sink5: Sink {
+            parameters:
+                @display("p=329,407");
+        }
+        sink6: Sink {
+            parameters:
+                @display("p=329,474");
+        }
+        sink7: Sink {
+            parameters:
+                @display("p=329,536");
+        }
+    connections:
+        gen.out --> wrSi.in++;
+        wrSi.out++ --> sink.in;
+        gen1.out --> wrSi.in++;
+        gen2.out --> wrSi.in++;
+        gen3.out --> wrSi.in++;
+        wrSi.out++ --> sink1.in;
+        wrSi.out++ --> sink3.in;
+        wrSi.out++ --> sink2.in;
+        wrSi.out++ --> sink5.in;
+        wrSi.out++ --> sink4.in;
+        wrSi.out++ --> sink7.in;
+        wrSi.out++ --> sink6.in;
+}
+
+

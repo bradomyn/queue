@@ -48,6 +48,8 @@ class QUEUEING_API WRSourceBase8 : public cSimpleModule
  */
 class QUEUEING_API WRSource8 : public WRSourceBase8
 {
+	virtual ~WRSource8();
+
     private:
         simtime_t startTime;
         //simtime_t stopTime;
@@ -57,11 +59,16 @@ class QUEUEING_API WRSource8 : public WRSourceBase8
         // SMa, 18.01.2012
         //cSocketRTScheduler *rtScheduler;
 
+        cMessage *sendMessageEvent;
+
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
-        Job * generateJob();
+        Job* generateJob();
         std::vector<Job*> generateJobs(int number);
+
+        cMessage* generateMessage();
+        std::vector<cMessage*> generateMessages(int number);
 
         double triggerTime;
 };

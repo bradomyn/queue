@@ -2,11 +2,6 @@
 **** Build of configuration gcc-debug for project wrs ****
 
 make MODE=debug CONFIGNAME=gcc-debug all 
-g++ -c -g -Wall -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT -DXMLPARSER=libxml -DWITH_PARSIM -DWITH_NETBUILDER  -I. -Itemplates -Itemplates/queueing -I/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include -o out/gcc-debug//WRServer.o WRServer.cc
-g++ -shared -fPIC -o out/gcc-debug//libwrs.so  out/gcc-debug//WRScheduler.o out/gcc-debug//WRPassiveQueue.o out/gcc-debug//WRQueue.o out/gcc-debug//WRSource8.o out/gcc-debug//JobList.o out/gcc-debug//Timer.o out/gcc-debug//WRPacket.o out/gcc-debug//WRClassifier_out.o out/gcc-debug//PassiveQueue.o out/gcc-debug//WRClassifier_in.o out/gcc-debug//Job.o out/gcc-debug//WRSource7.o out/gcc-debug//WRSwitchinner.o out/gcc-debug//Server.o out/gcc-debug//Sink.o out/gcc-debug//WRRouter.o out/gcc-debug//SelectionStrategies.o out/gcc-debug//WRServer.o out/gcc-debug//WRTrigger.o out/gcc-debug//Job_m.o   -L"/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib/gcc" -L"/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib" -loppenvird -loppsimd -ldl -lstdc++  -Wl,-rpath,/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib -Wl,-rpath,.
-chcon: can't apply partial context to unlabeled file out/gcc-debug//libwrs.so
-opp_shlib_postprocess out/gcc-debug//libwrs.so
-chcon -t textrel_shlib_t out/gcc-debug//libwrs.so
-ln -sf out/gcc-debug//libwrs.so .
+make: Nothing to be done for `all'.
 
 **** Build Finished ****

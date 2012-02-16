@@ -1,0 +1,1 @@
+-g -Wall -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT -DXMLPARSER=libxml -DWITH_PARSIM -DWITH_NETBUILDER  -I../wrs -I. -Iresults -I/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include

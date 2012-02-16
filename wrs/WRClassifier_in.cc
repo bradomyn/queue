@@ -26,6 +26,7 @@ void WRClassifier_in::initialize()
 
 void WRClassifier_in::handleMessage(cMessage *msg)
 {
+#if 0
     Job *job = check_and_cast<Job *>(msg);
     int priority = job->getPriority();
     /*int outGateIndex = -1;
@@ -54,7 +55,34 @@ void WRClassifier_in::handleMessage(cMessage *msg)
 	cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
 	sendDirect(msg, targetModule, "sendDirect");
 	numSent++;
+#else
+	// extract priority from jobname
+	std::string jobname = std::string(msg->getName());
+	size_t found1;
+	found1 = jobname.find("y: ");
+	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
+	// extract priority from jobname
+	int prio=0;
+	if( found1!=std::string::npos ) {
+		std::string priority = jobname.substr(found1+2);
+		std::istringstream stm;
+		stm.str(priority);
+		stm >> prio;
+		//std::cout << "priority " << prio << std::endl;
+	}
 
+	 std::string queue;
+	queue = "wrQueue";
+	char buffer[3];
+
+	sprintf(buffer,"%d",prio);
+	buffer[2]='\0';
+	queue += buffer;
+	//std::cout << __FILE__ << " send " << job->getName() << " to " << queue << std::endl;
+	cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
+	sendDirect(msg, targetModule, "sendDirect");
+	numSent++;
+#endif
 }
 
 }; //namespace

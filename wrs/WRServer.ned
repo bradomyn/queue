@@ -25,7 +25,9 @@ simple WRServer
 
         string fetchingAlgorithm @enum("priority","random","roundRobin","longestQueue","currentWRSwitch") = default("priority");
              // how the next job will be choosen from the attached queues
-        volatile double serviceTime = default(0s) @unit(s); // service time of a job
+        
+        //volatile double serviceTime = default(0s) @unit(s); // service time of a job
+        
     gates:
         input in[];
         output out;
