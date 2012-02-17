@@ -11,7 +11,7 @@
 #include "../wrs/Job.h"
 #include "../wrs/Timer.h"
 
-#include <map>
+#include <vector>
 
 using namespace queueing;
 
@@ -27,6 +27,7 @@ class WRSink : public cSimpleModule {
   private:
     simsignal_t lifetimeSignal;
     vector<double> mm;	// time
+    vector<simtime_t> lt;	// lifetime
 
   protected:
     virtual void initialize();

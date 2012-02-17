@@ -17,15 +17,14 @@ Define_Module(WRS);
 simtime_t WRS::startService(cMessage *msg)
 {
     EV << "Starting service of " << msg->getName() << endl;
-    std::cout << "Starting service of " << msg->getName() << std::endl;
+    //std::cout << "Starting service of " << msg->getName() << std::endl;
     return par("serviceTime");
 }
 
 void WRS::endService(cMessage *msg)
 {
     EV << "Completed service of " << msg->getName() << endl;
-    std::cout << "Completed service of " << msg->getName() << std::endl;
-
+    //std::cout << "Completed service of " << msg->getName() << std::endl;
 
     // extract priority from jobname
     std::string jobname = std::string(msg->getName());

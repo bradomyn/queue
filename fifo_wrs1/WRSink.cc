@@ -64,23 +64,31 @@ void WRSink::handleMessage(cMessage *msg)
 	}
 
 	mm.push_back( arrivalTime-triggerTime );
+	lt.push_back(lifetime);
 
     emit(lifetimeSignal, lifetime);
     delete msg;
 }
 
 void WRSink::finish() {
-	std::cout << __FUNCTION__ <<  ": " << this->getName() << ", " << mm.size() << " ";
+	std::cout << this->getName() << ":" << __FUNCTION__ <<  "(), # " << mm.size() << " ";
 
 	double avg = 0.;
 
-	vector<double>::iterator it;
+	std::vector<double>::iterator it;
 	for( it = mm.begin(); it!=mm.end(); it++ ) {
-		//std::cout << (*it).first << ", " << (*it).second << " " << std::endl;
 		avg += (*it);
 	}
 	avg /= mm.size();
-	std:: cout << "    " << avg << "s = " << avg / 1000.0 << "ms" << std::endl;
+	std:: cout << "    " << avg << "s = " << avg / 1000.0 << "ms     ";
+
+	double avg_lt = 0.;
+	std::vector<simtime_t>::iterator lit;
+	for( lit = lt.begin(); lit!=lt.end(); lit++ ) {
+		avg_lt += (*it);
+	}
+	avg_lt /= lt.size();
+	std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
 }
 
 }; //namespace

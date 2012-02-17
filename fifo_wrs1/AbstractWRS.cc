@@ -85,6 +85,7 @@ void AbstractWRS::handleMessage(cMessage *msg)
         	msg->setTimestamp();
         	emit(qlenSignal, queue.length());
         } else {
+        	// don't queue
         	// sendDirect to port 7
         	sendDirect(msg, s7, "sendDirect");
         }

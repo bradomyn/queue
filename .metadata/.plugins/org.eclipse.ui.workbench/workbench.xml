@@ -59,25 +59,25 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/fifo_wrs1/WRS.h"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="419" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="AbstractWRS.cc" partName="AbstractWRS.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/fifo_wrs1/AbstractWRS.cc" title="AbstractWRS.cc" tooltip="fifo_wrs1/AbstractWRS.cc" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="AbstractWRS.cc" partName="AbstractWRS.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/fifo_wrs1/AbstractWRS.cc" title="AbstractWRS.cc" tooltip="fifo_wrs1/AbstractWRS.cc" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/fifo_wrs1/AbstractWRS.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2196" selectionTopPixel="1185"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2374" selectionTopPixel="1225"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRSource.cc" partName="WRSource.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/fifo_wrs1/WRSource.cc" title="WRSource.cc" tooltip="fifo_wrs1/WRSource.cc" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/fifo_wrs1/WRSource.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1217" selectionTopPixel="881"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2820" selectionTopPixel="879"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRSink.cc" partName="WRSink.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/fifo_wrs1/WRSink.cc" title="WRSink.cc" tooltip="fifo_wrs1/WRSink.cc" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="WRSink.cc" partName="WRSink.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/fifo_wrs1/WRSink.cc" title="WRSink.cc" tooltip="fifo_wrs1/WRSink.cc" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/fifo_wrs1/WRSink.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="50" selectionOffset="728" selectionTopPixel="592"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1383" selectionTopPixel="589"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRS.cc" partName="WRS.cc" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/fifo_wrs1/WRS.cc" title="WRS.cc" tooltip="fifo_wrs1/WRS.cc" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/fifo_wrs1/WRS.cc"/>
-<editorState selectionHorizontalPixel="0" selectionLength="34" selectionOffset="1239" selectionTopPixel="547"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="680" selectionTopPixel="372"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="WRSink.h" partName="WRSink.h" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/fifo_wrs1/WRSink.h" title="WRSink.h" tooltip="fifo_wrs1/WRSink.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/fifo_wrs1/WRSink.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="495" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="325" selectionTopPixel="34"/>
 </editor>
 <editor id="org.omnetpp.ned.editor" name="WRSink.ned" partName="WRSink.ned" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/fifo_wrs1/WRSink.ned" title="WRSink.ned" tooltip="fifo_wrs1/WRSink.ned" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/fifo_wrs1/WRSink.ned"/>
@@ -109,7 +109,6 @@
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
 <category IMemento.internal.id="Warnings (1 item)"/>
-<category IMemento.internal.id="Warnings"/>
 <category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="120" org.eclipse.ui.ide.markerType="1491" org.eclipse.ui.ide.pathField="160" org.eclipse.ui.ide.resourceField="120" org.eclipse.ui.ide.severityAndDescriptionField="400"/>
@@ -290,148 +289,155 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/fifo_wrs1/FifoNet_wrs.ned"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/AbstractFifo.cc"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRS.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRS.cc"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/AbstractFifo.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.ned.editor" path="/fifo_wrs1/WRS.ned"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRSink.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRSink.cc"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRSource.cc"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/AbstractWRS.cc"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/AbstractWRS.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.inifile.editor.editors.InifileEditor" path="/fifo_wrs1/omnetpp.ini"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.inifile.editor.editors.InifileEditor" path="/fifo/omnetpp.ini"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wrs/Timer.cc"/>
 <editor factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/src/envir/main.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRSink.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRSink.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.omnetpp.inifile.editor.editors.InifileEditor" path="/fifo_wrs1/omnetpp.ini"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRSource.cc"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/fifo_wrs1/WRS.cc"/>
 </editors>
+<item historyLabel="WRS.ned" index="3"/>
 <item historyLabel="FifoNet_wrs.ned" index="0"/>
-<item historyLabel="WRSink.h" index="6">
-<position info="not_deleted" x="495" y="0"/>
-</item>
-<item historyLabel="AbstractFifo.h" index="4">
-<position info="not_deleted" x="1113" y="0"/>
-</item>
-<item historyLabel="AbstractFifo.cc" index="1">
-<position info="not_deleted" x="1058" y="0"/>
-</item>
-<item historyLabel="WRS.h" index="2">
-<position info="not_deleted" x="532" y="0"/>
-</item>
-<item historyLabel="WRS.cc" index="3">
-<position info="not_deleted" x="235" y="0"/>
-</item>
-<item historyLabel="AbstractFifo.cc" index="1">
-<position info="not_deleted" x="955" y="0"/>
-</item>
+<item historyLabel="WRS.ned" index="3"/>
 <item historyLabel="FifoNet_wrs.ned" index="0"/>
-<item historyLabel="WRS.cc" index="3">
-<position info="not_deleted" x="235" y="0"/>
-</item>
-<item historyLabel="AbstractFifo.cc" index="1">
-<position info="not_deleted" x="955" y="0"/>
-</item>
-<item historyLabel="WRSink.cc" index="7">
-<position info="not_deleted" x="1914" y="0"/>
-</item>
-<item historyLabel="WRSink.cc" index="7">
-<position info="not_deleted" x="2243" y="0"/>
-</item>
-<item historyLabel="WRSource.cc" index="8">
-<position info="not_deleted" x="1217" y="0"/>
-</item>
-<item historyLabel="WRS.cc" index="3">
-<position info="not_deleted" x="1207" y="0"/>
-</item>
-<item historyLabel="AbstractFifo.cc" index="1">
-<position info="not_deleted" x="955" y="0"/>
-</item>
-<item historyLabel="AbstractWRS.cc" index="9">
-<position info="not_deleted" x="1290" y="0"/>
-</item>
-<item historyLabel="AbstractWRS.h" index="10">
-<position info="not_deleted" x="284" y="0"/>
-</item>
-<item historyLabel="AbstractWRS.cc" index="9">
-<position info="not_deleted" x="381" y="0"/>
-</item>
-<item historyLabel="WRS.h" index="2">
-<position info="not_deleted" x="419" y="0"/>
-</item>
-<item historyLabel="AbstractWRS.cc" index="9">
-<position info="not_deleted" x="381" y="0"/>
-</item>
-<item historyLabel="omnetpp.ini" index="11"/>
-<item historyLabel="WRSink.cc" index="7">
-<position info="not_deleted" x="2243" y="0"/>
-</item>
-<item historyLabel="omnetpp.ini" index="12"/>
-<item historyLabel="omnetpp.ini" index="11"/>
-<item historyLabel="omnetpp.ini" index="12"/>
-<item historyLabel="omnetpp.ini" index="11"/>
-<item historyLabel="WRS.ned" index="5"/>
-<item historyLabel="FifoNet_wrs.ned" index="0"/>
-<item historyLabel="WRS.ned" index="5"/>
-<item historyLabel="FifoNet_wrs.ned" index="0"/>
-<item historyLabel="WRS.cc" index="3">
+<item historyLabel="WRS.cc" index="2">
 <position info="not_deleted" x="1423" y="0"/>
 </item>
-<item historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="1772" y="0"/>
 </item>
-<item historyLabel="AbstractWRS.h" index="10">
+<item historyLabel="AbstractWRS.h" index="6">
 <position info="not_deleted" x="284" y="0"/>
 </item>
-<item historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="2164" y="5"/>
 </item>
-<item historyLabel="WRSink.cc" index="7">
+<item historyLabel="WRSink.cc" index="4">
 <position info="not_deleted" x="523" y="0"/>
 </item>
-<item historyLabel="Timer.cc" index="13">
+<item historyLabel="Timer.cc" index="7">
 <position info="not_deleted" x="352" y="0"/>
 </item>
-<item historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="2129" y="0"/>
 </item>
-<item historyLabel="WRSink.cc" index="7">
+<item historyLabel="WRSink.cc" index="4">
 <position info="not_deleted" x="1437" y="370"/>
 </item>
-<item historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="2047" y="0"/>
 </item>
-<item historyLabel="WRSink.cc" index="7">
+<item historyLabel="WRSink.cc" index="4">
 <position info="not_deleted" x="728" y="50"/>
 </item>
-<item historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="2129" y="0"/>
 </item>
-<item historyLabel="AbstractWRS.h" index="10">
+<item historyLabel="AbstractWRS.h" index="6">
 <position info="not_deleted" x="284" y="0"/>
 </item>
-<item historyLabel="AbstractWRS.h" index="10">
+<item historyLabel="AbstractWRS.h" index="6">
 <position info="not_deleted" x="1124" y="34"/>
 </item>
-<item historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="2451" y="0"/>
 </item>
-<item historyLabel="WRS.cc" index="3">
+<item historyLabel="WRS.cc" index="2">
 <position info="not_deleted" x="1239" y="34"/>
 </item>
-<item historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="2407" y="0"/>
 </item>
-<item historyLabel="WRS.h" index="2">
+<item historyLabel="WRS.h" index="1">
 <position info="not_deleted" x="419" y="0"/>
 </item>
-<item historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="2196" y="0"/>
 </item>
-<item historyLabel="main.cc" index="14">
+<item historyLabel="main.cc" index="8">
 <position info="not_deleted" x="821" y="0"/>
 </item>
-<item active="true" historyLabel="AbstractWRS.cc" index="9">
+<item historyLabel="AbstractWRS.cc" index="5">
 <position info="not_deleted" x="2196" y="0"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="728" y="50"/>
+</item>
+<item historyLabel="WRSink.h" index="10">
+<position info="not_deleted" x="607" y="0"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="429" y="9"/>
+</item>
+<item historyLabel="WRSink.h" index="10">
+<position info="not_deleted" x="598" y="0"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="429" y="9"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="1876" y="0"/>
+</item>
+<item historyLabel="WRSink.h" index="10">
+<position info="not_deleted" x="325" y="0"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="1876" y="0"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="2405" y="0"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="2071" y="0"/>
+</item>
+<item historyLabel="WRSink.h" index="10">
+<position info="not_deleted" x="325" y="0"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="2214" y="0"/>
+</item>
+<item historyLabel="omnetpp.ini" index="11"/>
+<item historyLabel="AbstractWRS.cc" index="5">
+<position info="not_deleted" x="2475" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="12">
+<position info="not_deleted" x="1217" y="0"/>
+</item>
+<item historyLabel="WRS.cc" index="13">
+<position info="not_deleted" x="404" y="0"/>
+</item>
+<item historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="2214" y="0"/>
+</item>
+<item historyLabel="omnetpp.ini" index="11"/>
+<item historyLabel="AbstractWRS.cc" index="5">
+<position info="not_deleted" x="2475" y="0"/>
+</item>
+<item historyLabel="WRS.cc" index="13">
+<position info="not_deleted" x="864" y="0"/>
+</item>
+<item historyLabel="omnetpp.ini" index="11"/>
+<item historyLabel="AbstractWRS.cc" index="5">
+<position info="not_deleted" x="2710" y="0"/>
+</item>
+<item historyLabel="WRSource.cc" index="12">
+<position info="not_deleted" x="2820" y="0"/>
+</item>
+<item historyLabel="WRS.cc" index="13">
+<position info="not_deleted" x="680" y="0"/>
+</item>
+<item historyLabel="AbstractWRS.cc" index="5">
+<position info="not_deleted" x="2374" y="0"/>
+</item>
+<item active="true" historyLabel="WRSink.cc" index="9">
+<position info="not_deleted" x="2214" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
