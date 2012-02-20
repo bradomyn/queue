@@ -28,8 +28,6 @@ class AbstractWRS : public cSimpleModule
     cMessage *msgServiced;
     cMessage *endServiceMsg;
     cQueue queue;
-    cQueue queue1;
-    cQueue queue2;
     simsignal_t qlenSignal;
     simsignal_t busySignal;
     simsignal_t queueingTimeSignal;
@@ -37,6 +35,8 @@ class AbstractWRS : public cSimpleModule
   public:
     AbstractWRS();
     virtual ~AbstractWRS();
+
+    cQueue getQueue(){return queue;};
 
   protected:
     virtual void initialize();
@@ -47,9 +47,10 @@ class AbstractWRS : public cSimpleModule
     virtual simtime_t startService(cMessage *msg) = 0;
     virtual void endService(cMessage *msg) = 0;
 
-    WRSink *s7;
-    std::vector<WRSink *> ss;
+    //WRSink *s7;
+    //std::vector<WRSink *> ss;
     int getPriority(std::string name);
+
 };
 
 }; //namespace

@@ -27,10 +27,10 @@ void WRS::endService(cMessage *msg)
     //std::cout << "Completed service of " << msg->getName() << std::endl;
 
     // extract priority from jobname
-    std::string jobname = std::string(msg->getName());
-	int prio=Useful::getInstance()->getPriority(jobname);
+    //std::string jobname = std::string(msg->getName());
+	//int prio=Useful::getInstance()->getPriority(jobname);
 	// deliver to matching sink
-    send( msg, "out", prio );
+    send( msg, "out" );
     // treat prio 7 first in abstractwrs
 }
 

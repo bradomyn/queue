@@ -35,24 +35,9 @@ void AbstractWRS::initialize()
     emit(qlenSignal, queue.length());
     emit(busySignal, 0);
 
-    queue1.setName("queue1");
-    queue2.setName("queue2");
-
-
 	// store pointer to sink 7
-	s7 = check_and_cast<WRSink *>( getParentModule()->findObject("sink7", true) );
+	//s7 = check_and_cast<WRSink *>( getParentModule()->findObject("sink7", true) );
 
-	// store pointers to other queues
-	std::string module;
-	char buffer[3];
-	for( int i=0; i<7; i++ ) {
-		module = "sink";
-		sprintf(buffer,"%d", i);
-		buffer[2]='\0';
-		module += buffer;
-		WRSink *pq = check_and_cast<WRSink *>( getParentModule()->findObject(module.c_str(), true) );
-		ss.push_back(pq);
-	}
 } // initialize()
 
 void AbstractWRS::handleMessage(cMessage *msg)
@@ -63,11 +48,14 @@ void AbstractWRS::handleMessage(cMessage *msg)
             msgServiced = NULL;
             emit(busySignal, 0);
         } else {
+#if 1
             msgServiced = (cMessage *) queue.pop();
             emit(qlenSignal, queue.length());
             emit(queueingTimeSignal, simTime() - msgServiced->getTimestamp());
             simtime_t serviceTime = startService( msgServiced );
             scheduleAt( simTime()+serviceTime, endServiceMsg );
+
+#endif
         }
     } else if (!msgServiced) {
         arrival( msg );
@@ -78,7 +66,7 @@ void AbstractWRS::handleMessage(cMessage *msg)
         emit(busySignal, 1);
     } else {
         arrival( msg );
-#if 1
+#if 0
         // determine priority from name
         int prio = Useful::getInstance()->getPriority( std::string(msg->getName()) );
         if( prio==7 ) {
@@ -94,9 +82,9 @@ void AbstractWRS::handleMessage(cMessage *msg)
         }
 #else
         queue.insert( msg );
-                	//std::cout << "!queued: " << msg->getName() << "    ql: " << queue.length() << std::endl;
-                	msg->setTimestamp();
-                	emit(qlenSignal, queue.length());
+		//std::cout << "!queued: " << msg->getName() << "    ql: " << queue.length() << std::endl;
+		msg->setTimestamp();
+		emit(qlenSignal, queue.length());
 #endif
     }
 } // handleMessage()

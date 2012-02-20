@@ -1,21 +1,21 @@
 version 2
-run FifoWRS-0-20120220-15:26:26-26934
+run FifoWRS-0-20120220-16:26:33-7288
 attr configname FifoWRS
-attr datetime 20120220-15:26:26
+attr datetime 20120220-16:26:33
 attr experiment FifoWRS
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network FifoNetWRS
-attr processid 26934
+attr processid 7288
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
-scalar FifoNetWRS.sink0 	lifetime:mean 	0.0020235294117647
+scalar FifoNetWRS.sink0 	lifetime:mean 	0.00225
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, mean"
 attr unit  s
@@ -23,63 +23,7 @@ scalar FifoNetWRS.sink0 	lifetime:max 	0.004
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, max"
 attr unit  s
-scalar FifoNetWRS.sink1 	lifetime:mean 	0.0020747663551402
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, mean"
-attr unit  s
-scalar FifoNetWRS.sink1 	lifetime:max 	0.004
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, max"
-attr unit  s
-scalar FifoNetWRS.sink2 	lifetime:mean 	0.0020224719101124
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, mean"
-attr unit  s
-scalar FifoNetWRS.sink2 	lifetime:max 	0.004
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, max"
-attr unit  s
-scalar FifoNetWRS.sink3 	lifetime:mean 	0.0021546391752577
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, mean"
-attr unit  s
-scalar FifoNetWRS.sink3 	lifetime:max 	0.004
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, max"
-attr unit  s
-scalar FifoNetWRS.sink4 	lifetime:mean 	0.002004347826087
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, mean"
-attr unit  s
-scalar FifoNetWRS.sink4 	lifetime:max 	0.004
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, max"
-attr unit  s
-scalar FifoNetWRS.sink5 	lifetime:mean 	0.0020576923076923
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, mean"
-attr unit  s
-scalar FifoNetWRS.sink5 	lifetime:max 	0.004
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, max"
-attr unit  s
-scalar FifoNetWRS.sink6 	lifetime:mean 	0.0005
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, mean"
-attr unit  s
-scalar FifoNetWRS.sink6 	lifetime:max 	0.0005
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, max"
-attr unit  s
-scalar FifoNetWRS.sink7 	lifetime:mean 	0.0010725388601036
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, mean"
-attr unit  s
-scalar FifoNetWRS.sink7 	lifetime:max 	0.004
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, max"
-attr unit  s
-scalar FifoNetWRS.wrs 	queueingTime:mean 	0.0015389518413598
+scalar FifoNetWRS.wrs 	queueingTime:mean 	0.00175
 attr interpolationmode  none
 attr title  "queueing time at dequeue, mean"
 attr unit  s
@@ -87,12 +31,29 @@ scalar FifoNetWRS.wrs 	queueingTime:max 	0.0035
 attr interpolationmode  none
 attr title  "queueing time at dequeue, max"
 attr unit  s
-scalar FifoNetWRS.wrs 	busy:timeavg 	0.353
+scalar FifoNetWRS.wrs 	busy:timeavg 	0.4
 attr interpolationmode  sample-hold
 attr title  "server busy state, timeavg"
-scalar FifoNetWRS.wrs 	qlen:timeavg 	1.0865
+scalar FifoNetWRS.wrs 	qlen:timeavg 	1.4
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
 scalar FifoNetWRS.wrs 	qlen:max 	7
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar FifoNetWRS.wrs1 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar FifoNetWRS.wrs1 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar FifoNetWRS.wrs1 	busy:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar FifoNetWRS.wrs1 	qlen:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar FifoNetWRS.wrs1 	qlen:max 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, max"

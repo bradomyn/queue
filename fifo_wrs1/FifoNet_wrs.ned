@@ -18,7 +18,7 @@ import org.omnetpp.queueing.WRClassifier_in;
 //
 network FifoNetWRS
 {
-    @display("bgb=422,615");
+    @display("bgb=933,647");
     submodules:
         gen0: WRSource {
             parameters:
@@ -54,68 +54,28 @@ network FifoNetWRS
         }
         sink0: WRSink {
             parameters:
-                @display("p=329,100");
-        }
-        sink1: WRSink {
-            parameters:
-                @display("p=329,162");
-        }
-        sink2: WRSink {
-            parameters:
-                @display("p=329,220");
-        }
-        sink3: WRSink {
-            parameters:
-                @display("p=329,282");
-        }
-        sink4: WRSink {
-            parameters:
-                @display("p=329,345");
-        }
-        sink5: WRSink {
-            parameters:
-                @display("p=329,407");
-        }
-        sink6: WRSink {
-            parameters:
-                @display("p=329,474");
-        }
-        sink7: WRSink {
-            parameters:
-                @display("p=329,536");
+                @display("p=883,72");
         }
         wrs: WRS {
-            @display("p=219,162;b=48,234");
+            @display("p=494,113;b=48,161");
+        }
+        wrs1: WRS {
+            @display("p=494,306;b=48,161");
+        }
+        wrClassifier_in: WRClassifier_in {
+            @display("p=365,312;b=28,30");
         }
     connections:
-        gen0.out --> wrs.in++;
-        gen1.out --> wrs.in++;
-        gen2.out --> wrs.in++;
-        gen3.out --> wrs.in++;
-        gen4.out --> wrs.in++;
-        gen5.out --> wrs.in++;
-        gen6.out --> wrs.in++;
-        gen7.out --> wrs.in++;
+        gen0.out --> wrClassifier_in.in++;
+        gen1.out --> wrClassifier_in.in++;
+        gen2.out --> wrClassifier_in.in++;
+        gen3.out --> wrClassifier_in.in++;
+        gen4.out --> wrClassifier_in.in++;
+        gen5.out --> wrClassifier_in.in++;
+        gen6.out --> wrClassifier_in.in++;
+        gen7.out --> wrClassifier_in.in++;
 
-        wrs.out++ --> sink0.in;
-        wrs.out++ --> sink1.in;
-        wrs.out++ --> sink3.in;
-        wrs.out++ --> sink2.in;
-        wrs.out++ --> sink5.in;
-        wrs.out++ --> sink4.in;
-        wrs.out++ --> sink7.in;
-        wrs.out++ --> sink6.in;
-
-
-        //gen.out --> wrs.in[0];
-        //gen1.out --> wrs.in[1];
-        //gen2.out --> wrs.in[2];
-        //gen3.out --> wrs.in[3];
-        //gen4.out --> wrs.in[4];
-        //gen5.out --> wrs.in[5];
-        //gen6.out --> wrs.in[6];
-        //gen7.out --> wrs.in[7];
-
+       
         //wrs.out[0] --> sink.in;
         //wrs.out[1] --> sink1.in;
         //wrs.out[2] --> sink3.in;
@@ -124,6 +84,10 @@ network FifoNetWRS
         //wrs.out[5] --> sink4.in;
         //wrs.out[6] --> sink7.in;
         //wrs.out[7] --> sink6.in;
+        wrClassifier_in.out++ --> wrs.in;
+        wrClassifier_in.out++ --> wrs1.in;
+        wrs.out --> sink0.in++;
+        wrs1.out --> sink0.in++;
 }
 
 

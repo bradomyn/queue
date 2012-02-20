@@ -3,7 +3,7 @@
 
 make MODE=debug CONFIGNAME=gcc-debug all 
 g++ -c -g -Wall -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT -DXMLPARSER=libxml -DWITH_PARSIM -DWITH_NETBUILDER  -I../wrs -I. -Iresults -I/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include -o out/gcc-debug//AbstractWRS.o AbstractWRS.cc
-g++ -Wl,-rpath,/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib -Wl,-rpath,. -o out/gcc-debug//fifo_wrs1  out/gcc-debug//Useful.o out/gcc-debug//Source.o out/gcc-debug//WRSource.o out/gcc-debug//WRS.o out/gcc-debug//AbstractWRS.o out/gcc-debug//WRSink.o  -Wl,--whole-archive -L../wrs/out/gcc-debug  -lwrs -Wl,-rpath,`abspath ../wrs/out/gcc-debug` -Wl,--no-whole-archive -L"/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib/gcc" -L"/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib" -loppmaind -u _tkenv_lib -Wl,--no-as-needed -lopptkenvd -loppenvird -lopplayoutd -u _cmdenv_lib -Wl,--no-as-needed -loppcmdenvd -loppenvird  -loppsimd -ldl -lstdc++ 
+g++ -Wl,-rpath,/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib -Wl,-rpath,. -o out/gcc-debug//fifo_wrs1  out/gcc-debug//Useful.o out/gcc-debug//Source.o out/gcc-debug//WRClassifier_in.o out/gcc-debug//WRSource.o out/gcc-debug//WRS.o out/gcc-debug//AbstractWRS.o out/gcc-debug//WRSink.o  -Wl,--whole-archive -L../wrs/out/gcc-debug  -lwrs -Wl,-rpath,`abspath ../wrs/out/gcc-debug` -Wl,--no-whole-archive -L"/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib/gcc" -L"/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/lib" -loppmaind -u _tkenv_lib -Wl,--no-as-needed -lopptkenvd -loppenvird -lopplayoutd -u _cmdenv_lib -Wl,--no-as-needed -loppcmdenvd -loppenvird  -loppsimd -ldl -lstdc++ 
 ln -sf out/gcc-debug//fifo_wrs1 .
 
 **** Build Finished ****

@@ -32,6 +32,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 OBJS = \
     $O/Useful.o \
     $O/Source.o \
+    $O/WRClassifier_in.o \
     $O/WRSource.o \
     $O/WRS.o \
     $O/AbstractWRS.o \
@@ -130,6 +131,13 @@ $O/Source.o: Source.cc \
 	$(WRS_PROJ)/Timer.h
 $O/Useful.o: Useful.cc \
 	Useful.h
+$O/WRClassifier_in.o: WRClassifier_in.cc \
+	Useful.h \
+	WRClassifier_in.h \
+	$(WRS_PROJ)/Job.h \
+	$(WRS_PROJ)/Job_m.h \
+	$(WRS_PROJ)/QueueingDefs.h \
+	$(WRS_PROJ)/WRClassifier_in.h
 $O/WRS.o: WRS.cc \
 	AbstractWRS.h \
 	Useful.h \
