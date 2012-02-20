@@ -1,0 +1,14 @@
+#Mon Feb 20 14:49:56 CET 2012
+indexer/indexerId=org.eclipse.cdt.core.fastIndexer
+indexer/indexUnusedHeadersWithDefaultLang=false
+indexer/skipImplicitReferences=false
+indexer/updatePolicy=0
+indexer/filesToParseUpFront=cstdarg, stdarg.h, stddef.h, sys/resource.h, ctime, sys/types.h, signal.h, cstdio
+indexer/skipTypeReferences=false
+indexer/indexOnOpen=false
+indexer/skipReferences=false
+indexer/skipMacroReferences=false
+indexer/indexAllFiles=true
+eclipse.preferences.version=1
+indexer/skipFilesLargerThanMB=8
+indexer/useHeuristicIncludeResolution=true

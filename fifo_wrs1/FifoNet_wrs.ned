@@ -10,6 +10,9 @@
 //import org.omnetpp.queueing.WRS;
 
 
+import org.omnetpp.queueing.WRClassifier_in;
+
+
 //
 // Simple queueing network: generator + FIFO + sink.
 //
@@ -82,7 +85,7 @@ network FifoNetWRS
                 @display("p=329,536");
         }
         wrs: WRS {
-            @display("p=216,335;b=48,363");
+            @display("p=219,162;b=48,234");
         }
     connections:
         gen0.out --> wrs.in++;
@@ -102,8 +105,8 @@ network FifoNetWRS
         wrs.out++ --> sink4.in;
         wrs.out++ --> sink7.in;
         wrs.out++ --> sink6.in;
-        
-        
+
+
         //gen.out --> wrs.in[0];
         //gen1.out --> wrs.in[1];
         //gen2.out --> wrs.in[2];

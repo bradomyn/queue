@@ -8,6 +8,7 @@
 //
 
 #include <omnetpp.h>
+#include "Useful.h"
 #include "../wrs/Job.h"
 #include "../wrs/Timer.h"
 

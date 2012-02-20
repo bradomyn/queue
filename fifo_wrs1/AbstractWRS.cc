@@ -12,6 +12,8 @@
 
 namespace wrs {
 
+Useful * Useful::_instance = 0;
+
 AbstractWRS::AbstractWRS()
 {
     msgServiced = endServiceMsg = NULL;
@@ -27,12 +29,14 @@ void AbstractWRS::initialize()
 {
     endServiceMsg = new cMessage("end-service");
     queue.setName("queue");
-
     qlenSignal = registerSignal("qlen");
     busySignal = registerSignal("busy");
     queueingTimeSignal = registerSignal("queueingTime");
     emit(qlenSignal, queue.length());
     emit(busySignal, 0);
+
+    queue1.setName("queue1");
+    queue2.setName("queue2");
 
 
 	// store pointer to sink 7
@@ -49,8 +53,7 @@ void AbstractWRS::initialize()
 		WRSink *pq = check_and_cast<WRSink *>( getParentModule()->findObject(module.c_str(), true) );
 		ss.push_back(pq);
 	}
-
-}
+} // initialize()
 
 void AbstractWRS::handleMessage(cMessage *msg)
 {
@@ -75,38 +78,29 @@ void AbstractWRS::handleMessage(cMessage *msg)
         emit(busySignal, 1);
     } else {
         arrival( msg );
-
+#if 1
         // determine priority from name
-        int prio = getPriority( std::string(msg->getName()) );
-
-        if( prio!=7 ) {
+        int prio = Useful::getInstance()->getPriority( std::string(msg->getName()) );
+        if( prio==7 ) {
+        	// don't queue
+			// sendDirect to port 7
+			//std::cout << "Don't queue prio 7" << std::endl;
+			sendDirect(msg, s7, "sendDirect");
+        } else {
         	queue.insert( msg );
         	//std::cout << "!queued: " << msg->getName() << "    ql: " << queue.length() << std::endl;
         	msg->setTimestamp();
         	emit(qlenSignal, queue.length());
-        } else {
-        	// don't queue
-        	// sendDirect to port 7
-        	sendDirect(msg, s7, "sendDirect");
         }
+#else
+        queue.insert( msg );
+                	//std::cout << "!queued: " << msg->getName() << "    ql: " << queue.length() << std::endl;
+                	msg->setTimestamp();
+                	emit(qlenSignal, queue.length());
+#endif
     }
-}
+} // handleMessage()
 
-int AbstractWRS::getPriority(std::string name) {
-	size_t found1;
-	found1 = name.find("y: ");
-	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
-	// extract priority from jobname
-	int prio=0;
-	if( found1!=std::string::npos ) {
-		std::string priority = name.substr(found1+2);
-		std::istringstream stm;
-		stm.str(priority);
-		stm >> prio;
-		//std::cout << "priority " << prio << std::endl;
-	}
-	return prio;
-}
 
 }; //namespace
 

@@ -20,6 +20,7 @@ class Source : public cSimpleModule
 {
   private:
     cMessage *sendMessageEvent;
+    cMessage *createMessage();
 
   public:
      Source();
@@ -52,28 +53,26 @@ void Source::handleMessage(cMessage *msg)
 {
     ASSERT(msg==sendMessageEvent);
 
-    cMessage *job = new cMessage("job");
+    cMessage *job = createMessage();
+    send(job, "out");
+
+    scheduleAt(simTime()+par("sendIaTime").doubleValue(), sendMessageEvent);
+}
+
+cMessage *Source::createMessage() {
+	cMessage *job = new cMessage("job");
     Timer t;
     timeval tv = t.currentTime();
-    //std::cout << "source ";
-    //t.print();
 
   	// TODO work with a fixed, repeatable data set
     double triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
-	//triggerTime = simTime().dbl();
-	//std::cout << "triggerTime " << triggerTime << std::endl;
-	//std::cout << "TRIGGER "; t.print(); std::cout << std::endl;
 
 	char name[80];
 	sprintf(name, "id: %ld; %f", job->getId(), triggerTime);
 	name[79] = '\0';
 	job->setName(name);
-
-
-    send(job, "out");
-
-    scheduleAt(simTime()+par("sendIaTime").doubleValue(), sendMessageEvent);
-}
+	return job;
+} // createMessage()
 
 }; //namespace
 

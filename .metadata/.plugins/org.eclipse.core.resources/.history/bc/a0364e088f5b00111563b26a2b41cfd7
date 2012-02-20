@@ -1,0 +1,38 @@
+/*
+ * Useful.cc
+ *
+ *  Created on: Feb 20, 2012
+ *      Author: matthies
+ */
+
+#include "Useful.h"
+
+namespace queueing {
+
+Useful::Useful() {
+	// TODO Auto-generated constructor stub
+
+}
+
+Useful::~Useful() {
+	// TODO Auto-generated destructor stub
+}
+
+
+int Useful::getPriority(std::string name) {
+	size_t found1;
+	found1 = name.find("y: ");
+	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
+	// extract priority from jobname
+	int prio=0;
+	if( found1!=std::string::npos ) {
+		std::string priority = name.substr(found1+2);
+		std::istringstream stm;
+		stm.str(priority);
+		stm >> prio;
+		//std::cout << "priority " << prio << std::endl;
+	}
+	return prio;
+} // getPriority()
+
+} /* namespace queueing */

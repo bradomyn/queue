@@ -1,0 +1,77 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include "WRSink.h"
+
+namespace wrs {
+
+Define_Module( WRSink );
+
+Useful * Useful::_instance = 0;
+
+void WRSink::initialize()
+{
+    lifetimeSignal = registerSignal("lifetime");
+}
+
+void WRSink::handleMessage(cMessage *msg)
+{
+
+    simtime_t lifetime = simTime() - msg->getCreationTime();
+
+    Timer t;
+	timeval tv = t.currentTime();
+	//std::cout << "		sink ";
+	//t.print();
+	//std::cout << std::endl;
+
+	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+
+	// extract time from jobname
+	std::string jobname = std::string(msg->getName());
+	//std::cout << "jobname " << jobname << " found " << found << std::endl;
+	// extract time from jobname
+	double triggerTime= Useful::getInstance()->getTime(jobname);
+	std::cout << msg->getName() << " , duration " << (arrivalTime-triggerTime) << "s = " << t.s2ms(arrivalTime-triggerTime) << "ms, lifetime " << lifetime <<
+			", ct " << msg->getCreationTime() << ", st " << simTime()
+			<< std::endl;
+
+	// extract priority from jobname
+	int prio=Useful::getInstance()->getPriority(jobname);
+
+	mm.push_back( arrivalTime-triggerTime );
+	lt.push_back(lifetime);
+
+    emit(lifetimeSignal, lifetime);
+    delete msg;
+}
+
+void WRSink::finish() {
+	std::cout << this->getName() << ":" << __FUNCTION__ <<  "(), # " << mm.size() << " ";
+
+	double avg = 0.;
+
+	std::vector<double>::iterator it;
+	for( it = mm.begin(); it!=mm.end(); it++ ) {
+		avg += (*it);
+	}
+	avg /= mm.size();
+	std:: cout << "    " << avg << "s = " << avg / 1000.0 << "ms     ";
+
+	double avg_lt = 0.;
+	std::vector<simtime_t>::iterator lit;
+	for( lit = lt.begin(); lit!=lt.end(); lit++ ) {
+		avg_lt += (*it);
+	}
+	avg_lt /= lt.size();
+	std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
+}
+
+}; //namespace
+

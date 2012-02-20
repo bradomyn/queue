@@ -1,0 +1,21 @@
+/*
+ * Useful.cc
+ *
+ *  Created on: Feb 20, 2012
+ *      Author: matthies
+ */
+
+#include "Useful.h"
+
+namespace queueing {
+
+Useful::Useful() {
+	// TODO Auto-generated constructor stub
+
+}
+
+Useful::~Useful() {
+	// TODO Auto-generated destructor stub
+}
+
+} /* namespace queueing */

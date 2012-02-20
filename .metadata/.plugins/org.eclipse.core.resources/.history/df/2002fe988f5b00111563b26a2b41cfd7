@@ -1,0 +1,35 @@
+/*
+ * Useful.h
+ *
+ *  Created on: Feb 20, 2012
+ *      Author: matthies
+ */
+
+#ifndef USEFUL_H_
+#define USEFUL_H_
+
+#include <string>
+
+using std::string;
+
+namespace queueing {
+
+class Useful {
+
+private:
+	Useful _instance;
+
+public:
+	Useful();
+	virtual ~Useful();
+
+	Useful getInstance();
+
+	double getTime(std::string name);
+	int getPriority(std::string name);
+
+
+};
+
+} /* namespace queueing */
+#endif /* USEFUL_H_ */

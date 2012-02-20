@@ -1,0 +1,20 @@
+/*
+ * Useful.h
+ *
+ *  Created on: Feb 20, 2012
+ *      Author: matthies
+ */
+
+#ifndef USEFUL_H_
+#define USEFUL_H_
+
+namespace queueing {
+
+class Useful {
+public:
+	Useful();
+	virtual ~Useful();
+};
+
+} /* namespace queueing */
+#endif /* USEFUL_H_ */

@@ -20,55 +20,28 @@ void WRSink::initialize()
 
 void WRSink::handleMessage(cMessage *msg)
 {
-
     simtime_t lifetime = simTime() - msg->getCreationTime();
 
-    Timer t;
-	timeval tv = t.currentTime();
-	//std::cout << "		sink ";
-	//t.print();
-	//std::cout << std::endl;
-
-	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+    //Timer t;
+	//timeval tv = t.currentTime();
+	//double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+	//double arrivalTime =  static_cast<double>( tv.tv_usec )/1E6;
 
 	// extract time from jobname
 	std::string jobname = std::string(msg->getName());
-	size_t found;
-	found = jobname.find("; ");
 	//std::cout << "jobname " << jobname << " found " << found << std::endl;
 	// extract time from jobname
-	double triggerTime=0.;
-	if( found!=std::string::npos ) {
-		std::string time = jobname.substr(found+2);
-		std::istringstream stm;
-		stm.str(time);
-		stm >> triggerTime;
-		//std::cout << "time " << time << " " << triggerTime << std::endl;
-	}
-	std::cout << msg->getName() << " , duration " << (arrivalTime-triggerTime) << "s = " << t.s2ms(arrivalTime-triggerTime) << "ms, lifetime " << lifetime <<
-			", ct " << msg->getCreationTime() << ", st " << simTime()
-			<< std::endl;
+	//double triggerTime= Useful::getInstance()->getTime(jobname);
+	//std::cout << msg->getName() << ", duration " << (arrivalTime-triggerTime) << "s = " << t.s2ms(arrivalTime-triggerTime) << "ms, lifetime " << lifetime <<
+		//	", ct " << msg->getCreationTime() << ", st " << simTime() << std::endl;
+	std::cout << msg->getName() << " " << ", ct " << msg->getCreationTime() << ", st " << simTime() << " lifetime " << lifetime << std::endl;
 
-	// extract priority from jobname
-	size_t found1;
-	found1 = jobname.find("y: ");
-	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
-	// extract priority from jobname
-	int prio=0;
-	if( found1!=std::string::npos ) {
-		std::string priority = jobname.substr(found1+2);
-		std::istringstream stm;
-		stm.str(priority);
-		stm >> prio;
-		//std::cout << "priority " << prio << std::endl;
-	}
-
-	mm.push_back( arrivalTime-triggerTime );
+	mm.push_back( 0. );
 	lt.push_back(lifetime);
 
     emit(lifetimeSignal, lifetime);
     delete msg;
-}
+} // handleMessage()
 
 void WRSink::finish() {
 	std::cout << this->getName() << ":" << __FUNCTION__ <<  "(), # " << mm.size() << " ";
@@ -89,7 +62,7 @@ void WRSink::finish() {
 	}
 	avg_lt /= lt.size();
 	std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
-}
+} // finish()
 
 }; //namespace
 

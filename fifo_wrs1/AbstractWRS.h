@@ -12,6 +12,7 @@
 #define __ABSTRACTWRS_H
 
 #include <omnetpp.h>
+#include "Useful.h"
 #include "WRSink.h"
 
 namespace wrs {
@@ -27,6 +28,8 @@ class AbstractWRS : public cSimpleModule
     cMessage *msgServiced;
     cMessage *endServiceMsg;
     cQueue queue;
+    cQueue queue1;
+    cQueue queue2;
     simsignal_t qlenSignal;
     simsignal_t busySignal;
     simsignal_t queueingTimeSignal;

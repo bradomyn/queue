@@ -15,6 +15,7 @@ simple WRS
 {
     parameters:
         volatile double serviceTime @unit(s);
+        volatile int queuelength;
         @display("i=block/queue;q=queue");
         @signal[qlen](type="int");
         @signal[busy](type="bool");

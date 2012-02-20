@@ -29,7 +29,13 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
-OBJS = $O/Source.o $O/WRSource.o $O/WRS.o $O/AbstractWRS.o $O/WRSink.o
+OBJS = \
+    $O/Useful.o \
+    $O/Source.o \
+    $O/WRSource.o \
+    $O/WRS.o \
+    $O/AbstractWRS.o \
+    $O/WRSink.o
 
 # Message files
 MSGFILES =
@@ -118,17 +124,23 @@ depend:
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/AbstractWRS.o: AbstractWRS.cc \
 	AbstractWRS.h \
+	Useful.h \
 	WRSink.h
 $O/Source.o: Source.cc \
 	$(WRS_PROJ)/Timer.h
+$O/Useful.o: Useful.cc \
+	Useful.h
 $O/WRS.o: WRS.cc \
 	AbstractWRS.h \
+	Useful.h \
 	WRS.h \
 	WRSink.h \
 	$(WRS_PROJ)/QueueingDefs.h \
 	$(WRS_PROJ)/Sink.h \
 	$(WRS_PROJ)/WRPacket.h
 $O/WRSink.o: WRSink.cc \
+	Useful.h \
 	WRSink.h
-$O/WRSource.o: WRSource.cc
+$O/WRSource.o: WRSource.cc \
+	Useful.h
 

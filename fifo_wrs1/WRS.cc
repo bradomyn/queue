@@ -23,40 +23,15 @@ simtime_t WRS::startService(cMessage *msg)
 
 void WRS::endService(cMessage *msg)
 {
-    EV << "Completed service of " << msg->getName() << endl;
+    //EV << "Completed service of " << msg->getName() << endl;
     //std::cout << "Completed service of " << msg->getName() << std::endl;
 
     // extract priority from jobname
     std::string jobname = std::string(msg->getName());
-	size_t found1;
-	found1 = jobname.find("y: ");
-	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
-	// extract priority from jobname
-	int prio=0;
-	if( found1!=std::string::npos ) {
-		std::string priority = jobname.substr(found1+2);
-		std::istringstream stm;
-		stm.str(priority);
-		stm >> prio;
-		//std::cout << "priority " << prio << std::endl;
-	}
-
-#if 1
+	int prio=Useful::getInstance()->getPriority(jobname);
 	// deliver to matching sink
     send( msg, "out", prio );
-#else
-    if( prio==7 ) {
-    	sendDirect(msg, s7, "sendDirect");
-    } else {
-    	/*switch (prio) {
-    	case 0:
-
-    	}*/
-    	send( msg, "out", prio );
-    }
-#endif
-
-    // TODO treat prio 7 first in abstractwrs
+    // treat prio 7 first in abstractwrs
 }
 
 }; //namespace

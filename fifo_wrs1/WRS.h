@@ -12,6 +12,7 @@
 #define __WRS_H
 
 #include "AbstractWRS.h"
+#include "Useful.h"
 #include "Sink.h"
 
 namespace wrs {

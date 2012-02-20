@@ -1,0 +1,54 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 1992-2008 Andras Varga
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+
+#ifndef __ABSTRACTWRS_H
+#define __ABSTRACTWRS_H
+
+#include <omnetpp.h>
+#include "WRSink.h"
+
+namespace wrs {
+
+/**
+ * Abstract base class for single-server queues. Subclasses should
+ * define startService() and endService(), and may override other
+ * virtual functions.
+ */
+class AbstractWRS : public cSimpleModule
+{
+  protected:
+    cMessage *msgServiced;
+    cMessage *endServiceMsg;
+    cQueue queue;
+    simsignal_t qlenSignal;
+    simsignal_t busySignal;
+    simsignal_t queueingTimeSignal;
+
+  public:
+    AbstractWRS();
+    virtual ~AbstractWRS();
+
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+
+    // hook functions to (re)define behaviour
+    virtual void arrival(cMessage *msg) {}
+    virtual simtime_t startService(cMessage *msg) = 0;
+    virtual void endService(cMessage *msg) = 0;
+
+    WRSink *s7;
+    std::vector<WRSink *> ss;
+    int getPriority(std::string name);
+};
+
+}; //namespace
+
+#endif

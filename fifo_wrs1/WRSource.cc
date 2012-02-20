@@ -10,6 +10,7 @@
 
 #include <omnetpp.h>
 
+#include "Useful.h"
 #include "../wrs/Job.h"
 #include "../wrs/Timer.h"
 
@@ -80,13 +81,14 @@ cMessage * WRSource::generateMessage() {
 	// TODO work with a fixed, repeatable data set
 	Timer t;
 	timeval tv = t.currentTime();
-	double triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+	//double triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+	//double triggerTime = static_cast<double>( tv.tv_usec )/1E6;
 	//triggerTime = simTime().dbl();
 	//std::cout << "triggerTime " << triggerTime << std::endl;
 	//std::cout << "TRIGGER "; t.print(); std::cout << std::endl;
 
 	char name[80];
-	sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
+	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), random , simTime().dbl());
 	name[79] = '\0';
 	job->setName(name);
 	//std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;
@@ -113,7 +115,7 @@ Job * WRSource::generateJob() {
 	std::string jobName="j";
 	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
 	Job *job = new Job(buf);
-	int random = (int)(rand() / (((double)RAND_MAX + 1)/ (double)(7+1)));
+	int random = Useful::getInstance()->generateRandom();
 
 	// TODO work with a fixed, repeatable data set
 	job->setPriority(random);
@@ -137,6 +139,7 @@ Job * WRSource::generateJob() {
 
 	return job;
 } // generateJob()
+
 
 }; //namespace
 
