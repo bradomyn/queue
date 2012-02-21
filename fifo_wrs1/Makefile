@@ -31,15 +31,23 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc and .msg files
 OBJS = \
     $O/Useful.o \
+    $O/JobList.o \
+    $O/Timer.o \
     $O/Source.o \
+    $O/PassiveQueue.o \
     $O/WRClassifier_in.o \
+    $O/Job.o \
     $O/WRSource.o \
     $O/WRS.o \
     $O/AbstractWRS.o \
-    $O/WRSink.o
+    $O/Server.o \
+    $O/WRSink.o \
+    $O/SelectionStrategies.o \
+    $O/Job_m.o
 
 # Message files
-MSGFILES =
+MSGFILES = \
+    Job.msg
 
 # Other makefile variables (-K)
 WRS_PROJ=../wrs
@@ -127,11 +135,81 @@ $O/AbstractWRS.o: AbstractWRS.cc \
 	AbstractWRS.h \
 	Useful.h \
 	WRSink.h
+$O/Job.o: Job.cc \
+	Job.h \
+	JobList.h \
+	Job_m.h \
+	$(WRS_PROJ)/Job.h \
+	$(WRS_PROJ)/JobList.h \
+	$(WRS_PROJ)/Job_m.h \
+	$(WRS_PROJ)/QueueingDefs.h
+$O/JobList.o: JobList.cc \
+	Job.h \
+	JobList.h \
+	Job_m.h \
+	$(WRS_PROJ)/Job.h \
+	$(WRS_PROJ)/JobList.h \
+	$(WRS_PROJ)/Job_m.h \
+	$(WRS_PROJ)/QueueingDefs.h
+$O/Job_m.o: Job_m.cc \
+	Job_m.h \
+	$(WRS_PROJ)/Job_m.h \
+	$(WRS_PROJ)/QueueingDefs.h
+$O/PassiveQueue.o: PassiveQueue.cc \
+	IPassiveQueue.h \
+	Job.h \
+	Job_m.h \
+	PassiveQueue.h \
+	SelectionStrategies.h \
+	$(WRS_PROJ)/IPassiveQueue.h \
+	$(WRS_PROJ)/Job.h \
+	$(WRS_PROJ)/Job_m.h \
+	$(WRS_PROJ)/PassiveQueue.h \
+	$(WRS_PROJ)/QueueingDefs.h \
+	$(WRS_PROJ)/SelectionStrategies.h
+$O/SelectionStrategies.o: SelectionStrategies.cc \
+	IPassiveQueue.h \
+	IServer.h \
+	PassiveQueue.h \
+	SelectionStrategies.h \
+	Server.h \
+	$(WRS_PROJ)/IPassiveQueue.h \
+	$(WRS_PROJ)/IServer.h \
+	$(WRS_PROJ)/PassiveQueue.h \
+	$(WRS_PROJ)/QueueingDefs.h \
+	$(WRS_PROJ)/SelectionStrategies.h \
+	$(WRS_PROJ)/Server.h
+$O/Server.o: Server.cc \
+	IPassiveQueue.h \
+	IServer.h \
+	Job.h \
+	Job_m.h \
+	SelectionStrategies.h \
+	Server.h \
+	$(WRS_PROJ)/IPassiveQueue.h \
+	$(WRS_PROJ)/IServer.h \
+	$(WRS_PROJ)/Job.h \
+	$(WRS_PROJ)/Job_m.h \
+	$(WRS_PROJ)/QueueingDefs.h \
+	$(WRS_PROJ)/SelectionStrategies.h \
+	$(WRS_PROJ)/Server.h
 $O/Source.o: Source.cc \
+	Job.h \
+	Job_m.h \
+	Timer.h \
+	Useful.h \
+	$(WRS_PROJ)/Job.h \
+	$(WRS_PROJ)/Job_m.h \
+	$(WRS_PROJ)/QueueingDefs.h \
+	$(WRS_PROJ)/Timer.h
+$O/Timer.o: Timer.cc \
+	Timer.h \
 	$(WRS_PROJ)/Timer.h
 $O/Useful.o: Useful.cc \
 	Useful.h
 $O/WRClassifier_in.o: WRClassifier_in.cc \
+	Job.h \
+	Job_m.h \
 	Useful.h \
 	WRClassifier_in.h \
 	$(WRS_PROJ)/Job.h \
@@ -150,5 +228,12 @@ $O/WRSink.o: WRSink.cc \
 	Useful.h \
 	WRSink.h
 $O/WRSource.o: WRSource.cc \
-	Useful.h
+	Job.h \
+	Job_m.h \
+	Timer.h \
+	Useful.h \
+	$(WRS_PROJ)/Job.h \
+	$(WRS_PROJ)/Job_m.h \
+	$(WRS_PROJ)/QueueingDefs.h \
+	$(WRS_PROJ)/Timer.h
 

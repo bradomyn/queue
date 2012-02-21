@@ -27,7 +27,7 @@ void WRClassifier_in::initialize()
 
 void WRClassifier_in::handleMessage(cMessage *msg)
 {
-#if 0
+#if 1
     Job *job = check_and_cast<Job *>(msg);
     int priority = job->getPriority();
     /*int outGateIndex = -1;
@@ -46,13 +46,13 @@ void WRClassifier_in::handleMessage(cMessage *msg)
 //        send(job, "out", outGateIndex);
 
     std::string queue;
-	queue = "wrQueue";
+	queue = "passiveQueue";
 	char buffer[3];
 
     sprintf(buffer,"%d",priority);
     buffer[2]='\0';
 	queue += buffer;
-	//std::cout << __FILE__ << " send " << job->getName() << " to " << queue << std::endl;
+	std::cout << __FILE__ << " send " << job->getName() << " to " << queue << std::endl;
 	cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
 	sendDirect(msg, targetModule, "sendDirect");
 	numSent++;
@@ -72,17 +72,6 @@ void WRClassifier_in::handleMessage(cMessage *msg)
 		//std::cout << "priority " << prio << std::endl;
 	}
 
-	 std::string queue;
-	queue = "wrQueue";
-	char buffer[3];
-
-	sprintf(buffer,"%d",prio);
-	buffer[2]='\0';
-	queue += buffer;
-	//std::cout << __FILE__ << " send " << job->getName() << " to " << queue << std::endl;
-	cModule *targetModule = getParentModule()->getSubmodule(queue.c_str());
-	sendDirect(msg, targetModule, "sendDirect");
-	numSent++;
 #else
 
 	int prio = Useful::getInstance()->getPriority(msg->getName());

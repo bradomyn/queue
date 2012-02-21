@@ -10,8 +10,6 @@
 //import org.omnetpp.queueing.WRS;
 
 
-import org.omnetpp.queueing.WRClassifier_in;
-
 
 //
 // Simple queueing network: generator + FIFO + sink.
@@ -54,16 +52,37 @@ network FifoNetWRS
         }
         sink0: WRSink {
             parameters:
-                @display("p=883,72");
-        }
-        wrs: WRS {
-            @display("p=494,113;b=48,161");
-        }
-        wrs1: WRS {
-            @display("p=494,306;b=48,161");
+                @display("p=886,346");
         }
         wrClassifier_in: WRClassifier_in {
-            @display("p=365,312;b=28,30");
+            @display("p=334,329;b=28,30");
+        }
+        passiveQueue0: PassiveQueue {
+            @display("p=529,100;b=29,18");
+        }
+        passiveQueue1: PassiveQueue {
+            @display("p=529,174;b=29,18");
+        }
+        server: Server {
+            @display("p=807,346");
+        }
+        passiveQueue2: PassiveQueue {
+            @display("p=529,220;b=29,18");
+        }
+        passiveQueue3: PassiveQueue {
+            @display("p=529,300;b=29,18");
+        }
+        passiveQueue4: PassiveQueue {
+            @display("p=529,376;b=29,18");
+        }
+        passiveQueue5: PassiveQueue {
+            @display("p=529,456;b=29,18");
+        }
+        passiveQueue6: PassiveQueue {
+            @display("p=529,524;b=29,18");
+        }
+        passiveQueue7: PassiveQueue {
+            @display("p=529,604;b=29,18");
         }
     connections:
         gen0.out --> wrClassifier_in.in++;
@@ -75,7 +94,7 @@ network FifoNetWRS
         gen6.out --> wrClassifier_in.in++;
         gen7.out --> wrClassifier_in.in++;
 
-       
+
         //wrs.out[0] --> sink.in;
         //wrs.out[1] --> sink1.in;
         //wrs.out[2] --> sink3.in;
@@ -84,10 +103,39 @@ network FifoNetWRS
         //wrs.out[5] --> sink4.in;
         //wrs.out[6] --> sink7.in;
         //wrs.out[7] --> sink6.in;
-        wrClassifier_in.out++ --> wrs.in;
-        wrClassifier_in.out++ --> wrs1.in;
-        wrs.out --> sink0.in++;
-        wrs1.out --> sink0.in++;
+        wrClassifier_in.out++ --> passiveQueue0.in;
+        //wrs.out[0] --> sink.in;
+        //wrs.out[1] --> sink1.in;
+        //wrs.out[2] --> sink3.in;
+        //wrs.out[3] --> sink2.in;
+        //wrs.out[4] --> sink5.in;
+        //wrs.out[5] --> sink4.in;
+        //wrs.out[6] --> sink7.in;
+        //wrs.out[7] --> sink6.in;
+        wrClassifier_in.out++ --> passiveQueue1.in;
+        passiveQueue0.out++ --> server.in++;
+        passiveQueue1.out++ --> server.in++;
+        server.out --> sink0.in++;
+        //wrs.out[0] --> sink.in;
+        //wrs.out[1] --> sink1.in;
+        //wrs.out[2] --> sink3.in;
+        //wrs.out[3] --> sink2.in;
+        //wrs.out[4] --> sink5.in;
+        //wrs.out[5] --> sink4.in;
+        //wrs.out[6] --> sink7.in;
+        //wrs.out[7] --> sink6.in;
+        wrClassifier_in.out++ --> passiveQueue2.in;
+        passiveQueue2.out++ --> server.in++;
+        wrClassifier_in.out++ --> passiveQueue3.in;
+        wrClassifier_in.out++ --> passiveQueue4.in;
+        wrClassifier_in.out++ --> passiveQueue5.in;
+        wrClassifier_in.out++ --> passiveQueue6.in;
+        wrClassifier_in.out++ --> passiveQueue7.in;
+        passiveQueue3.out++ --> server.in++;
+        passiveQueue4.out++ --> server.in++;
+        passiveQueue5.out++ --> server.in++;
+        passiveQueue6.out++ --> server.in++;
+        passiveQueue7.out++ --> server.in++;
 }
 
 

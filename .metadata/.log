@@ -13240,3 +13240,426 @@ org.eclipse.swt.SWTException: Invalid thread access
 
 !ENTRY org.omnetpp.cdt 1 0 2012-02-20 16:26:29.465
 !MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:45:16.662
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-20 16:45:17.567
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:49:27.780
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:49:51.413
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:51:06.743
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:52:07.568
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:52:26.798
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:53:58.791
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:54:14.238
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-20 16:54:38.699
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+!SESSION 2012-02-21 07:20:46.379 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.omnetpp.main 1 0 2012-02-21 07:20:59.895
+!MESSAGE OMNeT++ IDE 4.2.0.111116-7631e2d started.
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:27:52.893
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.eclipse.cdt.core 1 0 2012-02-21 13:28:06.798
+!MESSAGE Indexed 'fifo' (5 sources, 298 headers) in 12.35 sec: 25,547 declarations; 37,635 references; 0 unresolved inclusions; 0 syntax errors; 63 unresolved names (0.10%)
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:28:08.071
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:28:08.589
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.eclipse.cdt.core 1 0 2012-02-21 13:28:16.177
+!MESSAGE Indexed 'wrs' (20 sources, 318 headers) in 7.55 sec: 26,463 declarations; 41,010 references; 0 unresolved inclusions; 0 syntax errors; 63 unresolved names (0.09%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2012-02-21 13:28:17.134
+!MESSAGE Indexed 'fifo_wrs1' (10 sources, 24 headers) in 0.96 sec: 390 declarations; 1,423 references; 0 unresolved inclusions; 0 syntax errors; 6 unresolved names (0.33%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2012-02-21 13:28:17.676
+!MESSAGE Indexed 'fifo_wrs' (5 sources, 16 headers) in 0.54 sec: 150 declarations; 695 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:28:18.762
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:29:11.470
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:30:52.165
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:32:07.710
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:33:17.152
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:34:32.119
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:34:37.734
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:37:01.024
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:37:16.447
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:40:31.048
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:43:10.833
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:43:17.333
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:43:55.878
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:45:33.316
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:45:47.809
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:46:23.919
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:47:35.768
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:47:36.439
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:48:41.122
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:48:45.848
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 13:50:44.115
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:50:48.426
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 13:51:15.108
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:13:04.346
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:13:45.827
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-21 15:14:52.667
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-21 15:14:52.688
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:20:09.719
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:20:10.798
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:21:59.285
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:22:00.079
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:23:02.814
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:23:03.587
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:23:37.747
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:23:38.504
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:31:25.601
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:31:26.861
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:33:55.190
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:33:55.781
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:34:29.547
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:35:07.665
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:35:08.400
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:36:08.472
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:36:09.187
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:37:16.988
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:37:17.829
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:42:25.510
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:43:19.402
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:43:20.165
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-21 15:45:12.465
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-21 15:45:12.467
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-21 15:45:21.214
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-21 15:45:21.215
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:48:01.187
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:48:02.027
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:48:55.694
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:48:56.465
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:49:11.707
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:49:12.453
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:49:52.591
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:49:53.425
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:50:30.422
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:51:08.280
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:51:09.049
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:53:51.289
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:53:52.155
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:54:41.335
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:55:48.664
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:55:49.439
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 15:57:57.912
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 15:57:58.616
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-21 16:00:01.398
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 16:00:02.123
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 16:00:42.789
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 16:01:01.010
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 16:01:16.420
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-21 16:01:34.578
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?

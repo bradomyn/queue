@@ -10,6 +10,8 @@
 
 #include <omnetpp.h>
 #include "Timer.h"
+#include "Job.h"
+#include "Useful.h"
 
 namespace wrs {
 
@@ -21,6 +23,7 @@ class Source : public cSimpleModule
   private:
     cMessage *sendMessageEvent;
     cMessage *createMessage();
+    Job *createJob();
 
   public:
      Source();
@@ -52,12 +55,31 @@ void Source::initialize()
 void Source::handleMessage(cMessage *msg)
 {
     ASSERT(msg==sendMessageEvent);
+#if 1
 
+#else
     cMessage *job = createMessage();
     send(job, "out");
-
+#endif
     scheduleAt(simTime()+par("sendIaTime").doubleValue(), sendMessageEvent);
 }
+
+Job *Source::createJob() {
+	Job *job = new Job("job");
+    Timer t;
+    timeval tv = t.currentTime();
+
+  	// TODO work with a fixed, repeatable data set
+    double triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+
+
+
+	char name[80];
+	sprintf(name, "id: %ld; %f", job->getId(), triggerTime);
+	name[79] = '\0';
+	job->setName(name);
+	return job;
+} // createMessage()
 
 cMessage *Source::createMessage() {
 	cMessage *job = new cMessage("job");

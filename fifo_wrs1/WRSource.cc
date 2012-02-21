@@ -11,10 +11,8 @@
 #include <omnetpp.h>
 
 #include "Useful.h"
-#include "../wrs/Job.h"
-#include "../wrs/Timer.h"
-
-using namespace queueing;
+#include "Job.h"
+#include "Timer.h"
 
 namespace wrs {
 
@@ -65,10 +63,17 @@ void WRSource::handleMessage(cMessage *msg)
 {
     ASSERT(msg==sendMessageEvent);
 
+#if 1
+	// reschedule the timer for the next message
+	scheduleAt(simTime() + par("sendIaTime").doubleValue(), msg);
+
+	Job *job = generateJob();
+	send(job, "out");
+#else
     cMessage *job = generateMessage();
     send(job, "out");
     scheduleAt(simTime()+par("sendIaTime").doubleValue(), sendMessageEvent);
-
+#endif
 }	// handleMessage()
 
 cMessage * WRSource::generateMessage() {
@@ -120,15 +125,16 @@ Job * WRSource::generateJob() {
 	// TODO work with a fixed, repeatable data set
 	job->setPriority(random);
 
-	Timer t;
-	timeval tv = t.currentTime();
-	double triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
+	//Timer t;
+	//timeval tv = t.currentTime();
+	//double triggerTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
 	//triggerTime = simTime().dbl();
 	//std::cout << "triggerTime " << triggerTime << std::endl;
 	//std::cout << "TRIGGER "; t.print(); std::cout << std::endl;
 
 	char name[80];
-	sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
+	//sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
+	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), random , simTime().dbl());
 	name[79] = '\0';
 	job->setName(name);
 	//std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;

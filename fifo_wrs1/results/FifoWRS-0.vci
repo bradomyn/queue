@@ -1,36 +1,42 @@
-file 52181 1329751596                                           
+                                                                
 version 2
-run FifoWRS-0-20120220-16:26:33-7288
+run FifoWRS-0-20120221-16:01:38-17259
 attr configname FifoWRS
-attr datetime 20120220-16:26:33
+attr datetime 20120221-16:01:38
 attr experiment FifoWRS
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network FifoNetWRS
-attr processid 7288
+attr processid 17259
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
-vector 1  FifoNetWRS.wrs  qlen:vector  ETV
+vector 1  FifoNetWRS.passiveQueue0  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 3  FifoNetWRS.wrs1  qlen:vector  ETV
+vector 2  FifoNetWRS.passiveQueue1  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 2  FifoNetWRS.wrs  queueingTime:vector  ETV
-attr interpolationmode  none
-attr title  "queueing time at dequeue, vector"
-attr unit  s
-vector 0  FifoNetWRS.sink0  lifetime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-0	873 15785 26 4000 0.0005 0.994 800 0.0005 0.004 1.8 0.0051
-1	16658 20244 0 3997 0 0.9935 1401 0 7 4900 23100
-2	36902 15271 17 3997 0 0.9935 800 0 0.0035 1.4 0.0035
-3	52173 8 0 0 0 0 1 0 0 0 0
+vector 3  FifoNetWRS.passiveQueue2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 4  FifoNetWRS.passiveQueue3  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 5  FifoNetWRS.passiveQueue4  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 6  FifoNetWRS.passiveQueue5  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 7  FifoNetWRS.passiveQueue6  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 8  FifoNetWRS.passiveQueue7  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
