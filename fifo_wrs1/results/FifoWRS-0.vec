@@ -1,14 +1,14 @@
 version 2
-run FifoWRS-0-20120221-16:01:38-17259
+run FifoWRS-0-20120222-09:04:55-1707
 attr configname FifoWRS
-attr datetime 20120221-16:01:38
+attr datetime 20120222-09:04:55
 attr experiment FifoWRS
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network FifoNetWRS
-attr processid 17259
+attr processid 1707
 attr repetition 0
 attr replication #0
 attr resultdir results

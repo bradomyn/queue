@@ -1,0 +1,88 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+import org.omnetpp.queueing.Classifier;
+import org.omnetpp.queueing.PassiveQueue;
+import org.omnetpp.queueing.Router;
+import org.omnetpp.queueing.Server;
+import org.omnetpp.queueing.Sink;
+import org.omnetpp.queueing.Source;
+
+
+//
+// A call center simulation.
+//
+network WRS
+{
+    parameters:
+        @display("i=device/cellphone;bgb=591,565");
+    submodules:
+        source: Source {
+            @display("p=34.0,236.0");
+        }
+        classifier: Classifier {
+            @display("p=130.0,236.0");
+        }
+        router: Router {
+            @display("p=432,236");
+            gates:
+                out[1];
+        }
+        passiveQueue0: PassiveQueue {
+            @display("p=225.0,27.0");
+        }
+        passiveQueue1: PassiveQueue {
+            @display("p=225.0,104.0");
+        }
+        passiveQueue2: PassiveQueue {
+            @display("p=225.0,169.0");
+        }
+        passiveQueue3: PassiveQueue {
+            @display("p=225.0,236.0");
+        }
+        operator1: Server {
+            @display("p=359,236");
+        }
+        sink: Sink {
+            @display("p=543,236");
+        }
+        passiveQueue4: PassiveQueue {
+            @display("p=225,296");
+        }
+        passiveQueue5: PassiveQueue {
+            @display("p=225,373");
+        }
+        passiveQueue6: PassiveQueue {
+            @display("p=225,438");
+        }
+        passiveQueue7: PassiveQueue {
+            @display("p=225,505");
+        }
+    connections:
+        source.out --> classifier.in++;
+        classifier.out++ --> passiveQueue0.in++;
+        classifier.out++ --> passiveQueue1.in++;
+        classifier.out++ --> passiveQueue2.in++;
+        classifier.out++ --> passiveQueue3.in++;
+        passiveQueue0.out++ --> operator1.in++;
+        passiveQueue1.out++ --> operator1.in++;
+        passiveQueue2.out++ --> operator1.in++;
+        passiveQueue3.out++ --> operator1.in++;
+        operator1.out --> router.in++;
+        router.out++ --> sink.in++;
+        //router.out++ --> sink.in++;
+        classifier.out++ --> passiveQueue4.in++;
+        classifier.out++ --> passiveQueue5.in++;
+        classifier.out++ --> passiveQueue6.in++;
+        classifier.out++ --> passiveQueue7.in++;
+        passiveQueue4.out++ --> operator1.in++;
+        passiveQueue5.out++ --> operator1.in++;
+        passiveQueue6.out++ --> operator1.in++;
+        passiveQueue7.out++ --> operator1.in++;
+}

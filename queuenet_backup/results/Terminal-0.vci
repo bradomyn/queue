@@ -1,0 +1,39 @@
+file 4695 1328793831                                            
+version 2
+run Terminal-0-20120111-15:18:51-3272
+attr configname Terminal
+attr datetime 20120111-15:18:51
+attr experiment Terminal
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network Terminal
+attr processid 3272
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+vector 1  Terminal.firstClass  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+1	1674 593 0 342 0 3493.608553748286 23 0 2 15 19
+vector 2  Terminal.businessClass  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+2	2267 323 0 262 0 2659.006685728322 13 0 1 6 6
+vector 3  Terminal.economyClass  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+3	2590 653 0 353 0 3574.566456424796 25 0 4 30 64
+vector 0  Terminal.toOtherTerminal  lifeTime:vector  ETV
+attr interpolationmode none
+attr title "lifetime of arrived jobs, vector"
+attr unit s
+0	1069 605 6 339 93.193919117733 3441.585092767453 23 0 0 0 0
+vector 4  Terminal.boarding  lifeTime:vector  ETV
+attr interpolationmode none
+attr title "lifetime of arrived jobs, vector"
+attr unit s
+4	3243 1452 14 357 146.793292512272 3586.70748273883 36 25.169757584681 946.75447907712 8529.8672971706 3123401.314911

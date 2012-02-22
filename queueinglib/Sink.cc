@@ -9,8 +9,6 @@
 
 #include "Sink.h"
 #include "Job.h"
-#include "WRTrigger.h"
-#include "Timer.h"
 
 namespace queueing {
 
@@ -18,9 +16,6 @@ Define_Module(Sink);
 
 void Sink::initialize()
 {
-	numReceived = 0;
-	WATCH(numReceived);
-
     lifeTimeSignal = registerSignal("lifeTime");
     totalQueueingTimeSignal = registerSignal("totalQueueingTime");
     queuesVisitedSignal = registerSignal("queuesVisited");
@@ -29,40 +24,20 @@ void Sink::initialize()
     delaysVisitedSignal = registerSignal("delaysVisited");
     generationSignal = registerSignal("generation");
     keepJobs = par("keepJobs");
+
+    numReceived = 0;
+    WATCH(numReceived);
 }
 
 void Sink::handleMessage(cMessage *msg)
 {
+	simtime_t currentTime = simTime();
+	simtime_t lifetime = currentTime-msg->getCreationTime();
     Job *job = check_and_cast<Job *>(msg);
 
-    Timer t;
-	timeval tv = t.currentTime();
-	double arrivalTime = static_cast<double>( tv.tv_sec ) + static_cast<double>( tv.tv_usec )/1E6;
-	//double arrivalTime = simTime().dbl();
-	//std::cout << "arrivaltime " << arrivalTime << std::endl;
+    numReceived++;
 
-	//std::cout << "timestamp " << simTime()-msg->getCreationTime().dbl() << std::endl;
-	//simtime_t eed=simTime()-msg->getCreationTime();
-	//endToEndDelay.record(eed);
-
-	// extract time from jobname
-	string jobname = std::string(job->getName());
-	size_t found;
-	found = jobname.find("; ");
-	//std::cout << "jobname " << jobname << " found " << found << std::endl;
-	// extract time from jobname
-	double triggerTime=0.;
-	if( found!=std::string::npos ) {
-		std::string time = jobname.substr(found+2);
-	    std::istringstream stm;
-	    stm.str(time);
-	    stm >> triggerTime;
-	    //std::cout << "time " << time << " " << triggerTime << std::endl;
-	}
-	//std::cout << job->getName() << " , duration " << (arrivalTime-triggerTime) << std::endl;
-
-	jobs.push_back(WRPacket(job->getName(), job->getId(), job->getPriority(), triggerTime, arrivalTime));
-	numReceived++;
+    std::cout << numReceived << ": " << job->getName() << " received. Lifetime " << lifetime << " ct " << msg->getCreationTime() << " st " << currentTime << std::endl;
 
     // gather statistics
     emit(lifeTimeSignal, simTime()- job->getCreationTime());
@@ -77,29 +52,9 @@ void Sink::handleMessage(cMessage *msg)
         delete msg;
 }
 
-// will be called in the end
 void Sink::finish()
 {
     // TODO missing scalar statistics
-
-	vector<WRPacket>::iterator it;
-	double duration=0., avgTime=0.;
-	for( it=jobs.begin(); it!=jobs.end(); it++ ) {
-		duration = it->getEndTime()-it->getStartTime();
-		//std::cout << __FILE__ << " job ID: " << it->getID() << ", prio: " << it->getPriority() << ", duration: " << duration << std::endl;
-		avgTime += duration;
-	}
-	avgTime /= jobs.size();
-	Timer t;
-	std::cout << this->getName() << " average time " << avgTime << " = " << t.s2ms(avgTime)  << std::endl;
-
-	//simtime_t t1 = simTime();
-	//std::cout << simtimeToStr(t1) << std::endl;
-	//std::cout << t1.str().c_str() << std::endl;
-	//char buf[64];
-	//sprintf("%s", SIMTIME_STR(simTime()));
-	//std::cout << buf << std::endl;
-
 }
 
 }; //namespace

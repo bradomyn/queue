@@ -1,0 +1,128 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd.
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include "Source.h"
+#include "Job.h"
+
+namespace queueing {
+
+Useful * Useful::_instance = 0;
+
+void SourceBase::initialize()
+{
+	createdSignal = registerSignal("created");
+    jobCounter = 0;
+    WATCH(jobCounter);
+    jobName = par("jobName").stringValue();
+    if (jobName == "")
+        jobName = getName();
+}
+
+Job *SourceBase::createJob()
+{
+    char buf[80];
+    sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
+    Job *job = new Job(buf);
+    //job->setKind(par("jobType"));
+    int prio = Useful::getInstance()->generateRandom();
+    job->setPriority(prio); //par("jobPriority"));
+    return job;
+}
+
+void SourceBase::finish()
+{
+    emit(createdSignal, jobCounter);
+}
+
+//----
+
+Define_Module(Source);
+
+void Source::initialize()
+{
+    SourceBase::initialize();
+    startTime = par("startTime");
+    stopTime = par("stopTime");
+    numJobs = par("numJobs");
+
+    // schedule the first message timer for start time
+    scheduleAt(startTime, new cMessage("newJobTimer"));
+
+    WATCH(numCreated);
+    numCreated = 0;
+}
+
+void Source::handleMessage(cMessage *msg)
+{
+    ASSERT(msg->isSelfMessage());
+
+    if ((numJobs < 0 || numJobs > jobCounter) && (stopTime < 0 || stopTime > simTime()))
+    {
+        // reschedule the timer for the next message
+        scheduleAt(simTime() + par("interArrivalTime").doubleValue(), msg);
+
+        Job *job = generateJob(); //createJob();
+        send(job, "out");
+        numCreated++;
+    }
+    else
+    {
+        // finished
+        delete msg;
+    }
+}
+
+Job * Source::generateJob() {
+	char buf[80];
+	std::string jobName="j";
+	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
+	Job *job = new Job(buf);
+	int random = Useful::getInstance()->generateRandom();
+
+	// TODO work with a fixed, repeatable data set
+	job->setPriority(random);
+
+	char name[80];
+	//sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
+	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), random , simTime().dbl());
+	name[79] = '\0';
+	job->setName(name);
+	//std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;
+
+	job->setTimestamp();
+
+	return job;
+} // generateJob()
+
+//----
+
+Define_Module(SourceOnce);
+
+void SourceOnce::initialize()
+{
+    SourceBase::initialize();
+    simtime_t time = par("time");
+    scheduleAt(time, new cMessage("newJobTimer"));
+}
+
+void SourceOnce::handleMessage(cMessage *msg)
+{
+    ASSERT(msg->isSelfMessage());
+    delete msg;
+
+    int n = par("numJobs");
+    for (int i=0; i<n; i++)
+    {
+        Job *job = createJob();
+        send(job, "out");
+    }
+}
+
+}; //namespace
+

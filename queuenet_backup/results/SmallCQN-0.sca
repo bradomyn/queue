@@ -1,0 +1,57 @@
+version 2
+run SmallCQN-0-20120111-14:19:10-1140
+attr configname SmallCQN
+attr datetime 20120111-14:19:10
+attr experiment SmallCQN
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network SmallCQN
+attr processid 1140
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar SmallCQN.queue1 	busy:timeavg 	1
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar SmallCQN.queue1 	queueingTime:mean 	1.5
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar SmallCQN.queue1 	queueingTime:max 	3
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar SmallCQN.queue1 	queueLength:timeavg 	8.435188368984
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar SmallCQN.queue1 	queueLength:max 	9
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar SmallCQN.queue1 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar SmallCQN.queue2 	busy:timeavg 	0.564811631016
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar SmallCQN.queue2 	queueingTime:mean 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar SmallCQN.queue2 	queueingTime:max 	0
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar SmallCQN.queue2 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar SmallCQN.queue2 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar SmallCQN.queue2 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"

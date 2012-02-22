@@ -1,0 +1,33 @@
+file 943 1328793831                                             
+version 2
+run CallCenter-0-20120112-12:42:50-1712
+attr configname CallCenter
+attr datetime 20120112-12:42:50
+attr experiment CallCenter
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network CallCenter
+attr processid 1712
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+vector 0  CallCenter.billing  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+0	907 9 0 0 0 0 1 0 0 0 0
+vector 1  CallCenter.marketing  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+1	916 9 0 0 0 0 1 0 0 0 0
+vector 2  CallCenter.support  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+2	925 9 0 0 0 0 1 0 0 0 0
+vector 3  CallCenter.internal  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+3	934 9 0 0 0 0 1 0 0 0 0

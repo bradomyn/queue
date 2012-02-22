@@ -38,8 +38,6 @@ SelectionStrategy *SelectionStrategy::create(const char *algName, cSimpleModule 
         strategy = new ShortestQueueSelectionStrategy(module, selectOnInGate);
     } else if (strcmp(algName, "longestQueue") == 0) {
         strategy = new LongestQueueSelectionStrategy(module, selectOnInGate);
-    } else if (strcmp(algName, "currentWRSwitch") == 0) {
-        strategy = new LongestQueueSelectionStrategy(module, selectOnInGate);
     }
 
     return strategy;
@@ -76,12 +74,16 @@ PrioritySelectionStrategy::PrioritySelectionStrategy(cSimpleModule *module, bool
 
 int PrioritySelectionStrategy::select()
 {
-    // return the smallest selectable index
-    for (int i=0; i<gateSize; i++)
-        if (isSelectable(selectableGate(i)->getOwnerModule()))
-            return i;
 
+    // return the smallest selectable index
+    for (int i=0; i<gateSize; i++) {
+        if (isSelectable(selectableGate(i)->getOwnerModule())) {
+        	//std::cout << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__ << " selected gate " << i << std::endl;
+        	return i;
+        }
+    }
     // if none of them is selectable return an invalid no.
+   // std::cout << __FILE__ << ":" << __FUNCTION__ << " nothing is selectable" << std::endl;
     return -1;
 }
 
@@ -163,31 +165,6 @@ LongestQueueSelectionStrategy::LongestQueueSelectionStrategy(cSimpleModule *modu
 }
 
 int LongestQueueSelectionStrategy::select()
-{
-    // return the longest selectable queue
-    int result = -1;            // by default none of them is selectable
-    int sizeMax = -1;
-    for (int i = 0; i<gateSize; ++i)
-    {
-        cModule *module = selectableGate(i)->getOwnerModule();
-        int length = (check_and_cast<IPassiveQueue *>(module))->length();;
-        if (isSelectable(module) && length>sizeMax)
-        {
-            sizeMax = length;
-            result = i;
-        }
-    }
-    return result;
-}
-
-// --------------------------------------------------------------------------------------------
-
-CurrentWRSwitch::CurrentWRSwitch(cSimpleModule *module, bool selectOnInGate) :
-    SelectionStrategy(module, selectOnInGate)
-{
-}
-
-int CurrentWRSwitch::select()
 {
     // return the longest selectable queue
     int result = -1;            // by default none of them is selectable

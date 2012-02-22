@@ -40,6 +40,9 @@ void Server::initialize()
     selectionStrategy = SelectionStrategy::create(par("fetchingAlgorithm"), this, true);
     if (!selectionStrategy)
         error("invalid selection strategy");
+
+    WATCH(numSent);
+    numSent = 0;
 }
 
 void Server::handleMessage(cMessage *msg)
@@ -50,6 +53,8 @@ void Server::handleMessage(cMessage *msg)
         simtime_t d = simTime() - endServiceMsg->getSendingTime();
         jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
         send(jobServiced, "out");
+        //std::cout << jobServiced->getName() << " with prio " << jobServiced->getPriority() << " sent" << std::endl;
+        numSent++;
         jobServiced = NULL;
         emit(busySignal, 0);
 
@@ -60,14 +65,17 @@ void Server::handleMessage(cMessage *msg)
         if (k >= 0)
         {
             EV << "requesting job from queue " << k << endl;
+            std::cout << "requesting job from queue " << k << std::endl;
             cGate *gate = selectionStrategy->selectableGate(k);
             check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
         }
     }
     else
     {
-        if (jobServiced)
-            error("job arrived while already servicing one");
+        if (jobServiced) {
+        	error("job arrived while already servicing one");
+            std::cout << "job arrived while already servicing one" << std::endl;
+        }
 
         jobServiced = check_and_cast<Job *>(msg);
         simtime_t serviceTime = par("serviceTime");

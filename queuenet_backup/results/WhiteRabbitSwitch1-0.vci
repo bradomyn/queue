@@ -1,0 +1,54 @@
+file 4923 1328793831                                            
+version 2
+run WhiteRabbitSwitch1-0-20120113-14:06:19-592
+attr configname WhiteRabbitSwitch1
+attr datetime 20120113-14:06:19
+attr experiment WhiteRabbitSwitch1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WhiteRabbitSwitch1
+attr processid 592
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+vector 1  WhiteRabbitSwitch1.queue  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+1	1979 368 0 272 0 821.804892554284 15 0 6 45 187
+vector 2  WhiteRabbitSwitch1.queue1  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+2	2347 342 0 280 0 843.844862055873 14 0 6 43 183
+vector 3  WhiteRabbitSwitch1.queue2  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+3	2689 445 0 292 0 894.510602472269 18 0 6 57 237
+vector 4  WhiteRabbitSwitch1.queue3  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+4	3134 421 0 290 0 880.959564436819 17 0 6 52 212
+vector 5  WhiteRabbitSwitch1.queue4  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+5	3555 416 0 284 0 862.363324156479 17 0 6 52 212
+vector 6  WhiteRabbitSwitch1.queue5  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+6	3971 345 0 288 0 869.807515689614 14 0 6 43 183
+vector 7  WhiteRabbitSwitch1.queue6  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+7	4316 392 0 282 0 860.343522515247 16 0 6 48 196
+vector 8  WhiteRabbitSwitch1.queue7  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+8	4708 215 0 206 0 642.308445611468 9 0 6 24 96
+vector 0  WhiteRabbitSwitch1.out  lifeTime:vector  ETV
+attr interpolationmode none
+attr title "lifetime of arrived jobs, vector"
+attr unit s
+0	1649 330 12 256 66.930409112914 783.384719988086 13 0 0 0 0

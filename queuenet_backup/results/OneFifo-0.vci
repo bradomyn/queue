@@ -1,0 +1,26 @@
+file 2799 1328793831                                            
+version 2
+run OneFifo-0-20120112-12:39:23-2992
+attr configname OneFifo
+attr datetime 20120112-12:39:23
+attr experiment OneFifo
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network SimpleQueue
+attr processid 2992
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+vector 1  SimpleQueue.queue  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+1	1683 1116 0 117 0 71.128927611718 47 0 5 75 207
+vector 0  SimpleQueue.sink  lifeTime:vector  ETV
+attr interpolationmode none
+attr title "lifetime of arrived jobs, vector"
+attr unit s
+0	653 1030 6 114 4.103610525225 70.057796171263 28 1.10209697334 11.468610546837 138.85588594304 928.94947812017

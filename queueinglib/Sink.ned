@@ -34,6 +34,5 @@ simple Sink
         bool keepJobs = default(false); // whether to keep the received jobs till the end of simulation
     gates:
         input in[];
-        input sendDirect @directIn;
 }
 

@@ -34,6 +34,8 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         Job *jobServiced;
         cMessage *endServiceMsg;
 
+        int numSent;
+
     public:
         Server();
         virtual ~Server();

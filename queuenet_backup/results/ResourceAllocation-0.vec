@@ -1,0 +1,25 @@
+version 2
+run ResourceAllocation-0-20120111-14:30:35-4044
+attr configname ResourceAllocation
+attr datetime 20120111-14:30:35
+attr experiment ResourceAllocation
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network ResourceAllocation
+attr processid 4044
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  ResourceAllocation.queue1  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 2  ResourceAllocation.queue2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+0	0	0	0
+2	0	0	0

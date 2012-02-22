@@ -1,0 +1,22 @@
+file 599 1328793831                                             
+version 2
+run ForkJoin-0-20120111-14:29:48-2780
+attr configname ForkJoin
+attr datetime 20120111-14:29:48
+attr experiment ForkJoin
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network ForkJoin
+attr processid 2780
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+vector 0  ForkJoin.sink  lifeTime:vector  ETV
+attr interpolationmode none
+attr title "lifetime of arrived jobs, vector"
+attr unit s
+0	523 76 17 33 22.559307580473 39.515453358844 2 12.559307580473 19.515453358844 32.074760939317 538.58912670214

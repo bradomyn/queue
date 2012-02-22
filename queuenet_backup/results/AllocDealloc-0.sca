@@ -1,0 +1,251 @@
+version 2
+run AllocDealloc-0-20120111-14:30:56-2992
+attr configname AllocDealloc
+attr datetime 20120111-14:30:56
+attr experiment AllocDealloc
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network AllocDealloc
+attr processid 2992
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar AllocDealloc.source 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar AllocDealloc.allocate 	queueingTime:mean 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar AllocDealloc.allocate 	queueingTime:max 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar AllocDealloc.allocate 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar AllocDealloc.allocate 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar AllocDealloc.allocate 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar AllocDealloc.delay 	delayedJobs:timeavg 	0.32963670887784
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar AllocDealloc.delay 	delayedJobs:max 	1
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar AllocDealloc.delay1 	delayedJobs:timeavg 	0.28107007305511
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar AllocDealloc.delay1 	delayedJobs:max 	1
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar AllocDealloc.allocate1 	queueingTime:mean 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar AllocDealloc.allocate1 	queueingTime:max 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar AllocDealloc.allocate1 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar AllocDealloc.allocate1 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar AllocDealloc.allocate1 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar AllocDealloc.allocate2 	queueingTime:mean 	0.0938776254
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar AllocDealloc.allocate2 	queueingTime:max 	0.0938776254
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar AllocDealloc.allocate2 	queueLength:timeavg 	0.055864991570077
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar AllocDealloc.allocate2 	queueLength:max 	1
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar AllocDealloc.allocate2 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar AllocDealloc.delay2 	delayedJobs:timeavg 	0.19675179638187
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar AllocDealloc.delay2 	delayedJobs:max 	1
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar AllocDealloc.source1 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar AllocDealloc.source2 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar AllocDealloc.sink 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar AllocDealloc.sink 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar AllocDealloc.sink 	delaysVisited:mean 	1
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar AllocDealloc.sink 	delaysVisited:max 	1
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar AllocDealloc.sink 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar AllocDealloc.sink 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar AllocDealloc.sink 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink 	totalDelayTime:mean 	0.553933878882
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink 	totalDelayTime:max 	0.553933878882
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink 	lifeTime:mean 	0.553933878882
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink 	lifeTime:max 	0.553933878882
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink1 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar AllocDealloc.sink1 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar AllocDealloc.sink1 	delaysVisited:mean 	1
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar AllocDealloc.sink1 	delaysVisited:max 	1
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar AllocDealloc.sink1 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar AllocDealloc.sink1 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar AllocDealloc.sink1 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink1 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink1 	totalDelayTime:mean 	0.472320683989
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink1 	totalDelayTime:max 	0.472320683989
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink1 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink1 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink1 	lifeTime:mean 	0.472320683989
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink1 	lifeTime:max 	0.472320683989
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink2 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar AllocDealloc.sink2 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar AllocDealloc.sink2 	delaysVisited:mean 	1
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar AllocDealloc.sink2 	delaysVisited:max 	1
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar AllocDealloc.sink2 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar AllocDealloc.sink2 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar AllocDealloc.sink2 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink2 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink2 	totalDelayTime:mean 	0.330629092002
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink2 	totalDelayTime:max 	0.330629092002
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink2 	totalQueueingTime:mean 	0.0938776254
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink2 	totalQueueingTime:max 	0.0938776254
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.sink2 	lifeTime:mean 	0.424506717402
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar AllocDealloc.sink2 	lifeTime:max 	0.424506717402
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar AllocDealloc.resourcePool 	amount:timeavg 	1.1925414216852
+attr interpolationmode  sample-hold
+attr title  "available resource, timeavg"
+scalar AllocDealloc.resourcePool 	amount:min 	0
+attr interpolationmode  sample-hold
+attr title  "available resource, min"

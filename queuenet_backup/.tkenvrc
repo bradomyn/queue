@@ -1,0 +1,11 @@
+# Partial Tkenv config file -- see $HOME/.tkenvrc as well
+inspector "WhiteRabbitSwitch4" "WhiteRabbitSwitch4" "2" "565x338+272+220:normal"
+inspector "ClosedQueueingNetwork" "ClosedQueueingNetwork" "2" "565x338+96+44:normal"
+inspector "Terminal.boarding" "Sink" "3" "844x253+428+633:normal"
+inspector "WhiteRabbitSwitch2" "WhiteRabbitSwitch2" "2" "565x338+250+198:normal"
+inspector "WhiteRabbitSwitch6" "WhiteRabbitSwitch6" "2" "607x338+327+153:normal"
+inspector "WhiteRabbitSwitch1" "WhiteRabbitSwitch1" "2" "586x385+294+206:normal"
+inspector "Terminal" "Terminal" "2" "565x338+53+-3:normal"
+inspector "Terminal.boarding" "Sink" "1" "629x310+634+-10:normal"
+inspector "WhiteRabbitSwitch3" "WhiteRabbitSwitch3" "2" "565x338+272+220:normal"
+

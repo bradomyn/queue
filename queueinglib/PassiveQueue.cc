@@ -39,6 +39,9 @@ void PassiveQueue::initialize()
     selectionStrategy = SelectionStrategy::create(par("sendingAlgorithm"), this, false);
     if (!selectionStrategy)
         error("invalid selection strategy");
+
+    WATCH(numServed);
+    numServed = 0;
 }
 
 void PassiveQueue::handleMessage(cMessage *msg)
@@ -50,6 +53,7 @@ void PassiveQueue::handleMessage(cMessage *msg)
     if (capacity >=0 && queue.length() >= capacity)
     {
         EV << "Queue full! Job dropped.\n";
+        std::cerr << "Queue full! Job dropped." << std::endl;
         if (ev.isGUI()) bubble("Dropped!");
         emit(droppedSignal, 1);
         delete msg;
@@ -57,19 +61,36 @@ void PassiveQueue::handleMessage(cMessage *msg)
     }
 
     int k = selectionStrategy->select();
+    //std::cout << "gate selected: " << k << std::endl;
+    //std::cout << "selection strategy " << selectionStrategy->getFullName() << std::endl;
     if (k < 0)
     {
         // enqueue if no idle server found
         queue.insert(job);
+        std::cout << "queued: " << job->getName() << std::endl;
         emit(queueLengthSignal, length());
         job->setQueueCount(job->getQueueCount() + 1);
     }
     else if (length() == 0)
     {
+#if 1
         // send through without queueing
         send(job, "out", k);
-    }
-    else
+        numServed++;
+#else
+        if( job->getPriority()<7 ) {
+		   queue.insert(job);
+		   std::cout << "queued: " << job->getName() << std::endl;
+		   emit(queueLengthSignal, length());
+		   job->setQueueCount(job->getQueueCount() + 1);
+		   numServed++;
+        } else {
+            // send through without queueing
+            send(job, "out", k);
+            numServed++;
+        }
+#endif
+    } else
         error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
 
     // change the icon color
@@ -92,10 +113,12 @@ void PassiveQueue::request(int gateIndex)
     if (fifo)
     {
         job = (Job *)queue.pop();
+        std::cout << __FUNCTION__ << " pop: " << job->getName() << std::endl;
     }
     else
     {
         job = (Job *)queue.back();
+        std::cout << __FUNCTION__ << " back: " << job->getName() << std::endl;
         // FIXME this may have bad performance as remove uses linear search
         queue.remove(job);
     }
@@ -107,6 +130,8 @@ void PassiveQueue::request(int gateIndex)
     emit(queueingTimeSignal, d);
 
     send(job, "out", gateIndex);
+    numServed++;
+    std::cout << "job requested over gate " << gateIndex << std::endl;
 
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");

@@ -1,14 +1,14 @@
 version 2
-run CallCenter-0-20120112-12:42:50-1712
+run CallCenter-0-20120222-09:17:44-12073
 attr configname CallCenter
-attr datetime 20120112-12:42:50
+attr datetime 20120222-09:17:44
 attr experiment CallCenter
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network CallCenter
-attr processid 1712
+attr processid 12073
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -27,7 +27,3 @@ attr title  "queue length, vector"
 vector 3  CallCenter.internal  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-0	0	0	0
-1	0	0	0
-2	0	0	0
-3	0	0	0

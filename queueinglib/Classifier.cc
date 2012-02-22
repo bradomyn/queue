@@ -31,10 +31,20 @@ void Classifier::handleMessage(cMessage *msg)
         error("invalid dispatchField parameter, must be \"type\" or \"priority\"");
     // TODO we could look for the value in the dynamically added parameters too
 
-    if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
-        send(job, "rest");
-    else
-        send(job, "out", outGateIndex);
+    //if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
+    //    send(job, "rest");
+    //else
+
+#if 0
+    send(job, "out", outGateIndex);
+    std::cout << "job sent to " << outGateIndex << std::endl;
+#else
+    int prio = job->getPriority(); //Useful::getInstance()->getPriority(job->getName());
+    send(job, "out", prio);
+    //std::cout << "job sent to " << prio << std::endl;
+#endif
+
+
 }
 
 }; //namespace

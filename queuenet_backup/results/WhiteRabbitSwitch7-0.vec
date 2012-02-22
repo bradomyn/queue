@@ -1,0 +1,161 @@
+version 2
+run WhiteRabbitSwitch7-0-20120209-13:40:41-29461
+attr configname WhiteRabbitSwitch7
+attr datetime 20120209-13:40:41
+attr experiment WhiteRabbitSwitch7
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WhiteRabbitSwitch7
+attr processid 29461
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 17  WhiteRabbitSwitch7.wrQueue0  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 18  WhiteRabbitSwitch7.wrQueue1  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 19  WhiteRabbitSwitch7.wrQueue2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 20  WhiteRabbitSwitch7.wrQueue3  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 21  WhiteRabbitSwitch7.wrQueue4  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 22  WhiteRabbitSwitch7.wrQueue5  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 23  WhiteRabbitSwitch7.wrQueue6  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 24  WhiteRabbitSwitch7.wrQueue7  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 29  WhiteRabbitSwitch7.out5  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 25  WhiteRabbitSwitch7.out1  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 27  WhiteRabbitSwitch7.out3  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 31  WhiteRabbitSwitch7.out7  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 30  WhiteRabbitSwitch7.out6  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 26  WhiteRabbitSwitch7.out2  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 28  WhiteRabbitSwitch7.out4  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 16  WhiteRabbitSwitch7.out0  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+16	369	1	0
+16	389	1	0
+16	391	1	0
+16	401	1	0
+16	404	1	0
+16	405	1	0
+17	0	0	0
+18	0	0	0
+19	0	0	0
+20	0	0	0
+21	0	0	0
+22	0	0	0
+23	0	0	0
+24	0	0	0
+25	330	1	0
+25	335	1	0
+25	350	1	0
+25	353	1	0
+25	362	1	0
+25	363	1	0
+25	367	1	0
+25	370	1	0
+25	380	1	0
+25	382	1	0
+25	383	1	0
+25	385	1	0
+25	387	1	0
+25	393	1	0
+25	394	1	0
+25	402	1	0
+25	406	1	0
+26	334	1	0
+26	337	1	0
+26	358	1	0
+26	360	1	0
+26	364	1	0
+26	378	1	0
+26	379	1	0
+27	331	1	0
+27	343	1	0
+27	345	1	0
+27	349	1	0
+27	356	1	0
+27	361	1	0
+27	366	1	0
+27	371	1	0
+27	376	1	0
+27	407	1	0
+28	340	1	0
+28	357	1	0
+28	365	1	0
+28	381	1	0
+28	392	1	0
+28	403	1	0
+29	329	1	0
+29	338	1	0
+29	341	1	0
+29	347	1	0
+29	355	1	0
+29	375	1	0
+29	377	1	0
+29	384	1	0
+29	388	1	0
+29	396	1	0
+29	397	1	0
+29	399	1	0
+30	333	1	0
+30	342	1	0
+30	346	1	0
+30	359	1	0
+30	372	1	0
+30	386	1	0
+30	395	1	0
+30	400	1	0
+30	408	1	0
+31	332	1	0
+31	336	1	0
+31	339	1	0
+31	344	1	0
+31	348	1	0
+31	351	1	0
+31	352	1	0
+31	354	1	0
+31	368	1	0
+31	373	1	0
+31	374	1	0
+31	390	1	0
+31	398	1	0

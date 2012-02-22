@@ -24,37 +24,17 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
 OBJS = \
-    $O/WRScheduler.o \
-    $O/WRPassiveQueue.o \
-    $O/WRQueue.o \
+    $O/Useful.o \
     $O/JobList.o \
-    $O/Timer.o \
     $O/Source.o \
-    $O/WRPacket.o \
-    $O/WRClassifier_out.o \
     $O/PassiveQueue.o \
-    $O/WRClassifier_in.o \
-    $O/ResourcePool.o \
     $O/Job.o \
-    $O/WRSource.o \
     $O/Classifier.o \
-    $O/Join.o \
-    $O/Delay.o \
-    $O/Fork.o \
     $O/Queue.o \
-    $O/ResourceBasedQueue.o \
     $O/Router.o \
     $O/Server.o \
-    $O/SocketRTScheduler.o \
     $O/Sink.o \
-    $O/WRRouter.o \
     $O/SelectionStrategies.o \
-    $O/Merge.o \
-    $O/WRServer.o \
-    $O/WRTrigger.o \
-    $O/Allocate.o \
-    $O/Clone.o \
-    $O/Deallocate.o \
     $O/Job_m.o
 
 # Message files
@@ -142,38 +122,12 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc templates/*.cc templates/queueing/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-$O/Allocate.o: Allocate.cc \
-	Allocate.h \
-	IResourcePool.h \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	ResourcePool.h
 $O/Classifier.o: Classifier.cc \
 	Classifier.h \
 	Job.h \
 	Job_m.h \
-	QueueingDefs.h
-$O/Clone.o: Clone.cc \
-	Clone.h \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h
-$O/Deallocate.o: Deallocate.cc \
-	Deallocate.h \
-	IResourcePool.h \
 	QueueingDefs.h \
-	ResourcePool.h
-$O/Delay.o: Delay.cc \
-	Delay.h \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h
-$O/Fork.o: Fork.cc \
-	Fork.h \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h
+	Useful.h
 $O/Job.o: Job.cc \
 	Job.h \
 	JobList.h \
@@ -187,14 +141,6 @@ $O/JobList.o: JobList.cc \
 $O/Job_m.o: Job_m.cc \
 	Job_m.h \
 	QueueingDefs.h
-$O/Join.o: Join.cc \
-	Job.h \
-	Job_m.h \
-	Join.h \
-	QueueingDefs.h
-$O/Merge.o: Merge.cc \
-	Merge.h \
-	QueueingDefs.h
 $O/PassiveQueue.o: PassiveQueue.cc \
 	IPassiveQueue.h \
 	Job.h \
@@ -207,16 +153,6 @@ $O/Queue.o: Queue.cc \
 	Job_m.h \
 	Queue.h \
 	QueueingDefs.h
-$O/ResourceBasedQueue.o: ResourceBasedQueue.cc \
-	IResourcePool.h \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	ResourceBasedQueue.h
-$O/ResourcePool.o: ResourcePool.cc \
-	IResourcePool.h \
-	QueueingDefs.h \
-	ResourcePool.h
 $O/Router.o: Router.cc \
 	QueueingDefs.h \
 	Router.h
@@ -239,76 +175,13 @@ $O/Sink.o: Sink.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
-	Sink.h \
-	Timer.h \
-	WRPacket.h \
-	WRTrigger.h
-$O/SocketRTScheduler.o: SocketRTScheduler.cc \
-	SocketRTScheduler.h
+	Sink.h
 $O/Source.o: Source.cc \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
-	Source.h
-$O/Timer.o: Timer.cc \
-	Timer.h
-$O/WRClassifier_in.o: WRClassifier_in.cc \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	WRClassifier_in.h
-$O/WRClassifier_out.o: WRClassifier_out.cc \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	Timer.h \
-	WRClassifier_out.h \
-	WRQueue.h \
-	WRTrigger.h
-$O/WRPacket.o: WRPacket.cc \
-	WRPacket.h
-$O/WRPassiveQueue.o: WRPassiveQueue.cc \
-	IPassiveQueue.h \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	SelectionStrategies.h \
-	WRPassiveQueue.h
-$O/WRQueue.o: WRQueue.cc \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	Timer.h \
-	WRQueue.h \
-	WRTrigger.h
-$O/WRRouter.o: WRRouter.cc \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	WRRouter.h
-$O/WRScheduler.o: WRScheduler.cc \
-	QueueingDefs.h \
-	WRScheduler.h
-$O/WRServer.o: WRServer.cc \
-	IPassiveQueue.h \
-	IServer.h \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	SelectionStrategies.h \
-	WRPassiveQueue.h \
-	WRServer.h
-$O/WRSource.o: WRSource.cc \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	Timer.h \
-	WRPacket.h \
-	WRSource.h
-$O/WRTrigger.o: WRTrigger.cc \
-	Job.h \
-	Job_m.h \
-	QueueingDefs.h \
-	Timer.h \
-	WRTrigger.h
+	Source.h \
+	Useful.h
+$O/Useful.o: Useful.cc \
+	Useful.h
 

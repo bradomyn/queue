@@ -11,6 +11,7 @@
 #define __QUEUEING_CLASSIFIER_H
 
 #include "QueueingDefs.h"
+#include "Useful.h"
 
 namespace queueing {
 

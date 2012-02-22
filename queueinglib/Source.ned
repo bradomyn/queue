@@ -10,8 +10,6 @@
 package org.omnetpp.queueing;
 
 //
-// SMa, 12.01.2012: This is where the packets are simulated
-// 
 // A module that generates jobs. One can specify the number of jobs to be generated,
 // the starting and ending time, and interval between generating jobs.
 // Job generation stops when the number of jobs or the end time has been reached,
@@ -31,6 +29,7 @@ simple Source
         volatile int jobPriority = default(0);   // priority of the job
         double startTime @unit(s) = default(interArrivalTime); // when the module sends out the first job
         double stopTime @unit(s) = default(-1s); // when the module stops the job generation (-1 means no limit)
+        
     gates:
         output out;
 }

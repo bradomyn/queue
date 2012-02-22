@@ -11,9 +11,9 @@
 <includePath path="/usr/lib/gcc/x86_64-redhat-linux/4.1.2/include"/>
 <includePath path="/usr/include"/>
 <includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/include"/>
-<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib"/>
-<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/templates"/>
-<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/samples/queueinglib/templates/queueing"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/queueinglib"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/queueinglib/templates"/>
+<includePath path="/common/home/bel/matthies/lnx/whiteRabbit/omnetpp-4.2/workspace/queueinglib/templates/queueing"/>
 <definedSymbol symbol="__STDC__=1"/>
 <definedSymbol symbol="__cplusplus=1"/>
 <definedSymbol symbol="__STDC_HOSTED__=1"/>

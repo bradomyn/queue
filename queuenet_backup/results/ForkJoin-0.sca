@@ -1,0 +1,88 @@
+version 2
+run ForkJoin-0-20120111-14:29:48-2780
+attr configname ForkJoin
+attr datetime 20120111-14:29:48
+attr experiment ForkJoin
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network ForkJoin
+attr processid 2780
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar ForkJoin.source 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar ForkJoin.delay 	delayedJobs:timeavg 	0.87574041966387
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar ForkJoin.delay 	delayedJobs:max 	2
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar ForkJoin.delay1 	delayedJobs:timeavg 	0.8454696742158
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar ForkJoin.delay1 	delayedJobs:max 	2
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar ForkJoin.delay2 	delayedJobs:timeavg 	0.94616086529005
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, timeavg"
+scalar ForkJoin.delay2 	delayedJobs:max 	2
+attr interpolationmode  sample-hold
+attr title  "number of delayed jobs, max"
+scalar ForkJoin.sink 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar ForkJoin.sink 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar ForkJoin.sink 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar ForkJoin.sink 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar ForkJoin.sink 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar ForkJoin.sink 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar ForkJoin.sink 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar ForkJoin.sink 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar ForkJoin.sink 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar ForkJoin.sink 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar ForkJoin.sink 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar ForkJoin.sink 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar ForkJoin.sink 	lifeTime:mean 	16.037380469659
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar ForkJoin.sink 	lifeTime:max 	19.515453358844
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s

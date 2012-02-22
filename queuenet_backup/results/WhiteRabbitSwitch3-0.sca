@@ -1,0 +1,90 @@
+version 2
+run WhiteRabbitSwitch3-0-20120113-14:35:02-3340
+attr configname WhiteRabbitSwitch3
+attr datetime 20120113-14:35:02
+attr experiment WhiteRabbitSwitch3
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WhiteRabbitSwitch3
+attr processid 3340
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar WhiteRabbitSwitch3.in 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WhiteRabbitSwitch3.out 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WhiteRabbitSwitch3.out 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WhiteRabbitSwitch3.out 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch3.out 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WhiteRabbitSwitch3.out 	queuesVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WhiteRabbitSwitch3.out 	queuesVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WhiteRabbitSwitch3.out 	totalServiceTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch3.out 	totalServiceTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch3.out 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch3.out 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch3.out 	totalQueueingTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch3.out 	totalQueueingTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch3.out 	lifeTime:mean 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WhiteRabbitSwitch3.out 	lifeTime:max 	0
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WhiteRabbitSwitch3.wrQueue 	busy:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WhiteRabbitSwitch3.wrQueue 	queueingTime:mean 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WhiteRabbitSwitch3.wrQueue 	queueingTime:max 	-1.#IND
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WhiteRabbitSwitch3.wrQueue 	queueLength:timeavg 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WhiteRabbitSwitch3.wrQueue 	queueLength:max 	0
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WhiteRabbitSwitch3.wrQueue 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"

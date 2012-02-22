@@ -1,3 +1,3 @@
 @cd %~dp0
-@opp_run -l../wrs/wrs %*
+@opp_run -l../queueinglib/queueinglib %*
 

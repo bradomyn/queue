@@ -1,0 +1,90 @@
+version 2
+run OneFifo-0-20120112-12:39:23-2992
+attr configname OneFifo
+attr datetime 20120112-12:39:23
+attr experiment OneFifo
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network SimpleQueue
+attr processid 2992
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar SimpleQueue.sink 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar SimpleQueue.sink 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar SimpleQueue.sink 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar SimpleQueue.sink 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar SimpleQueue.sink 	queuesVisited:mean 	0.75
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar SimpleQueue.sink 	queuesVisited:max 	1
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar SimpleQueue.sink 	totalServiceTime:mean 	2.1623471613893
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar SimpleQueue.sink 	totalServiceTime:max 	7.690443738283
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar SimpleQueue.sink 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar SimpleQueue.sink 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar SimpleQueue.sink 	totalQueueingTime:mean 	2.7967916222907
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar SimpleQueue.sink 	totalQueueingTime:max 	7.386826115014
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar SimpleQueue.sink 	lifeTime:mean 	4.95913878368
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar SimpleQueue.sink 	lifeTime:max 	11.468610546837
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar SimpleQueue.queue 	busy:timeavg 	0.8662699414746
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar SimpleQueue.queue 	queueingTime:mean 	2.7929921327454
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar SimpleQueue.queue 	queueingTime:max 	7.386826115014
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar SimpleQueue.queue 	queueLength:timeavg 	1.1779984149312
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar SimpleQueue.queue 	queueLength:max 	5
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar SimpleQueue.queue 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar SimpleQueue.source 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"

@@ -32,6 +32,7 @@ Server::~Server()
 
 void Server::initialize()
 {
+	std::cout << "Server:" << __FUNCTION__ << std::endl;
     busySignal = registerSignal("busy");
     emit(busySignal, 0);
 
@@ -64,7 +65,7 @@ void Server::handleMessage(cMessage *msg)
     }
 #else
 	if( jobServiced )
-		std::cout << __FUNCTION__ << " job serviced " << jobServiced->getName() << std::endl;
+		std::cout << "Server:" << __FUNCTION__ << " job serviced " << jobServiced->getName() << std::endl;
 
 	std::cout << " job arrived " << msg->getName() << std::endl;
 
@@ -73,7 +74,15 @@ void Server::handleMessage(cMessage *msg)
         ASSERT(jobServiced!=NULL);
         simtime_t d = simTime() - endServiceMsg->getSendingTime();
         jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
+
+#if 0
         send(jobServiced, "out");
+#else
+    	std::cout << "sendDirect" << std::endl;
+        cModule *targetModule = getParentModule()->getSubmodule("sink0");
+    	sendDirect(msg, targetModule, "sendDirect");
+#endif
+
         std::cout << " job sent out " << jobServiced->getName() << std::endl;
         jobServiced = NULL;
         emit(busySignal, 0);

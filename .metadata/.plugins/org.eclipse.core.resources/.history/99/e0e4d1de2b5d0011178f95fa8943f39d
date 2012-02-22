@@ -1,0 +1,130 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd.
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include "Server.h"
+#include "Job.h"
+#include "SelectionStrategies.h"
+#include "IPassiveQueue.h"
+
+namespace wrs {
+
+Define_Module(Server);
+
+Server::Server()
+{
+    selectionStrategy = NULL;
+    jobServiced = NULL;
+    endServiceMsg = NULL;
+}
+
+Server::~Server()
+{
+    delete selectionStrategy;
+    delete jobServiced;
+    cancelAndDelete(endServiceMsg);
+}
+
+void Server::initialize()
+{
+	std::cout << "Server:" << __FUNCTION__ << std::endl;
+    busySignal = registerSignal("busy");
+    emit(busySignal, 0);
+
+    endServiceMsg = new cMessage("end-service");
+    jobServiced = NULL;
+    selectionStrategy = SelectionStrategy::create(par("fetchingAlgorithm"), this, true);
+    if (!selectionStrategy)
+        error("invalid selection strategy");
+}
+
+void Server::handleMessage(cMessage *msg)
+{
+#if 0
+	{
+		std::cout << " job arrived " << msg->getName() << std::endl;
+
+		jobServiced = check_and_cast<Job *>(msg);
+		simtime_t serviceTime = par("serviceTime");
+		simtime_t d = simTime() - jobServiced->getSendingTime();
+		jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
+		scheduleAt(simTime()+serviceTime, jobServiced);
+
+		send(jobServiced, "out");
+
+		jobServiced = NULL;
+
+		emit(busySignal, 1);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
+    }
+#else
+	if( jobServiced )
+		std::cout << __FUNCTION__ << " job serviced " << jobServiced->getName() << std::endl;
+
+	std::cout << " job arrived " << msg->getName() << std::endl;
+
+	if (msg==endServiceMsg)
+    {
+        ASSERT(jobServiced!=NULL);
+        simtime_t d = simTime() - endServiceMsg->getSendingTime();
+        jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
+
+#if 0
+        send(jobServiced, "out");
+#else
+    	std::cout << "sendDirect" << std::endl;
+        cModule *targetModule = getParentModule()->getSubmodule("sink0");
+    	sendDirect(msg, targetModule, "sendDirect");
+#endif
+
+        std::cout << " job sent out " << jobServiced->getName() << std::endl;
+        jobServiced = NULL;
+        emit(busySignal, 0);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
+
+        // examine all input queues, and request a new job from a non empty queue
+        int k = selectionStrategy->select();
+        std::cout << "selection strategy " << k << std::endl;
+        if (k >= 0)
+        {
+            //EV << "requesting job from queue " << k << endl;
+            std::cout << "requesting job from queue " << k << endl;
+            cGate *gate = selectionStrategy->selectableGate(k);
+            check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+        }
+    }
+    else
+    {
+        if (jobServiced) {
+        	std::cout << "job arrived while already servicing one: " << jobServiced->getName() << ", " << msg->getName() << std::endl;
+            error("job arrived while already servicing one");
+        }
+        jobServiced = check_and_cast<Job *>(msg);
+        std::cout << "jobServiced = " << jobServiced->getName() << std::endl;
+        simtime_t serviceTime = par("serviceTime");
+        scheduleAt(simTime()+serviceTime, endServiceMsg);
+        emit(busySignal, 1);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
+    }
+#endif
+}
+
+void Server::finish()
+{
+}
+
+bool Server::isIdle()
+{
+    return jobServiced == NULL;
+}
+
+}; //namespace
+

@@ -33,6 +33,8 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
         cQueue queue;
         SelectionStrategy *selectionStrategy;
 
+        int numServed;
+
         void queueLengthChanged();
 
     protected:

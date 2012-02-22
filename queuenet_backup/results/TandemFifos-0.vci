@@ -1,0 +1,34 @@
+file 5347 1328793831                                            
+version 2
+run TandemFifos-0-20120111-14:19:59-2852
+attr configname TandemFifos
+attr datetime 20120111-14:19:59
+attr experiment TandemFifos
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network TandemQueue
+attr processid 2852
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+vector 0  TandemQueue.queue  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+0	921 1130 0 275 0 94.900705889189 47 0 4 57 135
+vector 1  TandemQueue.queue1  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+1	2051 1434 0 292 0 102.978200981814 59 0 8 163 769
+vector 2  TandemQueue.queue2  queueLength:vector  ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+2	3485 646 0 279 0 96.381999077728 27 0 2 17 21
+vector 3  TandemQueue.sink  lifeTime:vector  ETV
+attr interpolationmode none
+attr title "lifetime of arrived jobs, vector"
+attr unit s
+3	4131 1216 18 288 9.960714049779 101.129740663678 32 2.232342199475 23.947347824551 335.7471369753 4344.7597027476

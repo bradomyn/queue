@@ -11,6 +11,8 @@
 #define __QUEUEING_SOURCE_H
 
 #include "QueueingDefs.h"
+#include "Job.h"
+#include "Useful.h"
 
 namespace queueing {
 
@@ -41,24 +43,16 @@ class QUEUEING_API Source : public SourceBase
         simtime_t startTime;
         simtime_t stopTime;
         int numJobs;
+        int numCreated;
 
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
+
+        Job * generateJob();
 };
 
-
-/**
- * Generates jobs; see NED file for more info.
- */
-class QUEUEING_API SourceOnce : public SourceBase
-{
-    protected:
-        virtual void initialize();
-        virtual void handleMessage(cMessage *msg);
 };
-
-}; //namespace
 
 #endif
 

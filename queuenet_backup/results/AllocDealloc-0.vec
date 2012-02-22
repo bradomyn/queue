@@ -1,0 +1,46 @@
+version 2
+run AllocDealloc-0-20120111-14:30:56-2992
+attr configname AllocDealloc
+attr datetime 20120111-14:30:56
+attr experiment AllocDealloc
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network AllocDealloc
+attr processid 2992
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  AllocDealloc.allocate  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 1  AllocDealloc.allocate1  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 2  AllocDealloc.allocate2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 3  AllocDealloc.sink  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 4  AllocDealloc.sink1  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+vector 5  AllocDealloc.sink2  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+0	0	0	0
+1	0	0	0
+2	0	0	0
+2	8	1.255930758047	1
+2	10	1.349808383447	0
+3	12	1.349808383447	0.553933878882
+4	15	1.370881072472	0.472320683989
+5	18	1.680437475449	0.424506717402
