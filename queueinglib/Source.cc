@@ -80,15 +80,16 @@ Job * Source::generateJob() {
 	// TODO work with a fixed, repeatable data set
 	job->setPriority(random);
 
+	simtime_t creationTime = simTime();
 	char name[80];
 	//sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
 	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), random,
-			simTime().dbl());
+			creationTime.dbl());
 	name[79] = '\0';
 	job->setName(name);
 	//std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;
 
-	job->setTimestamp();
+	job->setTimestamp(creationTime);
 
 	return job;
 } // generateJob()

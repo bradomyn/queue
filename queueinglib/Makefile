@@ -162,7 +162,8 @@ $O/SelectionStrategies.o: SelectionStrategies.cc \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	SelectionStrategies.h \
-	Server.h
+	Server.h \
+	Useful.h
 $O/Server.o: Server.cc \
 	IPassiveQueue.h \
 	IServer.h \
@@ -170,7 +171,8 @@ $O/Server.o: Server.cc \
 	Job_m.h \
 	QueueingDefs.h \
 	SelectionStrategies.h \
-	Server.h
+	Server.h \
+	Useful.h
 $O/Sink.o: Sink.cc \
 	Job.h \
 	Job_m.h \

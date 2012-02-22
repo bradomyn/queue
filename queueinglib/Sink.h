@@ -12,6 +12,10 @@
 
 #include "QueueingDefs.h"
 
+#include <vector>
+
+using namespace std;
+
 namespace queueing {
 
 /**
@@ -31,10 +35,23 @@ class QUEUEING_API Sink : public cSimpleModule
 
     int numReceived;
 
+    vector<simtime_t> v0;
+    vector<simtime_t> v1;
+    vector<simtime_t> v2;
+    vector<simtime_t> v3;
+    vector<simtime_t> v4;
+    vector<simtime_t> v5;
+    vector<simtime_t> v6;
+    vector<simtime_t> v7;
+    double avg_lifetime(vector<simtime_t> v);
+
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
     virtual void finish();
+
+
+
 };
 
 }; //namespace

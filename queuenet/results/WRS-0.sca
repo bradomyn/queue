@@ -1,0 +1,209 @@
+version 2
+run WRS-0-20120222-16:15:54-9267
+attr configname WRS
+attr datetime 20120222-16:15:54
+attr experiment WRS
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WRS
+attr processid 9267
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar WRS.source 	created:count 	1
+attr interpolationmode  none
+attr title  "the number of jobs created, count"
+scalar WRS.passiveQueue0 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WRS.passiveQueue0 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WRS.passiveQueue0 	queueLength:timeavg 	6245.14273
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WRS.passiveQueue0 	queueLength:max 	12451
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WRS.passiveQueue0 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WRS.passiveQueue1 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WRS.passiveQueue1 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WRS.passiveQueue1 	queueLength:timeavg 	6274.54109
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WRS.passiveQueue1 	queueLength:max 	12481
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WRS.passiveQueue1 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WRS.passiveQueue2 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WRS.passiveQueue2 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WRS.passiveQueue2 	queueLength:timeavg 	6314.51996
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WRS.passiveQueue2 	queueLength:max 	12666
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WRS.passiveQueue2 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WRS.passiveQueue3 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WRS.passiveQueue3 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WRS.passiveQueue3 	queueLength:timeavg 	6266.09175
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WRS.passiveQueue3 	queueLength:max 	12439
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WRS.passiveQueue3 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WRS.operator1 	busy:timeavg 	0.99998999999994
+attr interpolationmode  sample-hold
+attr title  "server busy state, timeavg"
+scalar WRS.sink 	generation:mean 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, mean"
+scalar WRS.sink 	generation:max 	0
+attr interpolationmode  none
+attr title  "the generation of the arrived jobs, max"
+scalar WRS.sink 	delaysVisited:mean 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, mean"
+scalar WRS.sink 	delaysVisited:max 	0
+attr interpolationmode  none
+attr title  "the total number of delays visited by arrived jobs, max"
+scalar WRS.sink 	queuesVisited:mean 	1.999799979998
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, mean"
+scalar WRS.sink 	queuesVisited:max 	2
+attr interpolationmode  none
+attr title  "the total number of queues visited by arrived jobs, max"
+scalar WRS.sink 	totalServiceTime:mean 	9.9999999999994e-06
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, mean"
+attr unit  s
+scalar WRS.sink 	totalServiceTime:max 	1e-05
+attr interpolationmode  none
+attr title  "the total time spent  by arrived jobs, max"
+attr unit  s
+scalar WRS.sink 	totalDelayTime:mean 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr unit  s
+scalar WRS.sink 	totalDelayTime:max 	0
+attr interpolationmode  none
+attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr unit  s
+scalar WRS.sink 	totalQueueingTime:mean 	0.010051597959796
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, mean"
+attr unit  s
+scalar WRS.sink 	totalQueueingTime:max 	0.020948
+attr interpolationmode  none
+attr title  "the total time spent in queues by arrived jobs, max"
+attr unit  s
+scalar WRS.sink 	lifeTime:mean 	0.010061597959796
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, mean"
+attr unit  s
+scalar WRS.sink 	lifeTime:max 	0.020958
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, max"
+attr unit  s
+scalar WRS.passiveQueue4 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WRS.passiveQueue4 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WRS.passiveQueue4 	queueLength:timeavg 	6252.67187
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WRS.passiveQueue4 	queueLength:max 	12518
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WRS.passiveQueue4 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WRS.passiveQueue5 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WRS.passiveQueue5 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WRS.passiveQueue5 	queueLength:timeavg 	6218.87594
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WRS.passiveQueue5 	queueLength:max 	12493
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WRS.passiveQueue5 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WRS.passiveQueue6 	queueingTime:mean 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WRS.passiveQueue6 	queueingTime:max 	nan
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WRS.passiveQueue6 	queueLength:timeavg 	6159.0785
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WRS.passiveQueue6 	queueLength:max 	12369
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WRS.passiveQueue6 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"
+scalar WRS.passiveQueue7 	queueingTime:mean 	0.010053691769177
+attr interpolationmode  none
+attr title  "queueing time at dequeue, mean"
+attr unit  s
+scalar WRS.passiveQueue7 	queueingTime:max 	0.020948
+attr interpolationmode  none
+attr title  "queueing time at dequeue, max"
+attr unit  s
+scalar WRS.passiveQueue7 	queueLength:timeavg 	1268.17816
+attr interpolationmode  sample-hold
+attr title  "queue length, timeavg"
+scalar WRS.passiveQueue7 	queueLength:max 	2584
+attr interpolationmode  sample-hold
+attr title  "queue length, max"
+scalar WRS.passiveQueue7 	dropped:count 	0
+attr interpolationmode  none
+attr title  "drop event, count"

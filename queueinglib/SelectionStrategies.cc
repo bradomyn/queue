@@ -74,7 +74,17 @@ PrioritySelectionStrategy::PrioritySelectionStrategy(cSimpleModule *module, bool
 
 int PrioritySelectionStrategy::select()
 {
-
+#if 1
+    // return the highest selectable index
+    for (int i=gateSize-1; i>=0; i--) {
+        if (isSelectable(selectableGate(i)->getOwnerModule())) {
+        	//std::cout << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__ << " selected gate " << i << std::endl;
+        	return i;
+        }
+    }
+#else
+	//std::string s = isInputGate?"inputGate: ":"outputGate: ";
+	//std::cout << s << "gate size " << gateSize << std::endl;
     // return the smallest selectable index
     for (int i=0; i<gateSize; i++) {
         if (isSelectable(selectableGate(i)->getOwnerModule())) {
@@ -82,6 +92,7 @@ int PrioritySelectionStrategy::select()
         	return i;
         }
     }
+#endif
     // if none of them is selectable return an invalid no.
    // std::cout << __FILE__ << ":" << __FUNCTION__ << " nothing is selectable" << std::endl;
     return -1;

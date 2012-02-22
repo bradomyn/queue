@@ -25,7 +25,7 @@ simple Server
              // how the next job will be choosen from the attached queues
         volatile double serviceTime @unit(s); // service time of a job
     gates:
-        input in[];
+        input in[8];
         output out;
 }
 

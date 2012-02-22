@@ -1077,3 +1077,1239 @@ org.eclipse.swt.SWTException: Invalid thread access
 
 !ENTRY org.omnetpp.cdt 1 0 2012-02-22 13:57:28.869
 !MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:02:24.109
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:02:24.423
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:02:31.449
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:03:24.005
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:03:24.320
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:03:31.736
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:22:20.775
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:22:21.104
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:22:28.161
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:23:45.891
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:23:46.205
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:23:52.153
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:24:14.241
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:24:14.556
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:24:16.285
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:26:02.197
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:26:02.512
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:26:04.333
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:27:24.509
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:27:24.823
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:27:26.459
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 14:33:37.590
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 14:33:37.599
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:37:55.559
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:37:55.874
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:38:00.766
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:39:06.618
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:39:06.934
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:39:08.352
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:39:49.261
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 14:39:49.576
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 14:39:55.161
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:00:18.451
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:00:18.774
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:00:53.710
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:02:45.907
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:02:46.223
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:02:47.942
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:07:26.653
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:07:26.967
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:07:28.869
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:14:39.779
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:14:40.105
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:14:44.148
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:19:54.500
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:19:54.825
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:19:58.957
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:21:54.960
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:21:55.275
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:21:57.182
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:23:42.068
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:23:42.382
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:23:44.245
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:25:49.888
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:25:49.893
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:26:51.499
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:26:51.813
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:26:53.649
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:41.424
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:41.425
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:48.544
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:48.545
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:52.269
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:52.271
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:56.981
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:56.983
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:59.710
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:27:59.712
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:18.358
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:18.360
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:22.878
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:22.880
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:25.065
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:25.067
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:26.755
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:26.758
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:29.672
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:29.674
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:31.507
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:31.508
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:33.117
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:33.118
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:34.328
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:34.330
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:35.480
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:35.481
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:37.565
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:37.566
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:38.577
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireBeginChangeEvent(NedResources.java:365)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:101)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.ned.model 4 2 2012-02-22 15:28:38.579
+!MESSAGE Problems occurred when invoking code from plug-in: "org.omnetpp.ned.model".
+!STACK 0
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:466)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:404)
+	at org.eclipse.swt.widgets.ToolItem.getEnabled(ToolItem.java:403)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor.updateToggleButton(ExpandableFieldEditor.java:142)
+	at org.omnetpp.inifile.editor.form.ExpandableFieldEditor$1.modelChanged(ExpandableFieldEditor.java:50)
+	at org.omnetpp.inifile.editor.model.InifileChangeListenerList.fireModelChanged(InifileChangeListenerList.java:79)
+	at org.omnetpp.inifile.editor.model.InifileDocument.fireModelChanged(InifileDocument.java:909)
+	at org.omnetpp.inifile.editor.model.InifileDocument.markAsChanged(InifileDocument.java:218)
+	at org.omnetpp.inifile.editor.model.InifileDocument$3.modelChanged(InifileDocument.java:208)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList$1.run(NedChangeListenerList.java:52)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.omnetpp.ned.model.notification.NedChangeListenerList.fireModelChanged(NedChangeListenerList.java:47)
+	at org.omnetpp.ned.core.NedResources.nedModelChanged(NedResources.java:553)
+	at org.omnetpp.ned.core.NedResources.fireEndChangeEvent(NedResources.java:369)
+	at org.omnetpp.ned.core.NedValidationJob.tryValidate(NedValidationJob.java:121)
+	at org.omnetpp.ned.core.NedValidationJob.run(NedValidationJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:28:43.624
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:28:52.468
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:30:36.398
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:30:36.712
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:30:38.534
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:31:23.119
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:31:23.435
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:31:25.264
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:31:46.442
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:31:46.757
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:31:48.631
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:36:30.869
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:36:31.185
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:36:33.200
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:40:21.555
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:40:21.868
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:41:46.910
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:41:47.224
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:41:49.101
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:45:05.425
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:45:05.740
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:45:08.241
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:48:12.110
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:48:12.423
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:48:14.971
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:49:00.776
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:49:01.092
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:49:02.907
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:49:42.626
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:49:42.941
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:49:44.807
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:51:33.780
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 15:51:34.092
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:51:35.902
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:51:58.377
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 15:53:22.261
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:02:10.369
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:02:10.695
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 16:02:14.210
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:03:37.078
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:03:37.393
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 16:03:39.309
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:09:54.197
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:09:54.522
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:11:04.294
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:11:04.608
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:12:10.817
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:12:11.130
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 16:12:18.426
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:14:12.846
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:14:13.160
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 16:14:14.979
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:14:36.604
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:14:36.917
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 16:14:38.830
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:15:48.711
+!MESSAGE OMNeT++ DependencyCache: /queueinglib/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 2 0 2012-02-22 16:15:49.024
+!MESSAGE OMNeT++ DependencyCache: /wrs/IResourcePool.h is not found in index! This should not happen, please report at http://bugs.omnetpp.org!
+
+!ENTRY org.omnetpp.cdt 1 0 2012-02-22 16:15:50.888
+!MESSAGE CDT's builder is missing from project P/queuenet when org.omnetpp.cdt.MakefileBuilder is running! Not configured, or perhaps a custom builder is in use?

@@ -37,7 +37,37 @@ void Sink::handleMessage(cMessage *msg)
 
     numReceived++;
 
-    std::cout << numReceived << ": " << job->getName() << " received. Lifetime " << lifetime << " ct " << msg->getCreationTime() << " st " << currentTime << std::endl;
+    std::cout << "#" << numReceived << ": " << job->getName() << " received. ct " << msg->getCreationTime() << " st " << currentTime << " lifetime " << lifetime  << std::endl;
+
+    switch( job->getPriority() ) {
+    case 0:
+    	v0.push_back(lifetime);
+    	break;
+    case 1:
+    	v1.push_back(lifetime);
+        	break;
+    case 2:
+    	v2.push_back(lifetime);
+        	break;
+    case 3:
+    	v3.push_back(lifetime);
+        	break;
+    case 4:
+    	v4.push_back(lifetime);
+        	break;
+    case 5:
+    	v5.push_back(lifetime);
+        	break;
+    case 6:
+    	v6.push_back(lifetime);
+        	break;
+    case 7:
+    	v7.push_back(lifetime);
+        	break;
+    default:
+    	break;
+    }
+
 
     // gather statistics
     emit(lifeTimeSignal, simTime()- job->getCreationTime());
@@ -52,9 +82,30 @@ void Sink::handleMessage(cMessage *msg)
         delete msg;
 }
 
+double Sink::avg_lifetime(vector<simtime_t> v) {
+	double avg_lt = 0.;
+	std::vector<simtime_t>::iterator lit;
+	for( lit = v.begin(); lit!=v.end(); lit++ ) {
+		avg_lt += (*lit).dbl();
+	}
+	avg_lt /= v.size();
+	//std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
+	return avg_lt;
+}
+
 void Sink::finish()
 {
     // TODO missing scalar statistics
+
+	std::cout << "p 0: avg " << avg_lifetime(v0) << " size " << v0.size() << std::endl;
+	std::cout << "p 1: avg " << avg_lifetime(v1) << " size " << v1.size() << std::endl;
+	std::cout << "p 2: avg " << avg_lifetime(v2) << " size " << v2.size() << std::endl;
+	std::cout << "p 3: avg " << avg_lifetime(v3) << " size " << v3.size() << std::endl;
+	std::cout << "p 4: avg " << avg_lifetime(v4) << " size " << v4.size() << std::endl;
+	std::cout << "p 5: avg " << avg_lifetime(v5) << " size " << v5.size() << std::endl;
+	std::cout << "p 6: avg " << avg_lifetime(v6) << " size " << v6.size() << std::endl;
+	std::cout << "p 7: avg " << avg_lifetime(v7) << " size " << v7.size() << std::endl;
+
 }
 
 }; //namespace

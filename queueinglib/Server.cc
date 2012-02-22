@@ -47,13 +47,58 @@ void Server::initialize()
 
 void Server::handleMessage(cMessage *msg)
 {
+#if 1
+	// Original
+    if (msg==endServiceMsg)
+    {
+    	std::cout << "endServiceMsg " << endServiceMsg->getName() << std::endl;
+        ASSERT(jobServiced!=NULL);
+        simtime_t d = simTime() - endServiceMsg->getSendingTime();
+        jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
+        send(jobServiced, "out");
+        std::cout << jobServiced->getName() << " with prio " << jobServiced->getPriority() << " sent" << std::endl;
+        numSent++;
+        jobServiced = NULL;
+        emit(busySignal, 0);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
+
+        // examine all input queues, and request a new job from a non empty queue
+        int k = selectionStrategy->select();
+        std::cout << "server selected gate " << k << std::endl;
+        if (k >= 0)
+        {
+            EV << "requesting job from queue " << k << endl;
+            std::cout << "requesting job from queue " << k << std::endl;
+            cGate *gate = selectionStrategy->selectableGate(k);
+            check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+        }
+    }
+    else
+    {
+        if (jobServiced) {
+        	error("job arrived while already servicing one");
+            std::cout << "job arrived while already servicing one" << std::endl;
+        }
+
+        jobServiced = check_and_cast<Job *>(msg);
+        std::cout << "jobServiced " << jobServiced->getName() << " with prio " << jobServiced->getPriority() << " sent" << std::endl;
+        simtime_t serviceTime = par("serviceTime");
+        scheduleAt(simTime()+serviceTime, endServiceMsg);
+        emit(busySignal, 1);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
+    }
+#else
+	log("");
+	//jobServiced = check_and_cast<Job *>(msg);
     if (msg==endServiceMsg)
     {
         ASSERT(jobServiced!=NULL);
         simtime_t d = simTime() - endServiceMsg->getSendingTime();
         jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
         send(jobServiced, "out");
-        //std::cout << jobServiced->getName() << " with prio " << jobServiced->getPriority() << " sent" << std::endl;
+        std::cout << jobServiced->getName() << " with prio " << jobServiced->getPriority() << " sent" << std::endl;
         numSent++;
         jobServiced = NULL;
         emit(busySignal, 0);
@@ -63,6 +108,7 @@ void Server::handleMessage(cMessage *msg)
         // examine all input queues, and request a new job from a non empty queue
         int k = selectionStrategy->select();
         if (k >= 0)
+        //int k = 0;	// fixed	// TODO
         {
             EV << "requesting job from queue " << k << endl;
             std::cout << "requesting job from queue " << k << std::endl;
@@ -84,6 +130,8 @@ void Server::handleMessage(cMessage *msg)
 
         if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
     }
+
+#endif
 }
 
 void Server::finish()

@@ -21,48 +21,48 @@ import org.omnetpp.queueing.Source;
 network WRS
 {
     parameters:
-        @display("i=device/cellphone;bgb=591,565");
+        @display("i=device/cellphone;bgb=846,838");
     submodules:
         source: Source {
-            @display("p=34.0,236.0");
+            @display("p=41,399");
         }
         classifier: Classifier {
-            @display("p=130.0,236.0");
+            @display("p=136,399");
         }
         router: Router {
-            @display("p=432,236");
+            @display("p=655,399");
             gates:
                 out[2];
         }
         passiveQueue0: PassiveQueue {
-            @display("p=225.0,27.0");
+            @display("p=335,88");
         }
         passiveQueue1: PassiveQueue {
-            @display("p=225.0,104.0");
+            @display("p=335,183");
         }
         passiveQueue2: PassiveQueue {
-            @display("p=225.0,169.0");
+            @display("p=335,276");
         }
         passiveQueue3: PassiveQueue {
-            @display("p=225.0,236.0");
+            @display("p=335,360");
         }
         operator1: Server {
-            @display("p=359,236");
+            @display("p=582,399");
         }
         sink: Sink {
-            @display("p=543,236");
+            @display("p=766,399");
         }
         passiveQueue4: PassiveQueue {
-            @display("p=225,296");
+            @display("p=335,462");
         }
         passiveQueue5: PassiveQueue {
-            @display("p=225,373");
+            @display("p=335,568");
         }
         passiveQueue6: PassiveQueue {
-            @display("p=225,438");
+            @display("p=335,669");
         }
         passiveQueue7: PassiveQueue {
-            @display("p=225,505");
+            @display("p=335,781");
         }
     connections:
         source.out --> classifier.in++;

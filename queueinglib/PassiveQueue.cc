@@ -42,6 +42,12 @@ void PassiveQueue::initialize()
 
     WATCH(numServed);
     numServed = 0;
+
+    WATCH(numQueued);
+    numQueued = 0;
+
+    WATCH(numQueuedIdle);
+    numQueuedIdle = 0;
 }
 
 void PassiveQueue::handleMessage(cMessage *msg)
@@ -60,6 +66,30 @@ void PassiveQueue::handleMessage(cMessage *msg)
         return;
     }
 
+#if 1
+    // Original
+    int k = selectionStrategy->select();
+    std::cout << this->getName() << " selected gate: " << k << std::endl;
+    //std::cout << "selection strategy " << selectionStrategy->getFullName() << std::endl;
+    if (k < 0)
+    {
+        // enqueue if no idle server found
+        queue.insert(job);
+
+        emit(queueLengthSignal, length());
+        job->setQueueCount(job->getQueueCount() + 1);
+        numQueued++;
+        std::cout << this->getName() << ": #" << numQueued << " queued: " << job->getName() << std::endl;
+    }
+    else if (length() == 0)
+    {
+        // send through without queueing
+        send(job, "out", k);
+        numServed++;
+    } else {
+    	error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
+    }
+#elif 0
     int k = selectionStrategy->select();
     //std::cout << "gate selected: " << k << std::endl;
     //std::cout << "selection strategy " << selectionStrategy->getFullName() << std::endl;
@@ -70,10 +100,11 @@ void PassiveQueue::handleMessage(cMessage *msg)
         std::cout << "queued: " << job->getName() << std::endl;
         emit(queueLengthSignal, length());
         job->setQueueCount(job->getQueueCount() + 1);
+        numQueued++;
     }
     else if (length() == 0)
     {
-#if 1
+#if 0
         // send through without queueing
         send(job, "out", k);
         numServed++;
@@ -83,16 +114,34 @@ void PassiveQueue::handleMessage(cMessage *msg)
 		   std::cout << "queued: " << job->getName() << std::endl;
 		   emit(queueLengthSignal, length());
 		   job->setQueueCount(job->getQueueCount() + 1);
-		   numServed++;
+		   numQueued++;
         } else {
             // send through without queueing
             send(job, "out", k);
             numServed++;
         }
 #endif
-    } else
-        error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
+    } else {
+#if 1
+    	std::cout << " queued though server is idle, gate " << k << std::endl;
+    	numQueuedIdle++;
+#else
+    	error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
+#endif
+    }
 
+#elif 0
+
+
+	// queue everything
+	// enqueue if no idle server found
+	queue.insert(job);
+	std::cout << "queued: " << job->getName() << std::endl;
+	emit(queueLengthSignal, length());
+	job->setQueueCount(job->getQueueCount() + 1);
+	numQueued++;
+
+#endif
     // change the icon color
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");

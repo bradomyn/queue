@@ -11,6 +11,7 @@
 #define __QUEUEING_SERVER_H
 
 #include "IServer.h"
+#include "Useful.h"
 
 namespace queueing {
 
