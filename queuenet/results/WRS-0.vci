@@ -1,15 +1,15 @@
-file 2749551 1329923762                                         
+                                                                
 version 2
-run WRS-0-20120222-16:15:54-9267
+run WRS-0-20120301-13:17:49-16771
 attr configname WRS
-attr datetime 20120222-16:15:54
+attr datetime 20120301-13:17:49
 attr experiment WRS
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WRS
-attr processid 9267
+attr processid 16771
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -40,16 +40,3 @@ attr title  "queue length, vector"
 vector 8  WRS.passiveQueue7  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 4  WRS.sink  lifeTime:vector  ETV
-attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
-attr unit  s
-0	1469 282296 0 339963 0 0.09999 12452 0 12451 77519926 643492905726
-1	283765 282885 0 339939 0 0.099982 12482 0 12481 77893921 648155316641
-2	566650 287473 0 339979 0 0.099994 12667 0 12666 80220111 677405357321
-3	854123 281964 0 339920 0 0.099977 12440 0 12439 77370580 641634219940
-4	1136087 265585 37 339969 0.000011 0.099991 9999 1e-05 0.020958 100.605918 1.374579952988
-5	1401672 283835 0 339982 0 0.099995 12519 0 12518 78356421 653936570859
-6	1685507 283254 0 339994 0 0.099999 12494 0 12493 78043771 650026568659
-7	1968761 280356 0 339991 0 0.099998 12370 0 12369 76502265 630863177945
-8	2249117 500434 0 339985 0 0.099996 22581 0 2584 28694822 49370347102

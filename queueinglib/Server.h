@@ -13,10 +13,14 @@
 #include "IServer.h"
 #include "Useful.h"
 
+#include "PassiveQueue.h"
+
+#include <vector>
+
 namespace queueing {
 
 class Job;
-class SelectionStrategy;
+class SelectionStrategyServer;
 
 /**
  * The queue server. It cooperates with several Queues that which queue up
@@ -30,10 +34,13 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		simsignal_t busySignal;
 
         int numQueues;
-        SelectionStrategy *selectionStrategy;
+        SelectionStrategyServer *selectionStrategy;
 
         Job *jobServiced;
         cMessage *endServiceMsg;
+
+        // receive trigger messages
+        cMessage *triggerServiceMsg;
 
         int numSent;
 
@@ -49,6 +56,13 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
     public:
         virtual bool isIdle();
+
+    private:
+        // retrieve a pointer to queue with given index
+        IPassiveQueue *getQueue(int index);
+        IPassiveQueue *_q7;
+
+        std::vector<IPassiveQueue*> _qs;
 };
 
 }; //namespace

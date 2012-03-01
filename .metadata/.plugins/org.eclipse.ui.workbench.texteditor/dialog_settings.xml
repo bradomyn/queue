@@ -3,28 +3,29 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="337" key="DIALOG_WIDTH"/>
 		<item value="390" key="DIALOG_Y_ORIGIN"/>
-		<item value="444" key="DIALOG_HEIGHT"/>
 		<item value="1117" key="DIALOG_X_ORIGIN"/>
+		<item value="444" key="DIALOG_HEIGHT"/>
 		<item value="1|Sans|12.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="" key="selection"/>
+		<item value="SelectionStrategyServer" key="selection"/>
 		<list key="findhistory">
+			<item value="SelectionStrategy"/>
+			<item value="passiveQueue6"/>
 			<item value="queued:"/>
 			<item value="passiveQueue"/>
 			<item value="passiveQueue7"/>
 			<item value="jobServiced"/>
 			<item value="with prio"/>
 			<item value="pop"/>
-			<item value="lifetime 0,"/>
-			<item value="AbstractFifo"/>
 		</list>
 		<list key="replacehistory">
+			<item value="SelectionStrategyServer"/>
 			<item value="AbstractWRS"/>
 			<item value="WR_Input"/>
 			<item value="WR_InputBase"/>

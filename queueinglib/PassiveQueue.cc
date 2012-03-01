@@ -67,7 +67,18 @@ void PassiveQueue::handleMessage(cMessage *msg)
     }
 
 #if 1
+    // Trigger Test
+    // queue everything until requested
+    queue.insert(job);
+    std::cout << "queued: " << job->getName() << std::endl;
+    emit(queueLengthSignal, length());
+    job->setQueueCount(job->getQueueCount() + 1);
+    numQueued++;
+
+#else
+#if 1
     // Original
+    // determine a free input port of the server
     int k = selectionStrategy->select();
     std::cout << this->getName() << " selected gate: " << k << std::endl;
     //std::cout << "selection strategy " << selectionStrategy->getFullName() << std::endl;
@@ -85,6 +96,7 @@ void PassiveQueue::handleMessage(cMessage *msg)
     {
         // send through without queueing
         send(job, "out", k);
+        std::cout << "sent " << job->getName() << " without queueing" << std::endl;
         numServed++;
     } else {
     	error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
@@ -142,6 +154,7 @@ void PassiveQueue::handleMessage(cMessage *msg)
 	numQueued++;
 
 #endif
+#endif
     // change the icon color
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
@@ -181,6 +194,40 @@ void PassiveQueue::request(int gateIndex)
     send(job, "out", gateIndex);
     numServed++;
     std::cout << "job requested over gate " << gateIndex << std::endl;
+
+    if (ev.isGUI())
+        getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");
+}
+
+void PassiveQueue::request()
+{
+    Enter_Method("request()!");
+
+    ASSERT(!queue.empty());
+
+    Job *job;
+    if (fifo)
+    {
+        job = (Job *)queue.pop();
+        std::cout << __FUNCTION__ << " pop: " << job->getName() << std::endl;
+    }
+    else
+    {
+        job = (Job *)queue.back();
+        std::cout << __FUNCTION__ << " back: " << job->getName() << std::endl;
+        // FIXME this may have bad performance as remove uses linear search
+        queue.remove(job);
+    }
+    emit(queueLengthSignal, length());
+
+    job->setQueueCount(job->getQueueCount()+1);
+    simtime_t d = simTime() - job->getTimestamp();
+    job->setTotalQueueingTime(job->getTotalQueueingTime() + d);
+    emit(queueingTimeSignal, d);
+
+    send(job, "out");
+    numServed++;
+    std::cout << "job requested without gate " << std::endl;
 
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");

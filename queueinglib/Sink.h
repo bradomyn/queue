@@ -50,6 +50,8 @@ class QUEUEING_API Sink : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
     virtual void finish();
 
+  private:
+    void determineQueueSizes();
 
 
 };

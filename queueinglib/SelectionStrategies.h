@@ -96,6 +96,16 @@ class QUEUEING_API LongestQueueSelectionStrategy : public SelectionStrategy
         virtual int select();
 };
 
+/**
+ * Treats high priority packets first
+ */
+class QUEUEING_API WRSSelectionStrategy1 : public SelectionStrategy
+{
+    public:
+        WRSSelectionStrategy1(cSimpleModule *module, bool selectOnInGate);
+        virtual int select();
+};
+
 }; //namespace
 
 #endif

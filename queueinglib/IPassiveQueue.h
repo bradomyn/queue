@@ -27,6 +27,9 @@ class QUEUEING_API IPassiveQueue
         virtual int length() = 0;
         // requests the queue to send out the next job on its "gateIndex" gate.
         virtual void request(int gateIndex) = 0;
+
+        // request without a gate
+        virtual void request() = 0;
 };
 
 }; //namespace

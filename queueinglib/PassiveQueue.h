@@ -49,6 +49,9 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
         // The following methods are called from IServer:
         virtual int length();
         virtual void request(int gateIndex);
+
+        // request without a gate
+        virtual void request();
 };
 
 }; //namespace

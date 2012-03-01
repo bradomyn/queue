@@ -1,0 +1,158 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd.
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include "Server.h"
+#include "Job.h"
+#include "SelectionStrategiesServer.h"
+#include "IPassiveQueue.h"
+
+namespace queueing {
+
+Define_Module(Server);
+
+Server::Server()
+{
+    selectionStrategy = NULL;
+    jobServiced = NULL;
+    endServiceMsg = NULL;
+}
+
+Server::~Server()
+{
+    delete selectionStrategy;
+    delete jobServiced;
+    cancelAndDelete(endServiceMsg);
+}
+
+void Server::initialize()
+{
+    busySignal = registerSignal("busy");
+    emit(busySignal, 0);
+
+    endServiceMsg = new cMessage("end-service");
+    jobServiced = NULL;
+    selectionStrategy = SelectionStrategyServer::create(par("fetchingAlgorithm"), this, true);
+    if (!selectionStrategy)
+        error("invalid selection strategy");
+
+    WATCH(numSent);
+    numSent = 0;
+}
+
+void Server::handleMessage(cMessage *msg)
+{
+#if 0
+	// Original
+    if (msg==endServiceMsg)
+    {
+    	//std::cout << "endServiceMsg " << endServiceMsg->getName() << std::endl;
+        ASSERT(jobServiced!=NULL);
+        simtime_t d = simTime() - endServiceMsg->getSendingTime();
+        jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
+        send(jobServiced, "out");
+        std::cout << jobServiced->getName() << " with prio " << jobServiced->getPriority() << " sent" << std::endl;
+        numSent++;
+        jobServiced = NULL;
+        emit(busySignal, 0);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
+
+        // examine all input queues, and request a new job from a non empty queue
+        int k = selectionStrategy->select();
+        std::cout << "server selected gate " << k << std::endl;
+        if (k >= 0)
+        {
+            EV << "requesting job from queue " << k << endl;
+            std::cout << "requesting job from queue " << k << std::endl;
+            cGate *gate = selectionStrategy->selectableGate(k);
+            check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+        }
+    }
+    else
+    {
+        if (jobServiced) {
+        	error("job arrived while already servicing one");
+            std::cout << "job arrived while already servicing one" << std::endl;
+        }
+
+        jobServiced = check_and_cast<Job *>(msg);
+        std::cout << "jobServiced " << jobServiced->getName() << " with prio " << jobServiced->getPriority() << " sent" << std::endl;
+        simtime_t serviceTime = par("serviceTime");
+        scheduleAt(simTime()+serviceTime, endServiceMsg);
+        emit(busySignal, 1);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
+    }
+#else
+	log("");
+	//jobServiced = check_and_cast<Job *>(msg);
+    if (msg==endServiceMsg)
+    {
+        ASSERT(jobServiced!=NULL);
+        simtime_t d = simTime() - endServiceMsg->getSendingTime();
+        jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
+        send(jobServiced, "out");
+        std::cout << jobServiced->getName() << " with prio " << jobServiced->getPriority() << " sent" << std::endl;
+        numSent++;
+        jobServiced = NULL;
+        emit(busySignal, 0);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
+
+        // examine all input queues, and request a new job from a non empty queue
+        /*int k = selectionStrategy->select();
+        if (k >= 0)
+        //int k = 0;	// fixed	// TODO
+        {
+            EV << "requesting job from queue " << k << endl;
+            std::cout << "requesting job from queue " << k << std::endl;
+            cGate *gate = selectionStrategy->selectableGate(k);
+            check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+        }*/
+
+        // check all queue gates
+        for( int i=7; i>-1; i++ ) {
+        	cGate *gate = selectionStrategy->selectableGate(i);
+        	bool b = selectionStrategy->isSelectable(gate->getOwnerModule());
+        	std::cout << i << ", " << b << std::endl;
+        	if( b==true ) {
+				std::cout << " checked "<< i << ", size " << gate->size() << std::endl;
+				check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+        	}
+        }
+    }
+    else
+    {
+        if (jobServiced) {
+        	error("job arrived while already servicing one");
+            std::cout << "job arrived while already servicing one" << std::endl;
+        }
+
+        jobServiced = check_and_cast<Job *>(msg);
+        simtime_t serviceTime = par("serviceTime");
+        scheduleAt(simTime()+serviceTime, endServiceMsg);
+        emit(busySignal, 1);
+
+        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
+    }
+
+#endif
+}
+
+void Server::finish()
+{
+}
+
+bool Server::isIdle()
+{
+    return jobServiced == NULL;
+}
+
+}; //namespace
+

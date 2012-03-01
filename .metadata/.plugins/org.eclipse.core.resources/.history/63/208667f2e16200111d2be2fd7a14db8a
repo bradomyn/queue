@@ -1,0 +1,191 @@
+//
+// This file is part of an OMNeT++/OMNEST simulation example.
+//
+// Copyright (C) 2006-2008 OpenSim Ltd.
+//
+// This file is distributed WITHOUT ANY WARRANTY. See the file
+// `license' for details on this and other legal matters.
+//
+
+#include "PassiveQueue.h"
+#include "Job.h"
+
+namespace queueing {
+
+Define_Module(PassiveQueue);
+
+PassiveQueue::PassiveQueue()
+{
+    selectionStrategy = NULL;
+}
+
+PassiveQueue::~PassiveQueue()
+{
+    delete selectionStrategy;
+}
+
+void PassiveQueue::initialize()
+{
+    droppedSignal = registerSignal("dropped");
+    queueingTimeSignal = registerSignal("queueingTime");
+    queueLengthSignal = registerSignal("queueLength");
+    emit(queueLengthSignal, 0);
+
+    capacity = par("capacity");
+    queue.setName("queue");
+
+    fifo = par("fifo");
+
+    selectionStrategy = SelectionStrategy::create(par("sendingAlgorithm"), this, false);
+    if (!selectionStrategy)
+        error("invalid selection strategy");
+
+    WATCH(numServed);
+    numServed = 0;
+
+    WATCH(numQueued);
+    numQueued = 0;
+
+    WATCH(numQueuedIdle);
+    numQueuedIdle = 0;
+}
+
+void PassiveQueue::handleMessage(cMessage *msg)
+{
+    Job *job = check_and_cast<Job *>(msg);
+    job->setTimestamp();
+
+    // check for container capacity
+    if (capacity >=0 && queue.length() >= capacity)
+    {
+        EV << "Queue full! Job dropped.\n";
+        std::cerr << "Queue full! Job dropped." << std::endl;
+        if (ev.isGUI()) bubble("Dropped!");
+        emit(droppedSignal, 1);
+        delete msg;
+        return;
+    }
+
+#if 1
+    // Original
+    int k = selectionStrategy->select();
+    std::cout << this->getName() << " selected gate: " << k << std::endl;
+    //std::cout << "selection strategy " << selectionStrategy->getFullName() << std::endl;
+    if (k < 0)
+    {
+        // enqueue if no idle server found
+        queue.insert(job);
+
+        emit(queueLengthSignal, length());
+        job->setQueueCount(job->getQueueCount() + 1);
+        numQueued++;
+        std::cout << this->getName() << ": #" << numQueued << " queued: " << job->getName() << std::endl;
+    }
+    else if (length() == 0)
+    {
+        // send through without queueing
+        send(job, "out", k);
+        std::cout << "sent " << job->getName() << " without queueing" << std::endl;
+        numServed++;
+    } else {
+    	error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
+    }
+#elif 0
+    int k = selectionStrategy->select();
+    //std::cout << "gate selected: " << k << std::endl;
+    //std::cout << "selection strategy " << selectionStrategy->getFullName() << std::endl;
+    if (k < 0)
+    {
+        // enqueue if no idle server found
+        queue.insert(job);
+        std::cout << "queued: " << job->getName() << std::endl;
+        emit(queueLengthSignal, length());
+        job->setQueueCount(job->getQueueCount() + 1);
+        numQueued++;
+    }
+    else if (length() == 0)
+    {
+#if 0
+        // send through without queueing
+        send(job, "out", k);
+        numServed++;
+#else
+        if( job->getPriority()<7 ) {
+		   queue.insert(job);
+		   std::cout << "queued: " << job->getName() << std::endl;
+		   emit(queueLengthSignal, length());
+		   job->setQueueCount(job->getQueueCount() + 1);
+		   numQueued++;
+        } else {
+            // send through without queueing
+            send(job, "out", k);
+            numServed++;
+        }
+#endif
+    } else {
+#if 1
+    	std::cout << " queued though server is idle, gate " << k << std::endl;
+    	numQueuedIdle++;
+#else
+    	error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
+#endif
+    }
+
+#elif 0
+
+
+	// queue everything
+	// enqueue if no idle server found
+	queue.insert(job);
+	std::cout << "queued: " << job->getName() << std::endl;
+	emit(queueLengthSignal, length());
+	job->setQueueCount(job->getQueueCount() + 1);
+	numQueued++;
+
+#endif
+    // change the icon color
+    if (ev.isGUI())
+        getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
+}
+
+int PassiveQueue::length()
+{
+    return queue.length();
+}
+
+void PassiveQueue::request(int gateIndex)
+{
+    Enter_Method("request()!");
+
+    ASSERT(!queue.empty());
+
+    Job *job;
+    if (fifo)
+    {
+        job = (Job *)queue.pop();
+        std::cout << __FUNCTION__ << " pop: " << job->getName() << std::endl;
+    }
+    else
+    {
+        job = (Job *)queue.back();
+        std::cout << __FUNCTION__ << " back: " << job->getName() << std::endl;
+        // FIXME this may have bad performance as remove uses linear search
+        queue.remove(job);
+    }
+    emit(queueLengthSignal, length());
+
+    job->setQueueCount(job->getQueueCount()+1);
+    simtime_t d = simTime() - job->getTimestamp();
+    job->setTotalQueueingTime(job->getTotalQueueingTime() + d);
+    emit(queueingTimeSignal, d);
+
+    send(job, "out", gateIndex);
+    numServed++;
+    std::cout << "job requested over gate " << gateIndex << std::endl;
+
+    if (ev.isGUI())
+        getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");
+}
+
+}; //namespace
+

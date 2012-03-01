@@ -1,0 +1,22 @@
+[General]
+ned-path = .;../queueinglib
+#debug-on-errors = true
+#record-eventlog = true
+#**.vector-record-eventnumbers = false
+sim-time-limit = 0.1s
+#sim-time-limit = 1s
+simtime-scale = -12
+
+[Config WRS]
+description = "WRS"
+network = WRS
+#**.interArrivalTime = 0.001ms #queue too many jobs
+#**.interArrivalTime = 0.01ms #queue too many jobs
+**.interArrivalTime = 0.1ms
+**.serviceTime = 10us
+**.jobType = intuniform(0,3)
+**.source.jobName = "job"
+**.sendingAlgorithm = "priority"
+**.fetchingAlgorithm = "WRS"
+**.randomGateIndex = (intuniform(0, 9) == 0) ? 1 : 0
+

@@ -9,6 +9,7 @@
 
 #include "Sink.h"
 #include "Job.h"
+#include "IPassiveQueue.h"
 
 namespace queueing {
 
@@ -106,6 +107,24 @@ void Sink::finish()
 	std::cout << "p 6: avg " << avg_lifetime(v6) << " size " << v6.size() << std::endl;
 	std::cout << "p 7: avg " << avg_lifetime(v7) << " size " << v7.size() << std::endl;
 
+	determineQueueSizes();
+}
+
+void Sink::determineQueueSizes() {
+
+	std::string queue;
+	char buffer[3];
+
+	for( int i=0; i<8; i++ ) {
+		queue = "passiveQueue";
+		sprintf(buffer,"%d",i);
+		buffer[2]='\0';
+		queue += buffer;
+		cModule *module = getParentModule()->getSubmodule(queue.c_str());
+		IPassiveQueue *pqueue = dynamic_cast<IPassiveQueue *>(module);
+		if (pqueue != NULL)
+			std::cout << queue.c_str() << " length " <<  pqueue->length() << std::endl;
+	}
 }
 
 }; //namespace

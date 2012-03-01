@@ -25,6 +25,7 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc and .msg files
 OBJS = \
     $O/Useful.o \
+    $O/Trigger.o \
     $O/JobList.o \
     $O/Source.o \
     $O/PassiveQueue.o \
@@ -35,6 +36,7 @@ OBJS = \
     $O/Server.o \
     $O/Sink.o \
     $O/SelectionStrategies.o \
+    $O/SelectionStrategiesServer.o \
     $O/Job_m.o
 
 # Message files
@@ -164,16 +166,28 @@ $O/SelectionStrategies.o: SelectionStrategies.cc \
 	SelectionStrategies.h \
 	Server.h \
 	Useful.h
+$O/SelectionStrategiesServer.o: SelectionStrategiesServer.cc \
+	IPassiveQueue.h \
+	IServer.h \
+	PassiveQueue.h \
+	QueueingDefs.h \
+	SelectionStrategies.h \
+	SelectionStrategiesServer.h \
+	Server.h \
+	Useful.h
 $O/Server.o: Server.cc \
 	IPassiveQueue.h \
 	IServer.h \
 	Job.h \
 	Job_m.h \
+	PassiveQueue.h \
 	QueueingDefs.h \
 	SelectionStrategies.h \
+	SelectionStrategiesServer.h \
 	Server.h \
 	Useful.h
 $O/Sink.o: Sink.cc \
+	IPassiveQueue.h \
 	Job.h \
 	Job_m.h \
 	QueueingDefs.h \
@@ -183,6 +197,12 @@ $O/Source.o: Source.cc \
 	Job_m.h \
 	QueueingDefs.h \
 	Source.h \
+	Useful.h
+$O/Trigger.o: Trigger.cc \
+	Job.h \
+	Job_m.h \
+	QueueingDefs.h \
+	Trigger.h \
 	Useful.h
 $O/Useful.o: Useful.cc \
 	Useful.h

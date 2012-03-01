@@ -58,10 +58,13 @@ void Source::handleMessage(cMessage *msg) {
 	if ((numJobs < 0 || numJobs > jobCounter)
 			&& (stopTime < 0 || stopTime > simTime())) {
 		// reschedule the timer for the next message
-		scheduleAt(simTime() + par("interArrivalTime").doubleValue(), msg);
+		simtime_t sourceTime = simTime() + par("interArrivalTime").doubleValue();
+		scheduleAt(sourceTime, msg);
 
 		Job *job = generateJob(); //createJob();
 		send(job, "out");
+		//std::cout << "Message sent at " << sourceTime << std::endl;
+
 		numCreated++;
 	} else {
 		// finished

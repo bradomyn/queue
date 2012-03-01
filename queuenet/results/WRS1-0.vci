@@ -1,0 +1,55 @@
+file 6042182 1330607941                                         
+version 2
+run WRS1-0-20120301-14:18:46-3400
+attr configname WRS1
+attr datetime 20120301-14:18:46
+attr experiment WRS1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network WRS1
+attr processid 3400
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0  WRS1.passiveQueue0  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 1  WRS1.passiveQueue1  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 2  WRS1.passiveQueue2  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 3  WRS1.passiveQueue3  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 5  WRS1.passiveQueue4  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 6  WRS1.passiveQueue5  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 7  WRS1.passiveQueue6  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 8  WRS1.passiveQueue7  queueLength:vector  ETV
+attr interpolationmode  sample-hold
+attr title  "queue length, vector"
+vector 4  WRS1.sink  lifeTime:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived jobs, vector"
+attr unit  s
+0	1482 442456 0 899910 0 9.9991 24903 0 1 12451 12451
+1	443938 443424 0 899838 0 9.9983 24963 0 1 12481 12481
+2	887362 450060 0 899946 0 9.9995 25333 0 1 12666 12666
+3	1337422 441949 0 899793 0 9.9978 24879 0 1 12439 12439
+4	1779371 2487610 14 899987 0.00021 9.99991 99998 0.00011 0.00011 10.999779999991 0.0012099758000006
+5	4266981 444681 0 899955 0 9.9996 25037 0 1 12518 12518
+6	4711662 443902 0 899983 0 9.9999 24986 0 1 12493 12493
+7	5155564 439554 0 899982 0 9.9999 24741 0 1 12370 12370
+8	5595118 447064 0 899964 0 9.9997 25163 0 1 12581 12581
