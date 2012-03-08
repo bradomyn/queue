@@ -61,6 +61,11 @@ public:
 	std::vector<JobDescription> readDataList(std::string filename);
 
 	void writeRandomDataToList(std::string filename, int priority, int size);
+
+	void appendToFile(std::string filename, std::string value);
+	void appendToFile(std::string filename, double value);
+	void appendToFile(std::string filename, int value);
+
 private:
 	static Useful *_instance;
 

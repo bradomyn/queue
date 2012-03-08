@@ -108,4 +108,27 @@ std::vector<JobDescription> Useful::readDataList(std::string filename) {
 
 } //readDataList()
 
+void Useful::appendToFile(std::string filename, std::string value) {
+	FILE* filehandle = fopen( filename.c_str(),"a" );
+	if( filehandle ) {
+		fprintf(filehandle,"%s\n", value);	// append to end of file
+		fclose(filehandle );
+	}
+} // appendToFile()
+
+void Useful::appendToFile(std::string filename, double value) {
+	FILE* filehandle = fopen( filename.c_str(),"a" );
+	if( filehandle ) {
+		fprintf(filehandle,"%lf\n", value);	// append to end of file
+		fclose(filehandle );
+	}
+} // appendToFile()
+
+void Useful::appendToFile(std::string filename, int value) {
+	FILE* filehandle = fopen( filename.c_str(),"a" );
+	if( filehandle ) {
+		fprintf(filehandle,"%d\n", value);	// append to end of file
+		fclose(filehandle );
+	}
+} // appendToFile()
 } /* namespace queueing */
