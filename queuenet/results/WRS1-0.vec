@@ -1,14 +1,14 @@
 version 2
-run WRS1-0-20120308-10:10:31-24091
+run WRS1-0-20120308-15:28:58-1984
 attr configname WRS1
-attr datetime 20120308-10:10:31
+attr datetime 20120308-15:28:58
 attr experiment WRS1
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WRS1
-attr processid 24091
+attr processid 1984
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -41,7 +41,7 @@ attr interpolationmode  sample-hold
 attr title  "queue length, vector"
 vector 4  WRS1.sink  lifeTime:vector  ETV
 attr interpolationmode  none
-attr title  "lifetime of arrived jobs, vector"
+attr title  "lifetime of arrived packets, vector"
 attr unit  s
 0	0	0	0
 0	241	0.0011	1

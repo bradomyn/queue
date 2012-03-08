@@ -1,14 +1,14 @@
 version 2
-run WRS1-0-20120308-10:10:31-24091
+run WRS1-0-20120308-15:28:58-1984
 attr configname WRS1
-attr datetime 20120308-10:10:31
+attr datetime 20120308-15:28:58
 attr experiment WRS1
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WRS1
-attr processid 24091
+attr processid 1984
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -17,7 +17,7 @@ attr seedset 0
 
 scalar WRS1.source 	created:count 	1
 attr interpolationmode  none
-attr title  "the number of jobs created, count"
+attr title  "the number of packets created, count"
 scalar WRS1.passiveQueue0 	queueingTime:mean 	7.1321483771252e-06
 attr interpolationmode  none
 attr title  "queueing time at dequeue, mean"
@@ -91,53 +91,53 @@ attr interpolationmode  sample-hold
 attr title  "server busy state, timeavg"
 scalar WRS1.sink 	generation:mean 	0
 attr interpolationmode  none
-attr title  "the generation of the arrived jobs, mean"
+attr title  "the generation of the arrived packets, mean"
 scalar WRS1.sink 	generation:max 	0
 attr interpolationmode  none
-attr title  "the generation of the arrived jobs, max"
+attr title  "the generation of the arrived packets, max"
 scalar WRS1.sink 	delaysVisited:mean 	0
 attr interpolationmode  none
-attr title  "the total number of delays visited by arrived jobs, mean"
+attr title  "the total number of delays visited by arrived packets, mean"
 scalar WRS1.sink 	delaysVisited:max 	0
 attr interpolationmode  none
-attr title  "the total number of delays visited by arrived jobs, max"
+attr title  "the total number of delays visited by arrived packets, max"
 scalar WRS1.sink 	queuesVisited:mean 	1.7561756175618
 attr interpolationmode  none
-attr title  "the total number of queues visited by arrived jobs, mean"
+attr title  "the total number of queues visited by arrived packets, mean"
 scalar WRS1.sink 	queuesVisited:max 	2
 attr interpolationmode  none
-attr title  "the total number of queues visited by arrived jobs, max"
+attr title  "the total number of queues visited by arrived packets, max"
 scalar WRS1.sink 	totalServiceTime:mean 	0
 attr interpolationmode  none
-attr title  "the total time spent  by arrived jobs, mean"
+attr title  "the total time spent  by arrived packets, mean"
 attr unit  s
 scalar WRS1.sink 	totalServiceTime:max 	0
 attr interpolationmode  none
-attr title  "the total time spent  by arrived jobs, max"
+attr title  "the total time spent  by arrived packets, max"
 attr unit  s
 scalar WRS1.sink 	totalDelayTime:mean 	0
 attr interpolationmode  none
-attr title  "the total time spent in delay nodes by arrived jobs, mean"
+attr title  "the total time spent in delay nodes by arrived packets, mean"
 attr unit  s
 scalar WRS1.sink 	totalDelayTime:max 	0
 attr interpolationmode  none
-attr title  "the total time spent in delay nodes by arrived jobs, max"
+attr title  "the total time spent in delay nodes by arrived packets, max"
 attr unit  s
 scalar WRS1.sink 	totalQueueingTime:mean 	6.1403140314032e-06
 attr interpolationmode  none
-attr title  "the total time spent in queues by arrived jobs, mean"
+attr title  "the total time spent in queues by arrived packets, mean"
 attr unit  s
 scalar WRS1.sink 	totalQueueingTime:max 	1.3e-05
 attr interpolationmode  none
-attr title  "the total time spent in queues by arrived jobs, max"
+attr title  "the total time spent in queues by arrived packets, max"
 attr unit  s
 scalar WRS1.sink 	lifeTime:mean 	6.1403140314032e-06
 attr interpolationmode  none
-attr title  "lifetime of arrived jobs, mean"
+attr title  "lifetime of arrived packets, mean"
 attr unit  s
 scalar WRS1.sink 	lifeTime:max 	1.3e-05
 attr interpolationmode  none
-attr title  "lifetime of arrived jobs, max"
+attr title  "lifetime of arrived packets, max"
 attr unit  s
 scalar WRS1.passiveQueue4 	queueingTime:mean 	7.10234375e-06
 attr interpolationmode  none
@@ -209,4 +209,4 @@ attr interpolationmode  none
 attr title  "drop event, count"
 scalar WRS1.trigger 	created:count 	1
 attr interpolationmode  none
-attr title  "the number of jobs created, count"
+attr title  "the number of packets created, count"
