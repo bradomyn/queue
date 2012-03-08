@@ -1,15 +1,15 @@
-file 219928 1331194140                                          
+file 219928 1331195959                                          
 version 2
-run WRS-0-20120308-09:08:57-24379
+run WRS-0-20120308-09:39:16-32484
 attr configname WRS
-attr datetime 20120308-09:08:57
+attr datetime 20120308-09:39:16
 attr experiment WRS
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WRS
-attr processid 24379
+attr processid 32484
 attr repetition 0
 attr replication #0
 attr resultdir results

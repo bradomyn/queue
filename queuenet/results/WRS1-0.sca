@@ -1,14 +1,14 @@
 version 2
-run WRS1-0-20120308-09:09:12-24505
+run WRS1-0-20120308-10:10:31-24091
 attr configname WRS1
-attr datetime 20120308-09:09:12
+attr datetime 20120308-10:10:31
 attr experiment WRS1
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WRS1
-attr processid 24505
+attr processid 24091
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -101,7 +101,7 @@ attr title  "the total number of delays visited by arrived jobs, mean"
 scalar WRS1.sink 	delaysVisited:max 	0
 attr interpolationmode  none
 attr title  "the total number of delays visited by arrived jobs, max"
-scalar WRS1.sink 	queuesVisited:mean 	2
+scalar WRS1.sink 	queuesVisited:mean 	1.7561756175618
 attr interpolationmode  none
 attr title  "the total number of queues visited by arrived jobs, mean"
 scalar WRS1.sink 	queuesVisited:max 	2
@@ -123,7 +123,7 @@ scalar WRS1.sink 	totalDelayTime:max 	0
 attr interpolationmode  none
 attr title  "the total time spent in delay nodes by arrived jobs, max"
 attr unit  s
-scalar WRS1.sink 	totalQueueingTime:mean 	6.999799979998e-06
+scalar WRS1.sink 	totalQueueingTime:mean 	6.1403140314032e-06
 attr interpolationmode  none
 attr title  "the total time spent in queues by arrived jobs, mean"
 attr unit  s
@@ -131,7 +131,7 @@ scalar WRS1.sink 	totalQueueingTime:max 	1.3e-05
 attr interpolationmode  none
 attr title  "the total time spent in queues by arrived jobs, max"
 attr unit  s
-scalar WRS1.sink 	lifeTime:mean 	6.999799979998e-06
+scalar WRS1.sink 	lifeTime:mean 	6.1403140314032e-06
 attr interpolationmode  none
 attr title  "lifetime of arrived jobs, mean"
 attr unit  s
@@ -190,18 +190,18 @@ attr title  "queue length, max"
 scalar WRS1.passiveQueue6 	dropped:count 	0
 attr interpolationmode  none
 attr title  "drop event, count"
-scalar WRS1.passiveQueue7 	queueingTime:mean 	7.0500410172272e-06
+scalar WRS1.passiveQueue7 	queueingTime:mean 	nan
 attr interpolationmode  none
 attr title  "queueing time at dequeue, mean"
 attr unit  s
-scalar WRS1.passiveQueue7 	queueingTime:max 	1.3e-05
+scalar WRS1.passiveQueue7 	queueingTime:max 	nan
 attr interpolationmode  none
 attr title  "queueing time at dequeue, max"
 attr unit  s
-scalar WRS1.passiveQueue7 	queueLength:timeavg 	0.008594
+scalar WRS1.passiveQueue7 	queueLength:timeavg 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, timeavg"
-scalar WRS1.passiveQueue7 	queueLength:max 	1
+scalar WRS1.passiveQueue7 	queueLength:max 	0
 attr interpolationmode  sample-hold
 attr title  "queue length, max"
 scalar WRS1.passiveQueue7 	dropped:count 	0
