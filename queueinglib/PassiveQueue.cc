@@ -63,7 +63,7 @@ void PassiveQueue::initialize()
 		_scheduling = 4;
 	}
 
-}
+} // initialize()
 
 int PassiveQueue::determineQueueSize() {
 	if( queue.length()>0 ) {
@@ -164,6 +164,7 @@ void PassiveQueue::handleMessage(cMessage *msg)
 			getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
     	break;
 	case 4:	// 7first
+		// use with WRS1.ned
 		//std::cout << this->getName() << " 7first" << std::endl;
 		if( job->getPriority()==7 ){
 			// send through without queueing
@@ -179,14 +180,12 @@ void PassiveQueue::handleMessage(cMessage *msg)
     default:
     	break;
     } // switch
-
-
-}
+} // handleMessage()
 
 int PassiveQueue::length()
 {
     return queue.length();
-}
+} // length()
 
 void PassiveQueue::request(int gateIndex)
 {
@@ -220,7 +219,7 @@ void PassiveQueue::request(int gateIndex)
 
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");
-}
+} // request(index)
 
 void PassiveQueue::request()
 {
@@ -229,13 +228,10 @@ void PassiveQueue::request()
     ASSERT(!queue.empty());
 
     Job *job;
-    if (fifo)
-    {
+    if (fifo) {
         job = (Job *)queue.pop();
         std::cout << __FUNCTION__ << " pop: " << job->getName() << std::endl;
-    }
-    else
-    {
+    } else {
         job = (Job *)queue.back();
         std::cout << __FUNCTION__ << " back: " << job->getName() << std::endl;
         // FIXME this may have bad performance as remove uses linear search
@@ -254,7 +250,7 @@ void PassiveQueue::request()
 
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");
-}
+} // request()
 
 }; //namespace
 

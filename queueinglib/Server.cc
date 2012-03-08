@@ -145,7 +145,6 @@ void Server::handleMessage(cMessage *msg)
 							<< jobServiced->getName() << " vs. "
 							<< msg->getName() << std::endl;
 					error("job arrived while already servicing one");
-					//serveCurrentJob();
 				}
 
 				jobServiced = check_and_cast<Job *>(msg);
@@ -159,6 +158,8 @@ void Server::handleMessage(cMessage *msg)
 		case 2: // feedback
 			// std::cout << this->getName() << " feedback" << std::endl;
 			// TODO
+			// store information internally how long a message is already there
+			// serve oldest first
 			break;
 		case 3: // original
 			//std::cout << this->getName() << " original" << std::endl;
@@ -195,6 +196,7 @@ void Server::handleMessage(cMessage *msg)
 		    }
 			break;
 		case 4:	// 7first
+			// use with WRS1.ned
 			//std::cout << this->getName() << " 7first" << std::endl;
 			if (msg == triggerServiceMsg) {
 				//std::cout << " triggerServiceMsg: ";
@@ -248,16 +250,16 @@ IPassiveQueue *Server::getQueue(int index) {
 	IPassiveQueue *pqueue = dynamic_cast<IPassiveQueue *>(module);
 
 	return pqueue;
-}
+} // getQueue()
 
 void Server::finish()
 {
-}
+} // finish()
 
 bool Server::isIdle()
 {
     return jobServiced == NULL;
-}
+} // isIdle()
 
 }; //namespace
 

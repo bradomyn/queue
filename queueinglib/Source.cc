@@ -50,6 +50,12 @@ void Source::initialize() {
 
 	_data = Useful::getInstance()->readDataList("data_10000.txt");
 
+	while(_data.size()< numJobs ) {
+		std::vector<JobDescription> v = Useful::getInstance()->readDataList("data_10000.txt");
+		_data.insert( _data.end(), v.begin(), v.end() );
+	}
+	std::cout << "data size " << _data.size() << std::endl;
+
 	//for( int i=0; i<_data.size(); i++ )
 	  //std::cout << _data.at(i).getPriority() << " " << _data.at(i).getSize() << std::endl;
 
