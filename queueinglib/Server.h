@@ -34,7 +34,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		simsignal_t busySignal;
 
         int numQueues;
-        SelectionStrategyServer *selectionStrategy;
+        SelectionStrategyServer *selectionStrategy;	// currently not used
 
         Job *jobServiced;
         cMessage *endServiceMsg;
@@ -43,6 +43,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         cMessage *triggerServiceMsg;
 
         int numSent;
+        int triggerCounter;
 
     public:
         Server();
@@ -58,11 +59,16 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         virtual bool isIdle();
 
     private:
+        void serveCurrentJob();
+
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);
         IPassiveQueue *_q7;
 
         std::vector<IPassiveQueue*> _qs;
+
+        // Server.ned: string schedulingAlgorithm @enum("none", "priority" , "feedback", "original") = default("none");
+        int _scheduling;	// see Server.ned for possible values in enum
 };
 
 }; //namespace

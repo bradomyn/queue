@@ -63,6 +63,8 @@ bool SelectionStrategyServer::isSelectable(cModule *module)
     if (server != NULL)
         return server->isIdle();
 
+    std::cout << __FUNCTION__ << " " << module->getName() << std::endl;
+
     opp_error("Only IPassiveQueue and IServer is supported by this Strategy");
     return true;
 }
@@ -206,6 +208,7 @@ int WRSSelectionStrategyServer1::select()
 {
 	// TODO check queues for priority 7 packets
 #if 1
+	//std::cout << __FUNCTION__;
 	// priority 7
 	cModule *module7 = selectableGate(7)->getOwnerModule();
 	int length = (check_and_cast<IPassiveQueue *>(module7))->length();;
@@ -215,9 +218,9 @@ int WRSSelectionStrategyServer1::select()
 	}
 
 	int result = -3;
-	for( int i=gateSize-2; i>=0; i-- ) {
+	for( int i=gateSize-2; i>=1; i-- ) {	// TODO indizes
 		cModule *module = selectableGate(i)->getOwnerModule();
-		//std::cout << selectableGate(i)->getOwnerModule()->getName() << " gateSize " << gateSize << std::endl;
+		//std::cout << " " << selectableGate(i)->getOwnerModule()->getName() << " gateSize " << gateSize << std::endl;
 		if (isSelectable(module) ) {
 			result = i;
 			return result;

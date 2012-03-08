@@ -26,7 +26,7 @@ Job *SourceBase::createJob() {
 	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
 	Job *job = new Job(buf);
 	//job->setKind(par("jobType"));
-	int prio = Useful::getInstance()->generateRandom();
+	int prio = Useful::getInstance()->generateRandomPriority();
 	job->setPriority(prio); //par("jobPriority"));
 	return job;
 }
@@ -48,6 +48,12 @@ void Source::initialize() {
 	// schedule the first message timer for start time
 	scheduleAt(startTime, new cMessage("newJobTimer"));
 
+	_data = Useful::getInstance()->readDataList("data_10000.txt");
+
+	//for( int i=0; i<_data.size(); i++ )
+	  //std::cout << _data.at(i).getPriority() << " " << _data.at(i).getSize() << std::endl;
+
+
 	WATCH(numCreated);
 	numCreated = 0;
 }
@@ -55,6 +61,24 @@ void Source::initialize() {
 void Source::handleMessage(cMessage *msg) {
 	ASSERT(msg->isSelfMessage());
 
+#if 1
+
+	if( (numJobs < 0 || numJobs > jobCounter || numJobs<_data.size() )
+			&& (stopTime < 0 || stopTime > simTime()) ) {
+		// reschedule the timer for the next message
+		simtime_t sourceTime = simTime() + par("interArrivalTime").doubleValue();
+		scheduleAt(sourceTime, msg);
+
+		Job *job = generateJob( _data.at(numCreated).getPriority(), _data.at(numCreated).getSize() );
+		send(job, "out");
+		//std::cout << "Message sent at " << sourceTime << std::endl;
+		numCreated++;
+	} else {
+		std::cout << "No more packets available." << std::endl;
+		// finished
+		delete msg;
+	}
+#else
 	if ((numJobs < 0 || numJobs > jobCounter)
 			&& (stopTime < 0 || stopTime > simTime())) {
 		// reschedule the timer for the next message
@@ -70,6 +94,8 @@ void Source::handleMessage(cMessage *msg) {
 		// finished
 		delete msg;
 	}
+#endif
+
 }
 
 Job * Source::generateJob() {
@@ -78,19 +104,50 @@ Job * Source::generateJob() {
 	std::string jobName = "j";
 	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
 	Job *job = new Job(buf);
-	int random = Useful::getInstance()->generateRandom();
+	int randomP = Useful::getInstance()->generateRandomPriority();
 
 	// TODO work with a fixed, repeatable data set
-	job->setPriority(random);
+	job->setPriority(randomP);
+
+	int randomS = Useful::getInstance()->generateRandomSize();
+
+	// TODO work with a fixed, repeatable data set
+	job->setSize(randomS);
+
+	// to build a data file:
+	//Useful::getInstance()->writeRandomDataToList("data.txt", randomP, randomS);
+
 
 	simtime_t creationTime = simTime();
 	char name[80];
 	//sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
-	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), random,
-			creationTime.dbl());
+	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), randomP, creationTime.dbl());
 	name[79] = '\0';
 	job->setName(name);
-	//std::cout << "job (id: " << job->getId() << ") priority set to: " << random << std::endl;
+	std::cout << "job (id: " << job->getId() << ") priority set to: " << randomP << " size " << randomS << std::endl;
+
+	job->setTimestamp(creationTime);
+
+	return job;
+} // generateJob()
+
+Job * Source::generateJob( int priority, int size ) {
+	//log("test");
+	char buf[80];
+	std::string jobName = "j";
+	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
+
+	Job *job = new Job(buf);
+	job->setPriority(priority);
+	job->setSize(size);
+
+	simtime_t creationTime = simTime();
+	char name[80];
+	//sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
+	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), priority, creationTime.dbl());
+	name[79] = '\0';
+	job->setName(name);
+	//std::cout << "job (id: " << job->getId() << ") priority set to: " << priority << " size " << size << std::endl;
 
 	job->setTimestamp(creationTime);
 

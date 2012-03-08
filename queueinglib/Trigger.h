@@ -25,7 +25,6 @@ class QUEUEING_API TriggerBase : public cSimpleModule
 {
     protected:
         int triggerCounter;
-        std::string jobName;
         simsignal_t createdSignal;
     protected:
         virtual void initialize();

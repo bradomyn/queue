@@ -8,8 +8,11 @@
 #ifndef USEFUL_H_
 #define USEFUL_H_
 
-#include <string>
 #include <sstream>
+
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -25,6 +28,22 @@ namespace queueing {
 #define log(src, args...) std::cout << __FUNCTION__ << "() at " << __FILE__ << ":" << __LINE__ << ": " << src << std::endl;
 //##args <<
 
+// simple helper class
+class JobDescription {
+public:
+	JobDescription(int priority, int size) {
+		_priority = priority;
+		_size = size;
+	};
+
+	int getPriority(){ return _priority; };
+	int getSize(){ return _size; };
+
+private:
+	int _priority;
+	int _size;
+};
+
 class Useful {
 
 public:
@@ -36,8 +55,12 @@ public:
 	double getTime(string name);
 	int getPriority(string name);
 
-	int generateRandom();
+	int generateRandomPriority();
+	int generateRandomSize();
 
+	std::vector<JobDescription> readDataList(std::string filename);
+
+	void writeRandomDataToList(std::string filename, int priority, int size);
 private:
 	static Useful *_instance;
 

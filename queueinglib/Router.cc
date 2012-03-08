@@ -65,6 +65,7 @@ void Router::handleMessage(cMessage *msg)
         error("Invalid output gate selected during routing");
 
     send(msg, "out", outGateIndex);
+    //std::cout << "router sent " << msg->getName() << std::endl;
 }
 
 }; //namespace

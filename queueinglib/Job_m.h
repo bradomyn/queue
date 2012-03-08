@@ -27,6 +27,7 @@ namespace queueing {
  * {
  *     @customize(true);
  *     int priority;                
+ *     int size;					 
  *     simtime_t totalQueueingTime; 
  *     simtime_t totalServiceTime;  
  *     simtime_t totalDelayTime;    
@@ -64,6 +65,7 @@ class Job_Base : public ::cMessage
 {
   protected:
     int priority_var;
+    int size_var;
     simtime_t totalQueueingTime_var;
     simtime_t totalServiceTime_var;
     simtime_t totalDelayTime_var;
@@ -92,6 +94,8 @@ class Job_Base : public ::cMessage
     // field getter/setter methods
     virtual int getPriority() const;
     virtual void setPriority(int priority);
+    virtual int getSize() const;
+    virtual void setSize(int size);
     virtual simtime_t getTotalQueueingTime() const;
     virtual void setTotalQueueingTime(simtime_t totalQueueingTime);
     virtual simtime_t getTotalServiceTime() const;

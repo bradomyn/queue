@@ -48,116 +48,120 @@ void PassiveQueue::initialize()
 
     WATCH(numQueuedIdle);
     numQueuedIdle = 0;
+
+    const char * algName = par("schedulingAlgorithm");
+    std::cout << this->getName() << " scheduling algorithm " << algName << std::endl;
+    if (strcmp(algName, "none") == 0) {
+		_scheduling = 0;
+	} else if (strcmp(algName, "priority") == 0) {
+		_scheduling = 1;
+	} else if (strcmp(algName, "feedback") == 0) {
+		_scheduling = 2;
+	} else if (strcmp(algName, "original") == 0) {
+		_scheduling = 3;
+	}
 }
+
+int PassiveQueue::determineQueueSize() {
+	if( queue.length()>0 ) {
+		int size=0;
+		int queuelength = queue.length();	// TODO can the length change during size determination? I hope not!
+		// iterate queue without removing or changing objects inside
+		for( int i; i<queuelength; i++ ) {
+			Job *j = check_and_cast<Job *>(queue.get(i));
+			if( j!=NULL ) {
+				size += j->getSize();
+			}
+		}
+		return size;
+	} else {
+		//std::cout << "queue length 0" << std::endl;
+		return 0;
+	}
+} // determineQueueSize()
 
 void PassiveQueue::handleMessage(cMessage *msg)
 {
     Job *job = check_and_cast<Job *>(msg);
     job->setTimestamp();
+    int k;
 
-    // check for container capacity
-    if (capacity >=0 && queue.length() >= capacity)
-    {
-        EV << "Queue full! Job dropped.\n";
-        std::cerr << "Queue full! Job dropped." << std::endl;
-        if (ev.isGUI()) bubble("Dropped!");
-        emit(droppedSignal, 1);
-        delete msg;
-        return;
-    }
-
-#if 1
-    // Trigger Test
-    // queue everything until requested
-    queue.insert(job);
-    std::cout << "queued: " << job->getName() << std::endl;
-    emit(queueLengthSignal, length());
-    job->setQueueCount(job->getQueueCount() + 1);
-    numQueued++;
-
-#else
-#if 1
-    // Original
-    // determine a free input port of the server
-    int k = selectionStrategy->select();
-    std::cout << this->getName() << " selected gate: " << k << std::endl;
-    //std::cout << "selection strategy " << selectionStrategy->getFullName() << std::endl;
-    if (k < 0)
-    {
-        // enqueue if no idle server found
-        queue.insert(job);
-
-        emit(queueLengthSignal, length());
-        job->setQueueCount(job->getQueueCount() + 1);
-        numQueued++;
-        std::cout << this->getName() << ": #" << numQueued << " queued: " << job->getName() << std::endl;
-    }
-    else if (length() == 0)
-    {
-        // send through without queueing
-        send(job, "out", k);
-        std::cout << "sent " << job->getName() << " without queueing" << std::endl;
-        numServed++;
-    } else {
-    	error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
-    }
-#elif 0
-    int k = selectionStrategy->select();
-    //std::cout << "gate selected: " << k << std::endl;
-    //std::cout << "selection strategy " << selectionStrategy->getFullName() << std::endl;
-    if (k < 0)
-    {
-        // enqueue if no idle server found
-        queue.insert(job);
-        std::cout << "queued: " << job->getName() << std::endl;
-        emit(queueLengthSignal, length());
-        job->setQueueCount(job->getQueueCount() + 1);
-        numQueued++;
-    }
-    else if (length() == 0)
-    {
-#if 0
-        // send through without queueing
-        send(job, "out", k);
-        numServed++;
-#else
-        if( job->getPriority()<7 ) {
-		   queue.insert(job);
-		   std::cout << "queued: " << job->getName() << std::endl;
-		   emit(queueLengthSignal, length());
-		   job->setQueueCount(job->getQueueCount() + 1);
-		   numQueued++;
-        } else {
-            // send through without queueing
-            send(job, "out", k);
-            numServed++;
+    switch(_scheduling) {
+    case 0:	// none
+    	// use with WRS.ned
+    	// send through without queueing
+		send(job, "out", 0);
+		numServed++;
+    	break;
+    case 1:	// prority
+    	// use with WRS1.ned
+    	//std::cout << this->getName() << " priority" << std::endl;
+        //std::cout << "capacity " << capacity << " " << this->getName() << " queue size " << determineQueueSize() << std::endl;
+        // check for container capacity
+        //if (capacity >=0 && queue.length() >= capacity)
+        if( capacity >=0 && determineQueueSize()>=capacity ) {
+            EV << this->getName() << " full! Job dropped.\n";
+            std::cerr << this->getName() << " full! Job dropped." << std::endl;
+            if (ev.isGUI()) bubble("Dropped!");
+            emit(droppedSignal, 1);
+            delete msg;
+            return;
         }
-#endif
-    } else {
-#if 1
-    	std::cout << " queued though server is idle, gate " << k << std::endl;
-    	numQueuedIdle++;
-#else
-    	error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
-#endif
-    }
+        // Trigger Test
+        // queue everything until requested, truly passive queue
+        queue.insert(job);
+        //std::cout << "queued: " << job->getName() << std::endl;
+        emit(queueLengthSignal, length());
+        job->setQueueCount(job->getQueueCount() + 1);
+        numQueued++;
 
-#elif 0
+        // change the icon color
+        if (ev.isGUI())
+            getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
+    	break;
+    case 2:	// feedback
+    	break;
+    case 3:	// original
+    	//std::cout << this->getName() << " original" << std::endl;
+    	// use with WRS.ned
+    	job->setTimestamp();
+
+		// check for container capacity
+		if (capacity >=0 && queue.length() >= capacity)
+		{
+			EV << "Queue full! Job dropped.\n";
+			if (ev.isGUI()) bubble("Dropped!");
+			emit(droppedSignal, 1);
+			delete msg;
+			return;
+		}
+
+		k = selectionStrategy->select();
+		if (k < 0)
+		{
+			// enqueue if no idle server found
+			queue.insert(job);
+			emit(queueLengthSignal, length());
+			job->setQueueCount(job->getQueueCount() + 1);
+		}
+		else if (length() == 0)
+		{
+			// send through without queueing
+			send(job, "out", k);
+			numServed++;
+		}
+		else
+			error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
+
+		// change the icon color
+		if (ev.isGUI())
+			getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
+    	break;
+    default:
+    	break;
+    } // switch
 
 
-	// queue everything
-	// enqueue if no idle server found
-	queue.insert(job);
-	std::cout << "queued: " << job->getName() << std::endl;
-	emit(queueLengthSignal, length());
-	job->setQueueCount(job->getQueueCount() + 1);
-	numQueued++;
-
-#endif
-#endif
-    // change the icon color
-    if (ev.isGUI())
-        getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
 }
 
 int PassiveQueue::length()
@@ -175,12 +179,12 @@ void PassiveQueue::request(int gateIndex)
     if (fifo)
     {
         job = (Job *)queue.pop();
-        std::cout << __FUNCTION__ << " pop: " << job->getName() << std::endl;
+        //std::cout << __FUNCTION__ << " pop: " << job->getName() << std::endl;
     }
     else
     {
         job = (Job *)queue.back();
-        std::cout << __FUNCTION__ << " back: " << job->getName() << std::endl;
+        //std::cout << __FUNCTION__ << " back: " << job->getName() << std::endl;
         // FIXME this may have bad performance as remove uses linear search
         queue.remove(job);
     }
@@ -193,7 +197,7 @@ void PassiveQueue::request(int gateIndex)
 
     send(job, "out", gateIndex);
     numServed++;
-    std::cout << "job requested over gate " << gateIndex << std::endl;
+    std::cout << "job " << job->getName() << " requested over gate " << gateIndex << std::endl;
 
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");
@@ -227,7 +231,7 @@ void PassiveQueue::request()
 
     send(job, "out");
     numServed++;
-    std::cout << "job requested without gate " << std::endl;
+    //std::cout << "job requested without gate " << std::endl;
 
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");

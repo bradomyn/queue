@@ -44,12 +44,14 @@ class QUEUEING_API Source : public SourceBase
         simtime_t stopTime;
         int numJobs;
         int numCreated;
+        std::vector<JobDescription> _data;
 
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
 
         Job * generateJob();
+        Job * generateJob( int priority, int size );
 };
 
 };

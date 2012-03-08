@@ -58,17 +58,54 @@ int Useful::getPriority(std::string name) {
 	return prio;
 } // getPriority()
 
-int Useful::generateRandom() {
+int Useful::generateRandomPriority() {
 	int random = 0;
 #if 0
 	srand(time(NULL));
 	// TODO
-	random = rand() % 4 + 0;  //number between 0 and 7
+	random = rand() % 7 + 0;  //number between 0 and 7
 #else
 	random = (int)(rand() / (((double)RAND_MAX + 1)/ (double)(7+1)));
 #endif
 	return random;
-} // generateRandom()
+} // generateRandomPriority()
 
+int Useful::generateRandomSize() {
+	int random = 0;
+#if 0
+	srand(time(NULL));
+	// TODO
+	random = rand() % 7 + 0;  //number between 0 and 7
+#else
+	random = (int)(rand() / (((double)RAND_MAX + 1)/ (double)(1500+1)));
+#endif
+	return random;
+} // generateRandomSize()
+
+void Useful::writeRandomDataToList(std::string filename, int priority, int size) {
+	FILE* filehandle = fopen( filename.c_str(),"a" );
+	if( filehandle ) {
+		fprintf(filehandle,"%d %d\n", priority, size);	// append to end of file
+		fclose(filehandle );
+	}
+} // writeRandomDataToList()
+
+std::vector<JobDescription> Useful::readDataList(std::string filename) {
+
+	std::vector<JobDescription> v;
+	int priority, size;
+	FILE* filehandle = fopen( filename.c_str(),"r" );
+	if( filehandle ) {
+		while( fscanf(filehandle,"%d %d\n", &priority, &size)>0 ) {
+			v.push_back(JobDescription(priority, size));
+		}
+		fclose(filehandle );
+		return v;
+	} else {
+		std::cerr << "File " << filename.c_str() << " does not exist." << std::endl;
+		return v;
+	}
+
+} //readDataList()
 
 } /* namespace queueing */

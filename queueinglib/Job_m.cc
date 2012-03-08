@@ -34,6 +34,7 @@ namespace queueing {
 Job_Base::Job_Base(const char *name, int kind) : cMessage(name,kind)
 {
     this->priority_var = 0;
+    this->size_var = 0;
     this->totalQueueingTime_var = 0;
     this->totalServiceTime_var = 0;
     this->totalDelayTime_var = 0;
@@ -62,6 +63,7 @@ Job_Base& Job_Base::operator=(const Job_Base& other)
 void Job_Base::copy(const Job_Base& other)
 {
     this->priority_var = other.priority_var;
+    this->size_var = other.size_var;
     this->totalQueueingTime_var = other.totalQueueingTime_var;
     this->totalServiceTime_var = other.totalServiceTime_var;
     this->totalDelayTime_var = other.totalDelayTime_var;
@@ -74,6 +76,7 @@ void Job_Base::parsimPack(cCommBuffer *b)
 {
     cMessage::parsimPack(b);
     doPacking(b,this->priority_var);
+    doPacking(b,this->size_var);
     doPacking(b,this->totalQueueingTime_var);
     doPacking(b,this->totalServiceTime_var);
     doPacking(b,this->totalDelayTime_var);
@@ -86,6 +89,7 @@ void Job_Base::parsimUnpack(cCommBuffer *b)
 {
     cMessage::parsimUnpack(b);
     doUnpacking(b,this->priority_var);
+    doUnpacking(b,this->size_var);
     doUnpacking(b,this->totalQueueingTime_var);
     doUnpacking(b,this->totalServiceTime_var);
     doUnpacking(b,this->totalDelayTime_var);
@@ -102,6 +106,16 @@ int Job_Base::getPriority() const
 void Job_Base::setPriority(int priority)
 {
     this->priority_var = priority;
+}
+
+int Job_Base::getSize() const
+{
+    return size_var;
+}
+
+void Job_Base::setSize(int size)
+{
+    this->size_var = size;
 }
 
 simtime_t Job_Base::getTotalQueueingTime() const
@@ -212,7 +226,7 @@ const char *JobDescriptor::getProperty(const char *propertyname) const
 int JobDescriptor::getFieldCount(void *object) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 7+basedesc->getFieldCount(object) : 7;
+    return basedesc ? 8+basedesc->getFieldCount(object) : 8;
 }
 
 unsigned int JobDescriptor::getFieldTypeFlags(void *object, int field) const
@@ -231,8 +245,9 @@ unsigned int JobDescriptor::getFieldTypeFlags(void *object, int field) const
         FD_ISEDITABLE,
         FD_ISEDITABLE,
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<7) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<8) ? fieldTypeFlags[field] : 0;
 }
 
 const char *JobDescriptor::getFieldName(void *object, int field) const
@@ -245,6 +260,7 @@ const char *JobDescriptor::getFieldName(void *object, int field) const
     }
     static const char *fieldNames[] = {
         "priority",
+        "size",
         "totalQueueingTime",
         "totalServiceTime",
         "totalDelayTime",
@@ -252,7 +268,7 @@ const char *JobDescriptor::getFieldName(void *object, int field) const
         "delayCount",
         "generation",
     };
-    return (field>=0 && field<7) ? fieldNames[field] : NULL;
+    return (field>=0 && field<8) ? fieldNames[field] : NULL;
 }
 
 int JobDescriptor::findField(void *object, const char *fieldName) const
@@ -260,12 +276,13 @@ int JobDescriptor::findField(void *object, const char *fieldName) const
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount(object) : 0;
     if (fieldName[0]=='p' && strcmp(fieldName, "priority")==0) return base+0;
-    if (fieldName[0]=='t' && strcmp(fieldName, "totalQueueingTime")==0) return base+1;
-    if (fieldName[0]=='t' && strcmp(fieldName, "totalServiceTime")==0) return base+2;
-    if (fieldName[0]=='t' && strcmp(fieldName, "totalDelayTime")==0) return base+3;
-    if (fieldName[0]=='q' && strcmp(fieldName, "queueCount")==0) return base+4;
-    if (fieldName[0]=='d' && strcmp(fieldName, "delayCount")==0) return base+5;
-    if (fieldName[0]=='g' && strcmp(fieldName, "generation")==0) return base+6;
+    if (fieldName[0]=='s' && strcmp(fieldName, "size")==0) return base+1;
+    if (fieldName[0]=='t' && strcmp(fieldName, "totalQueueingTime")==0) return base+2;
+    if (fieldName[0]=='t' && strcmp(fieldName, "totalServiceTime")==0) return base+3;
+    if (fieldName[0]=='t' && strcmp(fieldName, "totalDelayTime")==0) return base+4;
+    if (fieldName[0]=='q' && strcmp(fieldName, "queueCount")==0) return base+5;
+    if (fieldName[0]=='d' && strcmp(fieldName, "delayCount")==0) return base+6;
+    if (fieldName[0]=='g' && strcmp(fieldName, "generation")==0) return base+7;
     return basedesc ? basedesc->findField(object, fieldName) : -1;
 }
 
@@ -279,6 +296,7 @@ const char *JobDescriptor::getFieldTypeString(void *object, int field) const
     }
     static const char *fieldTypeStrings[] = {
         "int",
+        "int",
         "simtime_t",
         "simtime_t",
         "simtime_t",
@@ -286,7 +304,7 @@ const char *JobDescriptor::getFieldTypeString(void *object, int field) const
         "int",
         "int",
     };
-    return (field>=0 && field<7) ? fieldTypeStrings[field] : NULL;
+    return (field>=0 && field<8) ? fieldTypeStrings[field] : NULL;
 }
 
 const char *JobDescriptor::getFieldProperty(void *object, int field, const char *propertyname) const
@@ -327,12 +345,13 @@ std::string JobDescriptor::getFieldAsString(void *object, int field, int i) cons
     Job_Base *pp = (Job_Base *)object; (void)pp;
     switch (field) {
         case 0: return long2string(pp->getPriority());
-        case 1: return double2string(pp->getTotalQueueingTime());
-        case 2: return double2string(pp->getTotalServiceTime());
-        case 3: return double2string(pp->getTotalDelayTime());
-        case 4: return long2string(pp->getQueueCount());
-        case 5: return long2string(pp->getDelayCount());
-        case 6: return long2string(pp->getGeneration());
+        case 1: return long2string(pp->getSize());
+        case 2: return double2string(pp->getTotalQueueingTime());
+        case 3: return double2string(pp->getTotalServiceTime());
+        case 4: return double2string(pp->getTotalDelayTime());
+        case 5: return long2string(pp->getQueueCount());
+        case 6: return long2string(pp->getDelayCount());
+        case 7: return long2string(pp->getGeneration());
         default: return "";
     }
 }
@@ -348,12 +367,13 @@ bool JobDescriptor::setFieldAsString(void *object, int field, int i, const char 
     Job_Base *pp = (Job_Base *)object; (void)pp;
     switch (field) {
         case 0: pp->setPriority(string2long(value)); return true;
-        case 1: pp->setTotalQueueingTime(string2double(value)); return true;
-        case 2: pp->setTotalServiceTime(string2double(value)); return true;
-        case 3: pp->setTotalDelayTime(string2double(value)); return true;
-        case 4: pp->setQueueCount(string2long(value)); return true;
-        case 5: pp->setDelayCount(string2long(value)); return true;
-        case 6: pp->setGeneration(string2long(value)); return true;
+        case 1: pp->setSize(string2long(value)); return true;
+        case 2: pp->setTotalQueueingTime(string2double(value)); return true;
+        case 3: pp->setTotalServiceTime(string2double(value)); return true;
+        case 4: pp->setTotalDelayTime(string2double(value)); return true;
+        case 5: pp->setQueueCount(string2long(value)); return true;
+        case 6: pp->setDelayCount(string2long(value)); return true;
+        case 7: pp->setGeneration(string2long(value)); return true;
         default: return false;
     }
 }
@@ -374,8 +394,9 @@ const char *JobDescriptor::getFieldStructName(void *object, int field) const
         NULL,
         NULL,
         NULL,
+        NULL,
     };
-    return (field>=0 && field<7) ? fieldStructNames[field] : NULL;
+    return (field>=0 && field<8) ? fieldStructNames[field] : NULL;
 }
 
 void *JobDescriptor::getFieldStructPointer(void *object, int field, int i) const

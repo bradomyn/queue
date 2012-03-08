@@ -2,14 +2,14 @@
 # OMNeT++/OMNEST Makefile for libqueueinglib
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep --make-so -O out
+#  opp_makemake -f --deep --make-so -O out -I
 #
 
 # Name of target to be created (-o option)
 TARGET = libqueueinglib$(SHARED_LIB_SUFFIX)
 
 # C++ include paths (with -I)
-INCLUDE_PATH = -I. -Itemplates -Itemplates/queueing
+INCLUDE_PATH = -I -I. -Itemplates -Itemplates/queueing
 
 # Additional object and library files to link with
 EXTRA_OBJS =

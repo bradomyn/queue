@@ -28,10 +28,12 @@ simple PassiveQueue
         @statistic[queueingTime](title="queueing time at dequeue";record=vector?,mean,max;unit=s;interpolationmode=none);
         @display("i=block/passiveq;q=queue");
 
-        int capacity = default(-1);  // negative capacity means unlimited queue
+        int capacity = default(6000); // 4x1500KB //default(-1);  // negative capacity means unlimited queue
         bool fifo = default(true);   // whether the module works as a queue (fifo=true) or a stack (fifo=false)
         string sendingAlgorithm @enum("priority","random","roundRobin","minDelay", "WRS") = default("WRS");
                                      // how the queue tries to find a suitable server for an incoming job
+                                     
+		string schedulingAlgorithm @enum("none", "priority" , "feedback", "original") = default("original");
     gates:
         input in[];
         output out[];

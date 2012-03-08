@@ -39,6 +39,8 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
 
         void queueLengthChanged();
 
+        int _scheduling;
+
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
@@ -52,6 +54,10 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
 
         // request without a gate
         virtual void request();
+
+        // add up packet sizes
+        int determineQueueSize();
+
 };
 
 }; //namespace

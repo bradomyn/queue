@@ -66,7 +66,7 @@ network WRS1
             @display("p=335,781");
         }
         trigger: Trigger {
-            @display("p=594,544;b=36,10");
+            @display("p=582,207;b=36,10");
         }
     connections:
         source.out --> classifier.in++;
@@ -74,9 +74,9 @@ network WRS1
         classifier.out++ --> passiveQueue1.in++;
         classifier.out++ --> passiveQueue2.in++;
         classifier.out++ --> passiveQueue3.in++;
-        
+
         trigger.out --> operator1.in++;
-        
+
         passiveQueue0.out++ --> operator1.in++;
         passiveQueue1.out++ --> operator1.in++;
         passiveQueue2.out++ --> operator1.in++;
@@ -92,5 +92,5 @@ network WRS1
         passiveQueue5.out++ --> operator1.in++;
         passiveQueue6.out++ --> operator1.in++;
         passiveQueue7.out++ --> operator1.in++;
-        
+
 }
