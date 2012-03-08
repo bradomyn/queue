@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by opp_msgc 4.2 from Job.msg.
+// Generated file, do not edit! Created by opp_msgc 4.2 from Packet.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:
@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <sstream>
-#include "Job_m.h"
+#include "Packet_m.h"
 
 // Template rule which fires if a struct or class doesn't have operator<<
 template<typename T>
@@ -31,7 +31,7 @@ void doUnpacking(cCommBuffer *, T& t) {
 
 namespace queueing {
 
-Job_Base::Job_Base(const char *name, int kind) : cMessage(name,kind)
+Packet_Base::Packet_Base(const char *name, int kind) : cMessage(name,kind)
 {
     this->priority_var = 0;
     this->size_var = 0;
@@ -43,16 +43,16 @@ Job_Base::Job_Base(const char *name, int kind) : cMessage(name,kind)
     this->generation_var = 0;
 }
 
-Job_Base::Job_Base(const Job_Base& other) : cMessage(other)
+Packet_Base::Packet_Base(const Packet_Base& other) : cMessage(other)
 {
     copy(other);
 }
 
-Job_Base::~Job_Base()
+Packet_Base::~Packet_Base()
 {
 }
 
-Job_Base& Job_Base::operator=(const Job_Base& other)
+Packet_Base& Packet_Base::operator=(const Packet_Base& other)
 {
     if (this==&other) return *this;
     cMessage::operator=(other);
@@ -60,7 +60,7 @@ Job_Base& Job_Base::operator=(const Job_Base& other)
     return *this;
 }
 
-void Job_Base::copy(const Job_Base& other)
+void Packet_Base::copy(const Packet_Base& other)
 {
     this->priority_var = other.priority_var;
     this->size_var = other.size_var;
@@ -72,7 +72,7 @@ void Job_Base::copy(const Job_Base& other)
     this->generation_var = other.generation_var;
 }
 
-void Job_Base::parsimPack(cCommBuffer *b)
+void Packet_Base::parsimPack(cCommBuffer *b)
 {
     cMessage::parsimPack(b);
     doPacking(b,this->priority_var);
@@ -85,7 +85,7 @@ void Job_Base::parsimPack(cCommBuffer *b)
     doPacking(b,this->generation_var);
 }
 
-void Job_Base::parsimUnpack(cCommBuffer *b)
+void Packet_Base::parsimUnpack(cCommBuffer *b)
 {
     cMessage::parsimUnpack(b);
     doUnpacking(b,this->priority_var);
@@ -98,91 +98,91 @@ void Job_Base::parsimUnpack(cCommBuffer *b)
     doUnpacking(b,this->generation_var);
 }
 
-int Job_Base::getPriority() const
+int Packet_Base::getPriority() const
 {
     return priority_var;
 }
 
-void Job_Base::setPriority(int priority)
+void Packet_Base::setPriority(int priority)
 {
     this->priority_var = priority;
 }
 
-int Job_Base::getSize() const
+int Packet_Base::getSize() const
 {
     return size_var;
 }
 
-void Job_Base::setSize(int size)
+void Packet_Base::setSize(int size)
 {
     this->size_var = size;
 }
 
-simtime_t Job_Base::getTotalQueueingTime() const
+simtime_t Packet_Base::getTotalQueueingTime() const
 {
     return totalQueueingTime_var;
 }
 
-void Job_Base::setTotalQueueingTime(simtime_t totalQueueingTime)
+void Packet_Base::setTotalQueueingTime(simtime_t totalQueueingTime)
 {
     this->totalQueueingTime_var = totalQueueingTime;
 }
 
-simtime_t Job_Base::getTotalServiceTime() const
+simtime_t Packet_Base::getTotalServiceTime() const
 {
     return totalServiceTime_var;
 }
 
-void Job_Base::setTotalServiceTime(simtime_t totalServiceTime)
+void Packet_Base::setTotalServiceTime(simtime_t totalServiceTime)
 {
     this->totalServiceTime_var = totalServiceTime;
 }
 
-simtime_t Job_Base::getTotalDelayTime() const
+simtime_t Packet_Base::getTotalDelayTime() const
 {
     return totalDelayTime_var;
 }
 
-void Job_Base::setTotalDelayTime(simtime_t totalDelayTime)
+void Packet_Base::setTotalDelayTime(simtime_t totalDelayTime)
 {
     this->totalDelayTime_var = totalDelayTime;
 }
 
-int Job_Base::getQueueCount() const
+int Packet_Base::getQueueCount() const
 {
     return queueCount_var;
 }
 
-void Job_Base::setQueueCount(int queueCount)
+void Packet_Base::setQueueCount(int queueCount)
 {
     this->queueCount_var = queueCount;
 }
 
-int Job_Base::getDelayCount() const
+int Packet_Base::getDelayCount() const
 {
     return delayCount_var;
 }
 
-void Job_Base::setDelayCount(int delayCount)
+void Packet_Base::setDelayCount(int delayCount)
 {
     this->delayCount_var = delayCount;
 }
 
-int Job_Base::getGeneration() const
+int Packet_Base::getGeneration() const
 {
     return generation_var;
 }
 
-void Job_Base::setGeneration(int generation)
+void Packet_Base::setGeneration(int generation)
 {
     this->generation_var = generation;
 }
 
-class JobDescriptor : public cClassDescriptor
+class PacketDescriptor : public cClassDescriptor
 {
   public:
-    JobDescriptor();
-    virtual ~JobDescriptor();
+    PacketDescriptor();
+    virtual ~PacketDescriptor();
 
     virtual bool doesSupport(cObject *obj) const;
     virtual const char *getProperty(const char *propertyname) const;
@@ -201,35 +201,35 @@ class JobDescriptor : public cClassDescriptor
     virtual void *getFieldStructPointer(void *object, int field, int i) const;
 };
 
-Register_ClassDescriptor(JobDescriptor);
+Register_ClassDescriptor(PacketDescriptor);
 
-JobDescriptor::JobDescriptor() : cClassDescriptor("queueing::Job", "cMessage")
+PacketDescriptor::PacketDescriptor() : cClassDescriptor("queueing::Packet", "cMessage")
 {
 }
 
-JobDescriptor::~JobDescriptor()
+PacketDescriptor::~PacketDescriptor()
 {
 }
 
-bool JobDescriptor::doesSupport(cObject *obj) const
+bool PacketDescriptor::doesSupport(cObject *obj) const
 {
-    return dynamic_cast<Job_Base *>(obj)!=NULL;
+    return dynamic_cast<Packet_Base *>(obj)!=NULL;
 }
 
-const char *JobDescriptor::getProperty(const char *propertyname) const
+const char *PacketDescriptor::getProperty(const char *propertyname) const
 {
     if (!strcmp(propertyname,"customize")) return "true";
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     return basedesc ? basedesc->getProperty(propertyname) : NULL;
 }
 
-int JobDescriptor::getFieldCount(void *object) const
+int PacketDescriptor::getFieldCount(void *object) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     return basedesc ? 8+basedesc->getFieldCount(object) : 8;
 }
 
-unsigned int JobDescriptor::getFieldTypeFlags(void *object, int field) const
+unsigned int PacketDescriptor::getFieldTypeFlags(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -250,7 +250,7 @@ unsigned int JobDescriptor::getFieldTypeFlags(void *object, int field) const
     return (field>=0 && field<8) ? fieldTypeFlags[field] : 0;
 }
 
-const char *JobDescriptor::getFieldName(void *object, int field) const
+const char *PacketDescriptor::getFieldName(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -271,7 +271,7 @@ const char *JobDescriptor::getFieldName(void *object, int field) const
     return (field>=0 && field<8) ? fieldNames[field] : NULL;
 }
 
-int JobDescriptor::findField(void *object, const char *fieldName) const
+int PacketDescriptor::findField(void *object, const char *fieldName) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount(object) : 0;
@@ -286,7 +286,7 @@ int JobDescriptor::findField(void *object, const char *fieldName) const
     return basedesc ? basedesc->findField(object, fieldName) : -1;
 }
 
-const char *JobDescriptor::getFieldTypeString(void *object, int field) const
+const char *PacketDescriptor::getFieldTypeString(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -307,7 +307,7 @@ const char *JobDescriptor::getFieldTypeString(void *object, int field) const
     return (field>=0 && field<8) ? fieldTypeStrings[field] : NULL;
 }
 
-const char *JobDescriptor::getFieldProperty(void *object, int field, const char *propertyname) const
+const char *PacketDescriptor::getFieldProperty(void *object, int field, const char *propertyname) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -320,7 +320,7 @@ const char *JobDescriptor::getFieldProperty(void *object, int field, const char 
     }
 }
 
-int JobDescriptor::getArraySize(void *object, int field) const
+int PacketDescriptor::getArraySize(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -328,13 +328,13 @@ int JobDescriptor::getArraySize(void *object, int field) const
             return basedesc->getArraySize(object, field);
         field -= basedesc->getFieldCount(object);
     }
-    Job_Base *pp = (Job_Base *)object; (void)pp;
+    Packet_Base *pp = (Packet_Base *)object; (void)pp;
     switch (field) {
         default: return 0;
     }
 }
 
-std::string JobDescriptor::getFieldAsString(void *object, int field, int i) const
+std::string PacketDescriptor::getFieldAsString(void *object, int field, int i) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -342,7 +342,7 @@ std::string JobDescriptor::getFieldAsString(void *object, int field, int i) cons
             return basedesc->getFieldAsString(object,field,i);
         field -= basedesc->getFieldCount(object);
     }
-    Job_Base *pp = (Job_Base *)object; (void)pp;
+    Packet_Base *pp = (Packet_Base *)object; (void)pp;
     switch (field) {
         case 0: return long2string(pp->getPriority());
         case 1: return long2string(pp->getSize());
@@ -356,7 +356,7 @@ std::string JobDescriptor::getFieldAsString(void *object, int field, int i) cons
     }
 }
 
-bool JobDescriptor::setFieldAsString(void *object, int field, int i, const char *value) const
+bool PacketDescriptor::setFieldAsString(void *object, int field, int i, const char *value) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -364,7 +364,7 @@ bool JobDescriptor::setFieldAsString(void *object, int field, int i, const char 
             return basedesc->setFieldAsString(object,field,i,value);
         field -= basedesc->getFieldCount(object);
     }
-    Job_Base *pp = (Job_Base *)object; (void)pp;
+    Packet_Base *pp = (Packet_Base *)object; (void)pp;
     switch (field) {
         case 0: pp->setPriority(string2long(value)); return true;
         case 1: pp->setSize(string2long(value)); return true;
@@ -378,7 +378,7 @@ bool JobDescriptor::setFieldAsString(void *object, int field, int i, const char 
     }
 }
 
-const char *JobDescriptor::getFieldStructName(void *object, int field) const
+const char *PacketDescriptor::getFieldStructName(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -399,7 +399,7 @@ const char *JobDescriptor::getFieldStructName(void *object, int field) const
     return (field>=0 && field<8) ? fieldStructNames[field] : NULL;
 }
 
-void *JobDescriptor::getFieldStructPointer(void *object, int field, int i) const
+void *PacketDescriptor::getFieldStructPointer(void *object, int field, int i) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -407,7 +407,7 @@ void *JobDescriptor::getFieldStructPointer(void *object, int field, int i) const
             return basedesc->getFieldStructPointer(object, field, i);
         field -= basedesc->getFieldCount(object);
     }
-    Job_Base *pp = (Job_Base *)object; (void)pp;
+    Packet_Base *pp = (Packet_Base *)object; (void)pp;
     switch (field) {
         default: return NULL;
     }

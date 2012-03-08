@@ -19,7 +19,7 @@ using namespace std;
 namespace queueing {
 
 /**
- * Consumes jobs; see NED file for more info.
+ * Consumes packets; see NED file for more info.
  */
 class QUEUEING_API Sink : public cSimpleModule
 {
@@ -31,7 +31,7 @@ class QUEUEING_API Sink : public cSimpleModule
 	simsignal_t totalDelayTimeSignal;
 	simsignal_t delaysVisitedSignal;
 	simsignal_t generationSignal;
-    bool keepJobs;
+    bool keepPackets;
 
     int numReceived;
 

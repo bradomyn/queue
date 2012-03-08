@@ -8,7 +8,7 @@
 //
 
 #include "Sink.h"
-#include "Job.h"
+#include "Packet.h"
 #include "IPassiveQueue.h"
 
 namespace queueing {
@@ -24,7 +24,7 @@ void Sink::initialize()
     totalDelayTimeSignal = registerSignal("totalDelayTime");
     delaysVisitedSignal = registerSignal("delaysVisited");
     generationSignal = registerSignal("generation");
-    keepJobs = par("keepJobs");
+    keepPackets = par("keepPackets");
 
     numReceived = 0;
     WATCH(numReceived);
@@ -34,13 +34,13 @@ void Sink::handleMessage(cMessage *msg)
 {
 	simtime_t currentTime = simTime();
 	simtime_t lifetime = currentTime-msg->getCreationTime();
-    Job *job = check_and_cast<Job *>(msg);
+    Packet *packet = check_and_cast<Packet *>(msg);
 
     numReceived++;
 
-    std::cout << "#" << numReceived << ": " << job->getName() << " received. ct " << msg->getCreationTime() << " st " << currentTime << " lifetime " << lifetime  << std::endl;
+    std::cout << "#" << numReceived << ": " << packet->getName() << " received. ct " << msg->getCreationTime() << " st " << currentTime << " lifetime " << lifetime  << std::endl;
 
-    switch( job->getPriority() ) {
+    switch( packet->getPriority() ) {
     case 0:
     	v0.push_back(lifetime);
     	break;
@@ -71,15 +71,15 @@ void Sink::handleMessage(cMessage *msg)
 
 
     // gather statistics
-    emit(lifeTimeSignal, simTime()- job->getCreationTime());
-    emit(totalQueueingTimeSignal, job->getTotalQueueingTime());
-    emit(queuesVisitedSignal, job->getQueueCount());
-    emit(totalServiceTimeSignal, job->getTotalServiceTime());
-    emit(totalDelayTimeSignal, job->getTotalDelayTime());
-    emit(delaysVisitedSignal, job->getDelayCount());
-    emit(generationSignal, job->getGeneration());
+    emit(lifeTimeSignal, simTime()- packet->getCreationTime());
+    emit(totalQueueingTimeSignal, packet->getTotalQueueingTime());
+    emit(queuesVisitedSignal, packet->getQueueCount());
+    emit(totalServiceTimeSignal, packet->getTotalServiceTime());
+    emit(totalDelayTimeSignal, packet->getTotalDelayTime());
+    emit(delaysVisitedSignal, packet->getDelayCount());
+    emit(generationSignal, packet->getGeneration());
 
-    if (!keepJobs)
+    if (!keepPackets)
         delete msg;
 }
 

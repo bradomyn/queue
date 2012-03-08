@@ -22,8 +22,8 @@ simple Server
         @statistic[busy](title="server busy state";record=vector?,timeavg;interpolationmode=sample-hold);
 
         string fetchingAlgorithm @enum("priority","random","roundRobin","longestQueue", "WRS") = default("priority");
-             // how the next job will be choosen from the attached queues
-        volatile double serviceTime @unit(s); // service time of a job
+             // how the next packet will be choosen from the attached queues
+        volatile double serviceTime @unit(s); // service time of a packet
         
         string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first") = default("priority");
     gates:

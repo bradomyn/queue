@@ -8,7 +8,7 @@
 //
 
 #include "Classifier.h"
-#include "Job.h"
+#include "Packet.h"
 
 namespace queueing {
 
@@ -21,27 +21,27 @@ void Classifier::initialize()
 
 void Classifier::handleMessage(cMessage *msg)
 {
-    Job *job = check_and_cast<Job *>(msg);
+    Packet *packet = check_and_cast<Packet *>(msg);
     int outGateIndex = -1;
     if (strcmp(dispatchField, "type") == 0)
-        outGateIndex = job->getKind();
+        outGateIndex = packet->getKind();
     else if (strcmp(dispatchField, "priority") == 0)
-        outGateIndex = job->getPriority();
+        outGateIndex = packet->getPriority();
     else
         error("invalid dispatchField parameter, must be \"type\" or \"priority\"");
     // TODO we could look for the value in the dynamically added parameters too
 
     //if (outGateIndex < 0 || outGateIndex >= gateSize("out"))
-    //    send(job, "rest");
+    //    send(packet, "rest");
     //else
 
 #if 0
-    send(job, "out", outGateIndex);
-    std::cout << "job sent to " << outGateIndex << std::endl;
+    send(packet, "out", outGateIndex);
+    std::cout << "packet sent to " << outGateIndex << std::endl;
 #else
-    int prio = job->getPriority(); //Useful::getInstance()->getPriority(job->getName());
-    send(job, "out", prio);
-    //std::cout << "job sent to " << prio << std::endl;
+    int prio = packet->getPriority(); //Useful::getInstance()->getPriority(packet->getName());
+    send(packet, "out", prio);
+    //std::cout << "packet sent to " << prio << std::endl;
 #endif
 
 

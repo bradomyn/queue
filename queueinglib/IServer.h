@@ -16,9 +16,9 @@ namespace queueing {
 
 /**
  * An interface that must be implemented by blocks that are capable
- * of processing a job. The block implementing IPassiveQueue is calling
+ * of processing a packet. The block implementing IPassiveQueue is calling
  * these methods to communicate with the block to decide whether
- * a new job can be sent to a server
+ * a new packet can be sent to a server
  */
 class QUEUEING_API IServer
 {

@@ -29,8 +29,8 @@ Useful *Useful::getInstance() {
 double Useful::getTime(std::string name) {
 	size_t found;
 	found = name.find("; ");
-	//std::cout << "jobname " << jobname << " found " << found << std::endl;
-	// extract time from jobname
+	//std::cout << "packetname " << packetname << " found " << found << std::endl;
+	// extract time from packetname
 	double triggerTime=0.;
 	if( found!=std::string::npos ) {
 		std::string time = name.substr(found+2);
@@ -45,8 +45,8 @@ double Useful::getTime(std::string name) {
 int Useful::getPriority(std::string name) {
 	size_t found1;
 	found1 = name.find("y: ");
-	//std::cout << "jobname " << jobname << " found1 " << found1 << std::endl;
-	// extract priority from jobname
+	//std::cout << "packetname " << packetname << " found1 " << found1 << std::endl;
+	// extract priority from packetname
 	int prio=0;
 	if( found1!=std::string::npos ) {
 		std::string priority = name.substr(found1+2);
@@ -90,14 +90,14 @@ void Useful::writeRandomDataToList(std::string filename, int priority, int size)
 	}
 } // writeRandomDataToList()
 
-std::vector<JobDescription> Useful::readDataList(std::string filename) {
+std::vector<PacketDescription> Useful::readDataList(std::string filename) {
 
-	std::vector<JobDescription> v;
+	std::vector<PacketDescription> v;
 	int priority, size;
 	FILE* filehandle = fopen( filename.c_str(),"r" );
 	if( filehandle ) {
 		while( fscanf(filehandle,"%d %d\n", &priority, &size)>0 ) {
-			v.push_back(JobDescription(priority, size));
+			v.push_back(PacketDescription(priority, size));
 		}
 		fclose(filehandle );
 		return v;

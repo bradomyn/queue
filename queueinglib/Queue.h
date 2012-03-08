@@ -14,7 +14,7 @@
 
 namespace queueing {
 
-class Job;
+class Packet;
 
 /**
  * Abstract base class for single-server queues.
@@ -27,13 +27,13 @@ class QUEUEING_API Queue : public cSimpleModule
 		simsignal_t queueingTimeSignal;
 		simsignal_t busySignal;
 
-        Job *jobServiced;
+        Packet *packetServiced;
         cMessage *endServiceMsg;
         cQueue queue;
         int capacity;
         bool fifo;
 
-        Job *getFromQueue();
+        Packet *getFromQueue();
 
     public:
         Queue();
@@ -46,9 +46,9 @@ class QUEUEING_API Queue : public cSimpleModule
         virtual void finish();
 
         // hook functions to (re)define behaviour
-        virtual void arrival(Job *job);
-        virtual simtime_t startService(Job *job);
-        virtual void endService(Job *job);
+        virtual void arrival(Packet *packet);
+        virtual simtime_t startService(Packet *packet);
+        virtual void endService(Packet *packet);
 };
 
 }; //namespace

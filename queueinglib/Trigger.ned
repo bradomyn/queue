@@ -20,15 +20,15 @@ simple Trigger
     parameters:
         @group(Queueing);
         @signal[created](type="int");
-        @statistic[created](title="the number of jobs created";record=count;interpolationmode=none);
+        @statistic[created](title="the number of packets created";record=count;interpolationmode=none);
         @display("i=block/trigger");
-        int numJobs = default(-1);               // number of jobs to be generated (-1 means no limit)
-        volatile double triggerIntervall @unit(s); // time between generated jobs
-        //string jobName = default("job");         // the base name of the generated job (will be the module name if left empty)
-        //volatile int jobType = default(0);       // the type attribute of the created job (used by classifers and other modules)
-        //volatile int jobPriority = default(0);   // priority of the job
-        double startTime @unit(s) = default(triggerIntervall); // when the module sends out the first job
-        double stopTime @unit(s) = default(-1s); // when the module stops the job generation (-1 means no limit)
+        int numPackets = default(-1);               // number of packets to be generated (-1 means no limit)
+        volatile double triggerIntervall @unit(s); // time between generated packets
+        //string packetName = default("packet");         // the base name of the generated packet (will be the module name if left empty)
+        //volatile int packetType = default(0);       // the type attribute of the created packet (used by classifers and other modules)
+        //volatile int packetPriority = default(0);   // priority of the packet
+        double startTime @unit(s) = default(triggerIntervall); // when the module sends out the first packet
+        double stopTime @unit(s) = default(-1s); // when the module stops the packet generation (-1 means no limit)
         
     gates:
         output out;

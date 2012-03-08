@@ -29,9 +29,9 @@ namespace queueing {
 //##args <<
 
 // simple helper class
-class JobDescription {
+class PacketDescription {
 public:
-	JobDescription(int priority, int size) {
+	PacketDescription(int priority, int size) {
 		_priority = priority;
 		_size = size;
 	};
@@ -58,7 +58,7 @@ public:
 	int generateRandomPriority();
 	int generateRandomSize();
 
-	std::vector<JobDescription> readDataList(std::string filename);
+	std::vector<PacketDescription> readDataList(std::string filename);
 
 	void writeRandomDataToList(std::string filename, int priority, int size);
 

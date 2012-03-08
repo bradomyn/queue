@@ -26,10 +26,10 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 OBJS = \
     $O/Useful.o \
     $O/Trigger.o \
-    $O/JobList.o \
     $O/Source.o \
     $O/PassiveQueue.o \
-    $O/Job.o \
+    $O/PacketList.o \
+    $O/Packet.o \
     $O/Classifier.o \
     $O/Queue.o \
     $O/Router.o \
@@ -37,11 +37,11 @@ OBJS = \
     $O/Sink.o \
     $O/SelectionStrategies.o \
     $O/SelectionStrategiesServer.o \
-    $O/Job_m.o
+    $O/Packet_m.o
 
 # Message files
 MSGFILES = \
-    Job.msg
+    Packet.msg
 
 #------------------------------------------------------------------------------
 
@@ -126,33 +126,33 @@ depend:
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/Classifier.o: Classifier.cc \
 	Classifier.h \
-	Job.h \
-	Job_m.h \
+	Packet.h \
+	Packet_m.h \
 	QueueingDefs.h \
 	Useful.h
-$O/Job.o: Job.cc \
-	Job.h \
-	JobList.h \
-	Job_m.h \
+$O/Packet.o: Packet.cc \
+	Packet.h \
+	PacketList.h \
+	Packet_m.h \
 	QueueingDefs.h
-$O/JobList.o: JobList.cc \
-	Job.h \
-	JobList.h \
-	Job_m.h \
+$O/PacketList.o: PacketList.cc \
+	Packet.h \
+	PacketList.h \
+	Packet_m.h \
 	QueueingDefs.h
-$O/Job_m.o: Job_m.cc \
-	Job_m.h \
+$O/Packet_m.o: Packet_m.cc \
+	Packet_m.h \
 	QueueingDefs.h
 $O/PassiveQueue.o: PassiveQueue.cc \
 	IPassiveQueue.h \
-	Job.h \
-	Job_m.h \
+	Packet.h \
+	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	SelectionStrategies.h
 $O/Queue.o: Queue.cc \
-	Job.h \
-	Job_m.h \
+	Packet.h \
+	Packet_m.h \
 	Queue.h \
 	QueueingDefs.h
 $O/Router.o: Router.cc \
@@ -178,8 +178,8 @@ $O/SelectionStrategiesServer.o: SelectionStrategiesServer.cc \
 $O/Server.o: Server.cc \
 	IPassiveQueue.h \
 	IServer.h \
-	Job.h \
-	Job_m.h \
+	Packet.h \
+	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	SelectionStrategies.h \
@@ -188,19 +188,19 @@ $O/Server.o: Server.cc \
 	Useful.h
 $O/Sink.o: Sink.cc \
 	IPassiveQueue.h \
-	Job.h \
-	Job_m.h \
+	Packet.h \
+	Packet_m.h \
 	QueueingDefs.h \
 	Sink.h
 $O/Source.o: Source.cc \
-	Job.h \
-	Job_m.h \
+	Packet.h \
+	Packet_m.h \
 	QueueingDefs.h \
 	Source.h \
 	Useful.h
 $O/Trigger.o: Trigger.cc \
-	Job.h \
-	Job_m.h \
+	Packet.h \
+	Packet_m.h \
 	QueueingDefs.h \
 	Trigger.h \
 	Useful.h

@@ -8,7 +8,7 @@
 //
 
 #include "Server.h"
-#include "Job.h"
+#include "Packet.h"
 #include "SelectionStrategiesServer.h"
 
 namespace queueing {
@@ -18,7 +18,7 @@ Define_Module(Server);
 Server::Server()
 {
     selectionStrategy = NULL;
-    jobServiced = NULL;
+    packetServiced = NULL;
     endServiceMsg = NULL;
 
     triggerServiceMsg = NULL;
@@ -27,7 +27,7 @@ Server::Server()
 Server::~Server()
 {
     delete selectionStrategy;
-    delete jobServiced;
+    delete packetServiced;
     cancelAndDelete(endServiceMsg);
 
     cancelAndDelete(triggerServiceMsg);
@@ -40,7 +40,7 @@ void Server::initialize()
 
     endServiceMsg = new cMessage("end-service");
 
-    jobServiced = NULL;
+    packetServiced = NULL;
 
     selectionStrategy = SelectionStrategyServer::create(par("fetchingAlgorithm"), this, true);
     if (!selectionStrategy)
@@ -79,31 +79,31 @@ void Server::initialize()
 
 } // initialize()
 
-void Server::serveCurrentJob() {
-	if( jobServiced!=NULL ) {
+void Server::serveCurrentPacket() {
+	if( packetServiced!=NULL ) {
 		simtime_t d = simTime() - triggerServiceMsg->getSendingTime();
-		jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
-		send(jobServiced, "out");
+		packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
+		send(packetServiced, "out");
 		numSent++;
-		//std::cout << "server sent " << jobServiced->getName() << std::endl;
-		jobServiced = NULL;
+		//std::cout << "server sent " << packetServiced->getName() << std::endl;
+		packetServiced = NULL;
 		emit(busySignal, 0);
 	}
-} // serveCurrentJob()()
+} // serveCurrentPacket()()
 
 void Server::handleMessage(cMessage *msg)
 {
 	//std::cout << "server received " << msg->getName() << std::endl;
-	Job *job;
+	Packet *packet;
 	int k;
 		simtime_t serviceTime = par("serviceTime");
 		switch(_scheduling) {
 		case 0:	// none
 			// use with WRS.ned
 			// send through without thinking
-			job = check_and_cast<Job *>(msg);
-			job->setTimestamp();
-			send(job, "out");
+			packet = check_and_cast<Packet *>(msg);
+			packet->setTimestamp();
+			send(packet, "out");
 			numSent++;
 			break;
 		case 1: // priority
@@ -111,7 +111,7 @@ void Server::handleMessage(cMessage *msg)
 		//std::cout << this->getName() << " priority" << std::endl;
 		if (msg == triggerServiceMsg) {
 			//std::cout << " triggerServiceMsg: ";
-			serveCurrentJob();
+			serveCurrentPacket();
 		} else {
 			if (strcmp(msg->getName(), "trigger") == 0) {
 
@@ -140,15 +140,15 @@ void Server::handleMessage(cMessage *msg)
 					}
 				}
 			} else {
-				if (jobServiced) {
-					std::cout << "job arrived while already servicing one "
-							<< jobServiced->getName() << " vs. "
+				if (packetServiced) {
+					std::cout << "packet arrived while already servicing one "
+							<< packetServiced->getName() << " vs. "
 							<< msg->getName() << std::endl;
-					error("job arrived while already servicing one");
+					error("packet arrived while already servicing one");
 				}
 
-				jobServiced = check_and_cast<Job *>(msg);
-				//std::cout << "jobServiced: " << jobServiced->getName()
+				packetServiced = check_and_cast<Packet *>(msg);
+				//std::cout << "packetServiced: " << packetServiced->getName()
 					//	<< std::endl;
 				simtime_t serviceTime = par("serviceTime");
 				scheduleAt(simTime() + serviceTime, triggerServiceMsg);
@@ -165,29 +165,29 @@ void Server::handleMessage(cMessage *msg)
 			//std::cout << this->getName() << " original" << std::endl;
 			// use with WRS.ned
 		    if (msg==endServiceMsg) {
-		        ASSERT(jobServiced!=NULL);
+		        ASSERT(packetServiced!=NULL);
 		        simtime_t d = simTime() - endServiceMsg->getSendingTime();
-		        jobServiced->setTotalServiceTime(jobServiced->getTotalServiceTime() + d);
-		        send(jobServiced, "out");
+		        packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
+		        send(packetServiced, "out");
 		        numSent++;
-		        jobServiced = NULL;
+		        packetServiced = NULL;
 		        emit(busySignal, 0);
 
 		        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
 
-		        // examine all input queues, and request a new job from a non empty queue
+		        // examine all input queues, and request a new packet from a non empty queue
 		        k = selectionStrategy->select();
 		        if (k >= 0)
 		        {
-		            EV << "requesting job from queue " << k << endl;
+		            EV << "requesting packet from queue " << k << endl;
 		            cGate *gate = selectionStrategy->selectableGate(k);
 		            check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
 		        }
 		    } else {
-		        if (jobServiced)
-		            error("job arrived while already servicing one");
+		        if (packetServiced)
+		            error("packet arrived while already servicing one");
 
-		        jobServiced = check_and_cast<Job *>(msg);
+		        packetServiced = check_and_cast<Packet *>(msg);
 		        simtime_t serviceTime = par("serviceTime");
 		        scheduleAt(simTime()+serviceTime, endServiceMsg);
 		        emit(busySignal, 1);
@@ -200,7 +200,7 @@ void Server::handleMessage(cMessage *msg)
 			//std::cout << this->getName() << " 7first" << std::endl;
 			if (msg == triggerServiceMsg) {
 				//std::cout << " triggerServiceMsg: ";
-				serveCurrentJob();
+				serveCurrentPacket();
 			} else {
 				if (strcmp(msg->getName(), "trigger") == 0) {
 					// trigger test
@@ -217,16 +217,16 @@ void Server::handleMessage(cMessage *msg)
 						}
 					}
 				} else {
-					if (jobServiced) {
-						std::cout << "job arrived while already servicing one "
-								<< jobServiced->getName() << " vs. "
+					if (packetServiced) {
+						std::cout << "packet arrived while already servicing one "
+								<< packetServiced->getName() << " vs. "
 								<< msg->getName() << std::endl;
-						error("job arrived while already servicing one");
-						//serveCurrentJob();
+						error("packet arrived while already servicing one");
+						//serveCurrentPacket();
 					}
 
-					jobServiced = check_and_cast<Job *>(msg);
-					//std::cout << "jobServiced: " << jobServiced->getName()
+					packetServiced = check_and_cast<Packet *>(msg);
+					//std::cout << "packetServiced: " << packetServiced->getName()
 						//	<< std::endl;
 					simtime_t serviceTime = par("serviceTime");
 					scheduleAt(simTime() + serviceTime, triggerServiceMsg);
@@ -258,7 +258,7 @@ void Server::finish()
 
 bool Server::isIdle()
 {
-    return jobServiced == NULL;
+    return packetServiced == NULL;
 } // isIdle()
 
 }; //namespace

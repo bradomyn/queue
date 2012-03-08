@@ -11,47 +11,47 @@
 #define __QUEUEING_SOURCE_H
 
 #include "QueueingDefs.h"
-#include "Job.h"
+#include "Packet.h"
 #include "Useful.h"
 
 namespace queueing {
 
-class Job;
+class Packet;
 
 /**
- * Abstract base class for job generator modules
+ * Abstract base class for packet generator modules
  */
 class QUEUEING_API SourceBase : public cSimpleModule
 {
     protected:
-        int jobCounter;
-        std::string jobName;
+        int packetCounter;
+        std::string packetName;
         simsignal_t createdSignal;
     protected:
         virtual void initialize();
-        virtual Job *createJob();
+        virtual Packet *createPacket();
         virtual void finish();
 };
 
 
 /**
- * Generates jobs; see NED file for more info.
+ * Generates packets; see NED file for more info.
  */
 class QUEUEING_API Source : public SourceBase
 {
     private:
         simtime_t startTime;
         simtime_t stopTime;
-        int numJobs;
+        int numPackets;
         int numCreated;
-        std::vector<JobDescription> _data;
+        std::vector<PacketDescription> _data;
 
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
 
-        Job * generateJob();
-        Job * generateJob( int priority, int size );
+        Packet * generatePacket();
+        Packet * generatePacket( int priority, int size );
 };
 
 };

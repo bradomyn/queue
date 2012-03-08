@@ -4,7 +4,7 @@ network = ${targetTypeName}
 
 *.source.interArrivalTime = ${interArrivalTime}
   <#if population!="">
-*.source.numJobs = ${population}
+*.source.numPackets = ${population}
   </#if>
   <#if numServers=="1">
 *.server.serviceTime = ${serviceTime}

@@ -1,9 +1,9 @@
 //
-// Generated file, do not edit! Created by opp_msgc 4.2 from Job.msg.
+// Generated file, do not edit! Created by opp_msgc 4.2 from Packet.msg.
 //
 
-#ifndef _JOB_M_H_
-#define _JOB_M_H_
+#ifndef _PACKET_M_H_
+#define _PACKET_M_H_
 
 #include <omnetpp.h>
 
@@ -21,9 +21,9 @@ namespace queueing {
 // }}
 
 /**
- * Class generated from <tt>Job.msg</tt> by opp_msgc.
+ * Class generated from <tt>Packet.msg</tt> by opp_msgc.
  * <pre>
- * message Job
+ * message Packet
  * {
  *     @customize(true);
  *     int priority;                
@@ -37,31 +37,31 @@ namespace queueing {
  * }
  * </pre>
  *
- * Job_Base is only useful if it gets subclassed, and Job is derived from it.
- * The minimum code to be written for Job is the following:
+ * Packet_Base is only useful if it gets subclassed, and Packet is derived from it.
+ * The minimum code to be written for Packet is the following:
  *
  * <pre>
- * class Job : public Job_Base
+ * class Packet : public Packet_Base
  * {
  *   private:
- *     void copy(const Job& other) { ... }
+ *     void copy(const Packet& other) { ... }
 
  *   public:
- *     Job(const char *name=NULL, int kind=0) : Job_Base(name,kind) {}
- *     Job(const Job& other) : Job_Base(other) {copy(other);}
- *     Job& operator=(const Job& other) {if (this==&other) return *this; Job_Base::operator=(other); copy(other); return *this;}
- *     virtual Job *dup() const {return new Job(*this);}
- *     // ADD CODE HERE to redefine and implement pure virtual functions from Job_Base
+ *     Packet(const char *name=NULL, int kind=0) : Packet_Base(name,kind) {}
+ *     Packet(const Packet& other) : Packet_Base(other) {copy(other);}
+ *     Packet& operator=(const Packet& other) {if (this==&other) return *this; Packet_Base::operator=(other); copy(other); return *this;}
+ *     virtual Packet *dup() const {return new Packet(*this);}
+ *     // ADD CODE HERE to redefine and implement pure virtual functions from Packet_Base
  * };
  * </pre>
  *
  * The following should go into a .cc (.cpp) file:
  *
  * <pre>
- * Register_Class(Job);
+ * Register_Class(Packet);
  * </pre>
  */
-class Job_Base : public ::cMessage
+class Packet_Base : public ::cMessage
 {
   protected:
     int priority_var;
@@ -74,20 +74,20 @@ class Job_Base : public ::cMessage
     int generation_var;
 
   private:
-    void copy(const Job_Base& other);
+    void copy(const Packet_Base& other);
 
   protected:
     // protected and unimplemented operator==(), to prevent accidental usage
-    bool operator==(const Job_Base&);
+    bool operator==(const Packet_Base&);
     // make constructors protected to avoid instantiation
-    Job_Base(const char *name=NULL, int kind=0);
-    Job_Base(const Job_Base& other);
+    Packet_Base(const char *name=NULL, int kind=0);
+    Packet_Base(const Packet_Base& other);
     // make assignment operator protected to force the user override it
-    Job_Base& operator=(const Job_Base& other);
+    Packet_Base& operator=(const Packet_Base& other);
 
   public:
-    virtual ~Job_Base();
-    virtual Job_Base *dup() const {throw cRuntimeError("You forgot to manually add a dup() function to class Job");}
+    virtual ~Packet_Base();
+    virtual Packet_Base *dup() const {throw cRuntimeError("You forgot to manually add a dup() function to class Packet");}
     virtual void parsimPack(cCommBuffer *b);
     virtual void parsimUnpack(cCommBuffer *b);
 
@@ -112,4 +112,4 @@ class Job_Base : public ::cMessage
 
 }; // end namespace queueing
 
-#endif // _JOB_M_H_
+#endif // _PACKET_M_H_

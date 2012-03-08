@@ -10,9 +10,9 @@
 package org.omnetpp.queueing;
 
 //
-// Presents a view of all jobs currently existing in the system.
+// Presents a view of all packets currently existing in the system.
 //
-simple JobList
+simple PacketList
 {
     @display("i=block/table2");
 }

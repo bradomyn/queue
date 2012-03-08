@@ -24,14 +24,14 @@ simple Sink
         @signal[queuesVisited](type="int");
         @signal[delaysVisited](type="int");
         @signal[generation](type="int");
-        @statistic[lifeTime](title="lifetime of arrived jobs";unit=s;record=vector,mean,max;interpolationmode=none);
-        @statistic[totalQueueingTime](title="the total time spent in queues by arrived jobs";unit=s;record=vector?,mean,max;interpolationmode=none);
-        @statistic[totalDelayTime](title="the total time spent in delay nodes by arrived jobs";unit=s;record=vector?,mean,max;interpolationmode=none);
-        @statistic[totalServiceTime](title="the total time spent  by arrived jobs";unit=s;record=vector?,mean,max;interpolationmode=none);
-        @statistic[queuesVisited](title="the total number of queues visited by arrived jobs";record=vector?,mean,max;interpolationmode=none);
-        @statistic[delaysVisited](title="the total number of delays visited by arrived jobs";record=vector?,mean,max;interpolationmode=none);
-        @statistic[generation](title="the generation of the arrived jobs";record=vector?,mean,max;interpolationmode=none);
-        bool keepJobs = default(false); // whether to keep the received jobs till the end of simulation
+        @statistic[lifeTime](title="lifetime of arrived packets";unit=s;record=vector,mean,max;interpolationmode=none);
+        @statistic[totalQueueingTime](title="the total time spent in queues by arrived packets";unit=s;record=vector?,mean,max;interpolationmode=none);
+        @statistic[totalDelayTime](title="the total time spent in delay nodes by arrived packets";unit=s;record=vector?,mean,max;interpolationmode=none);
+        @statistic[totalServiceTime](title="the total time spent  by arrived packets";unit=s;record=vector?,mean,max;interpolationmode=none);
+        @statistic[queuesVisited](title="the total number of queues visited by arrived packets";record=vector?,mean,max;interpolationmode=none);
+        @statistic[delaysVisited](title="the total number of delays visited by arrived packets";record=vector?,mean,max;interpolationmode=none);
+        @statistic[generation](title="the generation of the arrived packets";record=vector?,mean,max;interpolationmode=none);
+        bool keepPackets = default(false); // whether to keep the received packets till the end of simulation
     gates:
         input in[];
 }

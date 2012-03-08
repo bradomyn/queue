@@ -31,7 +31,7 @@ simple PassiveQueue
         int capacity = default(6000); // 4x1500KB //default(-1);  // negative capacity means unlimited queue
         bool fifo = default(true);   // whether the module works as a queue (fifo=true) or a stack (fifo=false)
         string sendingAlgorithm @enum("priority","random","roundRobin","minDelay", "WRS") = default("WRS");
-                                     // how the queue tries to find a suitable server for an incoming job
+                                     // how the queue tries to find a suitable server for an incoming packet
                                      
 		string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first") = default("priority");
     gates:

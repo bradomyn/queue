@@ -14,25 +14,25 @@ namespace queueing {
 
 void SourceBase::initialize() {
 	createdSignal = registerSignal("created");
-	jobCounter = 0;
-	WATCH(jobCounter);
-	jobName = par("jobName").stringValue();
-	if (jobName == "")
-		jobName = getName();
+	packetCounter = 0;
+	WATCH(packetCounter);
+	packetName = par("packetName").stringValue();
+	if (packetName == "")
+		packetName = getName();
 }
 
-Job *SourceBase::createJob() {
+Packet *SourceBase::createPacket() {
 	char buf[80];
-	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
-	Job *job = new Job(buf);
-	//job->setKind(par("jobType"));
+	sprintf(buf, "%.60s-%d", packetName.c_str(), ++packetCounter);
+	Packet *packet = new Packet(buf);
+	//packet->setKind(par("packetType"));
 	int prio = Useful::getInstance()->generateRandomPriority();
-	job->setPriority(prio); //par("jobPriority"));
-	return job;
+	packet->setPriority(prio); //par("packetPriority"));
+	return packet;
 }
 
 void SourceBase::finish() {
-	emit(createdSignal, jobCounter);
+	emit(createdSignal, packetCounter);
 }
 
 //----
@@ -43,15 +43,15 @@ void Source::initialize() {
 	SourceBase::initialize();
 	startTime = par("startTime");
 	stopTime = par("stopTime");
-	numJobs = par("numJobs");
+	numPackets = par("numPackets");
 
 	// schedule the first message timer for start time
-	scheduleAt(startTime, new cMessage("newJobTimer"));
+	scheduleAt(startTime, new cMessage("newPacketTimer"));
 
 	_data = Useful::getInstance()->readDataList("data_10000.txt");
 
-	while(_data.size()< numJobs ) {
-		std::vector<JobDescription> v = Useful::getInstance()->readDataList("data_10000.txt");
+	while(_data.size()< numPackets ) {
+		std::vector<PacketDescription> v = Useful::getInstance()->readDataList("data_10000.txt");
 		_data.insert( _data.end(), v.begin(), v.end() );
 	}
 	std::cout << "data size " << _data.size() << std::endl;
@@ -69,14 +69,14 @@ void Source::handleMessage(cMessage *msg) {
 
 #if 1
 
-	if( (numJobs < 0 || numJobs > jobCounter || numJobs<_data.size() )
+	if( (numPackets < 0 || numPackets > packetCounter || numPackets<_data.size() )
 			&& (stopTime < 0 || stopTime > simTime()) ) {
 		// reschedule the timer for the next message
 		simtime_t sourceTime = simTime() + par("interArrivalTime").doubleValue();
 		scheduleAt(sourceTime, msg);
 
-		Job *job = generateJob( _data.at(numCreated).getPriority(), _data.at(numCreated).getSize() );
-		send(job, "out");
+		Packet *packet = generatePacket( _data.at(numCreated).getPriority(), _data.at(numCreated).getSize() );
+		send(packet, "out");
 		//std::cout << "Message sent at " << sourceTime << std::endl;
 		numCreated++;
 	} else {
@@ -85,14 +85,14 @@ void Source::handleMessage(cMessage *msg) {
 		delete msg;
 	}
 #else
-	if ((numJobs < 0 || numJobs > jobCounter)
+	if ((numPackets < 0 || numPackets > packetCounter)
 			&& (stopTime < 0 || stopTime > simTime())) {
 		// reschedule the timer for the next message
 		simtime_t sourceTime = simTime() + par("interArrivalTime").doubleValue();
 		scheduleAt(sourceTime, msg);
 
-		Job *job = generateJob(); //createJob();
-		send(job, "out");
+		Packet *packet = generatePacket(); //createPacket();
+		send(packet, "out");
 		//std::cout << "Message sent at " << sourceTime << std::endl;
 
 		numCreated++;
@@ -104,21 +104,21 @@ void Source::handleMessage(cMessage *msg) {
 
 }
 
-Job * Source::generateJob() {
+Packet * Source::generatePacket() {
 	//log("test");
 	char buf[80];
-	std::string jobName = "j";
-	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
-	Job *job = new Job(buf);
+	std::string packetName = "j";
+	sprintf(buf, "%.60s-%d", packetName.c_str(), ++packetCounter);
+	Packet *packet = new Packet(buf);
 	int randomP = Useful::getInstance()->generateRandomPriority();
 
 	// TODO work with a fixed, repeatable data set
-	job->setPriority(randomP);
+	packet->setPriority(randomP);
 
 	int randomS = Useful::getInstance()->generateRandomSize();
 
 	// TODO work with a fixed, repeatable data set
-	job->setSize(randomS);
+	packet->setSize(randomS);
 
 	// to build a data file:
 	//Useful::getInstance()->writeRandomDataToList("data.txt", randomP, randomS);
@@ -126,39 +126,39 @@ Job * Source::generateJob() {
 
 	simtime_t creationTime = simTime();
 	char name[80];
-	//sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
-	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), randomP, creationTime.dbl());
+	//sprintf(name, "id: %ld, priority: %d; %f", packet->getId(), random, triggerTime);
+	sprintf(name, "id: %ld, priority: %d; > %lf", packet->getId(), randomP, creationTime.dbl());
 	name[79] = '\0';
-	job->setName(name);
-	std::cout << "job (id: " << job->getId() << ") priority set to: " << randomP << " size " << randomS << std::endl;
+	packet->setName(name);
+	std::cout << "packet (id: " << packet->getId() << ") priority set to: " << randomP << " size " << randomS << std::endl;
 
-	job->setTimestamp(creationTime);
+	packet->setTimestamp(creationTime);
 
-	return job;
-} // generateJob()
+	return packet;
+} // generatePacket()
 
-Job * Source::generateJob( int priority, int size ) {
+Packet * Source::generatePacket( int priority, int size ) {
 	//log("test");
 	char buf[80];
-	std::string jobName = "j";
-	sprintf(buf, "%.60s-%d", jobName.c_str(), ++jobCounter);
+	std::string packetName = "j";
+	sprintf(buf, "%.60s-%d", packetName.c_str(), ++packetCounter);
 
-	Job *job = new Job(buf);
-	job->setPriority(priority);
-	job->setSize(size);
+	Packet *packet = new Packet(buf);
+	packet->setPriority(priority);
+	packet->setSize(size);
 
 	simtime_t creationTime = simTime();
 	char name[80];
-	//sprintf(name, "id: %ld, priority: %d; %f", job->getId(), random, triggerTime);
-	sprintf(name, "id: %ld, priority: %d; > %lf", job->getId(), priority, creationTime.dbl());
+	//sprintf(name, "id: %ld, priority: %d; %f", packet->getId(), random, triggerTime);
+	sprintf(name, "id: %ld, priority: %d; > %lf", packet->getId(), priority, creationTime.dbl());
 	name[79] = '\0';
-	job->setName(name);
-	//std::cout << "job (id: " << job->getId() << ") priority set to: " << priority << " size " << size << std::endl;
+	packet->setName(name);
+	//std::cout << "packet (id: " << packet->getId() << ") priority set to: " << priority << " size " << size << std::endl;
 
-	job->setTimestamp(creationTime);
+	packet->setTimestamp(creationTime);
 
-	return job;
-} // generateJob()
+	return packet;
+} // generatePacket()
 
 };
 //namespace

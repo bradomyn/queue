@@ -18,9 +18,9 @@ void TriggerBase::initialize() {
 	WATCH(triggerCounter);
 }
 
-Job *TriggerBase::createJob() {
-	Job *job = new Job("trigger");
-	return job;
+Packet *TriggerBase::createPacket() {
+	Packet *packet = new Packet("trigger");
+	return packet;
 }
 
 void TriggerBase::finish() {
@@ -35,7 +35,7 @@ void Trigger::initialize() {
 	TriggerBase::initialize();
 	startTime = par("startTime");
 	stopTime = par("stopTime");
-	numJobs = par("numJobs");
+	numPackets = par("numPackets");
 
 	// schedule the first message timer for start time
 	scheduleAt(startTime, new cMessage("trigger"));
@@ -48,15 +48,15 @@ void Trigger::initialize() {
 void Trigger::handleMessage(cMessage *msg) {
 	ASSERT(msg->isSelfMessage());
 
-	if ((numJobs < 0 || numJobs > triggerCounter)
+	if ((numPackets < 0 || numPackets > triggerCounter)
 			&& (stopTime < 0 || stopTime > simTime())) {
 		// reschedule the timer for the next message
 		simtime_t triggerTime = simTime() + par("triggerIntervall").doubleValue();
 		scheduleAt(triggerTime, msg);
 
-		Job *job = generateTrigger();
+		Packet *packet = generateTrigger();
 
-		send(job, "out");
+		send(packet, "out");
 		//std::cout << "Trigger sent at " << triggerTime << std::endl;
 
 		numCreated++;
@@ -66,12 +66,12 @@ void Trigger::handleMessage(cMessage *msg) {
 	}
 }
 
-Job * Trigger::generateTrigger() {
-	Job *job = new Job();
+Packet * Trigger::generateTrigger() {
+	Packet *packet = new Packet();
 	simtime_t creationTime = simTime();
-	job->setName("trigger");
-	job->setTimestamp(creationTime);
-	return job;
+	packet->setName("trigger");
+	packet->setTimestamp(creationTime);
+	return packet;
 } // generateTrigger()
 
 };

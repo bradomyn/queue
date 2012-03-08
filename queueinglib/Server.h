@@ -19,12 +19,12 @@
 
 namespace queueing {
 
-class Job;
+class Packet;
 class SelectionStrategyServer;
 
 /**
  * The queue server. It cooperates with several Queues that which queue up
- * the jobs, and send them to Server on request.
+ * the packets, and send them to Server on request.
  *
  * @see PassiveQueue
  */
@@ -36,7 +36,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         int numQueues;
         SelectionStrategyServer *selectionStrategy;	// currently not used
 
-        Job *jobServiced;
+        Packet *packetServiced;
         cMessage *endServiceMsg;
 
         // receive trigger messages
@@ -59,7 +59,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         virtual bool isIdle();
 
     private:
-        void serveCurrentJob();
+        void serveCurrentPacket();
 
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);
