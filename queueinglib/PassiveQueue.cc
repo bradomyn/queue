@@ -59,7 +59,10 @@ void PassiveQueue::initialize()
 		_scheduling = 2;
 	} else if (strcmp(algName, "original") == 0) {
 		_scheduling = 3;
+	} else if (strcmp(algName, "7first") == 0) {
+		_scheduling = 4;
 	}
+
 }
 
 int PassiveQueue::determineQueueSize() {
@@ -120,6 +123,9 @@ void PassiveQueue::handleMessage(cMessage *msg)
             getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
     	break;
     case 2:	// feedback
+    	//std::cout << this->getName() << " feedback" << std::endl;
+    	// TODO
+
     	break;
     case 3:	// original
     	//std::cout << this->getName() << " original" << std::endl;
@@ -157,6 +163,19 @@ void PassiveQueue::handleMessage(cMessage *msg)
 		if (ev.isGUI())
 			getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
     	break;
+	case 4:	// 7first
+		//std::cout << this->getName() << " 7first" << std::endl;
+		if( job->getPriority()==7 ){
+			// send through without queueing
+			send(job, "out",0);
+			numServed++;
+		} else {
+			// enqueue if no idle server found
+			queue.insert(job);
+			emit(queueLengthSignal, length());
+			job->setQueueCount(job->getQueueCount() + 1);
+		}
+		break;
     default:
     	break;
     } // switch

@@ -25,7 +25,7 @@ simple Server
              // how the next job will be choosen from the attached queues
         volatile double serviceTime @unit(s); // service time of a job
         
-        string schedulingAlgorithm @enum("none", "priority" , "feedback", "original") = default("original");
+        string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first") = default("priority");
     gates:
         input in[8];
         output out;

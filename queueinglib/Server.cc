@@ -73,6 +73,8 @@ void Server::initialize()
 		_scheduling = 2;
 	} else if (strcmp(algName, "original") == 0) {
 		_scheduling = 3;
+	} else if (strcmp(algName, "7first") == 0) {
+		_scheduling = 4;
 	}
 
 } // initialize()
@@ -155,6 +157,7 @@ void Server::handleMessage(cMessage *msg)
 		}
 			break;
 		case 2: // feedback
+			// std::cout << this->getName() << " feedback" << std::endl;
 			// TODO
 			break;
 		case 3: // original
@@ -190,53 +193,43 @@ void Server::handleMessage(cMessage *msg)
 
 		        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
 		    }
-			//std::cout << "original: " << msg->getName() << std::endl;
-			// Original
-/*			if (msg == endServiceMsg) {
-					//std::cout << "endServiceMsg " << endServiceMsg->getName() << std::endl;
-					ASSERT(jobServiced!=NULL);
-					simtime_t d = simTime() - endServiceMsg->getSendingTime();
-					jobServiced->setTotalServiceTime(
-							jobServiced->getTotalServiceTime() + d);
-					send(jobServiced, "out");
-					std::cout << jobServiced->getName() << " with prio "
-							<< jobServiced->getPriority() << " sent" << std::endl;
-					numSent++;
-					jobServiced = NULL;
-					emit(busySignal, 0);
-
-					if (ev.isGUI())
-						getDisplayString().setTagArg("i", 1, "");
-
-					// examine all input queues, and request a new job from a non empty queue
-					int k = selectionStrategy->select();
-					std::cout << "server selected gate " << k << std::endl;
-					if (k >= 0) {
-						EV << "requesting job from queue " << k << endl;
-						std::cout << "requesting job from queue " << k << std::endl;
-						cGate *gate = selectionStrategy->selectableGate(k);
-						check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(
-								gate->getIndex());
+			break;
+		case 4:	// 7first
+			//std::cout << this->getName() << " 7first" << std::endl;
+			if (msg == triggerServiceMsg) {
+				//std::cout << " triggerServiceMsg: ";
+				serveCurrentJob();
+			} else {
+				if (strcmp(msg->getName(), "trigger") == 0) {
+					// trigger test
+					//std::cout << " server triggered ";
+					// check all other queue gates
+					for (int i = 6; i > -1; i--) {
+						if (_qs.at(i)->length() > 0) {
+							//std::cout << "q" << i << " length " << _qs.at(i)->length();
+							while( _qs.at(i)->length()>0 ) {
+							//if (_qs.at(i)->length()) {
+								//std::cout << " request i " << i << std::endl;
+								_qs.at(i)->request(0);
+							}
+						}
 					}
 				} else {
 					if (jobServiced) {
+						std::cout << "job arrived while already servicing one "
+								<< jobServiced->getName() << " vs. "
+								<< msg->getName() << std::endl;
 						error("job arrived while already servicing one");
-						std::cout << "job arrived while already servicing one"
-								<< std::endl;
+						//serveCurrentJob();
 					}
 
-					if (strcmp(msg->getName(), triggerServiceMsg->getName()) != 0) {
-						jobServiced = check_and_cast<Job *>(msg);
-						std::cout << "jobServiced " << jobServiced->getName()
-								<< " with prio " << jobServiced->getPriority()
-								<< " sent" << std::endl;
-						simtime_t serviceTime = par("serviceTime");
-						scheduleAt(simTime() + serviceTime, endServiceMsg);
-						emit(busySignal, 1);
-						if (ev.isGUI())
-							getDisplayString().setTagArg("i", 1, "cyan");
-					}
-			}*/
+					jobServiced = check_and_cast<Job *>(msg);
+					//std::cout << "jobServiced: " << jobServiced->getName()
+						//	<< std::endl;
+					simtime_t serviceTime = par("serviceTime");
+					scheduleAt(simTime() + serviceTime, triggerServiceMsg);
+				}
+			}
 			break;
 		default:
 			break;
