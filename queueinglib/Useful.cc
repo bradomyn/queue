@@ -111,7 +111,7 @@ std::vector<PacketDescription> Useful::readDataList(std::string filename) {
 void Useful::appendToFile(std::string filename, std::string value) {
 	FILE* filehandle = fopen( filename.c_str(),"a" );
 	if( filehandle ) {
-		fprintf(filehandle,"%s\n", value);	// append to end of file
+		fprintf(filehandle,"%s\n", value.c_str());	// append to end of file
 		fclose(filehandle );
 	}
 } // appendToFile()

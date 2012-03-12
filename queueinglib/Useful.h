@@ -8,6 +8,9 @@
 #ifndef USEFUL_H_
 #define USEFUL_H_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 #include <sstream>
 
 #include <iostream>
