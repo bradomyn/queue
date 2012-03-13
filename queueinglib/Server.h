@@ -45,6 +45,8 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         int numSent;
         int triggerCounter;
 
+        simtime_t _serviceTime;
+
     public:
         Server();
         virtual ~Server();

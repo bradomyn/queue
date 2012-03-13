@@ -77,6 +77,8 @@ void Server::initialize()
 		_scheduling = 4;
 	}
 
+	_serviceTime = par("serviceTime");
+
 } // initialize()
 
 void Server::serveCurrentPacket() {
@@ -96,15 +98,33 @@ void Server::handleMessage(cMessage *msg)
 	//std::cout << "server received " << msg->getName() << std::endl;
 	Packet *packet;
 	int k;
-		simtime_t serviceTime = par("serviceTime");
+
 		switch(_scheduling) {
 		case 0:	// none
+#if 0
 			// use with WRS.ned
 			// send through without thinking
 			packet = check_and_cast<Packet *>(msg);
 			packet->setTimestamp();
 			send(packet, "out");
 			numSent++;
+#else
+			if (msg == triggerServiceMsg) {
+				serveCurrentPacket();
+			} else {
+				if (strcmp(msg->getName(), "trigger") != 0) {
+					if (packetServiced) {
+						std::cout << "packet arrived while already servicing one "
+								<< packetServiced->getName() << " vs. "
+								<< msg->getName() << std::endl;
+						error("packet arrived while already servicing one");
+						//serveCurrentPacket();
+					}
+					packetServiced = check_and_cast<Packet *>(msg);
+					scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+				}
+			}
+#endif
 			break;
 		case 1: // priority
 		// use with WRS1.ned
@@ -150,8 +170,7 @@ void Server::handleMessage(cMessage *msg)
 				packetServiced = check_and_cast<Packet *>(msg);
 				//std::cout << "packetServiced: " << packetServiced->getName()
 					//	<< std::endl;
-				simtime_t serviceTime = par("serviceTime");
-				scheduleAt(simTime() + serviceTime, triggerServiceMsg);
+				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 			}
 		}
 			break;
@@ -188,8 +207,7 @@ void Server::handleMessage(cMessage *msg)
 		            error("packet arrived while already servicing one");
 
 		        packetServiced = check_and_cast<Packet *>(msg);
-		        simtime_t serviceTime = par("serviceTime");
-		        scheduleAt(simTime()+serviceTime, endServiceMsg);
+		        scheduleAt(simTime()+_serviceTime, endServiceMsg);
 		        emit(busySignal, 1);
 
 		        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
@@ -228,8 +246,7 @@ void Server::handleMessage(cMessage *msg)
 					packetServiced = check_and_cast<Packet *>(msg);
 					//std::cout << "packetServiced: " << packetServiced->getName()
 						//	<< std::endl;
-					simtime_t serviceTime = par("serviceTime");
-					scheduleAt(simTime() + serviceTime, triggerServiceMsg);
+					scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 				}
 			}
 			break;

@@ -49,12 +49,12 @@ void Source::initialize() {
 	scheduleAt(startTime, new cMessage("newPacketTimer"));
 
 	_data = Useful::getInstance()->readDataList("data_10000.txt");
-
+	//Useful::getInstance()->appendToFile("source_out.txt", int(_data.size()));
 	while(_data.size()< numPackets ) {
 		std::vector<PacketDescription> v = Useful::getInstance()->readDataList("data_10000.txt");
 		_data.insert( _data.end(), v.begin(), v.end() );
 	}
-	std::cout << "data size " << _data.size() << std::endl;
+	//Useful::getInstance()->appendToFile("source_out.txt", int(_data.size()));
 
 	//for( int i=0; i<_data.size(); i++ )
 	  //std::cout << _data.at(i).getPriority() << " " << _data.at(i).getSize() << std::endl;
@@ -66,15 +66,15 @@ void Source::initialize() {
 
 void Source::handleMessage(cMessage *msg) {
 	ASSERT(msg->isSelfMessage());
-
+#if 1
 #if 1
 
-	if( (numPackets < 0 || numPackets > packetCounter || numPackets<_data.size() )
+	if( (numCreated < numPackets || numPackets < 0 || numPackets > numCreated || numCreated<_data.size() )
 			&& (stopTime < 0 || stopTime > simTime()) ) {
 		// reschedule the timer for the next message
 		simtime_t sourceTime = simTime() + par("interArrivalTime").doubleValue();
 		scheduleAt(sourceTime, msg);
-
+		//Useful::getInstance()->appendToFile("source_out.txt", numCreated);
 		Packet *packet = generatePacket( _data.at(numCreated).getPriority(), _data.at(numCreated).getSize() );
 		send(packet, "out");
 		//std::cout << "Message sent at " << sourceTime << std::endl;
@@ -101,7 +101,7 @@ void Source::handleMessage(cMessage *msg) {
 		delete msg;
 	}
 #endif
-
+#endif
 }
 
 Packet * Source::generatePacket() {
