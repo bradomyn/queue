@@ -59,6 +59,7 @@ public:
 	int getPriority(string name);
 
 	int generateRandomPriority();
+	int generateRandomPriority(int lower, int upper);
 	int generateRandomSize();
 
 	std::vector<PacketDescription> readDataList(std::string filename);
@@ -68,6 +69,9 @@ public:
 	void appendToFile(std::string filename, std::string value);
 	void appendToFile(std::string filename, double value);
 	void appendToFile(std::string filename, int value);
+
+    // helper function to create input data
+    void createInputData(int number);
 
 private:
 	static Useful *_instance;

@@ -70,6 +70,11 @@ int Useful::generateRandomPriority() {
 	return random;
 } // generateRandomPriority()
 
+int Useful::generateRandomPriority(int lower, int upper) {
+	int random = rand() % (upper - lower) + lower;
+	return random;
+} // generateRandomPriority()
+
 int Useful::generateRandomSize() {
 	int random = 0;
 #if 0
@@ -131,4 +136,44 @@ void Useful::appendToFile(std::string filename, int value) {
 		fclose(filehandle );
 	}
 } // appendToFile()
+
+// structure to group data
+struct packet{
+	int priority;	// 0..7
+	int frequency;	// us..s
+	int payload;	// bytes
+};
+
+/*
+s: 	1			1 s
+ms: 1			0.001 s
+μs: 1			0.000001 s
+
+1s = 1000 ms = 1000000 μs
+
+*/
+
+/*
+prio	frequency		payload
+7 		1 ms -> 100μs 	64 -> 1500 bytes
+6 		1 sec -> 1ms	64 -> 1500 bytes
+5 		1 sec -> 1ms	64 -> 1500 bytes
+4 		1 sec -> 1ms	64 -> 1500 bytes
+3 		2 sec -> 1ms	64 -> 1500 bytes
+2 		3 sec -> 1ms	64 -> 1500 bytes
+1 		3 sec -> 1ms	64 -> 1500 bytes
+0 		4 sec -> 1ms	64 -> 1500 bytes	*/
+void Useful::createInputData(int number) {
+	packet p;
+	for (int var = 0; var < number; ++var) {
+		p.payload = generateRandomPriority(64, 1500);
+		p.priority = 7;
+		p.frequency = 0;
+		// frequency is encoded in order
+		writeRandomDataToList("inputdata.txt", p.priority, p.payload);
+	}
+
+} // createInputData()
+
+
 } /* namespace queueing */

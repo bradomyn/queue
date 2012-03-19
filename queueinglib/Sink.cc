@@ -40,6 +40,8 @@ void Sink::handleMessage(cMessage *msg)
 
     std::cout << "#" << numReceived << ": " << packet->getName() << " received. ct " << msg->getCreationTime() << " st " << currentTime << " lifetime " << lifetime  << std::endl;
 
+    // TODO investigate distribution of packet sizes (payload)
+
     switch( packet->getPriority() ) {
     case 0:
     	v0.push_back(lifetime);

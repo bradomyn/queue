@@ -1,14 +1,14 @@
 version 2
-run WRS1-0-20120308-15:28:58-1984
+run WRS1-0-20120319-10:21:14-11439
 attr configname WRS1
-attr datetime 20120308-15:28:58
+attr datetime 20120319-10:21:14
 attr experiment WRS1
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WRS1
-attr processid 1984
+attr processid 11439
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -107,11 +107,11 @@ attr title  "the total number of queues visited by arrived packets, mean"
 scalar WRS1.sink 	queuesVisited:max 	2
 attr interpolationmode  none
 attr title  "the total number of queues visited by arrived packets, max"
-scalar WRS1.sink 	totalServiceTime:mean 	0
+scalar WRS1.sink 	totalServiceTime:mean 	1.3e-05
 attr interpolationmode  none
 attr title  "the total time spent  by arrived packets, mean"
 attr unit  s
-scalar WRS1.sink 	totalServiceTime:max 	0
+scalar WRS1.sink 	totalServiceTime:max 	1.3e-05
 attr interpolationmode  none
 attr title  "the total time spent  by arrived packets, max"
 attr unit  s
@@ -131,11 +131,11 @@ scalar WRS1.sink 	totalQueueingTime:max 	1.3e-05
 attr interpolationmode  none
 attr title  "the total time spent in queues by arrived packets, max"
 attr unit  s
-scalar WRS1.sink 	lifeTime:mean 	6.1403140314032e-06
+scalar WRS1.sink 	lifeTime:mean 	1.9140314031401e-05
 attr interpolationmode  none
 attr title  "lifetime of arrived packets, mean"
 attr unit  s
-scalar WRS1.sink 	lifeTime:max 	1.3e-05
+scalar WRS1.sink 	lifeTime:max 	2.6e-05
 attr interpolationmode  none
 attr title  "lifetime of arrived packets, max"
 attr unit  s
