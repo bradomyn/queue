@@ -35,6 +35,7 @@ class QUEUEING_API Sink : public cSimpleModule
 
     int numReceived;
 
+    // group for transfer times
     vector<simtime_t> v0;
     vector<simtime_t> v1;
     vector<simtime_t> v2;
@@ -44,6 +45,16 @@ class QUEUEING_API Sink : public cSimpleModule
     vector<simtime_t> v6;
     vector<simtime_t> v7;
     double avg_lifetime(vector<simtime_t> v);
+
+    // group for packet sizes
+    vector<int> v00;
+    vector<int> v01;
+    vector<int> v02;
+    vector<int> v03;
+    vector<int> v04;
+    vector<int> v05;
+    vector<int> v06;
+    vector<int> v07;
 
   protected:
     virtual void initialize();

@@ -42,6 +42,15 @@ void Sink::handleMessage(cMessage *msg)
 
     // TODO investigate distribution of packet sizes (payload)
 
+    int size = packet->getSize();
+    if( size < 500 ) {
+    	v00.push_back(0);
+    } else if ( size>=500 && size <1000 ) {
+    	v01.push_back(1);
+    } else if( size >=1000 && size <=1500 ) {
+    	v02.push_back(2);
+    }
+
     switch( packet->getPriority() ) {
     case 0:
     	v0.push_back(lifetime);
@@ -110,6 +119,9 @@ void Sink::finish()
 	std::cout << "p 7: avg " << avg_lifetime(v7) << " size " << v7.size() << std::endl;
 
 	determineQueueSizes();
+
+	std::cout << "packet sizes " << v00.size() << " " << v01.size() << " " << v02.size() << std::endl;
+
 }
 
 void Sink::determineQueueSizes() {

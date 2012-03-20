@@ -30,6 +30,8 @@ simple Source
         double startTime @unit(s) = default(interArrivalTime); // when the module sends out the first packet
         double stopTime @unit(s) = default(-1s); // when the module stops the packet generation (-1 means no limit)
         
+        string inputDataFile = default("data.txt");
+        
     gates:
         output out;
 }
