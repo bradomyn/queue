@@ -161,6 +161,8 @@ $O/Router.o: Router.cc \
 $O/SelectionStrategies.o: SelectionStrategies.cc \
 	IPassiveQueue.h \
 	IServer.h \
+	Packet.h \
+	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	SelectionStrategies.h \
@@ -169,6 +171,8 @@ $O/SelectionStrategies.o: SelectionStrategies.cc \
 $O/SelectionStrategiesServer.o: SelectionStrategiesServer.cc \
 	IPassiveQueue.h \
 	IServer.h \
+	Packet.h \
+	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	SelectionStrategies.h \

@@ -25,7 +25,7 @@ simple Server
              // how the next packet will be choosen from the attached queues
         volatile double serviceTime @unit(s); // service time of a packet
         
-        string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first") = default("priority");
+        string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first") = default("7first");
     gates:
         input in[8];
         output out;

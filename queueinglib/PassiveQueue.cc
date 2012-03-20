@@ -100,32 +100,13 @@ void PassiveQueue::handleMessage(cMessage *msg)
     	// use with WRS1.ned
     	//std::cout << this->getName() << " priority" << std::endl;
         //std::cout << "capacity " << capacity << " " << this->getName() << " queue size " << determineQueueSize() << std::endl;
-        // check for container capacity
-        //if (capacity >=0 && queue.length() >= capacity)
-        if( capacity >=0 && determineQueueSize()>=capacity ) {
-            EV << this->getName() << " full! Packet dropped.\n";
-            std::cerr << this->getName() << " full! Packet dropped." << std::endl;
-            if (ev.isGUI()) bubble("Dropped!");
-            emit(droppedSignal, 1);
-            delete msg;
-            return;
-        }
-        // Trigger Test
-        // queue everything until requested, truly passive queue
-        queue.insert(packet);
-        //std::cout << "queued: " << packet->getName() << std::endl;
-        emit(queueLengthSignal, length());
-        packet->setQueueCount(packet->getQueueCount() + 1);
-        numQueued++;
-
-        // change the icon color
-        if (ev.isGUI())
-            getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
+    	checkCapacityAndQueue(msg);
     	break;
     case 2:	// feedback
     	//std::cout << this->getName() << " feedback" << std::endl;
-    	// TODO
-
+    	//checkCapacityAndQueue(msg);
+    	send(packet, "out", 0);
+    	numServed++;
     	break;
     case 3:	// original
     	//std::cout << this->getName() << " original" << std::endl;
@@ -133,8 +114,7 @@ void PassiveQueue::handleMessage(cMessage *msg)
     	packet->setTimestamp();
 
 		// check for container capacity
-		if (capacity >=0 && queue.length() >= capacity)
-		{
+		if (capacity >=0 && queue.length() >= capacity) {
 			EV << "Queue full! Packet dropped.\n";
 			if (ev.isGUI()) bubble("Dropped!");
 			emit(droppedSignal, 1);
@@ -143,20 +123,16 @@ void PassiveQueue::handleMessage(cMessage *msg)
 		}
 
 		k = selectionStrategy->select();
-		if (k < 0)
-		{
+		if (k < 0) {
 			// enqueue if no idle server found
 			queue.insert(packet);
 			emit(queueLengthSignal, length());
 			packet->setQueueCount(packet->getQueueCount() + 1);
-		}
-		else if (length() == 0)
-		{
+		} else if (length() == 0) {
 			// send through without queueing
 			send(packet, "out", k);
 			numServed++;
-		}
-		else
+		} else
 			error("This should not happen. Queue is NOT empty and there is an IDLE server attached to us.");
 
 		// change the icon color
@@ -181,6 +157,29 @@ void PassiveQueue::handleMessage(cMessage *msg)
     	break;
     } // switch
 } // handleMessage()
+
+void PassiveQueue::checkCapacityAndQueue(cMessage *msg) {
+	Packet *packet = check_and_cast<Packet *>(msg);
+	if( capacity >=0 && determineQueueSize()>=capacity ) {
+		EV << this->getName() << " full! Packet dropped.\n";
+		std::cerr << this->getName() << " full! Packet dropped." << std::endl;
+		if (ev.isGUI()) bubble("Dropped!");
+		emit(droppedSignal, 1);
+		delete msg;
+		return;
+	}
+	// Trigger Test
+	// queue everything until requested, truly passive queue
+	queue.insert(packet);
+	//std::cout << "queued: " << packet->getName() << std::endl;
+	emit(queueLengthSignal, length());
+	packet->setQueueCount(packet->getQueueCount() + 1);
+	numQueued++;
+
+	// change the icon color
+	if (ev.isGUI())
+		getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
+} // checkCapacityAndQueue()
 
 int PassiveQueue::length()
 {

@@ -41,6 +41,8 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
 
         int _scheduling;
 
+        void checkCapacityAndQueue(cMessage *msg);
+
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);

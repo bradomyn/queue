@@ -14,8 +14,10 @@
 #include "Useful.h"
 
 #include "PassiveQueue.h"
+#include "Packet.h"
 
 #include <vector>
+#include <set>
 
 namespace queueing {
 
@@ -28,6 +30,7 @@ class SelectionStrategyServer;
  *
  * @see PassiveQueue
  */
+
 class QUEUEING_API Server : public cSimpleModule, public IServer
 {
     private:
@@ -46,6 +49,14 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         int triggerCounter;
 
         simtime_t _serviceTime;
+
+        // TODO
+        struct packet_comparison {
+			bool operator() (const Packet* lhs, const Packet* rhs) const {
+			  return lhs->getCreationTime()<rhs->getCreationTime();
+			}
+		};
+        set<Packet*, packet_comparison> _order;
 
     public:
         Server();

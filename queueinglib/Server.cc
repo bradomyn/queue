@@ -175,10 +175,59 @@ void Server::handleMessage(cMessage *msg)
 		}
 			break;
 		case 2: // feedback
-			// std::cout << this->getName() << " feedback" << std::endl;
+			//std::cout << this->getName() << " feedback" << std::endl;
 			// TODO
 			// store information internally how long a message is already there
 			// serve oldest first
+
+			// TODO how to determine oldest frame? evaluate timestamps?
+			if (msg == triggerServiceMsg) {
+				//serveCurrentPacket();
+				_order.insert(new Packet(*packetServiced));
+				packetServiced = NULL;
+
+				std::cout << this->getName() << " " << _order.size() << std::endl;
+			} else {
+				if (strcmp(msg->getName(), "trigger") != 0) {
+
+					// investigate set for oldest entries
+					if (_order.size()>0 ) {
+						set<Packet*, packet_comparison>::iterator it;
+						it = _order.begin();
+						while( it!=_order.end() ) {
+						//for( it= _order.begin(); it!=_order.end(); it++ ) {
+							Packet * packet = *it;
+							if( packet->getPriority()==7 ) {
+								packet->setTimestamp();
+								send(packet, "out");
+								numSent++;
+								std::cout << "sent " << packet->getName() << " orders " << _order.size() << std::endl;
+								_order.erase(packet);
+							} else {
+								// sort for timestamps
+								packet->setTimestamp();
+								send(packet, "out");
+								numSent++;
+								std::cout << "sent " << packet->getName() << " orders " << _order.size() << std::endl;
+								_order.erase(packet);
+							}
+						}
+					}
+
+					if (packetServiced) {
+						std::cout << "packet arrived while already servicing one "
+								<< packetServiced->getName() << " vs. "
+								<< msg->getName() << std::endl;
+						std::cout << "orders " << _order.size() << std::endl;
+						error("packet arrived while already servicing one");
+						//serveCurrentPacket();
+					}
+					packetServiced = check_and_cast<Packet *>(msg);
+					//scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+				}
+			}
+			// retrieve elements from queues different than 7, increase priority if older
+
 			break;
 		case 3: // original
 			//std::cout << this->getName() << " original" << std::endl;
