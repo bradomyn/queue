@@ -75,6 +75,8 @@ void Server::initialize()
 		_scheduling = 3;
 	} else if (strcmp(algName, "7first") == 0) {
 		_scheduling = 4;
+	} else if (strcmp(algName, "feedback2") == 0) {
+		_scheduling = 5;
 	}
 
 	_serviceTime = par("serviceTime");
@@ -175,59 +177,44 @@ void Server::handleMessage(cMessage *msg)
 		}
 			break;
 		case 2: // feedback
-			//std::cout << this->getName() << " feedback" << std::endl;
-			// TODO
-			// store information internally how long a message is already there
-			// serve oldest first
-
-			// TODO how to determine oldest frame? evaluate timestamps?
 			if (msg == triggerServiceMsg) {
-				//serveCurrentPacket();
-				_order.insert(new Packet(*packetServiced));
-				packetServiced = NULL;
-
-				std::cout << this->getName() << " " << _order.size() << std::endl;
-			} else {
-				if (strcmp(msg->getName(), "trigger") != 0) {
-
-					// investigate set for oldest entries
-					if (_order.size()>0 ) {
-						set<Packet*, packet_comparison>::iterator it;
-						it = _order.begin();
-						while( it!=_order.end() ) {
-						//for( it= _order.begin(); it!=_order.end(); it++ ) {
-							Packet * packet = *it;
-							if( packet->getPriority()==7 ) {
-								packet->setTimestamp();
-								send(packet, "out");
-								numSent++;
-								std::cout << "sent " << packet->getName() << " orders " << _order.size() << std::endl;
-								_order.erase(packet);
-							} else {
-								// sort for timestamps
-								packet->setTimestamp();
-								send(packet, "out");
-								numSent++;
-								std::cout << "sent " << packet->getName() << " orders " << _order.size() << std::endl;
-								_order.erase(packet);
-							}
+				//std::cout << " triggerServiceMsg: ";
+				if (_order.size()>0 ) {
+					map<simtime_t, Packet*>::iterator it;
+					it = _order.begin();
+					//while( it!=_order.end() ) {
+					for( it = _order.begin(); it!=_order.end(); it++ ) {
+						Packet * packet = it->second;
+						if( packet->getPriority()==7 ) {
+							//packet->setTimestamp();
+							send(packet, "out");
+							numSent++;
+							std::cout << "7 sent " << packet->getName() << " orders " << _order.size();
+							_order.erase(packet->getCreationTime());
+							std::cout << " " << _order.size() << std::endl;
+						} else {
+							// sort for timestamps
+							//packet->setTimestamp();
+							send(packet, "out");
+							numSent++;
+							std::cout << "x sent " << packet->getName() << " orders " << _order.size();
+							_order.erase(packet->getCreationTime());
+							std::cout << " " << _order.size() << std::endl;
 						}
 					}
+				}
+			} else {
+				if (strcmp(msg->getName(), "trigger") != 0) {
+					// fill internal storage
+					Packet *packetServiced = check_and_cast<Packet *>(msg);
+					_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
+					//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
+					//packetServiced = NULL;
+					//std::cout << "packetServiced: " << packetServiced->getName() << std::endl;
 
-					if (packetServiced) {
-						std::cout << "packet arrived while already servicing one "
-								<< packetServiced->getName() << " vs. "
-								<< msg->getName() << std::endl;
-						std::cout << "orders " << _order.size() << std::endl;
-						error("packet arrived while already servicing one");
-						//serveCurrentPacket();
-					}
-					packetServiced = check_and_cast<Packet *>(msg);
-					//scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+					scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 				}
 			}
-			// retrieve elements from queues different than 7, increase priority if older
-
 			break;
 		case 3: // original
 			//std::cout << this->getName() << " original" << std::endl;
@@ -299,11 +286,91 @@ void Server::handleMessage(cMessage *msg)
 				}
 			}
 			break;
+		case 5:	// feedback 2
+			// use with WRS1.ned
+		if (msg == triggerServiceMsg) {
+			// check internal queues
+			vector<Packet*>::iterator it;
+
+			simtime_t timeDist = simTime()-1;
+
+			checkWaitingTimeAndMoveToOtherQueue(0, _iq0, _iq1, timeDist);
+			checkWaitingTimeAndMoveToOtherQueue(1, _iq1, _iq2, timeDist);
+			checkWaitingTimeAndMoveToOtherQueue(2, _iq2, _iq3, timeDist);
+			checkWaitingTimeAndMoveToOtherQueue(3, _iq3, _iq4, timeDist);
+			checkWaitingTimeAndMoveToOtherQueue(4, _iq4, _iq5, timeDist);
+			checkWaitingTimeAndMoveToOtherQueue(5, _iq5, _iq6, timeDist);
+			checkWaitingTimeAndMoveToOtherQueue(6, _iq6, _iq7, timeDist);
+
+			if (_iq7.size() > 0) {
+				it = _iq7.begin();
+				while( it!=_iq7.end() ) {
+					if( (simTime()-(*it)->getCreationTime())> timeDist ) {
+						send(*it, "out");
+						_iq7.erase(it);
+					}
+				}
+			}
+
+		} else {
+			if (strcmp(msg->getName(), "trigger") != 0) {
+				/*if (packetServiced) {
+					std::cout << "packet arrived while already servicing one "
+							<< packetServiced->getName() << " vs. "
+							<< msg->getName() << std::endl;
+					error("packet arrived while already servicing one");
+				}*/
+				Packet *packetServiced = check_and_cast<Packet *>(msg);
+				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+
+				switch (packetServiced->getPriority()) {
+				case 0:
+					_iq0.push_back(packetServiced);
+					break;
+				case 1:
+					_iq1.push_back(packetServiced);
+					break;
+				case 2:
+					_iq2.push_back(packetServiced);
+					break;
+				case 3:
+					_iq3.push_back(packetServiced);
+					break;
+				case 4:
+					_iq4.push_back(packetServiced);
+					break;
+				case 5:
+					_iq5.push_back(packetServiced);
+					break;
+				case 6:
+					_iq6.push_back(packetServiced);
+					break;
+				case 7:
+					_iq7.push_back(packetServiced);
+					break;
+				}
+			}
+		}
+			break;
 		default:
 			break;
 		}	// switch
 		//} // else
 } // handleMessage()
+
+void Server::checkWaitingTimeAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist) {
+	if (v1.size() > 0) {
+		vector<Packet*>::iterator it = v1.begin();
+		while (it != v1.end()) {
+			if( (simTime()-(*it)->getCreationTime())> timeDist ) {
+				v2.push_back(*it); // move to higher queue
+				//std::cout << "moved from " << priority << " to " << (priority+1) << ": " << (simTime()-(*it)->getCreationTime()) << std::endl;
+				v1.erase(it);
+			}
+		}
+		//std::cout << priority << " size: " << v1.size() << std::endl;
+	}
+}
 
 IPassiveQueue *Server::getQueue(int index) {
 	std::string queue = "passiveQueue";
@@ -320,6 +387,11 @@ IPassiveQueue *Server::getQueue(int index) {
 
 void Server::finish()
 {
+	std::cout << " iq7: " << _iq7.size();
+	std::cout << " iq6: " << _iq6.size() << " iq5: " << _iq5.size();
+	std::cout << " iq4: " << _iq4.size() << " iq3: " << _iq3.size();
+	std::cout << " iq2: " << _iq2.size() << " iq1: " << _iq1.size();
+	std::cout << " iq0: " << _iq0.size() << std::endl;
 } // finish()
 
 bool Server::isIdle()

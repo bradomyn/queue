@@ -33,7 +33,7 @@ simple PassiveQueue
         string sendingAlgorithm @enum("priority","random","roundRobin","minDelay", "WRS") = default("WRS");
                                      // how the queue tries to find a suitable server for an incoming packet
                                      
-		string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first") = default("7first");
+		string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first", "feedback2") = default("7first");
     gates:
         input in[];
         output out[];

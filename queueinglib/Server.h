@@ -25,7 +25,7 @@ class Packet;
 class SelectionStrategyServer;
 
 /**
- * The queue server. It cooperates with several Queues that which queue up
+ * The queue server. It cooperates with several Queues which queue up
  * the packets, and send them to Server on request.
  *
  * @see PassiveQueue
@@ -50,13 +50,19 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
         simtime_t _serviceTime;
 
-        // TODO
-        struct packet_comparison {
-			bool operator() (const Packet* lhs, const Packet* rhs) const {
-			  return lhs->getCreationTime()<rhs->getCreationTime();
-			}
-		};
-        set<Packet*, packet_comparison> _order;
+        map<simtime_t, Packet*> _order;
+
+      // feedback2, internal 'queues'
+      vector<Packet *> _iq7;
+      vector<Packet *> _iq6;
+      vector<Packet *> _iq5;
+      vector<Packet *> _iq4;
+      vector<Packet *> _iq3;
+      vector<Packet *> _iq2;
+      vector<Packet *> _iq1;
+      vector<Packet *> _iq0;
+
+      void checkWaitingTimeAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist);
 
     public:
         Server();

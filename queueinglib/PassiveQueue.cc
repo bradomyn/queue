@@ -61,6 +61,8 @@ void PassiveQueue::initialize()
 		_scheduling = 3;
 	} else if (strcmp(algName, "7first") == 0) {
 		_scheduling = 4;
+	} else if (strcmp(algName, "feedback2") == 0) {
+		_scheduling = 5;
 	}
 
 } // initialize()
@@ -152,6 +154,11 @@ void PassiveQueue::handleMessage(cMessage *msg)
 			emit(queueLengthSignal, length());
 			packet->setQueueCount(packet->getQueueCount() + 1);
 		}
+		break;
+	case 5:	// feedback 2
+		//checkCapacityAndQueue(msg);
+		send(packet, "out", 0);
+		numServed++;
 		break;
     default:
     	break;
