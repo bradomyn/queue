@@ -36,10 +36,14 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
     private:
 		simsignal_t busySignal;
 
+		// number of queues
         int numQueues;
         SelectionStrategyServer *selectionStrategy;	// currently not used
 
+        // the current packet scheduled
         Packet *packetServiced;
+
+        // internal trigger for the server
         cMessage *endServiceMsg;
 
         // receive trigger messages
@@ -48,21 +52,24 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         int numSent;
         int triggerCounter;
 
+        // service time of ther server
         simtime_t _serviceTime;
 
+        // feedback: contains packets in their arrival order
         map<simtime_t, Packet*> _order;
 
-      // feedback2, internal 'queues'
-      vector<Packet *> _iq7;
-      vector<Packet *> _iq6;
-      vector<Packet *> _iq5;
-      vector<Packet *> _iq4;
-      vector<Packet *> _iq3;
-      vector<Packet *> _iq2;
-      vector<Packet *> _iq1;
-      vector<Packet *> _iq0;
+		// feedback2, internal 'queues'
+		vector<Packet *> _iq7;
+		vector<Packet *> _iq6;
+		vector<Packet *> _iq5;
+		vector<Packet *> _iq4;
+		vector<Packet *> _iq3;
+		vector<Packet *> _iq2;
+		vector<Packet *> _iq1;
+		vector<Packet *> _iq0;
 
-      void checkWaitingTimeAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist);
+		// feedback2: check the waiting time of a packet and move it to another queue if timeDist criteria is fulfilled
+		void checkWaitingTimeAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist);
 
     public:
         Server();
@@ -78,12 +85,14 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         virtual bool isIdle();
 
     private:
+        // send the current packet in packetServiced
         void serveCurrentPacket();
 
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);
         IPassiveQueue *_q7;
 
+        // pointer to other queues
         std::vector<IPassiveQueue*> _qs;
 
         // Server.ned: string schedulingAlgorithm @enum("none", "priority" , "feedback", "original") = default("none");

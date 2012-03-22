@@ -29,18 +29,27 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
 		simsignal_t queueingTimeSignal;
 
         bool fifo;
-        int capacity;
-        cQueue queue;
-        SelectionStrategy *selectionStrategy;
 
+        // capacity of the queue
+        int capacity;
+
+        // the queue underneath
+        cQueue queue;
+        SelectionStrategy *selectionStrategy;	// currently not used
+
+        // number of packets handled
         int numServed;
+
+        // number of packets in queue
         int numQueued;
         int numQueuedIdle;
 
         void queueLengthChanged();
 
+        // scheduling type
         int _scheduling;
 
+        // check the capacity of the queue by considering the packet sizes
         void checkCapacityAndQueue(cMessage *msg);
 
     protected:

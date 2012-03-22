@@ -292,6 +292,7 @@ void Server::handleMessage(cMessage *msg)
 			// check internal queues
 			vector<Packet*>::iterator it;
 
+			// TODO
 			simtime_t timeDist = simTime()-1;
 
 			checkWaitingTimeAndMoveToOtherQueue(0, _iq0, _iq1, timeDist);
@@ -362,10 +363,15 @@ void Server::checkWaitingTimeAndMoveToOtherQueue(int priority, vector<Packet*> &
 	if (v1.size() > 0) {
 		vector<Packet*>::iterator it = v1.begin();
 		while (it != v1.end()) {
-			if( (simTime()-(*it)->getCreationTime())> timeDist ) {
+			if( (simTime()-(*it)->getCreationTime()) > timeDist ) {
 				v2.push_back(*it); // move to higher queue
 				//std::cout << "moved from " << priority << " to " << (priority+1) << ": " << (simTime()-(*it)->getCreationTime()) << std::endl;
 				v1.erase(it);
+				std::cout << ".";
+				if( v1.size()>0 )
+					it = v1.begin();
+				else
+					break;
 			}
 		}
 		//std::cout << priority << " size: " << v1.size() << std::endl;
@@ -392,6 +398,7 @@ void Server::finish()
 	std::cout << " iq4: " << _iq4.size() << " iq3: " << _iq3.size();
 	std::cout << " iq2: " << _iq2.size() << " iq1: " << _iq1.size();
 	std::cout << " iq0: " << _iq0.size() << std::endl;
+	std::cout << " simTime() " << simTime() << " timeDist " << simTime()-1 << std::endl;
 } // finish()
 
 bool Server::isIdle()
