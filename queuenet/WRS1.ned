@@ -9,7 +9,6 @@
 
 import org.omnetpp.queueing.Classifier;
 import org.omnetpp.queueing.PassiveQueue;
-import org.omnetpp.queueing.Router;
 import org.omnetpp.queueing.Server;
 import org.omnetpp.queueing.Sink;
 import org.omnetpp.queueing.Source;
@@ -29,11 +28,6 @@ network WRS1
         }
         classifier: Classifier {
             @display("p=136,399");
-        }
-        router: Router {
-            @display("p=655,399");
-            gates:
-                out[2];
         }
         passiveQueue0: PassiveQueue {
             @display("p=335,88");
@@ -81,9 +75,6 @@ network WRS1
         passiveQueue1.out++ --> operator1.in++;
         passiveQueue2.out++ --> operator1.in++;
         passiveQueue3.out++ --> operator1.in++;
-        operator1.out --> router.in++;
-        router.out++ --> sink.in++;
-        router.out++ --> sink.in++;
         classifier.out++ --> passiveQueue4.in++;
         classifier.out++ --> passiveQueue5.in++;
         classifier.out++ --> passiveQueue6.in++;
@@ -93,4 +84,5 @@ network WRS1
         passiveQueue6.out++ --> operator1.in++;
         passiveQueue7.out++ --> operator1.in++;
 
+        operator1.out --> sink.in++;
 }

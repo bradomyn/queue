@@ -32,7 +32,6 @@ OBJS = \
     $O/Packet.o \
     $O/Classifier.o \
     $O/Queue.o \
-    $O/Router.o \
     $O/Server.o \
     $O/Sink.o \
     $O/SelectionStrategies.o \
@@ -155,9 +154,6 @@ $O/Queue.o: Queue.cc \
 	Packet_m.h \
 	Queue.h \
 	QueueingDefs.h
-$O/Router.o: Router.cc \
-	QueueingDefs.h \
-	Router.h
 $O/SelectionStrategies.o: SelectionStrategies.cc \
 	IPassiveQueue.h \
 	IServer.h \
