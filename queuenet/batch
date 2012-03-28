@@ -1,0 +1,4 @@
+#! /bin/sh
+
+chmod +x queuenet
+./queuenet -u Cmdenv -c WRS1
