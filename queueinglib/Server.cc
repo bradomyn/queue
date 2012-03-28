@@ -81,6 +81,8 @@ void Server::initialize()
 
 	_serviceTime = par("serviceTime");
 
+	_capacity = par("capacity");
+
 } // initialize()
 
 void Server::serveCurrentPacket() {
@@ -295,13 +297,13 @@ void Server::handleMessage(cMessage *msg)
 			// TODO
 			simtime_t timeDist = simTime()-1;
 
-			checkWaitingTimeAndMoveToOtherQueue(0, _iq0, _iq1, timeDist);
-			checkWaitingTimeAndMoveToOtherQueue(1, _iq1, _iq2, timeDist);
-			checkWaitingTimeAndMoveToOtherQueue(2, _iq2, _iq3, timeDist);
-			checkWaitingTimeAndMoveToOtherQueue(3, _iq3, _iq4, timeDist);
-			checkWaitingTimeAndMoveToOtherQueue(4, _iq4, _iq5, timeDist);
-			checkWaitingTimeAndMoveToOtherQueue(5, _iq5, _iq6, timeDist);
-			checkWaitingTimeAndMoveToOtherQueue(6, _iq6, _iq7, timeDist);
+			checkWaitingTimeAndCapacityAndMoveToOtherQueue(0, _iq0, _iq1, timeDist);
+			checkWaitingTimeAndCapacityAndMoveToOtherQueue(1, _iq1, _iq2, timeDist);
+			checkWaitingTimeAndCapacityAndMoveToOtherQueue(2, _iq2, _iq3, timeDist);
+			checkWaitingTimeAndCapacityAndMoveToOtherQueue(3, _iq3, _iq4, timeDist);
+			checkWaitingTimeAndCapacityAndMoveToOtherQueue(4, _iq4, _iq5, timeDist);
+			checkWaitingTimeAndCapacityAndMoveToOtherQueue(5, _iq5, _iq6, timeDist);
+			checkWaitingTimeAndCapacityAndMoveToOtherQueue(6, _iq6, _iq7, timeDist);
 
 			if (_iq7.size() > 0) {
 				it = _iq7.begin();
@@ -359,11 +361,23 @@ void Server::handleMessage(cMessage *msg)
 		//} // else
 } // handleMessage()
 
-void Server::checkWaitingTimeAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist) {
+int Server::determineQueueSize(vector<Packet*> v) {
+	int queuesize = 0;
+	vector<Packet*>::iterator it = v.begin();
+	for( it = v.begin(); it!= v.end(); it++ ) {
+		queuesize += (*it)->getSize();
+	}
+
+	return queuesize;
+}
+
+void Server::checkWaitingTimeAndCapacityAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist) {
 	if (v1.size() > 0) {
 		vector<Packet*>::iterator it = v1.begin();
+		int queuesize = determineQueueSize(v1);
 		while (it != v1.end()) {
-			if( (simTime()-(*it)->getCreationTime()) > timeDist ) {
+			if( ((simTime()-(*it)->getCreationTime()) > timeDist ) ||
+			    ( queuesize>(_capacity-1500) ) ) {	// queue is almost full
 				v2.push_back(*it); // move to higher queue
 				//std::cout << "moved from " << priority << " to " << (priority+1) << ": " << (simTime()-(*it)->getCreationTime()) << std::endl;
 				v1.erase(it);

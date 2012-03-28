@@ -31,7 +31,7 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
         bool fifo;
 
         // capacity of the queue
-        int capacity;
+        int _capacity;
 
         // the queue underneath
         cQueue queue;

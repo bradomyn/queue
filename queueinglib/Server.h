@@ -69,7 +69,13 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		vector<Packet *> _iq0;
 
 		// feedback2: check the waiting time of a packet and move it to another queue if timeDist criteria is fulfilled
-		void checkWaitingTimeAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist);
+		void checkWaitingTimeAndCapacityAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist);
+
+		// compute queue size from contents (packet sizes)
+		int determineQueueSize(vector<Packet*> v);
+
+		// queues maximum capacity
+		int _capacity;
 
     public:
         Server();

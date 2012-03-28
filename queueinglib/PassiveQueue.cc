@@ -31,7 +31,7 @@ void PassiveQueue::initialize()
     queueLengthSignal = registerSignal("queueLength");
     emit(queueLengthSignal, 0);
 
-    capacity = par("capacity");
+    _capacity = par("capacity");
     queue.setName("queue");
 
     fifo = par("fifo");
@@ -116,7 +116,7 @@ void PassiveQueue::handleMessage(cMessage *msg)
     	packet->setTimestamp();
 
 		// check for container capacity
-		if (capacity >=0 && queue.length() >= capacity) {
+		if (_capacity >=0 && queue.length() >= _capacity) {
 			EV << "Queue full! Packet dropped.\n";
 			if (ev.isGUI()) bubble("Dropped!");
 			emit(droppedSignal, 1);
@@ -167,7 +167,7 @@ void PassiveQueue::handleMessage(cMessage *msg)
 
 void PassiveQueue::checkCapacityAndQueue(cMessage *msg) {
 	Packet *packet = check_and_cast<Packet *>(msg);
-	if( capacity >=0 && determineQueueSize()>=capacity ) {
+	if( _capacity >=0 && determineQueueSize()>=_capacity ) {
 		EV << this->getName() << " full! Packet dropped.\n";
 		std::cerr << this->getName() << " full! Packet dropped." << std::endl;
 		if (ev.isGUI()) bubble("Dropped!");
