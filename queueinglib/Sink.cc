@@ -90,8 +90,12 @@ void Sink::handleMessage(cMessage *msg)
     emit(delaysVisitedSignal, packet->getDelayCount());
     emit(generationSignal, packet->getGeneration());
 
-    if (!keepPackets)
-        delete msg;
+    if (!keepPackets) {
+    	if( msg->isScheduled() )
+    		cancelAndDelete(msg);
+    	delete msg;
+    }
+
 }
 
 double Sink::avg_lifetime(vector<simtime_t> v) {
@@ -121,6 +125,34 @@ void Sink::finish()
 	determineQueueSizes();
 
 	std::cout << "packet sizes " << v00.size() << " " << v01.size() << " " << v02.size() << std::endl;
+
+	// output to a file
+	string str;
+	char buf[30];
+	sprintf(buf,"p 0: avg %lf size ", avg_lifetime(v0), v0.size());
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	sprintf(buf, "p 1: avg %lf size ", avg_lifetime(v1), v1.size());
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	sprintf(buf, "p 2: avg %lf size ", avg_lifetime(v2), v2.size());
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	sprintf(buf, "p 3: avg %lf size ", avg_lifetime(v3), v3.size());
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	sprintf(buf, "p 4: avg %lf size ", avg_lifetime(v4), v4.size());
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	sprintf(buf, "p 5: avg %lf size ", avg_lifetime(v5), v5.size());
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	sprintf(buf, "p 6: avg %lf size ", avg_lifetime(v6), v6.size());
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	sprintf(buf, "p 7: avg %lf size ", avg_lifetime(v7), v7.size());
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
 
 }
 

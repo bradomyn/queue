@@ -1,4 +1,4 @@
 #! /bin/sh
 
 chmod +x queuenet
-./queuenet -u Cmdenv -c WRS1
+./queuenet -u Cmdenv -c WRS1 >> output.txt
