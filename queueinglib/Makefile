@@ -148,7 +148,8 @@ $O/PassiveQueue.o: PassiveQueue.cc \
 	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
-	SelectionStrategies.h
+	SelectionStrategies.h \
+	Useful.h
 $O/Queue.o: Queue.cc \
 	Packet.h \
 	Packet_m.h \
@@ -191,7 +192,8 @@ $O/Sink.o: Sink.cc \
 	Packet.h \
 	Packet_m.h \
 	QueueingDefs.h \
-	Sink.h
+	Sink.h \
+	Useful.h
 $O/Source.o: Source.cc \
 	Packet.h \
 	Packet_m.h \

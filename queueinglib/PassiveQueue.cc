@@ -53,16 +53,28 @@ void PassiveQueue::initialize()
     std::cout << this->getName() << " scheduling algorithm " << algName << std::endl;
     if (strcmp(algName, "none") == 0) {
 		_scheduling = 0;
+		std::cout << "queue none" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "queue none");
 	} else if (strcmp(algName, "priority") == 0) {
 		_scheduling = 1;
+		std::cout << "queue priority" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "queue priority");
 	} else if (strcmp(algName, "feedback") == 0) {
 		_scheduling = 2;
+		std::cout << "queue feedback" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "queue feedback");
 	} else if (strcmp(algName, "original") == 0) {
 		_scheduling = 3;
+		std::cout << "queue original" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "queue original");
 	} else if (strcmp(algName, "7first") == 0) {
 		_scheduling = 4;
+		std::cout << "queue 7first" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "queue 7first");
 	} else if (strcmp(algName, "feedback2") == 0) {
 		_scheduling = 5;
+		std::cout << "queue feedback2" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "queue feedback2");
 	}
 
 } // initialize()
@@ -221,7 +233,7 @@ void PassiveQueue::request(int gateIndex)
 
     send(packet, "out", gateIndex);
     numServed++;
-    std::cout << "packet " << packet->getName() << " requested over gate " << gateIndex << std::endl;
+    //std::cout << "packet " << packet->getName() << " requested over gate " << gateIndex << std::endl;
 
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");

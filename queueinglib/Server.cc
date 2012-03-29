@@ -67,16 +67,28 @@ void Server::initialize()
 	std::cout << this->getName() << " scheduling algorithm " << algName << std::endl;
 	if (strcmp(algName, "none") == 0) {
 		_scheduling = 0;
+		std::cout << "server none" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "server none");
 	} else if (strcmp(algName, "priority") == 0) {
 		_scheduling = 1;
+		std::cout << "server priority" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "server priority");
 	} else if (strcmp(algName, "feedback") == 0) {
 		_scheduling = 2;
+		std::cout << "server feedback" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "server feedback");
 	} else if (strcmp(algName, "original") == 0) {
 		_scheduling = 3;
+		std::cout << "server original" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "server original");
 	} else if (strcmp(algName, "7first") == 0) {
 		_scheduling = 4;
+		std::cout << "server 7first" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "server 7first");
 	} else if (strcmp(algName, "feedback2") == 0) {
 		_scheduling = 5;
+		std::cout << "server feedback2" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "server feedback2");
 	}
 
 	_serviceTime = par("serviceTime");
@@ -115,6 +127,8 @@ void Server::handleMessage(cMessage *msg)
 #else
 			if (msg == triggerServiceMsg) {
 				serveCurrentPacket();
+				if( triggerServiceMsg->isScheduled() )
+					cancelAndDelete(triggerServiceMsg);
 			} else {
 				if (strcmp(msg->getName(), "trigger") != 0) {
 					if (packetServiced) {
@@ -205,6 +219,8 @@ void Server::handleMessage(cMessage *msg)
 						}
 					}
 				}
+				if( triggerServiceMsg->isScheduled() )
+					cancelAndDelete(triggerServiceMsg);
 			} else {
 				if (strcmp(msg->getName(), "trigger") != 0) {
 					// fill internal storage
@@ -257,6 +273,8 @@ void Server::handleMessage(cMessage *msg)
 			if (msg == triggerServiceMsg) {
 				//std::cout << " triggerServiceMsg: ";
 				serveCurrentPacket();
+				if( triggerServiceMsg->isScheduled() )
+					cancelAndDelete(triggerServiceMsg);
 			} else {
 				if (strcmp(msg->getName(), "trigger") == 0) {
 					// trigger test
@@ -314,7 +332,8 @@ void Server::handleMessage(cMessage *msg)
 					}
 				}
 			}
-
+			if( triggerServiceMsg->isScheduled() )
+				cancelAndDelete(triggerServiceMsg);
 		} else {
 			if (strcmp(msg->getName(), "trigger") != 0) {
 				/*if (packetServiced) {
@@ -359,6 +378,12 @@ void Server::handleMessage(cMessage *msg)
 			break;
 		}	// switch
 		//} // else
+
+		if (strcmp(msg->getName(), "trigger") == 0) {
+			cancelAndDelete(msg);
+			//std::cout << "trigger deleted" << std::endl;
+		}
+
 } // handleMessage()
 
 int Server::determineQueueSize(vector<Packet*> v) {

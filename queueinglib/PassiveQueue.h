@@ -14,6 +14,8 @@
 #include "IPassiveQueue.h"
 #include "SelectionStrategies.h"
 
+#include "Useful.h"
+
 namespace queueing {
 
 class SelectionStrategy;

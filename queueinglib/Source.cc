@@ -131,7 +131,7 @@ Packet * Source::generatePacket() {
 	sprintf(name, "id: %ld, priority: %d; > %lf", packet->getId(), randomP, creationTime.dbl());
 	name[79] = '\0';
 	packet->setName(name);
-	std::cout << "packet (id: " << packet->getId() << ") priority set to: " << randomP << " size " << randomS << std::endl;
+	//std::cout << "packet (id: " << packet->getId() << ") priority set to: " << randomP << " size " << randomS << std::endl;
 
 	packet->setTimestamp(creationTime);
 

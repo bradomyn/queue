@@ -11,6 +11,7 @@
 #define __QUEUEING_SINK_H
 
 #include "QueueingDefs.h"
+#include "Useful.h"
 
 #include <vector>
 
