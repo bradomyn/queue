@@ -194,28 +194,27 @@ void Server::handleMessage(cMessage *msg)
 			break;
 		case 2: // feedback
 			if (msg == triggerServiceMsg) {
-				//std::cout << " triggerServiceMsg: ";
 				if (_order.size()>0 ) {
 					map<simtime_t, Packet*>::iterator it;
 					it = _order.begin();
-					//while( it!=_order.end() ) {
+					// oldest packet is first in map
 					for( it = _order.begin(); it!=_order.end(); it++ ) {
 						Packet * packet = it->second;
 						if( packet->getPriority()==7 ) {
 							//packet->setTimestamp();
 							send(packet, "out");
 							numSent++;
-							std::cout << "7 sent " << packet->getName() << " orders " << _order.size();
+							//std::cout << "7 sent " << packet->getName() << " orders " << _order.size() << std::endl;
 							_order.erase(packet->getCreationTime());
-							std::cout << " " << _order.size() << std::endl;
+							//std::cout << " " << _order.size() << std::endl;
 						} else {
 							// sort for timestamps
 							//packet->setTimestamp();
 							send(packet, "out");
 							numSent++;
-							std::cout << "x sent " << packet->getName() << " orders " << _order.size();
+							//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
 							_order.erase(packet->getCreationTime());
-							std::cout << " " << _order.size() << std::endl;
+							//std::cout << " " << _order.size() << std::endl;
 						}
 					}
 				}

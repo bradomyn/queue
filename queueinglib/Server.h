@@ -57,6 +57,9 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
         // feedback: contains packets in their arrival order
         map<simtime_t, Packet*> _order;
+        //http://www.cplusplus.com/reference/stl/map/: Internally, the elements in the map are sorted from lower to higher key value
+        //following a specific strict weak ordering criterion set on construction.
+
 
 		// feedback2, internal 'queues'
 		vector<Packet *> _iq7;
