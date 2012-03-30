@@ -8,7 +8,7 @@
 //
 
 import org.omnetpp.queueing.Classifier;
-import org.omnetpp.queueing.PassiveQueue;
+import org.omnetpp.queueing.Queue;
 import org.omnetpp.queueing.Server;
 import org.omnetpp.queueing.Sink;
 import org.omnetpp.queueing.Source;
@@ -29,34 +29,34 @@ network WRS1
         classifier: Classifier {
             @display("p=136,399");
         }
-        passiveQueue0: PassiveQueue {
+        queue0: Queue {
             @display("p=335,88");
         }
-        passiveQueue1: PassiveQueue {
+        queue1: Queue {
             @display("p=335,183");
         }
-        passiveQueue2: PassiveQueue {
+        queue2: Queue {
             @display("p=335,276");
         }
-        passiveQueue3: PassiveQueue {
+        queue3: Queue {
             @display("p=335,360");
         }
-        operator1: Server {
+        server: Server {
             @display("p=582,399");
         }
         sink: Sink {
             @display("p=766,399");
         }
-        passiveQueue4: PassiveQueue {
+        queue4: Queue {
             @display("p=335,462");
         }
-        passiveQueue5: PassiveQueue {
+        queue5: Queue {
             @display("p=335,568");
         }
-        passiveQueue6: PassiveQueue {
+        queue6: Queue {
             @display("p=335,669");
         }
-        passiveQueue7: PassiveQueue {
+        queue7: Queue {
             @display("p=335,781");
         }
         trigger: Trigger {
@@ -64,25 +64,25 @@ network WRS1
         }
     connections:
         source.out --> classifier.in++;
-        classifier.out++ --> passiveQueue0.in++;
-        classifier.out++ --> passiveQueue1.in++;
-        classifier.out++ --> passiveQueue2.in++;
-        classifier.out++ --> passiveQueue3.in++;
+        classifier.out++ --> queue0.in++;
+        classifier.out++ --> queue1.in++;
+        classifier.out++ --> queue2.in++;
+        classifier.out++ --> queue3.in++;
 
-        trigger.out --> operator1.in++;
+        trigger.out --> server.in++;
 
-        passiveQueue0.out++ --> operator1.in++;
-        passiveQueue1.out++ --> operator1.in++;
-        passiveQueue2.out++ --> operator1.in++;
-        passiveQueue3.out++ --> operator1.in++;
-        classifier.out++ --> passiveQueue4.in++;
-        classifier.out++ --> passiveQueue5.in++;
-        classifier.out++ --> passiveQueue6.in++;
-        classifier.out++ --> passiveQueue7.in++;
-        passiveQueue4.out++ --> operator1.in++;
-        passiveQueue5.out++ --> operator1.in++;
-        passiveQueue6.out++ --> operator1.in++;
-        passiveQueue7.out++ --> operator1.in++;
+        queue0.out++ --> server.in++;
+        queue1.out++ --> server.in++;
+        queue2.out++ --> server.in++;
+        queue3.out++ --> server.in++;
+        classifier.out++ --> queue4.in++;
+        classifier.out++ --> queue5.in++;
+        classifier.out++ --> queue6.in++;
+        classifier.out++ --> queue7.in++;
+        queue4.out++ --> server.in++;
+        queue5.out++ --> server.in++;
+        queue6.out++ --> server.in++;
+        queue7.out++ --> server.in++;
 
-        operator1.out --> sink.in++;
+        server.out --> sink.in++;
 }

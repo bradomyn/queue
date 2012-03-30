@@ -27,7 +27,6 @@ OBJS = \
     $O/Useful.o \
     $O/Trigger.o \
     $O/Source.o \
-    $O/PassiveQueue.o \
     $O/PacketList.o \
     $O/Packet.o \
     $O/Classifier.o \
@@ -142,48 +141,33 @@ $O/PacketList.o: PacketList.cc \
 $O/Packet_m.o: Packet_m.cc \
 	Packet_m.h \
 	QueueingDefs.h
-$O/PassiveQueue.o: PassiveQueue.cc \
-	IPassiveQueue.h \
-	Packet.h \
-	Packet_m.h \
-	PassiveQueue.h \
-	QueueingDefs.h \
-	SelectionStrategies.h \
-	Useful.h
 $O/Queue.o: Queue.cc \
 	Packet.h \
 	Packet_m.h \
 	Queue.h \
-	QueueingDefs.h
+	QueueingDefs.h \
+	Useful.h
 $O/SelectionStrategies.o: SelectionStrategies.cc \
-	IPassiveQueue.h \
 	IServer.h \
 	Packet.h \
 	Packet_m.h \
-	PassiveQueue.h \
 	QueueingDefs.h \
 	SelectionStrategies.h \
 	Server.h \
 	Useful.h
 $O/SelectionStrategiesServer.o: SelectionStrategiesServer.cc \
-	IPassiveQueue.h \
 	IServer.h \
 	Packet.h \
 	Packet_m.h \
-	PassiveQueue.h \
 	QueueingDefs.h \
-	SelectionStrategies.h \
 	SelectionStrategiesServer.h \
 	Server.h \
 	Useful.h
 $O/Server.o: Server.cc \
-	IPassiveQueue.h \
 	IServer.h \
 	Packet.h \
 	Packet_m.h \
-	PassiveQueue.h \
 	QueueingDefs.h \
-	SelectionStrategies.h \
 	SelectionStrategiesServer.h \
 	Server.h \
 	Useful.h
