@@ -26,12 +26,10 @@ simple Queue
         @statistic[queueingTime](title="queueing time at dequeue";record=vector?,mean,max;unit=s;interpolationmode=none);
         @statistic[busy](title="server busy state";record=vector?,timeavg;interpolationmode=sample-hold);
 
+        int capacity = default(-1);    // negative capacity means unlimited queue
+        bool fifo = default(true);     // whether the module works as a queue (fifo=true) or a stack (fifo=false)
         volatile double serviceTime @unit(s);
-
-        int capacity = default(6000); // 4x1500KB //default(-1);  // negative capacity means unlimited queue
-        bool fifo = default(true);   // whether the module works as a queue (fifo=true) or a stack (fifo=false)
-		string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first", "feedback2") = default("7first");
     gates:
         input in[];
-        output out[];
+        output out;
 }

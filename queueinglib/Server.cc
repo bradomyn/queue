@@ -77,11 +77,11 @@ void Server::initialize()
 		_scheduling = 2;
 		std::cout << "server feedback" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "server feedback");
-	} /*else if (strcmp(algName, "original") == 0) {
+	} else if (strcmp(algName, "original") == 0) {
 		_scheduling = 3;
 		std::cout << "server original" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "server original");
-	}*/ else if (strcmp(algName, "7first") == 0) {
+	} else if (strcmp(algName, "7first") == 0) {
 		_scheduling = 4;
 		std::cout << "server 7first" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "server 7first");
@@ -233,7 +233,39 @@ void Server::handleMessage(cMessage *msg)
 				}
 			}
 			break;
+		case 3: // original
+			//std::cout << this->getName() << " original" << std::endl;
+			// use with WRS.ned
+		    if (msg==endServiceMsg) {
+		        ASSERT(packetServiced!=NULL);
+		        simtime_t d = simTime() - endServiceMsg->getSendingTime();
+		        packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
+		        send(packetServiced, "out");
+		        numSent++;
+		        packetServiced = NULL;
+		        emit(busySignal, 0);
 
+		        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
+
+		        // examine all input queues, and request a new packet from a non empty queue
+		        k = selectionStrategy->select();
+		        if (k >= 0)
+		        {
+		            EV << "requesting packet from queue " << k << endl;
+		            cGate *gate = selectionStrategy->selectableGate(k);
+		            check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+		        }
+		    } else {
+		        if (packetServiced)
+		            error("packet arrived while already servicing one");
+
+		        packetServiced = check_and_cast<Packet *>(msg);
+		        scheduleAt(simTime()+_serviceTime, endServiceMsg);
+		        emit(busySignal, 1);
+
+		        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
+		    }
+			break;
 		case 4:	// 7first
 			// use with WRS1.ned
 			//std::cout << this->getName() << " 7first" << std::endl;

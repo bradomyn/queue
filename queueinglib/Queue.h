@@ -11,7 +11,6 @@
 #define __QUEUEING_QUEUE_H
 
 #include "QueueingDefs.h"
-#include "Useful.h"
 
 namespace queueing {
 
@@ -31,40 +30,15 @@ class QUEUEING_API Queue : public cSimpleModule
         Packet *packetServiced;
         cMessage *endServiceMsg;
         cQueue queue;
-
-        // capacity of the queue
         int capacity;
-
-        // capacity of the queue
-        int _capacity;
-
         bool fifo;
 
         Packet *getFromQueue();
-
-        // number of packets handled
-        int numServed;
-
-        // number of packets in queue
-        int numQueued;
-
-        // scheduling type
-        int _scheduling;
-
-        // check the capacity of the queue by considering the packet sizes
-        void checkCapacityAndQueue(cMessage *msg);
-
 
     public:
         Queue();
         virtual ~Queue();
         int length();
-
-        // request without a gate
-        virtual void request();
-
-        // add up packet sizes
-        int determineQueueSize();
 
     protected:
         virtual void initialize();

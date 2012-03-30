@@ -12,13 +12,12 @@ import org.omnetpp.queueing.PassiveQueue;
 import org.omnetpp.queueing.Server;
 import org.omnetpp.queueing.Sink;
 import org.omnetpp.queueing.Source;
-import org.omnetpp.queueing.Trigger;
 
 
 //
 // A call center simulation.
 //
-network WRS1
+network WRS
 {
     parameters:
         @display("i=device/cellphone;bgb=846,838");
@@ -59,18 +58,12 @@ network WRS1
         passiveQueue7: PassiveQueue {
             @display("p=335,781");
         }
-        trigger: Trigger {
-            @display("p=582,207;b=36,10");
-        }
     connections:
         source.out --> classifier.in++;
         classifier.out++ --> passiveQueue0.in++;
         classifier.out++ --> passiveQueue1.in++;
         classifier.out++ --> passiveQueue2.in++;
         classifier.out++ --> passiveQueue3.in++;
-
-        trigger.out --> operator1.in++;
-
         passiveQueue0.out++ --> operator1.in++;
         passiveQueue1.out++ --> operator1.in++;
         passiveQueue2.out++ --> operator1.in++;
@@ -83,6 +76,5 @@ network WRS1
         passiveQueue5.out++ --> operator1.in++;
         passiveQueue6.out++ --> operator1.in++;
         passiveQueue7.out++ --> operator1.in++;
-
         operator1.out --> sink.in++;
 }
