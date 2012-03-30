@@ -55,7 +55,6 @@ void Server::initialize()
     	_qs.push_back( getQueue(i) );
 
     triggerServiceMsg = new cMessage("triggerServiceMessage");
-    //triggerServiceMsg = new cMessage("trigger");
 
     WATCH(numSent);
     numSent = 0;
@@ -136,7 +135,6 @@ void Server::handleMessage(cMessage *msg)
 								<< packetServiced->getName() << " vs. "
 								<< msg->getName() << std::endl;
 						error("packet arrived while already servicing one");
-						//serveCurrentPacket();
 					}
 					packetServiced = check_and_cast<Packet *>(msg);
 					scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
@@ -148,18 +146,14 @@ void Server::handleMessage(cMessage *msg)
 		// use with WRS1.ned
 		//std::cout << this->getName() << " priority" << std::endl;
 		if (msg == triggerServiceMsg) {
-			//std::cout << " triggerServiceMsg: ";
 			serveCurrentPacket();
 		} else {
 			if (strcmp(msg->getName(), "trigger") == 0) {
 
-				// trigger test
-				//std::cout << " server triggered ";
-
 				//TODO service time, currently service time is trigger intervall (not nice)
 				// check queue lengths and request if length>0 as long as length>0
 				if (_q7->length() > 0) {
-					std::cout << "q7 length " << _q7->length();
+					//std::cout << "q7 length " << _q7->length();
 					while (_q7->length() > 0) {
 						//std::cout << "request 7" << std::endl;
 						_q7->request(0);
@@ -169,7 +163,6 @@ void Server::handleMessage(cMessage *msg)
 					for (int i = 6; i > -1; i--) {
 						if (_qs.at(i)->length() > 0) {
 							//std::cout << "q" << i << " length " << _qs.at(i)->length();
-							//while( _qs.at(i)->length()>0 ) {
 							if (_qs.at(i)->length()) {
 								//std::cout << " request i " << i << std::endl;
 								_qs.at(i)->request(0);
@@ -201,7 +194,6 @@ void Server::handleMessage(cMessage *msg)
 					for( it = _order.begin(); it!=_order.end(); it++ ) {
 						Packet * packet = it->second;
 						if( packet->getPriority()==7 ) {
-							//packet->setTimestamp();
 							send(packet, "out");
 							numSent++;
 							//std::cout << "7 sent " << packet->getName() << " orders " << _order.size() << std::endl;
@@ -226,8 +218,6 @@ void Server::handleMessage(cMessage *msg)
 					Packet *packetServiced = check_and_cast<Packet *>(msg);
 					_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
 					//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
-					//packetServiced = NULL;
-					//std::cout << "packetServiced: " << packetServiced->getName() << std::endl;
 
 					scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 				}
@@ -295,7 +285,6 @@ void Server::handleMessage(cMessage *msg)
 								<< packetServiced->getName() << " vs. "
 								<< msg->getName() << std::endl;
 						error("packet arrived while already servicing one");
-						//serveCurrentPacket();
 					}
 
 					packetServiced = check_and_cast<Packet *>(msg);
@@ -335,12 +324,6 @@ void Server::handleMessage(cMessage *msg)
 				cancelAndDelete(triggerServiceMsg);
 		} else {
 			if (strcmp(msg->getName(), "trigger") != 0) {
-				/*if (packetServiced) {
-					std::cout << "packet arrived while already servicing one "
-							<< packetServiced->getName() << " vs. "
-							<< msg->getName() << std::endl;
-					error("packet arrived while already servicing one");
-				}*/
 				Packet *packetServiced = check_and_cast<Packet *>(msg);
 				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 
@@ -380,9 +363,7 @@ void Server::handleMessage(cMessage *msg)
 
 		if (strcmp(msg->getName(), "trigger") == 0) {
 			cancelAndDelete(msg);
-			//std::cout << "trigger deleted" << std::endl;
 		}
-
 } // handleMessage()
 
 int Server::determineQueueSize(vector<Packet*> v) {

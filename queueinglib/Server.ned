@@ -27,7 +27,7 @@ simple Server
         
         int capacity = default(6000); // 4x1500KB //default(-1);  // negative capacity means unlimited queue
         
-        string schedulingAlgorithm @enum("none", "priority" , "feedback", "original", "7first", "feedback2") = default("7first");
+        string schedulingAlgorithm @enum("none", "priority" , "feedback", "7first", "feedback2") = default("7first");
     gates:
         input in[8];
         output out;
