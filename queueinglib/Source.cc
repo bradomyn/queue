@@ -74,6 +74,8 @@ void Source::handleMessage(cMessage *msg) {
 			&& (stopTime < 0 || stopTime > simTime()) ) {
 		// reschedule the timer for the next message
 		simtime_t sourceTime = simTime() + par("interArrivalTime").doubleValue();
+		// TODO change inter arrival time to distribution
+		//simtime_t sourceTime = simTime() + uniform(par("interArrivalTime").doubleValue(),1);
 		scheduleAt(sourceTime, msg);
 		//Useful::getInstance()->appendToFile("source_out.txt", numCreated);
 		Packet *packet = generatePacket( _data.at(numCreated).getPriority(), _data.at(numCreated).getSize() );

@@ -88,6 +88,10 @@ void Server::initialize()
 		_scheduling = 5;
 		std::cout << "server feedback2" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "server feedback2");
+	} else if (strcmp(algName, "feedback3") == 0) {
+		_scheduling = 6;
+		std::cout << "server feedback3" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "server feedback3");
 	}
 
 	_serviceTime = par("serviceTime");
@@ -111,11 +115,47 @@ void Server::serveCurrentPacket() {
 void Server::handleMessage(cMessage *msg)
 {
 	//std::cout << "server received " << msg->getName() << std::endl;
-	Packet *packet;
-	int k;
-
 		switch(_scheduling) {
 		case 0:	// none
+			none(msg);
+			break;
+		case 1: // priority
+		// use with WRS1.ned
+		//std::cout << this->getName() << " priority" << std::endl;
+			priority(msg);
+			break;
+		case 2: // feedback
+			feedback1(msg);
+			break;
+		case 3: // original
+			//std::cout << this->getName() << " original" << std::endl;
+			// use with WRS.ned
+		    original(msg);
+		    break;
+		case 4:	// 7first
+			// use with WRS1.ned
+			//std::cout << this->getName() << " 7first" << std::endl;
+			seven_first(msg);
+			break;
+		case 5:	// feedback 2
+			// use with WRS1.ned
+			feedback2(msg);
+			break;
+		case 6:	// feedback 3
+			// use with WRS1.ned
+			feedback3(msg);
+			break;
+		default:
+			break;
+		}	// switch
+		//} // else
+
+		if (strcmp(msg->getName(), "trigger") == 0) {
+			cancelAndDelete(msg);
+		}
+} // handleMessage()
+
+void Server::none(cMessage *msg) {
 #if 0
 			// use with WRS.ned
 			// send through without thinking
@@ -141,230 +181,229 @@ void Server::handleMessage(cMessage *msg)
 				}
 			}
 #endif
-			break;
-		case 1: // priority
-		// use with WRS1.ned
-		//std::cout << this->getName() << " priority" << std::endl;
-		if (msg == triggerServiceMsg) {
-			serveCurrentPacket();
-		} else {
-			if (strcmp(msg->getName(), "trigger") == 0) {
+} // none()
 
-				//TODO service time, currently service time is trigger intervall (not nice)
-				// check queue lengths and request if length>0 as long as length>0
-				if (_q7->length() > 0) {
-					//std::cout << "q7 length " << _q7->length();
-					while (_q7->length() > 0) {
-						//std::cout << "request 7" << std::endl;
-						_q7->request(0);
-					}
-				} else {
-					// check all other queue gates
-					for (int i = 6; i > -1; i--) {
-						if (_qs.at(i)->length() > 0) {
-							//std::cout << "q" << i << " length " << _qs.at(i)->length();
-							if (_qs.at(i)->length()) {
-								//std::cout << " request i " << i << std::endl;
-								_qs.at(i)->request(0);
-							}
-						}
-					}
-				}
-			} else {
-				if (packetServiced) {
-					std::cout << "packet arrived while already servicing one "
-							<< packetServiced->getName() << " vs. "
-							<< msg->getName() << std::endl;
-					error("packet arrived while already servicing one");
-				}
-
-				packetServiced = check_and_cast<Packet *>(msg);
-				//std::cout << "packetServiced: " << packetServiced->getName()
-					//	<< std::endl;
-				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-			}
-		}
-			break;
-		case 2: // feedback
-			if (msg == triggerServiceMsg) {
-				if (_order.size()>0 ) {
-					map<simtime_t, Packet*>::iterator it;
-					it = _order.begin();
-					// oldest packet is first in map
-					for( it = _order.begin(); it!=_order.end(); it++ ) {
-						Packet * packet = it->second;
-						if( packet->getPriority()==7 ) {
-							send(packet, "out");
-							numSent++;
-							//std::cout << "7 sent " << packet->getName() << " orders " << _order.size() << std::endl;
-							_order.erase(packet->getCreationTime());
-							//std::cout << " " << _order.size() << std::endl;
-						} else {
-							// sort for timestamps
-							//packet->setTimestamp();
-							send(packet, "out");
-							numSent++;
-							//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
-							_order.erase(packet->getCreationTime());
-							//std::cout << " " << _order.size() << std::endl;
-						}
-					}
-				}
-				if( triggerServiceMsg->isScheduled() )
-					cancelAndDelete(triggerServiceMsg);
-			} else {
-				if (strcmp(msg->getName(), "trigger") != 0) {
-					// fill internal storage
-					Packet *packetServiced = check_and_cast<Packet *>(msg);
-					_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
-					//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
-
-					scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-				}
-			}
-			break;
-		case 3: // original
-			//std::cout << this->getName() << " original" << std::endl;
-			// use with WRS.ned
-		    if (msg==endServiceMsg) {
-		        ASSERT(packetServiced!=NULL);
-		        simtime_t d = simTime() - endServiceMsg->getSendingTime();
-		        packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
-		        send(packetServiced, "out");
-		        numSent++;
-		        packetServiced = NULL;
-		        emit(busySignal, 0);
-
-		        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
-
-		        // examine all input queues, and request a new packet from a non empty queue
-		        k = selectionStrategy->select();
-		        if (k >= 0)
-		        {
-		            EV << "requesting packet from queue " << k << endl;
-		            cGate *gate = selectionStrategy->selectableGate(k);
-		            check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
-		        }
-		    } else {
-		        if (packetServiced)
-		            error("packet arrived while already servicing one");
-
-		        packetServiced = check_and_cast<Packet *>(msg);
-		        scheduleAt(simTime()+_serviceTime, endServiceMsg);
-		        emit(busySignal, 1);
-
-		        if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
-		    }
-			break;
-		case 4:	// 7first
-			// use with WRS1.ned
-			//std::cout << this->getName() << " 7first" << std::endl;
-			if (msg == triggerServiceMsg) {
-				//std::cout << " triggerServiceMsg: ";
-				serveCurrentPacket();
-				if( triggerServiceMsg->isScheduled() )
-					cancelAndDelete(triggerServiceMsg);
-			} else {
-				if (strcmp(msg->getName(), "trigger") == 0) {
-					// trigger test
-					//std::cout << " server triggered ";
-					// check all other queue gates
-					for (int i = 6; i > -1; i--) {
-						if (_qs.at(i)->length() > 0) {
-							//std::cout << "q" << i << " length " << _qs.at(i)->length();
-							while( _qs.at(i)->length()>0 ) {
-							//if (_qs.at(i)->length()) {
-								//std::cout << " request i " << i << std::endl;
-								_qs.at(i)->request(0);
-							}
-						}
-					}
-				} else {
-					if (packetServiced) {
-						std::cout << "packet arrived while already servicing one "
-								<< packetServiced->getName() << " vs. "
-								<< msg->getName() << std::endl;
-						error("packet arrived while already servicing one");
-					}
-
-					packetServiced = check_and_cast<Packet *>(msg);
-					//std::cout << "packetServiced: " << packetServiced->getName()
-						//	<< std::endl;
-					scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-				}
-			}
-			break;
-		case 5:	// feedback 2
-			// use with WRS1.ned
-		if (msg == triggerServiceMsg) {
-			// check internal queues
-			vector<Packet*>::iterator it;
-
-			// TODO
-			simtime_t timeDist = simTime()-1;
-
-			checkWaitingTimeAndCapacityAndMoveToOtherQueue(0, _iq0, _iq1, timeDist);
-			checkWaitingTimeAndCapacityAndMoveToOtherQueue(1, _iq1, _iq2, timeDist);
-			checkWaitingTimeAndCapacityAndMoveToOtherQueue(2, _iq2, _iq3, timeDist);
-			checkWaitingTimeAndCapacityAndMoveToOtherQueue(3, _iq3, _iq4, timeDist);
-			checkWaitingTimeAndCapacityAndMoveToOtherQueue(4, _iq4, _iq5, timeDist);
-			checkWaitingTimeAndCapacityAndMoveToOtherQueue(5, _iq5, _iq6, timeDist);
-			checkWaitingTimeAndCapacityAndMoveToOtherQueue(6, _iq6, _iq7, timeDist);
-
-			if (_iq7.size() > 0) {
-				it = _iq7.begin();
-				while( it!=_iq7.end() ) {
-					if( (simTime()-(*it)->getCreationTime())> timeDist ) {
-						send(*it, "out");
-						_iq7.erase(it);
-					}
-				}
-			}
-			if( triggerServiceMsg->isScheduled() )
-				cancelAndDelete(triggerServiceMsg);
-		} else {
-			if (strcmp(msg->getName(), "trigger") != 0) {
-				Packet *packetServiced = check_and_cast<Packet *>(msg);
-				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-
-				switch (packetServiced->getPriority()) {
-				case 0:
-					_iq0.push_back(packetServiced);
-					break;
-				case 1:
-					_iq1.push_back(packetServiced);
-					break;
-				case 2:
-					_iq2.push_back(packetServiced);
-					break;
-				case 3:
-					_iq3.push_back(packetServiced);
-					break;
-				case 4:
-					_iq4.push_back(packetServiced);
-					break;
-				case 5:
-					_iq5.push_back(packetServiced);
-					break;
-				case 6:
-					_iq6.push_back(packetServiced);
-					break;
-				case 7:
-					_iq7.push_back(packetServiced);
-					break;
-				}
-			}
-		}
-			break;
-		default:
-			break;
-		}	// switch
-		//} // else
-
+void Server::priority(cMessage *msg) {
+    if (msg == triggerServiceMsg) {
+		serveCurrentPacket();
+	} else {
 		if (strcmp(msg->getName(), "trigger") == 0) {
-			cancelAndDelete(msg);
+
+			//TODO service time, currently service time is trigger intervall (not nice)
+			// check queue lengths and request if length>0 as long as length>0
+			if (_q7->length() > 0) {
+				//std::cout << "q7 length " << _q7->length();
+				while (_q7->length() > 0) {
+					//std::cout << "request 7" << std::endl;
+					_q7->request(0);
+				}
+			} else {
+				// check all other queue gates
+				for (int i = 6; i > -1; i--) {
+					if (_qs.at(i)->length() > 0) {
+						//std::cout << "q" << i << " length " << _qs.at(i)->length();
+						if (_qs.at(i)->length()) {
+							//std::cout << " request i " << i << std::endl;
+							_qs.at(i)->request(0);
+						}
+					}
+				}
+			}
+		} else {
+			if (packetServiced) {
+				std::cout << "packet arrived while already servicing one "
+						<< packetServiced->getName() << " vs. "
+						<< msg->getName() << std::endl;
+				error("packet arrived while already servicing one");
+			}
+
+			packetServiced = check_and_cast<Packet *>(msg);
+			//std::cout << "packetServiced: " << packetServiced->getName()
+				//	<< std::endl;
+			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 		}
-} // handleMessage()
+	}
+} // priority()
+
+void Server::feedback1(cMessage *msg) {
+	if (msg == triggerServiceMsg) {
+		if (_order.size()>0 ) {
+			map<simtime_t, Packet*>::iterator it;
+			it = _order.begin();
+			// oldest packet is first in map
+			for( it = _order.begin(); it!=_order.end(); it++ ) {
+				Packet * packet = it->second;
+				if( packet->getPriority()==7 ) {
+					send(packet, "out");
+					numSent++;
+					//std::cout << "7 sent " << packet->getName() << " orders " << _order.size() << std::endl;
+					_order.erase(packet->getCreationTime());
+					//std::cout << " " << _order.size() << std::endl;
+				} else {
+					// sort for timestamps
+					//packet->setTimestamp();
+					send(packet, "out");
+					numSent++;
+					//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
+					_order.erase(packet->getCreationTime());
+					//std::cout << " " << _order.size() << std::endl;
+				}
+			}
+		}
+		if( triggerServiceMsg->isScheduled() )
+			cancelAndDelete(triggerServiceMsg);
+	} else {
+		if (strcmp(msg->getName(), "trigger") != 0) {
+			// fill internal storage
+			Packet *packetServiced = check_and_cast<Packet *>(msg);
+			_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
+			//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
+
+			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+		}
+	}
+
+} // feedback1()
+
+void Server::feedback2(cMessage *msg) {
+	if (msg == triggerServiceMsg) {
+		// check internal queues
+		vector<Packet*>::iterator it;
+
+		// TODO
+		simtime_t timeDist = simTime()-1;
+
+		checkWaitingTimeAndCapacityAndMoveToOtherQueue(0, _iq0, _iq1, timeDist);
+		checkWaitingTimeAndCapacityAndMoveToOtherQueue(1, _iq1, _iq2, timeDist);
+		checkWaitingTimeAndCapacityAndMoveToOtherQueue(2, _iq2, _iq3, timeDist);
+		checkWaitingTimeAndCapacityAndMoveToOtherQueue(3, _iq3, _iq4, timeDist);
+		checkWaitingTimeAndCapacityAndMoveToOtherQueue(4, _iq4, _iq5, timeDist);
+		checkWaitingTimeAndCapacityAndMoveToOtherQueue(5, _iq5, _iq6, timeDist);
+		checkWaitingTimeAndCapacityAndMoveToOtherQueue(6, _iq6, _iq7, timeDist);
+
+		if (_iq7.size() > 0) {
+			it = _iq7.begin();
+			while( it!=_iq7.end() ) {
+				if( (simTime()-(*it)->getCreationTime())> timeDist ) {
+					send(*it, "out");
+					_iq7.erase(it);
+				}
+			}
+		}
+		if( triggerServiceMsg->isScheduled() )
+			cancelAndDelete(triggerServiceMsg);
+	} else {
+		if (strcmp(msg->getName(), "trigger") != 0) {
+			Packet *packetServiced = check_and_cast<Packet *>(msg);
+			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+
+			switch (packetServiced->getPriority()) {
+			case 0:
+				_iq0.push_back(packetServiced);
+				break;
+			case 1:
+				_iq1.push_back(packetServiced);
+				break;
+			case 2:
+				_iq2.push_back(packetServiced);
+				break;
+			case 3:
+				_iq3.push_back(packetServiced);
+				break;
+			case 4:
+				_iq4.push_back(packetServiced);
+				break;
+			case 5:
+				_iq5.push_back(packetServiced);
+				break;
+			case 6:
+				_iq6.push_back(packetServiced);
+				break;
+			case 7:
+				_iq7.push_back(packetServiced);
+				break;
+			}
+		}
+	}
+
+} // feedback2()
+
+void Server::feedback3(cMessage *msg) {
+	// send p7 directly, queue and sort rest
+	if (msg == triggerServiceMsg) {
+		if (_order.size()>0 ) {
+			map<simtime_t, Packet*>::iterator it;
+			it = _order.begin();
+			// oldest packet is first in map
+			for( it = _order.begin(); it!=_order.end(); it++ ) {
+				Packet * packet = it->second;
+
+					// sort for timestamps
+					//packet->setTimestamp();
+					send(packet, "out");
+					numSent++;
+					//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
+					_order.erase(packet->getCreationTime());
+					//std::cout << " " << _order.size() << std::endl;
+			}
+		}
+		if( triggerServiceMsg->isScheduled() )
+			cancelAndDelete(triggerServiceMsg);
+	} else {
+		if (strcmp(msg->getName(), "trigger") != 0) {
+
+			Packet *packetServiced = check_and_cast<Packet *>(msg);
+			if( packetServiced->getPriority()==7 ) {
+				send(packetServiced, "out");
+				numSent++;
+			} else {
+				// fill internal storage and sort automatically for timestamps
+				_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
+				//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
+
+				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+			}
+		}
+	}
+
+} // feedback3()
+
+void Server::seven_first(cMessage *msg) {
+	if (msg == triggerServiceMsg) {
+		//std::cout << " triggerServiceMsg: ";
+		serveCurrentPacket();
+		if( triggerServiceMsg->isScheduled() )
+			cancelAndDelete(triggerServiceMsg);
+	} else {
+		if (strcmp(msg->getName(), "trigger") == 0) {
+			// trigger test
+			//std::cout << " server triggered ";
+			// check all other queue gates
+			for (int i = 6; i > -1; i--) {
+				if (_qs.at(i)->length() > 0) {
+					//std::cout << "q" << i << " length " << _qs.at(i)->length();
+					while( _qs.at(i)->length()>0 ) {
+					//if (_qs.at(i)->length()) {
+						//std::cout << " request i " << i << std::endl;
+						_qs.at(i)->request(0);
+					}
+				}
+			}
+		} else {
+			if (packetServiced) {
+				std::cout << "packet arrived while already servicing one "
+						<< packetServiced->getName() << " vs. "
+						<< msg->getName() << std::endl;
+				error("packet arrived while already servicing one");
+			}
+
+			packetServiced = check_and_cast<Packet *>(msg);
+			//std::cout << "packetServiced: " << packetServiced->getName()
+				//	<< std::endl;
+			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+		}
+	}
+} // seven_first()
 
 int Server::determineQueueSize(vector<Packet*> v) {
 	int queuesize = 0;
@@ -424,6 +463,39 @@ bool Server::isIdle()
 {
     return packetServiced == NULL;
 } // isIdle()
+
+void Server::original(cMessage *msg) {
+	int k=-1;
+	if (msg==endServiceMsg) {
+		ASSERT(packetServiced!=NULL);
+		simtime_t d = simTime() - endServiceMsg->getSendingTime();
+		packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
+		send(packetServiced, "out");
+		numSent++;
+		packetServiced = NULL;
+		emit(busySignal, 0);
+
+		if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
+
+		// examine all input queues, and request a new packet from a non empty queue
+		k = selectionStrategy->select();
+		if (k >= 0)
+		{
+			EV << "requesting packet from queue " << k << endl;
+			cGate *gate = selectionStrategy->selectableGate(k);
+			check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
+		}
+	} else {
+		if (packetServiced)
+			error("packet arrived while already servicing one");
+
+		packetServiced = check_and_cast<Packet *>(msg);
+		scheduleAt(simTime()+_serviceTime, endServiceMsg);
+		emit(busySignal, 1);
+
+		if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
+	}
+} // original()
 
 }; //namespace
 

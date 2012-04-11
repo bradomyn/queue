@@ -80,6 +80,14 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		// queues maximum capacity
 		int _capacity;
 
+		void none(cMessage *msg);
+		void priority(cMessage *msg);
+		void feedback1(cMessage *msg);
+		void feedback2(cMessage *msg);
+		void feedback3(cMessage *msg);
+		void seven_first(cMessage *msg);
+		void original(cMessage *msg);
+
     public:
         Server();
         virtual ~Server();
