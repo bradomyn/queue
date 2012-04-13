@@ -32,63 +32,65 @@ void Sink::initialize()
 
 void Sink::handleMessage(cMessage *msg)
 {
-	simtime_t currentTime = simTime();
-	simtime_t lifetime = currentTime-msg->getCreationTime();
-    Packet *packet = check_and_cast<Packet *>(msg);
+	if( strcmp(msg->getName(),"trigger")!=0 ){
+		simtime_t currentTime = simTime();
+		simtime_t lifetime = currentTime-msg->getCreationTime();
+		Packet *packet = check_and_cast<Packet *>(msg);
 
-    numReceived++;
+		numReceived++;
 
-    //std::cout << "#" << numReceived << ": " << packet->getName() << " received. ct " << msg->getCreationTime() << " st " << currentTime << " lifetime " << lifetime  << std::endl;
+		//std::cout << "#" << numReceived << ": " << packet->getName() << " received. ct " << msg->getCreationTime() << " st " << currentTime << " lifetime " << lifetime  << std::endl;
 
-    // TODO investigate distribution of packet sizes (payload)
+		// TODO investigate distribution of packet sizes (payload)
 
-    int size = packet->getSize();
-    if( size < 500 ) {
-    	v00.push_back(0);
-    } else if ( size>=500 && size <1000 ) {
-    	v01.push_back(1);
-    } else if( size >=1000 && size <=1500 ) {
-    	v02.push_back(2);
-    }
+		int size = packet->getSize();
+		if( size < 500 ) {
+			v00.push_back(0);
+		} else if ( size>=500 && size <1000 ) {
+			v01.push_back(1);
+		} else if( size >=1000 && size <=1500 ) {
+			v02.push_back(2);
+		}
 
-    switch( packet->getPriority() ) {
-    case 0:
-    	v0.push_back(lifetime);
-    	break;
-    case 1:
-    	v1.push_back(lifetime);
-        	break;
-    case 2:
-    	v2.push_back(lifetime);
-        	break;
-    case 3:
-    	v3.push_back(lifetime);
-        	break;
-    case 4:
-    	v4.push_back(lifetime);
-        	break;
-    case 5:
-    	v5.push_back(lifetime);
-        	break;
-    case 6:
-    	v6.push_back(lifetime);
-        	break;
-    case 7:
-    	v7.push_back(lifetime);
-        	break;
-    default:
-    	break;
-    }
+		switch( packet->getPriority() ) {
+		case 0:
+			v0.push_back(lifetime);
+			break;
+		case 1:
+			v1.push_back(lifetime);
+				break;
+		case 2:
+			v2.push_back(lifetime);
+				break;
+		case 3:
+			v3.push_back(lifetime);
+				break;
+		case 4:
+			v4.push_back(lifetime);
+				break;
+		case 5:
+			v5.push_back(lifetime);
+				break;
+		case 6:
+			v6.push_back(lifetime);
+				break;
+		case 7:
+			v7.push_back(lifetime);
+				break;
+		default:
+			break;
+		}
 
 
-    // gather statistics
-    emit(lifeTimeSignal, simTime()- packet->getCreationTime());
-    emit(totalQueueingTimeSignal, packet->getTotalQueueingTime());
-    emit(queuesVisitedSignal, packet->getQueueCount());
-    emit(totalServiceTimeSignal, packet->getTotalServiceTime());
-    emit(totalDelayTimeSignal, packet->getTotalDelayTime());
-    emit(delaysVisitedSignal, packet->getDelayCount());
-    emit(generationSignal, packet->getGeneration());
+		// gather statistics
+		emit(lifeTimeSignal, simTime()- packet->getCreationTime());
+		emit(totalQueueingTimeSignal, packet->getTotalQueueingTime());
+		emit(queuesVisitedSignal, packet->getQueueCount());
+		emit(totalServiceTimeSignal, packet->getTotalServiceTime());
+		emit(totalDelayTimeSignal, packet->getTotalDelayTime());
+		emit(delaysVisitedSignal, packet->getDelayCount());
+		emit(generationSignal, packet->getGeneration());
+	}
 
     if (!keepPackets) {
     	if( msg->isScheduled() )

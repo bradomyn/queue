@@ -110,7 +110,26 @@ void Server::serveCurrentPacket() {
 		packetServiced = NULL;
 		emit(busySignal, 0);
 	}
-} // serveCurrentPacket()()
+} // serveCurrentPacket()
+
+void Server::serveCurrentPacket7First() {
+	if( _iqX.size()>0 ) {
+		simtime_t d = simTime() - triggerServiceMsg->getSendingTime();
+		vector<Packet*>::iterator it;
+		//for(it = _iqX.begin(); it!= _iqX.end(); it++ ) {
+		while(_iqX.size()>0 ) {
+			it = _iqX.begin();
+			Packet *packetServiced = *it;
+			packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
+			send(packetServiced, "out");
+			numSent++;
+			std::cout << "server sent " << packetServiced->getName() << std::endl;
+			packetServiced = NULL;
+			emit(busySignal, 0);
+			_iqX.erase(it);
+		}
+	}
+} // serveCurrentPacket()
 
 void Server::handleMessage(cMessage *msg)
 {
@@ -338,13 +357,13 @@ void Server::feedback3(cMessage *msg) {
 			for( it = _order.begin(); it!=_order.end(); it++ ) {
 				Packet * packet = it->second;
 
-					// sort for timestamps
-					//packet->setTimestamp();
-					send(packet, "out");
-					numSent++;
-					//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
-					_order.erase(packet->getCreationTime());
-					//std::cout << " " << _order.size() << std::endl;
+				// sort for timestamps
+				//packet->setTimestamp();
+				send(packet, "out");
+				numSent++;
+				//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
+				_order.erase(packet->getCreationTime());
+				//std::cout << " " << _order.size() << std::endl;
 			}
 		}
 		if( triggerServiceMsg->isScheduled() )
@@ -371,7 +390,7 @@ void Server::feedback3(cMessage *msg) {
 void Server::seven_first(cMessage *msg) {
 	if (msg == triggerServiceMsg) {
 		//std::cout << " triggerServiceMsg: ";
-		serveCurrentPacket();
+		serveCurrentPacket7First();
 		if( triggerServiceMsg->isScheduled() )
 			cancelAndDelete(triggerServiceMsg);
 	} else {
@@ -390,17 +409,14 @@ void Server::seven_first(cMessage *msg) {
 				}
 			}
 		} else {
-			if (packetServiced) {
-				std::cout << "packet arrived while already servicing one "
-						<< packetServiced->getName() << " vs. "
-						<< msg->getName() << std::endl;
-				error("packet arrived while already servicing one");
-			}
+			Packet* p = check_and_cast<Packet *>(msg);
 
-			packetServiced = check_and_cast<Packet *>(msg);
-			//std::cout << "packetServiced: " << packetServiced->getName()
-				//	<< std::endl;
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+			if( p->getPriority()==7 ) {
+				send(p, "out");
+			} else {
+				_iqX.push_back(p);
+				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+			}
 		}
 	}
 } // seven_first()

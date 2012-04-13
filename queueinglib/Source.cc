@@ -80,6 +80,13 @@ void Source::handleMessage(cMessage *msg) {
 		//Useful::getInstance()->appendToFile("source_out.txt", numCreated);
 		Packet *packet = generatePacket( _data.at(numCreated).getPriority(), _data.at(numCreated).getSize() );
 		send(packet, "out");
+
+		// trigger the server
+		cMessage* trigger = new cMessage("trigger");
+		send(trigger, "outTrigger");
+
+		std::cout << "source sent " << packet->getName() << ", trigger " << std::endl;
+
 		//std::cout << "Message sent at " << sourceTime << std::endl;
 		numCreated++;
 	} else {

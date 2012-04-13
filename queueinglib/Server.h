@@ -71,6 +71,9 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		vector<Packet *> _iq1;
 		vector<Packet *> _iq0;
 
+		// for algorithm 7first
+		vector<Packet *> _iqX;
+
 		// feedback2: check the waiting time of a packet and move it to another queue if timeDist criteria is fulfilled
 		void checkWaitingTimeAndCapacityAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist);
 
@@ -104,6 +107,9 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
     private:
         // send the current packet in packetServiced
         void serveCurrentPacket();
+
+        // serve packet from _iqX
+        void serveCurrentPacket7First();
 
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);

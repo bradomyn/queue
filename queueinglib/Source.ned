@@ -34,5 +34,6 @@ simple Source
         
     gates:
         output out;
+        output outTrigger;
 }
 

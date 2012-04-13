@@ -31,6 +31,7 @@ simple Server
     gates:
         input in[8];
         output out;
+        input inTrigger;
 }
 
 

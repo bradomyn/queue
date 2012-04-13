@@ -18,7 +18,7 @@ import org.omnetpp.queueing.Trigger;
 //
 // A call center simulation.
 //
-network WRS1
+network WRS2
 {
     parameters:
         @display("i=device/cellphone;bgb=846,838");
@@ -59,20 +59,12 @@ network WRS1
         passiveQueue7: PassiveQueue {
             @display("p=335,781");
         }
-        trigger: Trigger {
-            @display("p=582,207;b=36,10");
-        }
-        ignore: Sink {
-            @display("p=38,511;b=34,19");
-        }
     connections:
         source.out --> classifier.in++;
         classifier.out++ --> passiveQueue0.in++;
         classifier.out++ --> passiveQueue1.in++;
         classifier.out++ --> passiveQueue2.in++;
         classifier.out++ --> passiveQueue3.in++;
-
-        trigger.out --> server.inTrigger;
 
         passiveQueue0.out++ --> server.in++;
         passiveQueue1.out++ --> server.in++;
@@ -88,5 +80,5 @@ network WRS1
         passiveQueue7.out++ --> server.in++;
 
         server.out --> sink.in++;
-        source.outTrigger --> ignore.in++;
+        source.outTrigger --> server.inTrigger;
 }
