@@ -59,7 +59,7 @@ void PassiveQueue::initialize()
 		_scheduling = 1;
 		std::cout << "queue priority" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "queue priority");
-	} else if (strcmp(algName, "feedback") == 0) {
+	} else if (strcmp(algName, "feedback1") == 0) {
 		_scheduling = 2;
 		std::cout << "queue feedback" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "queue feedback");

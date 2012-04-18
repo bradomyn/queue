@@ -60,6 +60,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         //http://www.cplusplus.com/reference/stl/map/: Internally, the elements in the map are sorted from lower to higher key value
         //following a specific strict weak ordering criterion set on construction.
 
+        map<simtime_t, Packet*> _order7;
 
 		// feedback2, internal 'queues'
 		vector<Packet *> _iq7;

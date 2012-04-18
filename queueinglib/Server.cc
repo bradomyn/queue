@@ -72,9 +72,9 @@ void Server::initialize()
 		_scheduling = 1;
 		std::cout << "server priority" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "server priority");
-	} else if (strcmp(algName, "feedback") == 0) {
+	} else if (strcmp(algName, "feedback1") == 0) {
 		_scheduling = 2;
-		std::cout << "server feedback" << std::endl;
+		std::cout << "server feedback1" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "server feedback");
 	} else if (strcmp(algName, "original") == 0) {
 		_scheduling = 3;
@@ -245,28 +245,38 @@ void Server::priority(cMessage *msg) {
 } // priority()
 
 void Server::feedback1(cMessage *msg) {
+	std::cout << "fb1 " << msg->getName() << std::endl;
 	if (msg == triggerServiceMsg) {
+
+		if( _order7.size()>0 ) {
+			map<simtime_t, Packet*>::iterator it;
+			it = _order7.begin();
+			// oldest packet is first in map
+			for( it = _order7.begin(); it!=_order7.end(); it++ ) {
+				Packet * packet = it->second;
+				// sort for timestamps
+				//packet->setTimestamp();
+				send(packet, "out");
+				numSent++;
+				//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
+				_order7.erase(packet->getCreationTime());
+				//std::cout << " " << _order.size() << std::endl;
+			}
+		}
+
 		if (_order.size()>0 ) {
 			map<simtime_t, Packet*>::iterator it;
 			it = _order.begin();
 			// oldest packet is first in map
 			for( it = _order.begin(); it!=_order.end(); it++ ) {
 				Packet * packet = it->second;
-				if( packet->getPriority()==7 ) {
-					send(packet, "out");
-					numSent++;
-					//std::cout << "7 sent " << packet->getName() << " orders " << _order.size() << std::endl;
-					_order.erase(packet->getCreationTime());
-					//std::cout << " " << _order.size() << std::endl;
-				} else {
-					// sort for timestamps
-					//packet->setTimestamp();
-					send(packet, "out");
-					numSent++;
-					//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
-					_order.erase(packet->getCreationTime());
-					//std::cout << " " << _order.size() << std::endl;
-				}
+				// sort for timestamps
+				//packet->setTimestamp();
+				send(packet, "out");
+				numSent++;
+				//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
+				_order.erase(packet->getCreationTime());
+				//std::cout << " " << _order.size() << std::endl;
 			}
 		}
 		if( triggerServiceMsg->isScheduled() )
@@ -275,8 +285,13 @@ void Server::feedback1(cMessage *msg) {
 		if (strcmp(msg->getName(), "trigger") != 0) {
 			// fill internal storage
 			Packet *packetServiced = check_and_cast<Packet *>(msg);
-			_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
-			//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
+
+			if( packetServiced->getPriority()==7 ) {
+				_order7.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
+			} else {
+				_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
+			}
+			std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
 
 			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 		}
