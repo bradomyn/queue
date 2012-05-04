@@ -78,6 +78,8 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		// feedback2: check the waiting time of a packet and move it to another queue if timeDist criteria is fulfilled
 		void checkWaitingTimeAndCapacityAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist);
 
+		void checkQueueSizeAndSend(vector<Packet*> &v);
+
 		// compute queue size from contents (packet sizes)
 		int determineQueueSize(vector<Packet*> v);
 
@@ -91,6 +93,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		void feedback3(cMessage *msg);
 		void seven_first(cMessage *msg);
 		void original(cMessage *msg);
+		void wfq1(cMessage *msg);
 
     public:
         Server();
@@ -111,6 +114,20 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
         // serve packet from _iqX
         void serveCurrentPacket7First();
+
+        // Weighted Fair Queueing, 4 HP for 1 LP
+        void sendWFQ1();
+
+        // Weighted Fair Queueing, 4, 3, 2, 1 accoridng to priority
+        void sendWFQ2();
+
+        // Weighted Fair Queueing using Round Robin
+        void sendWFQ3();
+        int _rrCounter;
+        int _rrN;
+
+        // Weighted Fair Queueing considering the size of a queue
+        void sendWFQ4();
 
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);

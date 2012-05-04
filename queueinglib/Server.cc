@@ -22,6 +22,9 @@ Server::Server()
     endServiceMsg = NULL;
 
     triggerServiceMsg = NULL;
+
+    _rrCounter = 7;
+    _rrN = 5;
 }
 
 Server::~Server()
@@ -92,6 +95,10 @@ void Server::initialize()
 		_scheduling = 6;
 		std::cout << "server feedback3" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "server feedback3");
+	} else if (strcmp(algName, "wfq1") == 0) {
+		_scheduling = 7;
+		std::cout << "server wfq1" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "server wfq1");
 	}
 
 	_serviceTime = par("serviceTime");
@@ -161,8 +168,12 @@ void Server::handleMessage(cMessage *msg)
 			feedback2(msg);
 			break;
 		case 6:	// feedback 3
-			// use with WRS1.ned
+			// use with WRS2.ned
 			feedback3(msg);
+			break;
+		case 7:	// wfq1
+			// use with WRS2.ned
+			wfq1(msg);
 			break;
 		default:
 			break;
@@ -402,6 +413,7 @@ void Server::feedback3(cMessage *msg) {
 
 } // feedback3()
 
+// this is similar to the current scheduling strategy in the WRS
 void Server::seven_first(cMessage *msg) {
 	if (msg == triggerServiceMsg) {
 		//std::cout << " triggerServiceMsg: ";
@@ -436,6 +448,524 @@ void Server::seven_first(cMessage *msg) {
 	}
 } // seven_first()
 
+void Server::sendWFQ1() {
+	//cout << __FUNCTION__ ;
+	int i=0;
+	int N = 4;
+	vector<Packet*>::iterator it;
+	// check higher priority queues
+	if( _iq7.size()>0 ) {
+		// send up to 4 packets if available
+		for(i=0; i<N; i++) {
+			if( _iq7.size()>0 ) {
+				it = _iq7.begin();
+				send(*it, "out");
+				_iq7.erase(it);
+			}
+		}
+	}
+	if( i==N ) {
+		// if packets sent check lower priority queues
+		if( _iq6.size()>0 ) {
+			it = _iq6.begin();
+			send(*it, "out");
+			_iq6.erase(it);
+		}
+		if( _iq5.size()>0 ) {
+			it = _iq5.begin();
+			send(*it, "out");
+			_iq5.erase(it);
+		}
+		if( _iq4.size()>0 ) {
+			it = _iq4.begin();
+			send(*it, "out");
+			_iq4.erase(it);
+		}
+		if( _iq3.size()>0 ) {
+			it = _iq3.begin();
+			send(*it, "out");
+			_iq3.erase(it);
+		}
+		if( _iq2.size()>0 ) {
+			it = _iq2.begin();
+			send(*it, "out");
+			_iq2.erase(it);
+		}
+		if( _iq1.size()>0 ) {
+			it = _iq1.begin();
+			send(*it, "out");
+			_iq1.erase(it);
+		}
+		if( _iq0.size()>0 ) {
+			it = _iq0.begin();
+			send(*it, "out");
+			_iq0.erase(it);
+		}
+	}
+} // sendWFQ1()
+
+void Server::sendWFQ2() {
+	//cout << __FUNCTION__ ;
+	int i=0;
+	int N = 4;
+	vector<Packet*>::iterator it;
+	// check higher priority queues
+	if( _iq7.size()>0 ) {
+		// send up to 4 packets if available
+		for(i=0; i<N; i++) {
+			if( _iq7.size()>0 ) {
+				it = _iq7.begin();
+				send(*it, "out");
+				_iq7.erase(it);
+			}
+		}
+	}
+	if( i==N ) {
+		// if packets sent check lower priority queues
+		if( _iq6.size()>0 ) {
+			for(i=0; i<(N-1); i++) {
+				if( _iq6.size()>0 ) {
+					it = _iq6.begin();
+					send(*it, "out");
+					_iq6.erase(it);
+				}
+			}
+		}
+		if( _iq5.size()>0 ) {
+			for(i=0; i<(N-1); i++) {
+				if( _iq5.size()>0 ) {
+					it = _iq5.begin();
+					send(*it, "out");
+					_iq5.erase(it);
+				}
+			}
+		}
+		if( _iq4.size()>0 ) {
+			for(i=0; i<(N-2); i++) {
+				if( _iq4.size()>0 ) {
+					it = _iq4.begin();
+					send(*it, "out");
+					_iq4.erase(it);
+				}
+			}
+		}
+		if( _iq3.size()>0 ) {
+			for(i=0; i<(N-2); i++) {
+				if( _iq3.size()>0 ) {
+					it = _iq3.begin();
+					send(*it, "out");
+					_iq3.erase(it);
+				}
+			}
+		}
+		if( _iq2.size()>0 ) {
+			for(i=0; i<(N-2); i++) {
+				if( _iq2.size()>0 ) {
+					it = _iq2.begin();
+					send(*it, "out");
+					_iq2.erase(it);
+				}
+			}
+		}
+		if( _iq1.size()>0 ) {
+			for(i=0; i<(N-3); i++) {
+				if( _iq1.size()>0 ) {
+					it = _iq1.begin();
+					send(*it, "out");
+					_iq1.erase(it);
+				}
+			}
+		}
+		if( _iq0.size()>0 ) {
+			for(i=0; i<(N-3); i++) {
+				if( _iq0.size()>0 ) {
+					it = _iq0.begin();
+					send(*it, "out");
+					_iq0.erase(it);
+				}
+			}
+		}
+	}
+} // sendWFQ2()
+
+//rrCounter = (rrCounter + 1) % gateSize("out");
+// use round robin
+// works best with
+// _rrCounter = 7; _rrN = 5;
+void Server::sendWFQ3() {
+	//cout << __FUNCTION__ ;
+	vector<Packet*>::iterator it;
+	// check higher priority queues
+
+	switch ( _rrCounter ) {
+	case 7:
+		if( _iq7.size()>0 ) {
+			for( int i=0; i<_rrN; i++ ) {
+				if( _iq7.size()>0 ) {
+					it = _iq7.begin();
+					send(*it, "out");
+					_iq7.erase(it);
+				}
+			}
+		}
+		break;
+		// if packets sent check lower priority queues
+	case 6:
+		if( _iq6.size()>0 ) {
+			for( int i=0; i<(_rrN-1); i++ ) {
+				if( _iq6.size()>0 ) {
+				it = _iq6.begin();
+				send(*it, "out");
+				_iq6.erase(it);
+				}
+			}
+		}
+		break;
+	case 5:
+		if( _iq5.size()>0 ) {
+			for( int i=0; i<(_rrN-2); i++ ) {
+				if( _iq5.size()>0 ) {
+					it = _iq5.begin();
+					send(*it, "out");
+					_iq5.erase(it);
+				}
+			}
+		}
+		break;
+	case 4:
+		if( _iq4.size()>0 ) {
+			for( int i=0; i<(_rrN-2); i++ ) {
+				if( _iq4.size()>0 ) {
+					it = _iq4.begin();
+					send(*it, "out");
+					_iq4.erase(it);
+				}
+			}
+		}
+		break;
+	case 3:
+		if( _iq3.size()>0 ) {
+			for( int i=0; i<(_rrN-3); i++ ) {
+				if( _iq3.size()>0 ) {
+					it = _iq3.begin();
+					send(*it, "out");
+					_iq3.erase(it);
+				}
+			}
+		}
+		break;
+	case 2:
+		if( _iq2.size()>0 ) {
+			for( int i=0; i<(_rrN-3); i++ ) {
+				if( _iq2.size()>0 ) {
+					it = _iq2.begin();
+					send(*it, "out");
+					_iq2.erase(it);
+				}
+			}
+		}
+		break;
+	case 1:
+		if( _iq1.size()>0 ) {
+			for( int i=0; i<(_rrN-3); i++ ) {
+				if( _iq1.size()>0 ) {
+					it = _iq1.begin();
+					send(*it, "out");
+					_iq1.erase(it);
+				}
+			}
+		}
+		break;
+	case 0:
+		if( _iq0.size()>0 ) {
+			for( int i=0; i<(_rrN-3); i++ ) {
+				if( _iq0.size()>0 ) {
+					it = _iq0.begin();
+					send(*it, "out");
+					_iq0.erase(it);
+				}
+			}
+		}
+		break;
+	}
+	// reset counter
+	_rrCounter = _rrCounter - 1;
+	if( _rrCounter<0 )
+		_rrCounter = 7;
+	cout << " rrCounter = " << _rrCounter << endl;
+} // sendWFQ3()
+
+// consider number of packets in queue
+void Server::sendWFQ4() {
+	//cout << __FUNCTION__ ;
+	// check higher priority queues
+	int N = 5;
+
+	// map sorts automatically after the key from lowest size to largest size
+	map< int, vector<Packet *> > queuesizes;
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq7.size(), _iq7));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq6.size(), _iq6));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq5.size(), _iq5));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq4.size(), _iq4));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq3.size(), _iq3));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq2.size(), _iq2));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq1.size(), _iq1));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq0.size(), _iq0));
+
+	// pick first from map, this is the smallest queue
+	map<int, vector<Packet *> >::iterator it;
+	it = queuesizes.begin();
+
+	// adjust weight depending on queue size, remove most packets from fullest queue first
+	// find queue 7, empty it, then move on to queue with biggest size
+	for( it = queuesizes.begin(); it!=queuesizes.end(); it++ ) {
+		vector<Packet *> v = it->second;
+		//cout << v.size() << ", " << _iq7.size() << "  ";
+		if( v.size()== _iq7.size() && v.size()>0 && _iq7.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq7.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq7
+
+							it = _iq7.begin();
+							//cout << " _iq7: " << (*it)->getName()<< " ";
+							_iq7.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq7.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 6
+		//cout << v.size() << ", " << _iq6.size() << "  ";
+		if( v.size()== _iq6.size() && v.size()>0 && _iq6.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq6.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-1; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq6
+
+							it = _iq6.begin();
+							//cout << " _iq6: " << (*it)->getName()<< " ";
+							_iq6.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq6.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 5
+		//cout << v.size() << ", " << _iq5.size() << "  ";
+		if( v.size()== _iq5.size() && v.size()>0 && _iq5.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq5.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-1; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq5
+
+							it = _iq5.begin();
+							//cout << " _iq5: " << (*it)->getName()<< " ";
+							_iq5.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq5.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 4
+		//cout << v.size() << ", " << _iq4.size() << "  ";
+		if( v.size()== _iq4.size() && v.size()>0 && _iq4.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq4.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-2; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq4
+
+							it = _iq4.begin();
+							//cout << " _iq4: " << (*it)->getName()<< " ";
+							_iq4.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq4.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 3
+		//cout << v.size() << ", " << _iq3.size() << "  ";
+		if( v.size()== _iq3.size() && v.size()>0 && _iq3.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq3.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-2; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq3
+
+							it = _iq3.begin();
+							//cout << " _iq3: " << (*it)->getName()<< " ";
+							_iq3.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq3.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 2
+		//cout << v.size() << ", " << _iq2.size() << "  ";
+		if( v.size()== _iq2.size() && v.size()>0 && _iq2.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq2.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-3; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq2
+
+							it = _iq2.begin();
+							//cout << " _iq2: " << (*it)->getName()<< " ";
+							_iq2.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq2.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 1
+		//cout << v.size() << ", " << _iq1.size() << "  ";
+		if( v.size()== _iq1.size() && v.size()>0 && _iq1.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq1.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-3; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq1
+
+							it = _iq1.begin();
+							//cout << " _iq1: " << (*it)->getName()<< " ";
+							_iq1.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq1.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 0
+		//cout << v.size() << ", " << _iq0.size() << "  ";
+		if( v.size()== _iq0.size() && v.size()>0 && _iq0.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq0.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-3; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq0
+
+							it = _iq0.begin();
+							//cout << " _iq0: " << (*it)->getName()<< " ";
+							_iq0.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq0.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+	}
+	// if packets sent check lower priority queues
+
+} // sendWFQ4()
+
+// first approach to weighted fair queueing:
+// send for each packet sent from a lower priority queue
+// four packet from higher priority queues
+void Server::wfq1(cMessage *msg) {
+	if (msg == triggerServiceMsg) {
+		//sendWFQ1();
+		//sendWFQ2();
+		//sendWFQ3();
+		sendWFQ4();
+		if( triggerServiceMsg->isScheduled() )
+			cancelAndDelete(triggerServiceMsg);
+	} else {
+		if (strcmp(msg->getName(), "trigger") != 0) {
+			Packet* p = check_and_cast<Packet *>(msg);
+
+			//cout << "packet arrived " << p->getName() << endl;
+			//Useful::getInstance()->appendToFile("out.txt", p->getName());
+
+			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+
+			// collect packets
+			switch (p->getPriority()) {
+				case 0:
+					_iq0.push_back(p);
+					break;
+				case 1:
+					_iq1.push_back(p);
+					break;
+				case 2:
+					_iq2.push_back(p);
+					break;
+				case 3:
+					_iq3.push_back(p);
+					break;
+				case 4:
+					_iq4.push_back(p);
+					break;
+				case 5:
+					_iq5.push_back(p);
+					break;
+				case 6:
+					_iq6.push_back(p);
+					break;
+				case 7:
+					_iq7.push_back(p);
+					break;
+				}
+		}
+	}
+} // wfq1()
+
 int Server::determineQueueSize(vector<Packet*> v) {
 	int queuesize = 0;
 	vector<Packet*>::iterator it = v.begin();
@@ -453,19 +983,41 @@ void Server::checkWaitingTimeAndCapacityAndMoveToOtherQueue(int priority, vector
 		while (it != v1.end()) {
 			if( ((simTime()-(*it)->getCreationTime()) > timeDist ) ||
 			    ( queuesize>(_capacity-1500) ) ) {	// queue is almost full
-				v2.push_back(*it); // move to higher queue
-				//std::cout << "moved from " << priority << " to " << (priority+1) << ": " << (simTime()-(*it)->getCreationTime()) << std::endl;
-				v1.erase(it);
-				std::cout << ".";
-				if( v1.size()>0 )
-					it = v1.begin();
-				else
-					break;
+				// consider sizes of queues that gain packets
+				if( determineQueueSize(v2)<(_capacity-1500) ) {
+					v2.push_back(*it); // move to higher queue
+					//std::cout << "moved from " << priority << " to " << (priority+1) << ": " << (simTime()-(*it)->getCreationTime()) << std::endl;
+					v1.erase(it);
+					std::cout << ".";
+					if( v1.size()>0 )
+						it = v1.begin();
+					else {
+						it++;
+						break;
+					}
+				}
+
 			}
 		}
 		//std::cout << priority << " size: " << v1.size() << std::endl;
 	}
 }
+
+void Server::checkQueueSizeAndSend(vector<Packet*> &v) {
+	if (v.size() > 0) {
+			vector<Packet*>::iterator it = v.begin();
+			int queuesize = determineQueueSize(v);
+			while (it != v.end()) {
+				if( queuesize>(_capacity-1500) ) {	// queue is almost full
+					send((*it), "out");
+					v.erase(it);
+					it = v.begin();
+					std::cout << "*";
+				}
+			}
+			//std::cout << priority << " size: " << v1.size() << std::endl;
+		}
+} // checkQueueSizeAndSend()
 
 IPassiveQueue *Server::getQueue(int index) {
 	std::string queue = "passiveQueue";

@@ -9,6 +9,7 @@
 
 #include "Sink.h"
 #include "Packet.h"
+#include "Server.h"
 #include "IPassiveQueue.h"
 
 namespace queueing {
@@ -126,7 +127,12 @@ void Sink::finish()
 
 	determineQueueSizes();
 
-	std::cout << "packet sizes " << v00.size() << " " << v01.size() << " " << v02.size() << std::endl;
+	std::cout << "packet sizes " << v00.size() << " " << v01.size() << " " << v02.size();
+
+	// find out number of objects still stuck in server
+	cModule *server = (cModule*)getParentModule()->findObject("server", true);
+	int nofObjects = (check_and_cast<Server *>(server))->getLiveObjectCount();
+	cout << " " << nofObjects << std::endl;
 
 	// output to a file
 	string str;

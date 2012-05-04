@@ -189,9 +189,13 @@ $O/Server.o: Server.cc \
 	Useful.h
 $O/Sink.o: Sink.cc \
 	IPassiveQueue.h \
+	IServer.h \
 	Packet.h \
 	Packet_m.h \
+	PassiveQueue.h \
 	QueueingDefs.h \
+	SelectionStrategies.h \
+	Server.h \
 	Sink.h \
 	Useful.h
 $O/Source.o: Source.cc \

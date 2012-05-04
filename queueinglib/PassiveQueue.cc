@@ -79,6 +79,10 @@ void PassiveQueue::initialize()
 		_scheduling = 6;
 		std::cout << "queue feedback3" << std::endl;
 		Useful::getInstance()->appendToFile("out.txt", "queue feedback3");
+	} else if (strcmp(algName, "wfq1") == 0) {
+		_scheduling = 7;
+		std::cout << "queue wfq1" << std::endl;
+		Useful::getInstance()->appendToFile("out.txt", "queue wfq1");
 	}
 
 } // initialize()
@@ -177,6 +181,10 @@ void PassiveQueue::handleMessage(cMessage *msg)
 		numServed++;
 		break;
 	case 6:	// feedback 3
+		send(packet, "out", 0);
+		numServed++;
+		break;
+	case 7:	// wfq1
 		send(packet, "out", 0);
 		numServed++;
 		break;
