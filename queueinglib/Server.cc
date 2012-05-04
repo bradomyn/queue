@@ -342,32 +342,7 @@ void Server::feedback2(cMessage *msg) {
 			Packet *packetServiced = check_and_cast<Packet *>(msg);
 			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 
-			switch (packetServiced->getPriority()) {
-			case 0:
-				_iq0.push_back(packetServiced);
-				break;
-			case 1:
-				_iq1.push_back(packetServiced);
-				break;
-			case 2:
-				_iq2.push_back(packetServiced);
-				break;
-			case 3:
-				_iq3.push_back(packetServiced);
-				break;
-			case 4:
-				_iq4.push_back(packetServiced);
-				break;
-			case 5:
-				_iq5.push_back(packetServiced);
-				break;
-			case 6:
-				_iq6.push_back(packetServiced);
-				break;
-			case 7:
-				_iq7.push_back(packetServiced);
-				break;
-			}
+			pushPacket2Queue(packetServiced);
 		}
 	}
 
@@ -923,7 +898,7 @@ void Server::wfq1(cMessage *msg) {
 		//sendWFQ1();
 		//sendWFQ2();
 		//sendWFQ3();
-		sendWFQ4();
+		sendWFQ4();	// best approach so far!
 		if( triggerServiceMsg->isScheduled() )
 			cancelAndDelete(triggerServiceMsg);
 	} else {
@@ -936,35 +911,157 @@ void Server::wfq1(cMessage *msg) {
 			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 
 			// collect packets
-			switch (p->getPriority()) {
-				case 0:
-					_iq0.push_back(p);
-					break;
-				case 1:
-					_iq1.push_back(p);
-					break;
-				case 2:
-					_iq2.push_back(p);
-					break;
-				case 3:
-					_iq3.push_back(p);
-					break;
-				case 4:
-					_iq4.push_back(p);
-					break;
-				case 5:
-					_iq5.push_back(p);
-					break;
-				case 6:
-					_iq6.push_back(p);
-					break;
-				case 7:
-					_iq7.push_back(p);
-					break;
-				}
+			//pushPacket2Queue(p);
+			pushPacket2QueueCheckNofPackets(p);
+			//pushPacket2QueueCheckSize(p);
 		}
 	}
 } // wfq1()
+
+void Server::pushPacket2Queue(Packet *p) {
+	if( p!=NULL ) {
+		switch (p->getPriority()) {
+		case 0:
+			_iq0.push_back(p);
+			break;
+		case 1:
+			_iq1.push_back(p);
+			break;
+		case 2:
+			_iq2.push_back(p);
+			break;
+		case 3:
+			_iq3.push_back(p);
+			break;
+		case 4:
+			_iq4.push_back(p);
+			break;
+		case 5:
+			_iq5.push_back(p);
+			break;
+		case 6:
+			_iq6.push_back(p);
+			break;
+		case 7:
+			_iq7.push_back(p);
+			break;
+		}
+	}
+}
+
+// check the number of packets in a queue
+void Server::pushPacket2QueueCheckNofPackets(Packet *p) {
+	int N=16;
+	if( p!=NULL ) {
+		switch (p->getPriority()) {
+		case 0:
+			if( _iq0.size()<N )
+				_iq0.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 1:
+			if( _iq1.size()<N )
+				_iq1.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 2:
+			if( _iq2.size()<N )
+				_iq2.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 3:
+			if( _iq3.size()<N )
+				_iq3.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 4:
+			if( _iq4.size()<N )
+				_iq4.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 5:
+			if( _iq5.size()<N )
+				_iq5.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 6:
+			if( _iq6.size()<N )
+				_iq6.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 7:
+			if( _iq7.size()<N )
+				_iq7.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		}
+	}
+}
+
+// check the queue size (size of packets in queue)
+void Server::pushPacket2QueueCheckSize(Packet *p) {
+	int N = 1024;
+	if( p!=NULL ) {
+		switch (p->getPriority()) {
+		case 0:
+			if( determineQueueSize(_iq0)<N )
+				_iq0.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 1:
+			if( determineQueueSize(_iq1)<N )
+				_iq1.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 2:
+			if( determineQueueSize(_iq2)<N )
+				_iq2.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 3:
+			if( determineQueueSize(_iq3)<N )
+				_iq3.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 4:
+			if( determineQueueSize(_iq4)<N )
+				_iq4.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 5:
+			if( determineQueueSize(_iq5)<N )
+				_iq5.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 6:
+			if( determineQueueSize(_iq6)<N )
+				_iq6.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 7:
+			if( determineQueueSize(_iq7)<N )
+				_iq7.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		}
+	}
+}
 
 int Server::determineQueueSize(vector<Packet*> v) {
 	int queuesize = 0;

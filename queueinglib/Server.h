@@ -94,6 +94,10 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		void seven_first(cMessage *msg);
 		void original(cMessage *msg);
 		void wfq1(cMessage *msg);
+		void pushPacket2Queue(Packet *p);
+		void pushPacket2QueueCheckNofPackets(Packet *p);
+		void pushPacket2QueueCheckSize(Packet *p);
+		vector<Packet*> _dropped;
 
     public:
         Server();
@@ -107,6 +111,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
     public:
         virtual bool isIdle();
+        vector<Packet* > getDropped() { return _dropped; };
 
     private:
         // send the current packet in packetServiced

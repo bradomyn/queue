@@ -133,6 +133,7 @@ void Sink::finish()
 	cModule *server = (cModule*)getParentModule()->findObject("server", true);
 	int nofObjects = (check_and_cast<Server *>(server))->getLiveObjectCount();
 	cout << " " << nofObjects << std::endl;
+	cout << "dropped " << (check_and_cast<Server *>(server))->getDropped().size() << endl;
 
 	// output to a file
 	string str;
