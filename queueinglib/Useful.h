@@ -67,6 +67,7 @@ public:
 	void writeRandomDataToList(std::string filename, int priority, int size);
 
 	void appendToFile(std::string filename, std::string value);
+	void appendToFileTab(std::string filename, std::string value);
 	void appendToFile(std::string filename, double value);
 	void appendToFile(std::string filename, int value);
 

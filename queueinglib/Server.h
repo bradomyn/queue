@@ -94,6 +94,8 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		void seven_first(cMessage *msg);
 		void original(cMessage *msg);
 		void wfq1(cMessage *msg);
+		void wfq4(cMessage *msg);
+		void mixed(cMessage *msg);
 		void pushPacket2Queue(Packet *p);
 		void pushPacket2QueueCheckNofPackets(Packet *p);
 		void pushPacket2QueueCheckSize(Packet *p);
@@ -120,19 +122,26 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         // serve packet from _iqX
         void serveCurrentPacket7First();
 
-        // Weighted Fair Queueing, 4 HP for 1 LP
+        // Weighted Fair Queuing, 4 HP for 1 LP
         void sendWFQ1();
 
-        // Weighted Fair Queueing, 4, 3, 2, 1 accoridng to priority
+        // Weighted Fair Queuing, 4, 3, 2, 1 according to priority
         void sendWFQ2();
 
-        // Weighted Fair Queueing using Round Robin
+        // Weighted Fair Queuing using Round Robin
         void sendWFQ3();
         int _rrCounter;
         int _rrN;
 
-        // Weighted Fair Queueing considering the size of a queue
+        // Weighted Fair Queuing considering the size of a queue
         void sendWFQ4();
+
+        void sendMixed();
+        void sendWFQ4_6to4();
+
+        int _nofPointersInQueue;
+        int _memorySize;
+        int _weightWFQ;
 
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);

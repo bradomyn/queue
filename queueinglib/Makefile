@@ -197,6 +197,7 @@ $O/Sink.o: Sink.cc \
 	SelectionStrategies.h \
 	Server.h \
 	Sink.h \
+	Source.h \
 	Useful.h
 $O/Source.o: Source.cc \
 	Packet.h \

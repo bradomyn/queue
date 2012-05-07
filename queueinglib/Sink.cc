@@ -10,6 +10,7 @@
 #include "Sink.h"
 #include "Packet.h"
 #include "Server.h"
+#include "Source.h"
 #include "IPassiveQueue.h"
 
 namespace queueing {
@@ -133,11 +134,17 @@ void Sink::finish()
 	cModule *server = (cModule*)getParentModule()->findObject("server", true);
 	int nofObjects = (check_and_cast<Server *>(server))->getLiveObjectCount();
 	cout << " " << nofObjects << std::endl;
-	cout << "dropped " << (check_and_cast<Server *>(server))->getDropped().size() << endl;
+	int nofDropped = (check_and_cast<Server *>(server))->getDropped().size();
+	cout << "dropped " << nofDropped;
+
+	cModule *source = (cModule*)getParentModule()->findObject("source", true);
+	int nofCreated = (check_and_cast<Source *>(source))->getCreated();
+	int nofArrived = v0.size()+v1.size()+v2.size()+v3.size()+v4.size()+v5.size()+v6.size()+v7.size();
+	cout << " created: " << nofCreated  << " arrived: " << nofArrived << endl;
 
 	// output to a file
 	string str;
-	char buf[30];
+	char buf[50];
 	sprintf(buf,"p 0: avg %lf size %d", avg_lifetime(v0), v0.size());
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.txt", str);
@@ -163,6 +170,9 @@ void Sink::finish()
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.txt", str);
 
+	sprintf(buf, "dropped: %d created: %d arrived: %d", nofDropped, nofCreated, nofArrived );
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
 }
 
 void Sink::determineQueueSizes() {

@@ -70,40 +70,52 @@ void Server::initialize()
 	if (strcmp(algName, "none") == 0) {
 		_scheduling = 0;
 		std::cout << "server none" << std::endl;
-		Useful::getInstance()->appendToFile("out.txt", "server none");
+		Useful::getInstance()->appendToFileTab("out.txt", "server none");
 	} else if (strcmp(algName, "priority") == 0) {
 		_scheduling = 1;
 		std::cout << "server priority" << std::endl;
-		Useful::getInstance()->appendToFile("out.txt", "server priority");
+		Useful::getInstance()->appendToFileTab("out.txt", "server priority");
 	} else if (strcmp(algName, "feedback1") == 0) {
 		_scheduling = 2;
 		std::cout << "server feedback1" << std::endl;
-		Useful::getInstance()->appendToFile("out.txt", "server feedback");
+		Useful::getInstance()->appendToFileTab("out.txt", "server feedback");
 	} else if (strcmp(algName, "original") == 0) {
 		_scheduling = 3;
 		std::cout << "server original" << std::endl;
-		Useful::getInstance()->appendToFile("out.txt", "server original");
+		Useful::getInstance()->appendToFileTab("out.txt", "server original");
 	} else if (strcmp(algName, "7first") == 0) {
 		_scheduling = 4;
 		std::cout << "server 7first" << std::endl;
-		Useful::getInstance()->appendToFile("out.txt", "server 7first");
+		Useful::getInstance()->appendToFileTab("out.txt", "server 7first");
 	} else if (strcmp(algName, "feedback2") == 0) {
 		_scheduling = 5;
 		std::cout << "server feedback2" << std::endl;
-		Useful::getInstance()->appendToFile("out.txt", "server feedback2");
+		Useful::getInstance()->appendToFileTab("out.txt", "server feedback2");
 	} else if (strcmp(algName, "feedback3") == 0) {
 		_scheduling = 6;
 		std::cout << "server feedback3" << std::endl;
-		Useful::getInstance()->appendToFile("out.txt", "server feedback3");
+		Useful::getInstance()->appendToFileTab("out.txt", "server feedback3");
 	} else if (strcmp(algName, "wfq1") == 0) {
 		_scheduling = 7;
 		std::cout << "server wfq1" << std::endl;
-		Useful::getInstance()->appendToFile("out.txt", "server wfq1");
+		Useful::getInstance()->appendToFileTab("out.txt", "server wfq1");
+	} else if (strcmp(algName, "wfq4") == 0) {
+		_scheduling = 8;
+		std::cout << "server wfq4" << std::endl;
+		Useful::getInstance()->appendToFileTab("out.txt", "server wfq4");
+	} else if (strcmp(algName, "mixed") == 0) {
+		_scheduling = 9;
+		std::cout << "server mixed" << std::endl;
+		Useful::getInstance()->appendToFileTab("out.txt", "server mixed");
 	}
 
 	_serviceTime = par("serviceTime");
 
 	_capacity = par("capacity");
+
+	_nofPointersInQueue = par("nofPointersInQueue");
+	_memorySize = par("memorySize");
+	_weightWFQ = par("weightWFQ");
 
 } // initialize()
 
@@ -130,7 +142,7 @@ void Server::serveCurrentPacket7First() {
 			packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
 			send(packetServiced, "out");
 			numSent++;
-			std::cout << "server sent " << packetServiced->getName() << std::endl;
+			//std::cout << "server sent " << packetServiced->getName() << std::endl;
 			packetServiced = NULL;
 			emit(busySignal, 0);
 			_iqX.erase(it);
@@ -174,6 +186,14 @@ void Server::handleMessage(cMessage *msg)
 		case 7:	// wfq1
 			// use with WRS2.ned
 			wfq1(msg);
+			break;
+		case 8:	// wfq4
+			// use with WRS2.ned
+			wfq4(msg);
+			break;
+		case 9:	// mixed
+			// use with WRS2.ned
+			mixed(msg);
 			break;
 		default:
 			break;
@@ -256,7 +276,7 @@ void Server::priority(cMessage *msg) {
 } // priority()
 
 void Server::feedback1(cMessage *msg) {
-	std::cout << "fb1 " << msg->getName() << std::endl;
+	//std::cout << "fb1 " << msg->getName() << std::endl;
 	if (msg == triggerServiceMsg) {
 
 		if( _order7.size()>0 ) {
@@ -302,7 +322,7 @@ void Server::feedback1(cMessage *msg) {
 			} else {
 				_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
 			}
-			std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
+			//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
 
 			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
 		}
@@ -672,11 +692,10 @@ void Server::sendWFQ3() {
 
 // consider number of packets in queue
 void Server::sendWFQ4() {
-	//cout << __FUNCTION__ ;
-	// check higher priority queues
-	int N = 5;
+	//int N = 5;
+	int N = _weightWFQ;
 
-	// map sorts automatically after the key from lowest size to largest size
+	// map sorts automatically after the key from lowest size to largest queue size
 	map< int, vector<Packet *> > queuesizes;
 	queuesizes.insert(pair<int, vector<Packet *> >(_iq7.size(), _iq7));
 	queuesizes.insert(pair<int, vector<Packet *> >(_iq6.size(), _iq6));
@@ -692,7 +711,7 @@ void Server::sendWFQ4() {
 	it = queuesizes.begin();
 
 	// adjust weight depending on queue size, remove most packets from fullest queue first
-	// find queue 7, empty it, then move on to queue with biggest size
+	// find queue 7 first, empty it, then move on to queue with biggest size
 	for( it = queuesizes.begin(); it!=queuesizes.end(); it++ ) {
 		vector<Packet *> v = it->second;
 		//cout << v.size() << ", " << _iq7.size() << "  ";
@@ -748,7 +767,7 @@ void Server::sendWFQ4() {
 			// compare packet name of first packet to help find the proper queue
 			if( strcmp(v.at(0)->getName(), _iq5.at(0)->getName()) == 0 ) {
 				if( v.size()>0 ) {
-					for( int i=0; i<N-1; i++ ) {
+					for( int i=0; i<N-2; i++ ) {
 						if( v.size()>0 ) {
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
@@ -886,19 +905,148 @@ void Server::sendWFQ4() {
 			break;
 		}
 	}
-	// if packets sent check lower priority queues
-
 } // sendWFQ4()
 
-// first approach to weighted fair queueing:
+void Server::sendWFQ4_6to4() {
+	int N = _weightWFQ;
+
+	// map sorts automatically after the key from lowest size to largest queue size
+	map< int, vector<Packet *> > queuesizes;
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq6.size(), _iq6));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq5.size(), _iq5));
+	queuesizes.insert(pair<int, vector<Packet *> >(_iq4.size(), _iq4));
+
+	// pick first from map, this is the smallest queue
+	map<int, vector<Packet *> >::iterator it;
+	it = queuesizes.begin();
+
+	// adjust weight depending on queue size, remove most packets from fullest queue first
+	// find queue 7 first, empty it, then move on to queue with biggest size
+	for( it = queuesizes.begin(); it!=queuesizes.end(); it++ ) {
+		vector<Packet *> v = it->second;
+
+		// queue 6
+		//cout << v.size() << ", " << _iq6.size() << "  ";
+		if( v.size()== _iq6.size() && v.size()>0 && _iq6.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq6.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-1; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq6
+
+							it = _iq6.begin();
+							//cout << " _iq6: " << (*it)->getName()<< " ";
+							_iq6.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq6.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 5
+		//cout << v.size() << ", " << _iq5.size() << "  ";
+		if( v.size()== _iq5.size() && v.size()>0 && _iq5.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq5.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-2; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq5
+
+							it = _iq5.begin();
+							//cout << " _iq5: " << (*it)->getName()<< " ";
+							_iq5.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq5.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+
+		// queue 4
+		//cout << v.size() << ", " << _iq4.size() << "  ";
+		if( v.size()== _iq4.size() && v.size()>0 && _iq4.size()>0 ) {
+			// compare packet name of first packet to help find the proper queue
+			if( strcmp(v.at(0)->getName(), _iq4.at(0)->getName()) == 0 ) {
+				if( v.size()>0 ) {
+					for( int i=0; i<N-2; i++ ) {
+						if( v.size()>0 ) {
+							vector<Packet *>::iterator it = v.begin();
+							//cout << " v: " << (*it)->getName()<< " ";
+							send(*it, "out");
+							v.erase(it);	// this doesn't erase in _iq4
+
+							it = _iq4.begin();
+							//cout << " _iq4: " << (*it)->getName()<< " ";
+							_iq4.erase(it);
+							//cout << " after deletion " << v.size() << ", " << _iq4.size() << endl;
+						}
+					}
+				}
+			}
+			break;
+		}
+	}
+} // sendWFQ4_6to4()
+
+void Server::sendMixed() {
+	// group queues into three classes
+	// queue 7: FCFS
+	// queue 6-4: WFQ
+	// queue 3-0: Feedback Scheduling
+	vector<Packet *>::iterator it;
+
+	// FCFS
+	if( _iq7.size()>0 ) {
+		for( unsigned int i=0; i<_iq7.size(); i++ ) {
+			it = _iq7.begin();
+			send(*it, "out");
+			_iq7.erase(it);
+		}
+	}
+
+	// WFQ
+	if( _iq6.size()>0 || _iq5.size()>0 || _iq4.size()>0 ) {
+		sendWFQ4_6to4();
+	}
+
+	// Feedback Scheduling
+	if (_order.size()>0 ) {
+		map<simtime_t, Packet*>::iterator it;
+		it = _order.begin();
+		// oldest packet is first in map
+		for( it = _order.begin(); it!=_order.end(); it++ ) {
+			Packet * packet = it->second;
+			// sort for timestamps
+			send(packet, "out");
+			numSent++;
+			//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
+			_order.erase(packet->getCreationTime());
+			//std::cout << " " << _order.size() << std::endl;
+		}
+	}
+
+} // sendMixed()
+
+// first approach to weighted fair queuing:
 // send for each packet sent from a lower priority queue
 // four packet from higher priority queues
 void Server::wfq1(cMessage *msg) {
 	if (msg == triggerServiceMsg) {
-		//sendWFQ1();
+		sendWFQ1();
 		//sendWFQ2();
 		//sendWFQ3();
-		sendWFQ4();	// best approach so far!
+		//sendWFQ4();	// best approach so far!
 		if( triggerServiceMsg->isScheduled() )
 			cancelAndDelete(triggerServiceMsg);
 	} else {
@@ -917,6 +1065,47 @@ void Server::wfq1(cMessage *msg) {
 		}
 	}
 } // wfq1()
+
+void Server::wfq4(cMessage *msg) {
+	if (msg == triggerServiceMsg) {
+		sendWFQ4();	// best approach so far!
+		if( triggerServiceMsg->isScheduled() )
+			cancelAndDelete(triggerServiceMsg);
+	} else {
+		if (strcmp(msg->getName(), "trigger") != 0) {
+			Packet* p = check_and_cast<Packet *>(msg);
+
+			//cout << "packet arrived " << p->getName() << endl;
+			//Useful::getInstance()->appendToFile("out.txt", p->getName());
+
+			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+
+			// collect packets
+			pushPacket2QueueCheckNofPackets(p);
+		}
+	}
+} // wfq4()
+
+void Server::mixed(cMessage *msg) {
+	if (msg == triggerServiceMsg) {
+		sendMixed();
+		if( triggerServiceMsg->isScheduled() )
+			cancelAndDelete(triggerServiceMsg);
+	} else {
+		if (strcmp(msg->getName(), "trigger") != 0) {
+			Packet* p = check_and_cast<Packet *>(msg);
+
+			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+
+			// collect packets
+			if( p->getPriority()>=4 ) {
+				pushPacket2QueueCheckNofPackets(p);
+			} else if( p->getPriority()>=0 && p->getPriority()<4 ) {
+				_order.insert(pair<simtime_t, Packet*>(p->getCreationTime(), new Packet(*p)));
+			}
+		}
+	}
+} // mixed()
 
 void Server::pushPacket2Queue(Packet *p) {
 	if( p!=NULL ) {
@@ -951,7 +1140,8 @@ void Server::pushPacket2Queue(Packet *p) {
 
 // check the number of packets in a queue
 void Server::pushPacket2QueueCheckNofPackets(Packet *p) {
-	int N=16;
+	//unsigned int N=16;	// current queue size (see Maciej's email from 04.05.12)
+	unsigned int N = _nofPointersInQueue;
 	if( p!=NULL ) {
 		switch (p->getPriority()) {
 		case 0:
@@ -1004,11 +1194,12 @@ void Server::pushPacket2QueueCheckNofPackets(Packet *p) {
 			break;
 		}
 	}
-}
+} // pushPacket2QueueCheckNofPackets()
 
 // check the queue size (size of packets in queue)
 void Server::pushPacket2QueueCheckSize(Packet *p) {
-	int N = 1024;
+	//int N = 32768;	// current memory size (see Maciej's email from 04.05.12)
+	int N = _memorySize;	// /8??? not necessarily
 	if( p!=NULL ) {
 		switch (p->getPriority()) {
 		case 0:
@@ -1061,7 +1252,7 @@ void Server::pushPacket2QueueCheckSize(Packet *p) {
 			break;
 		}
 	}
-}
+} // pushPacket2QueueCheckSize()
 
 int Server::determineQueueSize(vector<Packet*> v) {
 	int queuesize = 0;
@@ -1071,7 +1262,7 @@ int Server::determineQueueSize(vector<Packet*> v) {
 	}
 
 	return queuesize;
-}
+} // determineQueueSize()
 
 void Server::checkWaitingTimeAndCapacityAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist) {
 	if (v1.size() > 0) {

@@ -113,6 +113,14 @@ std::vector<PacketDescription> Useful::readDataList(std::string filename) {
 
 } //readDataList()
 
+void Useful::appendToFileTab(std::string filename, std::string value) {
+	FILE* filehandle = fopen( filename.c_str(),"a" );
+	if( filehandle ) {
+		fprintf(filehandle,"%s\t", value.c_str());	// append to end of file
+		fclose(filehandle );
+	}
+} // appendToFile()
+
 void Useful::appendToFile(std::string filename, std::string value) {
 	FILE* filehandle = fopen( filename.c_str(),"a" );
 	if( filehandle ) {

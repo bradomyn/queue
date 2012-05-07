@@ -50,6 +50,7 @@ void Source::initialize() {
 
 	string inputDataFile = par("inputDataFile").stringValue();
 	_data = Useful::getInstance()->readDataList(inputDataFile);
+	Useful::getInstance()->appendToFile("out.txt", inputDataFile.c_str());
 	//Useful::getInstance()->appendToFile("source_out.txt", int(_data.size()));
 	while(_data.size()< numPackets ) {
 		std::vector<PacketDescription> v = Useful::getInstance()->readDataList(inputDataFile);
@@ -85,7 +86,7 @@ void Source::handleMessage(cMessage *msg) {
 		cMessage* trigger = new cMessage("trigger");
 		send(trigger, "outTrigger");
 
-		std::cout << "source sent " << packet->getName() << ", trigger " << std::endl;
+		//std::cout << "source sent " << packet->getName() << ", trigger " << std::endl;
 
 		//std::cout << "Message sent at " << sourceTime << std::endl;
 		numCreated++;

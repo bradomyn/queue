@@ -52,6 +52,9 @@ class QUEUEING_API Source : public SourceBase
 
         Packet * generatePacket();
         Packet * generatePacket( int priority, int size );
+
+    public:
+        int getCreated() { return numCreated; };
 };
 
 };
