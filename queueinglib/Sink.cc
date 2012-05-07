@@ -43,8 +43,7 @@ void Sink::handleMessage(cMessage *msg)
 
 		//std::cout << "#" << numReceived << ": " << packet->getName() << " received. ct " << msg->getCreationTime() << " st " << currentTime << " lifetime " << lifetime  << std::endl;
 
-		// TODO investigate distribution of packet sizes (payload)
-
+		// investigate distribution of packet sizes (payload)
 		int size = packet->getSize();
 		if( size < 500 ) {
 			v00.push_back(0);
@@ -173,6 +172,18 @@ void Sink::finish()
 	sprintf(buf, "dropped: %d created: %d arrived: %d", nofDropped, nofCreated, nofArrived );
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.txt", str);
+
+	vector<int>::iterator it;
+	double avgOps = 0.;
+	for( it=(check_and_cast<Server *>(server))->getOps().begin(); it!=(check_and_cast<Server *>(server))->getOps().end(); it++ ) {
+		//cout << (*it) << "  ";
+		avgOps += (0.0000000125*(*it));
+		sprintf(buf, "%d %lf", *it, (0.0000000125*(*it)) );
+		str = string(buf);
+		Useful::getInstance()->appendToFile("ops.txt", str);
+	}
+	avgOps /= (check_and_cast<Server *>(server))->getOps().size();
+	cout << (check_and_cast<Server *>(server))->getOps().size() << " avg " << avgOps << endl;
 }
 
 void Sink::determineQueueSizes() {

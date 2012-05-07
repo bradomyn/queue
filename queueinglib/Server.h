@@ -114,6 +114,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
     public:
         virtual bool isIdle();
         vector<Packet* > getDropped() { return _dropped; };
+        vector<int> getOps() { return _ops; };
 
     private:
         // send the current packet in packetServiced
@@ -142,6 +143,8 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         int _nofPointersInQueue;
         int _memorySize;
         int _weightWFQ;
+        int _operationCounter;
+        vector<int> _ops;
 
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);

@@ -25,6 +25,7 @@ Server::Server()
 
     _rrCounter = 7;
     _rrN = 5;
+    _operationCounter = 0;
 }
 
 Server::~Server()
@@ -117,6 +118,7 @@ void Server::initialize()
 	_memorySize = par("memorySize");
 	_weightWFQ = par("weightWFQ");
 
+	_operationCounter = 0;
 } // initialize()
 
 void Server::serveCurrentPacket() {
@@ -303,7 +305,8 @@ void Server::feedback1(cMessage *msg) {
 				Packet * packet = it->second;
 				// sort for timestamps
 				//packet->setTimestamp();
-				send(packet, "out");
+				//send(packet, "out");
+				sendDelayed(packet, _serviceTime, "out");
 				numSent++;
 				//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
 				_order.erase(packet->getCreationTime());
@@ -380,7 +383,8 @@ void Server::feedback3(cMessage *msg) {
 
 				// sort for timestamps
 				//packet->setTimestamp();
-				send(packet, "out");
+				//send(packet, "out");
+				sendDelayed(packet, _serviceTime, "out");
 				numSent++;
 				//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
 				_order.erase(packet->getCreationTime());
@@ -394,7 +398,8 @@ void Server::feedback3(cMessage *msg) {
 
 			Packet *packetServiced = check_and_cast<Packet *>(msg);
 			if( packetServiced->getPriority()==7 ) {
-				send(packetServiced, "out");
+				//send(packetServiced, "out");
+				sendDelayed(packetServiced, _serviceTime, "out");
 				numSent++;
 			} else {
 				// fill internal storage and sort automatically for timestamps
@@ -434,7 +439,7 @@ void Server::seven_first(cMessage *msg) {
 			Packet* p = check_and_cast<Packet *>(msg);
 
 			if( p->getPriority()==7 ) {
-				send(p, "out");
+				sendDelayed(p, _serviceTime, "out");
 			} else {
 				_iqX.push_back(p);
 				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
@@ -721,6 +726,7 @@ void Server::sendWFQ4() {
 				if( v.size()>0 ) {
 					for( int i=0; i<N; i++ ) {
 						if( v.size()>0 ) {
+							_operationCounter += 1;
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
 							send(*it, "out");
@@ -730,6 +736,8 @@ void Server::sendWFQ4() {
 							//cout << " _iq7: " << (*it)->getName()<< " ";
 							_iq7.erase(it);
 							//cout << " after deletion " << v.size() << ", " << _iq7.size() << endl;
+							_ops.push_back(_operationCounter);
+							_operationCounter=0;
 						}
 					}
 				}
@@ -745,6 +753,7 @@ void Server::sendWFQ4() {
 				if( v.size()>0 ) {
 					for( int i=0; i<N-1; i++ ) {
 						if( v.size()>0 ) {
+							_operationCounter += 1;
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
 							send(*it, "out");
@@ -754,6 +763,8 @@ void Server::sendWFQ4() {
 							//cout << " _iq6: " << (*it)->getName()<< " ";
 							_iq6.erase(it);
 							//cout << " after deletion " << v.size() << ", " << _iq6.size() << endl;
+							_ops.push_back(_operationCounter);
+							_operationCounter=0;
 						}
 					}
 				}
@@ -769,6 +780,7 @@ void Server::sendWFQ4() {
 				if( v.size()>0 ) {
 					for( int i=0; i<N-2; i++ ) {
 						if( v.size()>0 ) {
+							_operationCounter += 1;
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
 							send(*it, "out");
@@ -778,6 +790,8 @@ void Server::sendWFQ4() {
 							//cout << " _iq5: " << (*it)->getName()<< " ";
 							_iq5.erase(it);
 							//cout << " after deletion " << v.size() << ", " << _iq5.size() << endl;
+							_ops.push_back(_operationCounter);
+							_operationCounter=0;
 						}
 					}
 				}
@@ -793,6 +807,7 @@ void Server::sendWFQ4() {
 				if( v.size()>0 ) {
 					for( int i=0; i<N-2; i++ ) {
 						if( v.size()>0 ) {
+							_operationCounter += 1;
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
 							send(*it, "out");
@@ -802,6 +817,8 @@ void Server::sendWFQ4() {
 							//cout << " _iq4: " << (*it)->getName()<< " ";
 							_iq4.erase(it);
 							//cout << " after deletion " << v.size() << ", " << _iq4.size() << endl;
+							_ops.push_back(_operationCounter);
+							_operationCounter=0;
 						}
 					}
 				}
@@ -817,6 +834,7 @@ void Server::sendWFQ4() {
 				if( v.size()>0 ) {
 					for( int i=0; i<N-2; i++ ) {
 						if( v.size()>0 ) {
+							_operationCounter += 1;
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
 							send(*it, "out");
@@ -826,6 +844,8 @@ void Server::sendWFQ4() {
 							//cout << " _iq3: " << (*it)->getName()<< " ";
 							_iq3.erase(it);
 							//cout << " after deletion " << v.size() << ", " << _iq3.size() << endl;
+							_ops.push_back(_operationCounter);
+							_operationCounter=0;
 						}
 					}
 				}
@@ -841,6 +861,7 @@ void Server::sendWFQ4() {
 				if( v.size()>0 ) {
 					for( int i=0; i<N-3; i++ ) {
 						if( v.size()>0 ) {
+							_operationCounter += 1;
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
 							send(*it, "out");
@@ -850,6 +871,8 @@ void Server::sendWFQ4() {
 							//cout << " _iq2: " << (*it)->getName()<< " ";
 							_iq2.erase(it);
 							//cout << " after deletion " << v.size() << ", " << _iq2.size() << endl;
+							_ops.push_back(_operationCounter);
+							_operationCounter=0;
 						}
 					}
 				}
@@ -865,6 +888,7 @@ void Server::sendWFQ4() {
 				if( v.size()>0 ) {
 					for( int i=0; i<N-3; i++ ) {
 						if( v.size()>0 ) {
+							_operationCounter += 1;
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
 							send(*it, "out");
@@ -874,6 +898,8 @@ void Server::sendWFQ4() {
 							//cout << " _iq1: " << (*it)->getName()<< " ";
 							_iq1.erase(it);
 							//cout << " after deletion " << v.size() << ", " << _iq1.size() << endl;
+							_ops.push_back(_operationCounter);
+							_operationCounter=0;
 						}
 					}
 				}
@@ -889,6 +915,7 @@ void Server::sendWFQ4() {
 				if( v.size()>0 ) {
 					for( int i=0; i<N-3; i++ ) {
 						if( v.size()>0 ) {
+							_operationCounter += 1;
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
 							send(*it, "out");
@@ -898,6 +925,8 @@ void Server::sendWFQ4() {
 							//cout << " _iq0: " << (*it)->getName()<< " ";
 							_iq0.erase(it);
 							//cout << " after deletion " << v.size() << ", " << _iq0.size() << endl;
+							_ops.push_back(_operationCounter);
+							_operationCounter=0;
 						}
 					}
 				}
@@ -935,7 +964,8 @@ void Server::sendWFQ4_6to4() {
 						if( v.size()>0 ) {
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
+							//send(*it, "out");
+							sendDelayed(*it, _serviceTime, "out");
 							v.erase(it);	// this doesn't erase in _iq6
 
 							it = _iq6.begin();
@@ -959,7 +989,8 @@ void Server::sendWFQ4_6to4() {
 						if( v.size()>0 ) {
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
+							//send(*it, "out");
+							sendDelayed(*it, _serviceTime, "out");
 							v.erase(it);	// this doesn't erase in _iq5
 
 							it = _iq5.begin();
@@ -983,7 +1014,8 @@ void Server::sendWFQ4_6to4() {
 						if( v.size()>0 ) {
 							vector<Packet *>::iterator it = v.begin();
 							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
+							//send(*it, "out");
+							sendDelayed(*it, _serviceTime, "out");
 							v.erase(it);	// this doesn't erase in _iq4
 
 							it = _iq4.begin();
@@ -1028,7 +1060,8 @@ void Server::sendMixed() {
 		for( it = _order.begin(); it!=_order.end(); it++ ) {
 			Packet * packet = it->second;
 			// sort for timestamps
-			send(packet, "out");
+			//send(packet, "out");
+			sendDelayed(packet, _serviceTime, "out");
 			numSent++;
 			//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
 			_order.erase(packet->getCreationTime());
@@ -1073,13 +1106,15 @@ void Server::wfq4(cMessage *msg) {
 			cancelAndDelete(triggerServiceMsg);
 	} else {
 		if (strcmp(msg->getName(), "trigger") != 0) {
+
+			_operationCounter=0;
 			Packet* p = check_and_cast<Packet *>(msg);
 
 			//cout << "packet arrived " << p->getName() << endl;
 			//Useful::getInstance()->appendToFile("out.txt", p->getName());
 
 			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-
+			_operationCounter += 1;
 			// collect packets
 			pushPacket2QueueCheckNofPackets(p);
 		}
@@ -1193,6 +1228,7 @@ void Server::pushPacket2QueueCheckNofPackets(Packet *p) {
 				_dropped.push_back(p);
 			break;
 		}
+		_operationCounter+=3;
 	}
 } // pushPacket2QueueCheckNofPackets()
 
@@ -1276,7 +1312,7 @@ void Server::checkWaitingTimeAndCapacityAndMoveToOtherQueue(int priority, vector
 					v2.push_back(*it); // move to higher queue
 					//std::cout << "moved from " << priority << " to " << (priority+1) << ": " << (simTime()-(*it)->getCreationTime()) << std::endl;
 					v1.erase(it);
-					std::cout << ".";
+					//std::cout << ".";
 					if( v1.size()>0 )
 						it = v1.begin();
 					else {
