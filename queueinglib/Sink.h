@@ -47,6 +47,17 @@ class QUEUEING_API Sink : public cSimpleModule
     vector<simtime_t> v7;
     double avg_lifetime(vector<simtime_t> v);
 
+    // group for transfer times
+    vector<double> v00q;
+    vector<double> v01q;
+    vector<double> v02q;
+    vector<double> v03q;
+    vector<double> v04q;
+    vector<double> v05q;
+    vector<double> v06q;
+    vector<double> v07q;
+    double avg_lifetime(vector<double> v);
+
     // group for packet sizes
     vector<int> v00;
     vector<int> v01;
@@ -56,6 +67,15 @@ class QUEUEING_API Sink : public cSimpleModule
     vector<int> v05;
     vector<int> v06;
     vector<int> v07;
+
+    simsignal_t lifeTimeSignal0;
+    simsignal_t lifeTimeSignal1;
+    simsignal_t lifeTimeSignal2;
+    simsignal_t lifeTimeSignal3;
+    simsignal_t lifeTimeSignal4;
+    simsignal_t lifeTimeSignal5;
+    simsignal_t lifeTimeSignal6;
+    simsignal_t lifeTimeSignal7;
 
   protected:
     virtual void initialize();

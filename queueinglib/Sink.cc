@@ -28,6 +28,15 @@ void Sink::initialize()
     generationSignal = registerSignal("generation");
     keepPackets = par("keepPackets");
 
+    lifeTimeSignal0 = registerSignal("lifeTime0");
+    lifeTimeSignal1 = registerSignal("lifeTime1");
+    lifeTimeSignal2 = registerSignal("lifeTime2");
+    lifeTimeSignal3 = registerSignal("lifeTime3");
+    lifeTimeSignal4 = registerSignal("lifeTime4");
+    lifeTimeSignal5 = registerSignal("lifeTime5");
+    lifeTimeSignal6 = registerSignal("lifeTime6");
+    lifeTimeSignal7 = registerSignal("lifeTime7");
+
     numReceived = 0;
     WATCH(numReceived);
 }
@@ -56,32 +65,47 @@ void Sink::handleMessage(cMessage *msg)
 		switch( packet->getPriority() ) {
 		case 0:
 			v0.push_back(lifetime);
+			v00q.push_back(packet->getOperationCounter() * 0.000000008);
+			emit(lifeTimeSignal0, simTime()- packet->getCreationTime());
 			break;
 		case 1:
 			v1.push_back(lifetime);
-				break;
+			v01q.push_back(packet->getOperationCounter() * 0.000000008);
+			emit(lifeTimeSignal1, simTime()- packet->getCreationTime());
+			break;
 		case 2:
 			v2.push_back(lifetime);
-				break;
+			v02q.push_back(packet->getOperationCounter() * 0.000000008);
+			emit(lifeTimeSignal2, simTime()- packet->getCreationTime());
+			break;
 		case 3:
 			v3.push_back(lifetime);
-				break;
+			v03q.push_back(packet->getOperationCounter() * 0.000000008);
+			emit(lifeTimeSignal3, simTime()- packet->getCreationTime());
+			break;
 		case 4:
 			v4.push_back(lifetime);
-				break;
+			v04q.push_back(packet->getOperationCounter() * 0.000000008);
+			emit(lifeTimeSignal4, simTime()- packet->getCreationTime());
+			break;
 		case 5:
 			v5.push_back(lifetime);
-				break;
+			v05q.push_back(packet->getOperationCounter() * 0.000000008);
+			emit(lifeTimeSignal5, simTime()- packet->getCreationTime());
+			break;
 		case 6:
 			v6.push_back(lifetime);
-				break;
+			v06q.push_back(packet->getOperationCounter() * 0.000000008);
+			emit(lifeTimeSignal6, simTime()- packet->getCreationTime());
+			break;
 		case 7:
 			v7.push_back(lifetime);
-				break;
+			v07q.push_back(packet->getOperationCounter() * 0.000000008);
+			emit(lifeTimeSignal7, simTime()- packet->getCreationTime());
+			break;
 		default:
 			break;
 		}
-
 
 		// gather statistics
 		emit(lifeTimeSignal, simTime()- packet->getCreationTime());
@@ -101,6 +125,17 @@ void Sink::handleMessage(cMessage *msg)
 
 }
 
+double Sink::avg_lifetime(vector<double> v) {
+	double avg_lt = 0.;
+	std::vector<double>::iterator lit;
+	for( lit = v.begin(); lit!=v.end(); lit++ ) {
+		avg_lt += (*lit);
+	}
+	avg_lt /= v.size();
+	//std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
+	return (double)avg_lt;
+}
+
 double Sink::avg_lifetime(vector<simtime_t> v) {
 	double avg_lt = 0.;
 	std::vector<simtime_t>::iterator lit;
@@ -109,7 +144,7 @@ double Sink::avg_lifetime(vector<simtime_t> v) {
 	}
 	avg_lt /= v.size();
 	//std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
-	return avg_lt;
+	return (double)avg_lt;
 }
 
 void Sink::finish()
@@ -173,17 +208,67 @@ void Sink::finish()
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.txt", str);
 
-	vector<int>::iterator it;
+	/*vector<int>::iterator it;
 	double avgOps = 0.;
 	for( it=(check_and_cast<Server *>(server))->getOps().begin(); it!=(check_and_cast<Server *>(server))->getOps().end(); it++ ) {
 		//cout << (*it) << "  ";
-		avgOps += (0.0000000125*(*it));
-		sprintf(buf, "%d %lf", *it, (0.0000000125*(*it)) );
+		//125000000 Operationen pro Sekunde moeglich im WRS
+		//1/125000000 = 0.000000008
+		//              0.0000000125
+		avgOps += (0.000000008*(*it));
+		sprintf(buf, "%d %lf", *it, (0.000000008*(*it)) );
 		str = string(buf);
 		Useful::getInstance()->appendToFile("ops.txt", str);
 	}
 	avgOps /= (check_and_cast<Server *>(server))->getOps().size();
-	cout << (check_and_cast<Server *>(server))->getOps().size() << " avg " << avgOps << endl;
+	cout << (check_and_cast<Server *>(server))->getOps().size() << " avg " << avgOps << endl;*/
+
+	// evaluate operation counter from packet
+	double avg = avg_lifetime(v00q);
+	cout << /*"s 0: " <<*/ avg << endl;
+	sprintf(buf, "op 0: %lf", avg);
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	avg = avg_lifetime(v01q);
+	cout << /*"s 1: " <<*/ avg << endl;
+	sprintf(buf, "op 1: %lf", avg);
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	avg = avg_lifetime(v02q);
+	cout << /*"s 2: " <<*/ avg << endl;
+	sprintf(buf, "op 2: %lf", avg);
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	avg = avg_lifetime(v03q);
+	cout << /*"s 3: " <<*/ avg << endl;
+	sprintf(buf, "op 3: %lf", avg);
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	avg = avg_lifetime(v04q);
+	cout << /*"s 4: " <<*/ avg << endl;
+	sprintf(buf, "op 4: %lf", avg);
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	avg = avg_lifetime(v05q);
+	cout << /*"s 5: " <<*/ avg << endl;
+	sprintf(buf, "op 5: %lf", avg);
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	avg = avg_lifetime(v06q);
+	cout << /*"s 6: " <<*/ avg << endl;
+	sprintf(buf, "op 6: %lf", avg);
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	avg = avg_lifetime(v07q);
+	cout << /*"s 7: " <<*/ avg << endl;
+	sprintf(buf, "op 7: %lf", avg);
+	str = string(buf);
+	Useful::getInstance()->appendToFile("out.txt", str);
+	// 4e-08 = 4*10^-8 	 	= 0,00000004
+	// 4.8e-08 = 4.8*10^-8 	= 0,000000048
+
+	// remove all undisposed messages in the end!
+	this->setPerformFinalGC(true);
 }
 
 void Sink::determineQueueSizes() {

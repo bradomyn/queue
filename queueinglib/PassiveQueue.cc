@@ -21,6 +21,9 @@ PassiveQueue::PassiveQueue()
 
 PassiveQueue::~PassiveQueue()
 {
+	// remove all undisposed messages in the end!
+	this->setPerformFinalGC(true);
+
     delete selectionStrategy;
 }
 
@@ -83,12 +86,11 @@ void PassiveQueue::initialize()
 		_scheduling = 7;
 		std::cout << "queue wfq1/4" << std::endl;
 		Useful::getInstance()->appendToFileTab("out.txt", "queue wfq1/4");
-	} else if (strcmp(algName, "mixed") == 0) {
+	} else if (strcmp(algName, "mixed1") == 0 || strcmp(algName, "mixed2") == 0) {
 		_scheduling = 8;
-		std::cout << "queue mixed" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "queue mixed");
+		std::cout << "queue mixed1/2" << std::endl;
+		Useful::getInstance()->appendToFileTab("out.txt", "queue mixed1/2");
 	}
-
 } // initialize()
 
 int PassiveQueue::determineQueueSize() {
@@ -192,7 +194,7 @@ void PassiveQueue::handleMessage(cMessage *msg)
 		send(packet, "out", 0);
 		numServed++;
 		break;
-	case 8:	// mixed
+	case 8:	// mixed1/2
 		send(packet, "out", 0);
 		numServed++;
 		break;
@@ -239,11 +241,13 @@ void PassiveQueue::request(int gateIndex)
     if (fifo)
     {
         packet = (Packet *)queue.pop();
+        packet->setOperationCounter(packet->getOperationCounter()+1);
         //std::cout << __FUNCTION__ << " pop: " << packet->getName() << std::endl;
     }
     else
     {
         packet = (Packet *)queue.back();
+        packet->setOperationCounter(packet->getOperationCounter()+1);
         //std::cout << __FUNCTION__ << " back: " << packet->getName() << std::endl;
         // FIXME this may have bad performance as remove uses linear search
         queue.remove(packet);
@@ -272,10 +276,12 @@ void PassiveQueue::request()
     Packet *packet;
     if (fifo) {
         packet = (Packet *)queue.pop();
-        std::cout << __FUNCTION__ << " pop: " << packet->getName() << std::endl;
+        packet->setOperationCounter(packet->getOperationCounter()+1);
+        //std::cout << __FUNCTION__ << " pop: " << packet->getName() << std::endl;
     } else {
         packet = (Packet *)queue.back();
-        std::cout << __FUNCTION__ << " back: " << packet->getName() << std::endl;
+        //std::cout << __FUNCTION__ << " back: " << packet->getName() << std::endl;
+        packet->setOperationCounter(packet->getOperationCounter()+1);
         // FIXME this may have bad performance as remove uses linear search
         queue.remove(packet);
     }

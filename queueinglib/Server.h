@@ -95,7 +95,8 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		void original(cMessage *msg);
 		void wfq1(cMessage *msg);
 		void wfq4(cMessage *msg);
-		void mixed(cMessage *msg);
+		void mixed1(cMessage *msg);
+		void mixed2(cMessage *msg);
 		void pushPacket2Queue(Packet *p);
 		void pushPacket2QueueCheckNofPackets(Packet *p);
 		void pushPacket2QueueCheckSize(Packet *p);
@@ -114,7 +115,6 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
     public:
         virtual bool isIdle();
         vector<Packet* > getDropped() { return _dropped; };
-        vector<int> getOps() { return _ops; };
 
     private:
         // send the current packet in packetServiced
@@ -137,14 +137,14 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         // Weighted Fair Queuing considering the size of a queue
         void sendWFQ4();
 
-        void sendMixed();
+        void sendMixed1();
         void sendWFQ4_6to4();
+        void sendMixed2();
+        void sendWFQ4_3to0();
 
         int _nofPointersInQueue;
         int _memorySize;
         int _weightWFQ;
-        int _operationCounter;
-        vector<int> _ops;
 
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);
