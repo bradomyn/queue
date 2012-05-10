@@ -97,9 +97,12 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		void wfq4(cMessage *msg);
 		void mixed1(cMessage *msg);
 		void mixed2(cMessage *msg);
+		void wred1(cMessage *msg);
 		void pushPacket2Queue(Packet *p);
 		void pushPacket2QueueCheckNofPackets(Packet *p);
 		void pushPacket2QueueCheckSize(Packet *p);
+		void avgQueueSizeWRED(Packet* p);
+		void pushPacket2QueueWRED(Packet *p);
 		vector<Packet*> _dropped;
 
     public:
@@ -145,6 +148,13 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
         int _nofPointersInQueue;
         int _memorySize;
         int _weightWFQ;
+
+        void sendWRED1();
+        double _weight;
+        int _currentQSize;
+        int _oldAvgQSize;
+        int _minQSize;
+        int _maxQSize;
 
         // retrieve a pointer to queue with given index
         IPassiveQueue *getQueue(int index);

@@ -27,7 +27,7 @@ simple Server
         
         int capacity = default(6000); // 4x1500KB //default(-1);  // negative capacity means unlimited queue
         
-        string schedulingAlgorithm @enum("none", "priority" , "feedback", "7first", "feedback2", "feedback3", "wfq1", "wfq4", "mixed1", "mixed2") = default("7first");
+        string schedulingAlgorithm @enum("none", "priority" , "feedback", "7first", "feedback2", "feedback3", "wfq1", "wfq4", "mixed1", "mixed2", "wred1") = default("7first");
         
         // how many memory pointers can be stored in a queue
         int nofPointersInQueue = default(16);	// current queue size (see Maciej's email from 04.05.12)

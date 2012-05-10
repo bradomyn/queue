@@ -82,14 +82,18 @@ void PassiveQueue::initialize()
 		_scheduling = 6;
 		std::cout << "queue feedback3" << std::endl;
 		Useful::getInstance()->appendToFileTab("out.txt", "queue feedback3");
-	} else if ((strcmp(algName, "wfq1") == 0) || strcmp(algName, "wfq4") == 0) {
+	} else if ((strcmp(algName, "wfq1") == 0) || (strcmp(algName, "wfq4") == 0)) {
 		_scheduling = 7;
 		std::cout << "queue wfq1/4" << std::endl;
 		Useful::getInstance()->appendToFileTab("out.txt", "queue wfq1/4");
-	} else if (strcmp(algName, "mixed1") == 0 || strcmp(algName, "mixed2") == 0) {
+	} else if ((strcmp(algName, "mixed1") == 0) || (strcmp(algName, "mixed2") == 0)) {
 		_scheduling = 8;
 		std::cout << "queue mixed1/2" << std::endl;
 		Useful::getInstance()->appendToFileTab("out.txt", "queue mixed1/2");
+	} else if (strcmp(algName, "wred1") == 0) {
+		_scheduling = 9;
+		std::cout << "queue wred1" << std::endl;
+		Useful::getInstance()->appendToFileTab("out.txt", "queue wred1");
 	}
 } // initialize()
 
@@ -195,6 +199,10 @@ void PassiveQueue::handleMessage(cMessage *msg)
 		numServed++;
 		break;
 	case 8:	// mixed1/2
+		send(packet, "out", 0);
+		numServed++;
+		break;
+	case 9:	// wred1
 		send(packet, "out", 0);
 		numServed++;
 		break;

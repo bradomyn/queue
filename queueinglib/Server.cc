@@ -25,6 +25,14 @@ Server::Server()
 
     _rrCounter = 7;
     _rrN = 5;
+
+
+	// WRED
+	_currentQSize = 4;
+	_oldAvgQSize = 4;
+	_weight = 0.5;
+	_minQSize = 10; //20;
+	_maxQSize = 16; //24;
 }
 
 Server::~Server()
@@ -111,7 +119,12 @@ void Server::initialize()
 		_scheduling = 10;
 		std::cout << "server mixed2" << std::endl;
 		Useful::getInstance()->appendToFileTab("out.txt", "server mixed2");
+	} else if (strcmp(algName, "wred1") == 0) {
+		_scheduling = 11;
+		std::cout << "server wred1" << std::endl;
+		Useful::getInstance()->appendToFileTab("out.txt", "server wred1");
 	}
+
 
 	_serviceTime = par("serviceTime");
 
@@ -120,6 +133,8 @@ void Server::initialize()
 	_nofPointersInQueue = par("nofPointersInQueue");
 	_memorySize = par("memorySize");
 	_weightWFQ = par("weightWFQ");
+
+
 
 } // initialize()
 
@@ -206,6 +221,10 @@ void Server::handleMessage(cMessage *msg)
 		case 10:	// mixed2
 			// use with WRS2.ned
 			mixed2(msg);
+			break;
+		case 11:	// wred1
+			// use with WRS2.ned
+			wred1(msg);
 			break;
 		default:
 			break;
@@ -1256,6 +1275,62 @@ void Server::sendMixed2() {
 	}
 } // sendMixed2()
 
+void Server::sendWRED1() {
+	//cout << __FUNCTION__ ;
+	vector<Packet*>::iterator it;
+	// check higher priority queues
+	if (_iq7.size() > 0) {
+		it = _iq7.begin();
+		(*it)->setOperationCounter(
+				(*it)->getOperationCounter() + 1);
+		send(*it, "out");
+		_iq7.erase(it);
+	}
+	// if packets sent check lower priority queues
+	if (_iq6.size() > 0) {
+		it = _iq6.begin();
+		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
+		send(*it, "out");
+		_iq6.erase(it);
+	}
+	if (_iq5.size() > 0) {
+		it = _iq5.begin();
+		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
+		send(*it, "out");
+		_iq5.erase(it);
+	}
+	if (_iq4.size() > 0) {
+		it = _iq4.begin();
+		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
+		send(*it, "out");
+		_iq4.erase(it);
+	}
+	if (_iq3.size() > 0) {
+		it = _iq3.begin();
+		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
+		send(*it, "out");
+		_iq3.erase(it);
+	}
+	if (_iq2.size() > 0) {
+		it = _iq2.begin();
+		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
+		send(*it, "out");
+		_iq2.erase(it);
+	}
+	if (_iq1.size() > 0) {
+		it = _iq1.begin();
+		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
+		send(*it, "out");
+		_iq1.erase(it);
+	}
+	if (_iq0.size() > 0) {
+		it = _iq0.begin();
+		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
+		send(*it, "out");
+		_iq0.erase(it);
+	}
+} // sendWRED1()
+
 // first approach to weighted fair queuing:
 // send for each packet sent from a lower priority queue
 // four packet from higher priority queues
@@ -1318,7 +1393,8 @@ void Server::mixed1(cMessage *msg) {
 
 			if( p->getPriority()==7 ) {	// FCFS
 				p->setOperationCounter(p->getOperationCounter()+1);
-				send(p,"out");
+				//send(p,"out");
+				sendDelayed(p, _serviceTime, "out");
 			} else if( p->getPriority()>=4 && p->getPriority()<7 ) {	// collect packets
 				pushPacket2QueueCheckNofPackets(p);
 			} else if( p->getPriority()>=0 && p->getPriority()<4 ) {
@@ -1346,7 +1422,8 @@ void Server::mixed2(cMessage *msg) {
 
 			if( p->getPriority()==7 ) {	// FCFS
 				p->setOperationCounter(p->getOperationCounter()+1);
-				send(p,"out");
+				//send(p,"out");
+				sendDelayed(p, _serviceTime, "out");
 			} else if( p->getPriority()>=4 && p->getPriority()<7 ) {	// collect packets
 				_order.insert(pair<simtime_t, Packet*>(p->getCreationTime(), new Packet(*p)));
 			} else if( p->getPriority()>=0 && p->getPriority()<4 ) {
@@ -1355,6 +1432,112 @@ void Server::mixed2(cMessage *msg) {
 		}
 	}
 } // mixed2()
+
+void Server::wred1(cMessage *msg) {
+	if (msg == triggerServiceMsg) {
+		sendWRED1();
+		if( triggerServiceMsg->isScheduled() )
+			cancelAndDelete(triggerServiceMsg);
+	} else {
+		if (strcmp(msg->getName(), "trigger") != 0) {
+			Packet* p = check_and_cast<Packet *>(msg);
+
+			//cout << "packet arrived " << p->getName() << endl;
+			//Useful::getInstance()->appendToFile("out.txt", p->getName());
+
+			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+
+			// determine average queue suze and collect packets
+			avgQueueSizeWRED(p);
+		}
+	}
+} // wred1()
+
+void Server::avgQueueSizeWRED(Packet* p) {
+	// allow to change queue sizes dynamically depending on congestion
+
+	// calculate average queue size
+	// queue packet if average is less than minimum queue threshold
+	// if average is between minimum and maximum queue threshold the packet is dropped or queued depending on packet drop propability
+	// if average queue size is greater than maximum threshold the packet is automatically dropped
+	cout << "1 old Q size: " << _oldAvgQSize << " curr Q size: " << _currentQSize << " weight: " << _weight << "  ";
+	_oldAvgQSize = _currentQSize;
+	_currentQSize = (int)(_oldAvgQSize * (1-pow(2, (-1.)*_weight)) + (_currentQSize * (pow(2,(-1.)*_weight))));
+
+	cout << "2 old Q size: " << _oldAvgQSize << " curr Q size: " << _currentQSize << " weight: " << _weight << endl;
+	p->setOperationCounter(p->getOperationCounter()+2);
+	if( p!=NULL ) {
+		if( _currentQSize < _minQSize ) {
+			// queue packet
+			pushPacket2QueueWRED(p);
+		} else if( _minQSize<=_currentQSize && _currentQSize<_maxQSize ) {
+			// consider drop probability, decide whether to drop or to queue
+			//????
+			pushPacket2QueueWRED(p);
+		} else if( _currentQSize>=_maxQSize ) {
+			// drop packet
+			_dropped.push_back(p);
+			return;
+		}
+	}
+} // avgQueueSizeWRED()
+
+void Server::pushPacket2QueueWRED(Packet *p) {
+
+	if( p!=NULL ) {
+		p->setOperationCounter(p->getOperationCounter()+3);
+		switch (p->getPriority()) {
+		case 0:
+			if( _iq0.size()< _currentQSize )
+				_iq0.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 1:
+			if( _iq1.size()< _currentQSize )
+				_iq1.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 2:
+			if( _iq2.size()< _currentQSize )
+				_iq2.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 3:
+			if( _iq3.size()< _currentQSize )
+				_iq3.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 4:
+			if( _iq4.size()< _currentQSize )
+				_iq4.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 5:
+			if( _iq5.size()< _currentQSize )
+				_iq5.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 6:
+			if( _iq6.size()< _currentQSize )
+				_iq6.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		case 7:
+			if( _iq7.size()< _currentQSize )
+				_iq7.push_back(p);
+			else
+				_dropped.push_back(p);
+			break;
+		}
+	}
+} // pushPacket2QueueWRED()
 
 void Server::pushPacket2Queue(Packet *p) {
 	if( p!=NULL ) {
@@ -1386,7 +1569,7 @@ void Server::pushPacket2Queue(Packet *p) {
 			break;
 		}
 	}
-}
+} // pushPacket2Queue()
 
 // check the number of packets in a queue
 void Server::pushPacket2QueueCheckNofPackets(Packet *p) {
