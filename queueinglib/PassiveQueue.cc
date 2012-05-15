@@ -37,9 +37,9 @@ void PassiveQueue::initialize()
     const char * algName = par("schedulingAlgorithm");
 	std::cout << this->getName() << " scheduling algorithm " << algName << std::endl;
 
-	if( (strcmp(algName, "priority") == 0) || (strcmp(algName, "feedback") == 0) || (strcmp(algName, "wfq1") == 0) || (strcmp(algName, "wfq2") == 0) || (strcmp(algName, "wfq3") == 0) ){
+	if( (strcmp(algName, "priority") == 0) || (strcmp(algName, "feedback") == 0) || (strcmp(algName, "wfq1") == 0) || (strcmp(algName, "wfq2") == 0) || (strcmp(algName, "wfq3") == 0) || (strcmp(algName, "wfq4") == 0) ){
 		_scheduling = 0;
-		std::cout << "queue priority | feedback | wfq1 | wfq2 | wfq3" << endl;
+		std::cout << "queue priority | feedback | wfq1 | wfq2 | wfq3 | wfq4" << endl;
 	} else if ( (strcmp(algName, "7first") == 0) || (strcmp(algName, "mixed1") == 0) ) {
 		_scheduling = 1;
 		std::cout << "server 7first" << endl;

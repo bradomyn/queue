@@ -74,6 +74,9 @@ void Server::initialize()
 	} else if (strcmp(_schedulingAlgorithm, "wfq3") == 0) {
 		_scheduling = 6;
 		cout << "server wfq3" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "wfq4") == 0) {
+		_scheduling = 7;
+		cout << "server wfq4" << endl;
 	}
 
 
@@ -104,6 +107,9 @@ void Server::handleMessage(cMessage *msg)
 	case 6:
 		wfq3(msg);
 		break;
+	case 7:
+		wfq4(msg);
+		break;
 	default:
 		break;
 	}
@@ -116,12 +122,16 @@ void Server::priority(cMessage* msg) {
 		//cout << "trigger " << _q7->length() << endl;
 
 		//priority
-		while( _q7->length()>0 ) {
+		if( _q7->length()>0 ) {
 			_q7->request(0);
 		}
 		vector<IPassiveQueue* >::iterator it;
 		for( it=_qs.begin();it!=_qs.end(); it++ ) {
-			while( (*it)->length()>0 ) {
+			if( _q7->length()>0 ) {	// check queue7 again
+				if( _q7->length()>0 )
+					_q7->request(0);
+			}
+			if( (*it)->length()>0 ) {
 				(*it)->request(0);
 			}
 		}
@@ -139,7 +149,7 @@ void Server::sevenfirst(cMessage* msg) {
 		//priority
 		vector<IPassiveQueue* >::iterator it;
 		for( it=_qs.begin();it!=_qs.end(); it++ ) {
-			while( (*it)->length()>0 ) {
+			if( (*it)->length()>0 ) {
 				(*it)->request(0);
 			}
 		}
@@ -325,6 +335,41 @@ void Server::wfq3(cMessage* msg) {
 		send(packet, "out");
 	}
 } // wfq3()
+
+void Server::wfq4(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
+		int N=_weight7;
+		int i=0;
+
+		if( _q7->length()>0 ) {
+			for( i=0; i<N; i++ ) {
+				if( _q7->length()>0 ) {
+					_q7->request(0);
+				}
+			}
+		}
+
+		// consider packet sizes instead of queue lengths
+		_mapFeedback.clear();
+		for( int i=0; i<7; i++ ) {
+			_mapFeedback.insert(pair<int, IPassiveQueue*>( _qs.at(i)->size(), _qs.at(i) ));
+		}
+		map<int, IPassiveQueue*>::iterator mit;
+		mit=_mapFeedback.end();
+		mit--;
+		// biggest queue first
+		for( ; mit!=_mapFeedback.begin(); mit-- ) {
+			while( (*mit).second->length() > 0 ) {
+				(*mit).second->request(0);
+			}
+		}
+	} else {
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
+	}
+} // wfq4()
 
 void Server::mixed1(cMessage* msg) {
 	if ( strcmp(msg->getName(), "trigger") == 0 ) {

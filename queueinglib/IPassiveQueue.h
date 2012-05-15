@@ -23,7 +23,7 @@ class QUEUEING_API IPassiveQueue
 {
     public:
         virtual ~IPassiveQueue() { };
-        // the current length of the queue
+        // the current length of the queue (number of packets)
         virtual int length() = 0;
         // requests the queue to send out the next job on its "gateIndex" gate.
         virtual void request(int gateIndex) = 0;

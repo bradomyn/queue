@@ -7,3 +7,5 @@
 *.so
 out
 
+/Packet_m.h
+/Packet_m.cc

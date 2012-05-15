@@ -22,7 +22,7 @@ simple Server
         @statistic[busy](title="server busy state";record=vector?,timeavg;interpolationmode=sample-hold);
 
         // how the next job will be choosen from the attached queues
-        string schedulingAlgorithm @enum("priority" , "feedback", "7first", "wfq1", "wfq2", "wfq3", "mixed1", "mixed2", "wred1") = default("7first");
+        string schedulingAlgorithm @enum("priority" , "feedback", "7first", "wfq1", "wfq2", "wfq3", "wfq4", "mixed1", "mixed2", "wred1") = default("7first");
        
         volatile double serviceTime @unit(s); // service time of a job
         

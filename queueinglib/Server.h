@@ -67,6 +67,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		int _rrN;
 
 		void wfq3(cMessage* msg);
+		void wfq4(cMessage* msg);
 
 		void mixed1(cMessage* msg);
 
