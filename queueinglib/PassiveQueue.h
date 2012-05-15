@@ -12,13 +12,14 @@
 
 #include "QueueingDefs.h"
 #include "IPassiveQueue.h"
-#include "SelectionStrategies.h"
+#include "Packet.h"
 
-#include "Useful.h"
+#include <vector>
+
+using std::vector;
 
 namespace queueing {
 
-class SelectionStrategy;
 
 /**
  * A passive queue, designed to co-operate with IServer using method calls.
@@ -31,46 +32,33 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
 		simsignal_t queueingTimeSignal;
 
         bool fifo;
-
-        // capacity of the queue
-        int _capacity;
-
-        // the queue underneath
+        int capacity;
         cQueue queue;
-        SelectionStrategy *selectionStrategy;	// currently not used
-
-        // number of packets handled
-        int numServed;
-
-        // number of packets in queue
-        int numQueued;
-        int numQueuedIdle;
 
         void queueLengthChanged();
 
-        // scheduling type
         int _scheduling;
 
-        // check the capacity of the queue by considering the packet sizes
-        void checkCapacityAndQueue(cMessage *msg);
+        void enequeue(cMessage* msg);
+
+        vector<Packet* > _dropped;
 
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
+        virtual void finish();
 
     public:
         PassiveQueue();
         virtual ~PassiveQueue();
         // The following methods are called from IServer:
         virtual int length();
+        virtual int size();
         virtual void request(int gateIndex);
 
-        // request without a gate
-        virtual void request();
+        cQueue getQueue() { return queue; };
 
-        // add up packet sizes
-        int determineQueueSize();
-
+        vector<Packet* > getDropped() {return _dropped;};
 };
 
 }; //namespace

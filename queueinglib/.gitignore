@@ -1,3 +1,9 @@
 /out
 /libqueueinglib.so
 /TODO.txt
+*.o
+*.a
+*.dll
+*.so
+out
+

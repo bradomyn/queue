@@ -11,40 +11,48 @@
 #define __QUEUEING_SOURCE_H
 
 #include "QueueingDefs.h"
+#include "Sink.h"
 #include "Packet.h"
 #include "Useful.h"
 
 namespace queueing {
 
+class Sink;
 class Packet;
 
 /**
- * Abstract base class for packet generator modules
+ * Abstract base class for job generator modules
  */
 class QUEUEING_API SourceBase : public cSimpleModule
 {
     protected:
-        int packetCounter;
+        int jobCounter;
         std::string packetName;
         simsignal_t createdSignal;
+        int packetCounter;
+
     protected:
         virtual void initialize();
-        virtual Packet *createPacket();
+        virtual Packet *createJob();
         virtual void finish();
 };
 
 
 /**
- * Generates packets; see NED file for more info.
+ * Generates jobs; see NED file for more info.
  */
 class QUEUEING_API Source : public SourceBase
 {
     private:
         simtime_t startTime;
         simtime_t stopTime;
+        //int numJobs;
         int numPackets;
         int numCreated;
         std::vector<PacketDescription> _data;
+
+        Sink *_sink;
+        std::vector<int> _sent;
 
     protected:
         virtual void initialize();
@@ -52,12 +60,25 @@ class QUEUEING_API Source : public SourceBase
 
         Packet * generatePacket();
         Packet * generatePacket( int priority, int size );
+        void send2Queue(Packet* packet);
 
     public:
-        int getCreated() { return numCreated; };
+    	int getCreated() { return numCreated; };
+    	std::vector<int> getSent() { return _sent; };
 };
 
+
+/**
+ * Generates jobs; see NED file for more info.
+ */
+class QUEUEING_API SourceOnce : public SourceBase
+{
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
 };
+
+}; //namespace
 
 #endif
 

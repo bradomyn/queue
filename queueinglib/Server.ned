@@ -21,27 +21,16 @@ simple Server
         @signal[busy](type="bool");
         @statistic[busy](title="server busy state";record=vector?,timeavg;interpolationmode=sample-hold);
 
-        string fetchingAlgorithm @enum("priority","random","roundRobin","longestQueue", "WRS") = default("priority");
-             // how the next packet will be choosen from the attached queues
-        volatile double serviceTime @unit(s); // service time of a packet
+        // how the next job will be choosen from the attached queues
+        string schedulingAlgorithm @enum("priority" , "feedback", "7first", "wfq1", "wfq2", "wfq3", "mixed1", "mixed2", "wred1") = default("7first");
+       
+        volatile double serviceTime @unit(s); // service time of a job
         
-        int capacity = default(6000); // 4x1500KB //default(-1);  // negative capacity means unlimited queue
-        
-        string schedulingAlgorithm @enum("none", "priority" , "feedback", "7first", "feedback2", "feedback3", "wfq1", "wfq4", "mixed1", "mixed2", "wred1") = default("7first");
-        
-        // how many memory pointers can be stored in a queue
-        int nofPointersInQueue = default(16);	// current queue size (see Maciej's email from 04.05.12)
-        
-        // how much memory is reserved for a queue's contents
-        int memorySize = default(32768);	// current memory size (see Maciej's email from 04.05.12), 2048 * 16
-        
-        // weight for adjusting removal of packets from queue
-        int weightWFQ = default(5);
-        
+        int weight7 = default(4);	// weight used in wfq1 
+        int rrN = default(5);		// weight used in wfq2
     gates:
-        input in[8];
+        input in[];
         output out;
-        input inTrigger;
 }
 
 

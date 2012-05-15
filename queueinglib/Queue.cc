@@ -16,13 +16,13 @@ Define_Module(Queue);
 
 Queue::Queue()
 {
-    packetServiced = NULL;
+    jobServiced = NULL;
     endServiceMsg = NULL;
 }
 
 Queue::~Queue()
 {
-    delete packetServiced;
+    delete jobServiced;
     cancelAndDelete(endServiceMsg);
 }
 
@@ -43,33 +43,34 @@ void Queue::initialize()
 
 void Queue::handleMessage(cMessage *msg)
 {
+	std::cout << __FUNCTION__ << std::endl;
     if (msg==endServiceMsg)
     {
-        endService( packetServiced );
+        endService( jobServiced );
         if (queue.empty())
         {
-            packetServiced = NULL;
+            jobServiced = NULL;
             emit(busySignal, 0);
         }
         else
         {
-            packetServiced = getFromQueue();
+            jobServiced = getFromQueue();
             emit(queueLengthSignal, length());
-            simtime_t serviceTime = startService( packetServiced );
+            simtime_t serviceTime = startService( jobServiced );
             scheduleAt( simTime()+serviceTime, endServiceMsg );
         }
     }
     else
     {
-        Packet *packet = check_and_cast<Packet *>(msg);
-        arrival(packet);
+        Packet *job = check_and_cast<Packet *>(msg);
+        arrival(job);
 
-        if (!packetServiced)
+        if (!jobServiced)
         {
         // processor was idle
-            packetServiced = packet;
+            jobServiced = job;
             emit(busySignal, 1);
-            simtime_t serviceTime = startService( packetServiced );
+            simtime_t serviceTime = startService( jobServiced );
             scheduleAt( simTime()+serviceTime, endServiceMsg );
         }
         else
@@ -80,32 +81,32 @@ void Queue::handleMessage(cMessage *msg)
                 EV << "Capacity full! Packet dropped.\n";
                 if (ev.isGUI()) bubble("Dropped!");
                 emit(droppedSignal, 1);
-                delete packet;
+                delete job;
                 return;
             }
-            queue.insert( packet );
+            queue.insert( job );
             emit(queueLengthSignal, length());
-            packet->setQueueCount(packet->getQueueCount() + 1);
+            job->setQueueCount(job->getQueueCount() + 1);
         }
     }
 
-    if (ev.isGUI()) getDisplayString().setTagArg("i",1, !packetServiced ? "" : "cyan3");
+    if (ev.isGUI()) getDisplayString().setTagArg("i",1, !jobServiced ? "" : "cyan3");
 }
 
 Packet *Queue::getFromQueue()
 {
-    Packet *packet;
+    Packet *job;
     if (fifo)
     {
-        packet = (Packet *)queue.pop();
+        job = (Packet *)queue.pop();
     }
     else
     {
-        packet = (Packet *)queue.back();
+        job = (Packet *)queue.back();
         // FIXME this may have bad performance as remove uses linear search
-        queue.remove(packet);
+        queue.remove(job);
     }
-    return packet;
+    return job;
 }
 
 int Queue::length()
@@ -113,28 +114,28 @@ int Queue::length()
     return queue.length();
 }
 
-void Queue::arrival(Packet *packet)
+void Queue::arrival(Packet *job)
 {
-    packet->setTimestamp();
+    job->setTimestamp();
 }
 
-simtime_t Queue::startService(Packet *packet)
+simtime_t Queue::startService(Packet *job)
 {
     // gather queueing time statistics
-    simtime_t d = simTime() - packet->getTimestamp();
+    simtime_t d = simTime() - job->getTimestamp();
     emit(queueingTimeSignal, d);
-    packet->setTotalQueueingTime(packet->getTotalQueueingTime() + d);
-    EV << "Starting service of " << packet->getName() << endl;
-    packet->setTimestamp();
+    job->setTotalQueueingTime(job->getTotalQueueingTime() + d);
+    EV << "Starting service of " << job->getName() << endl;
+    job->setTimestamp();
     return par("serviceTime").doubleValue();
 }
 
-void Queue::endService(Packet *packet)
+void Queue::endService(Packet *job)
 {
-    EV << "Finishing service of " << packet->getName() << endl;
-    simtime_t d = simTime() - packet->getTimestamp();
-    packet->setTotalServiceTime(packet->getTotalServiceTime() + d);
-    send(packet, "out");
+    EV << "Finishing service of " << job->getName() << endl;
+    simtime_t d = simTime() - job->getTimestamp();
+    job->setTotalServiceTime(job->getTotalServiceTime() + d);
+    send(job, "out");
 }
 
 void Queue::finish()

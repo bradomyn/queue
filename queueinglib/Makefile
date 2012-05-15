@@ -2,14 +2,14 @@
 # OMNeT++/OMNEST Makefile for libqueueinglib
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep --make-so -O out -I
+#  opp_makemake -f --deep --make-so -O out
 #
 
 # Name of target to be created (-o option)
 TARGET = libqueueinglib$(SHARED_LIB_SUFFIX)
 
 # C++ include paths (with -I)
-INCLUDE_PATH = -I -I. -Itemplates -Itemplates/queueing
+INCLUDE_PATH = -I. -Itemplates -Itemplates/queueing
 
 # Additional object and library files to link with
 EXTRA_OBJS =
@@ -25,17 +25,13 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc and .msg files
 OBJS = \
     $O/Useful.o \
-    $O/Trigger.o \
     $O/Source.o \
     $O/PassiveQueue.o \
     $O/PacketList.o \
     $O/Packet.o \
-    $O/Classifier.o \
     $O/Queue.o \
     $O/Server.o \
     $O/Sink.o \
-    $O/SelectionStrategies.o \
-    $O/SelectionStrategiesServer.o \
     $O/Packet_m.o
 
 # Message files
@@ -123,12 +119,6 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc templates/*.cc templates/queueing/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-$O/Classifier.o: Classifier.cc \
-	Classifier.h \
-	Packet.h \
-	Packet_m.h \
-	QueueingDefs.h \
-	Useful.h
 $O/Packet.o: Packet.cc \
 	Packet.h \
 	PacketList.h \
@@ -147,35 +137,12 @@ $O/PassiveQueue.o: PassiveQueue.cc \
 	Packet.h \
 	Packet_m.h \
 	PassiveQueue.h \
-	QueueingDefs.h \
-	SelectionStrategies.h \
-	Useful.h
+	QueueingDefs.h
 $O/Queue.o: Queue.cc \
 	Packet.h \
 	Packet_m.h \
 	Queue.h \
 	QueueingDefs.h
-$O/SelectionStrategies.o: SelectionStrategies.cc \
-	IPassiveQueue.h \
-	IServer.h \
-	Packet.h \
-	Packet_m.h \
-	PassiveQueue.h \
-	QueueingDefs.h \
-	SelectionStrategies.h \
-	Server.h \
-	Useful.h
-$O/SelectionStrategiesServer.o: SelectionStrategiesServer.cc \
-	IPassiveQueue.h \
-	IServer.h \
-	Packet.h \
-	Packet_m.h \
-	PassiveQueue.h \
-	QueueingDefs.h \
-	SelectionStrategies.h \
-	SelectionStrategiesServer.h \
-	Server.h \
-	Useful.h
 $O/Server.o: Server.cc \
 	IPassiveQueue.h \
 	IServer.h \
@@ -183,8 +150,6 @@ $O/Server.o: Server.cc \
 	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
-	SelectionStrategies.h \
-	SelectionStrategiesServer.h \
 	Server.h \
 	Useful.h
 $O/Sink.o: Sink.cc \
@@ -194,22 +159,20 @@ $O/Sink.o: Sink.cc \
 	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
-	SelectionStrategies.h \
 	Server.h \
 	Sink.h \
 	Source.h \
 	Useful.h
 $O/Source.o: Source.cc \
+	IPassiveQueue.h \
+	IServer.h \
 	Packet.h \
 	Packet_m.h \
+	PassiveQueue.h \
 	QueueingDefs.h \
+	Server.h \
+	Sink.h \
 	Source.h \
-	Useful.h
-$O/Trigger.o: Trigger.cc \
-	Packet.h \
-	Packet_m.h \
-	QueueingDefs.h \
-	Trigger.h \
 	Useful.h
 $O/Useful.o: Useful.cc \
 	Useful.h

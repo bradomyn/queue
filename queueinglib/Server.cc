@@ -9,7 +9,7 @@
 
 #include "Server.h"
 #include "Packet.h"
-#include "SelectionStrategiesServer.h"
+#include "IPassiveQueue.h"
 
 namespace queueing {
 
@@ -17,30 +17,13 @@ Define_Module(Server);
 
 Server::Server()
 {
-    selectionStrategy = NULL;
-    packetServiced = NULL;
-    endServiceMsg = NULL;
-
+    jobServiced = NULL;
     triggerServiceMsg = NULL;
-
-    _rrCounter = 7;
-    _rrN = 5;
-
-
-	// WRED
-	_currentQSize = 4;
-	_oldAvgQSize = 4;
-	_weight = 0.5;
-	_minQSize = 10; //20;
-	_maxQSize = 16; //24;
 }
 
 Server::~Server()
 {
-    delete selectionStrategy;
-    delete packetServiced;
-    cancelAndDelete(endServiceMsg);
-
+    delete jobServiced;
     cancelAndDelete(triggerServiceMsg);
 }
 
@@ -49,14 +32,9 @@ void Server::initialize()
     busySignal = registerSignal("busy");
     emit(busySignal, 0);
 
-    endServiceMsg = new cMessage("end-service");
+    jobServiced = NULL;
 
-    packetServiced = NULL;
-
-    selectionStrategy = SelectionStrategyServer::create(par("fetchingAlgorithm"), this, true);
-    if (!selectionStrategy)
-        error("invalid selection strategy");
-
+    triggerServiceMsg = new cMessage("triggerServiceMessage");
 
     // keep a pointer to queue 7
     _q7 = getQueue(7);
@@ -65,1686 +43,329 @@ void Server::initialize()
     for( int i=6; i>-1; i-- )
     	_qs.push_back( getQueue(i) );
 
-    triggerServiceMsg = new cMessage("triggerServiceMessage");
-
     WATCH(numSent);
-    numSent = 0;
+	numSent = 0;
 
-	WATCH(triggerCounter);
-	triggerCounter = 0;
+	_weight7 = par("weight7");
+	_rrN = par("rrN");
 
-	const char * algName = par("schedulingAlgorithm");
-	std::cout << this->getName() << " scheduling algorithm " << algName << std::endl;
-	if (strcmp(algName, "none") == 0) {
+
+	_schedulingAlgorithm = par("schedulingAlgorithm");
+	std::cout << this->getName() << " scheduling algorithm " << _schedulingAlgorithm << std::endl;
+
+	if (strcmp(_schedulingAlgorithm, "priority") == 0) {
 		_scheduling = 0;
-		std::cout << "server none" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server none");
-	} else if (strcmp(algName, "priority") == 0) {
+		cout << "server priority" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "7first") == 0) {
 		_scheduling = 1;
-		std::cout << "server priority" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server priority");
-	} else if (strcmp(algName, "feedback1") == 0) {
+		cout << "server mixed1" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "feedback") == 0) {
 		_scheduling = 2;
-		std::cout << "server feedback1" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server feedback");
-	} else if (strcmp(algName, "original") == 0) {
+		cout << "server feedback" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "wfq1") == 0) {
 		_scheduling = 3;
-		std::cout << "server original" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server original");
-	} else if (strcmp(algName, "7first") == 0) {
+		cout << "server wfq1" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "mixed1") == 0) {
 		_scheduling = 4;
-		std::cout << "server 7first" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server 7first");
-	} else if (strcmp(algName, "feedback2") == 0) {
+		cout << "server mixed1" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "wfq2") == 0) {
 		_scheduling = 5;
-		std::cout << "server feedback2" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server feedback2");
-	} else if (strcmp(algName, "feedback3") == 0) {
+		cout << "server wfq2" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "wfq3") == 0) {
 		_scheduling = 6;
-		std::cout << "server feedback3" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server feedback3");
-	} else if (strcmp(algName, "wfq1") == 0) {
-		_scheduling = 7;
-		std::cout << "server wfq1" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server wfq1");
-	} else if (strcmp(algName, "wfq4") == 0) {
-		_scheduling = 8;
-		std::cout << "server wfq4" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server wfq4");
-	} else if (strcmp(algName, "mixed1") == 0) {
-		_scheduling = 9;
-		std::cout << "server mixed1" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server mixed1");
-	} else if (strcmp(algName, "mixed2") == 0) {
-		_scheduling = 10;
-		std::cout << "server mixed2" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server mixed2");
-	} else if (strcmp(algName, "wred1") == 0) {
-		_scheduling = 11;
-		std::cout << "server wred1" << std::endl;
-		Useful::getInstance()->appendToFileTab("out.txt", "server wred1");
+		cout << "server wfq3" << endl;
 	}
 
 
-	_serviceTime = par("serviceTime");
-
-	_capacity = par("capacity");
-
-	_nofPointersInQueue = par("nofPointersInQueue");
-	_memorySize = par("memorySize");
-	_weightWFQ = par("weightWFQ");
-
-
-
-} // initialize()
-
-void Server::serveCurrentPacket() {
-	if( packetServiced!=NULL ) {
-		simtime_t d = simTime() - triggerServiceMsg->getSendingTime();
-		packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
-		packetServiced->setOperationCounter(packetServiced->getOperationCounter()+1);
-		send(packetServiced, "out");
-		numSent++;
-		//std::cout << "server sent " << packetServiced->getName() << std::endl;
-		packetServiced = NULL;
-		emit(busySignal, 0);
-	}
-} // serveCurrentPacket()
-
-void Server::serveCurrentPacket7First() {
-	if( _iqX.size()>0 ) {
-		simtime_t d = simTime() - triggerServiceMsg->getSendingTime();
-		vector<Packet*>::iterator it;
-		//for(it = _iqX.begin(); it!= _iqX.end(); it++ ) {
-		int i=1;
-		while(_iqX.size()>0 ) {
-			it = _iqX.begin();
-			Packet *packetServiced = *it;
-			packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
-			packetServiced->setOperationCounter(packetServiced->getOperationCounter()+1+i);
-			send(packetServiced, "out");
-			numSent++;
-			//std::cout << "server sent " << packetServiced->getName() << std::endl;
-			packetServiced = NULL;
-			emit(busySignal, 0);
-			_iqX.erase(it);
-			i++;
-		}
-	}
-} // serveCurrentPacket()
+}
 
 void Server::handleMessage(cMessage *msg)
 {
-	//std::cout << "server received " << msg->getName() << std::endl;
-		switch(_scheduling) {
-		case 0:	// none
-			none(msg);
-			break;
-		case 1: // priority
-		// use with WRS1.ned
-		//std::cout << this->getName() << " priority" << std::endl;
-			priority(msg);
-			break;
-		case 2: // feedback
-			feedback1(msg);
-			break;
-		case 3: // original
-			//std::cout << this->getName() << " original" << std::endl;
-			// use with WRS.ned
-		    original(msg);
-		    break;
-		case 4:	// 7first
-			// use with WRS1.ned
-			//std::cout << this->getName() << " 7first" << std::endl;
-			seven_first(msg);
-			break;
-		case 5:	// feedback 2
-			// use with WRS1.ned
-			feedback2(msg);
-			break;
-		case 6:	// feedback 3
-			// use with WRS2.ned
-			feedback3(msg);
-			break;
-		case 7:	// wfq1
-			// use with WRS2.ned
-			wfq1(msg);
-			break;
-		case 8:	// wfq4
-			// use with WRS2.ned
-			wfq4(msg);
-			break;
-		case 9:	// mixed1
-			// use with WRS2.ned
-			mixed1(msg);
-			break;
-		case 10:	// mixed2
-			// use with WRS2.ned
-			mixed2(msg);
-			break;
-		case 11:	// wred1
-			// use with WRS2.ned
-			wred1(msg);
-			break;
-		default:
-			break;
-		}	// switch
-		//} // else
-
-		if (strcmp(msg->getName(), "trigger") == 0) {
-			cancelAndDelete(msg);
-		}
-} // handleMessage()
-
-void Server::none(cMessage *msg) {
-
-	if (msg == triggerServiceMsg) {
-		serveCurrentPacket();
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
-	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
-			if (packetServiced) {
-				std::cout << "packet arrived while already servicing one "
-						<< packetServiced->getName() << " vs. "
-						<< msg->getName() << std::endl;
-				error("packet arrived while already servicing one");
-			}
-			packetServiced = check_and_cast<Packet *>(msg);
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-			packetServiced->setOperationCounter(packetServiced->getOperationCounter()+1);
-		}
+	//cout << __FILE__ << ": " << __FUNCTION__ << " " << msg->getName() << endl;
+	switch(_scheduling ) {
+	case 0:
+		priority(msg);
+		break;
+	case 1:
+		sevenfirst(msg);
+		break;
+	case 2:
+		feedback(msg);
+		break;
+	case 3:
+		wfq1(msg);
+		break;
+	case 4:
+		mixed1(msg);
+		break;
+	case 5:
+		wfq2(msg);
+		break;
+	case 6:
+		wfq3(msg);
+		break;
+	default:
+		break;
 	}
-} // none()
 
-void Server::priority(cMessage *msg) {
-    if (msg == triggerServiceMsg) {
-		serveCurrentPacket();
-	} else {
-		if (strcmp(msg->getName(), "trigger") == 0) {
+}
 
-			// check queue lengths and request if length>0 as long as length>0
-			if (_q7->length() > 0) {
-				//std::cout << "q7 length " << _q7->length();
-				while (_q7->length() > 0) {
-					//std::cout << "request 7" << std::endl;
-					_q7->request(0);
-				}
-			} else {
-				// check all other queue gates
-				for (int i = 6; i > -1; i--) {
-					if (_qs.at(i)->length() > 0) {
-						//std::cout << "q" << i << " length " << _qs.at(i)->length();
-						if (_qs.at(i)->length()) {
-							//std::cout << " request i " << i << std::endl;
-							_qs.at(i)->request(0);
-						}
-					}
-				}
-			}
-		} else {
-			if (packetServiced) {
-				std::cout << "packet arrived while already servicing one "
-						<< packetServiced->getName() << " vs. "
-						<< msg->getName() << std::endl;
-				error("packet arrived while already servicing one");
-			}
+void Server::priority(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
 
-			packetServiced = check_and_cast<Packet *>(msg);
-			int onTop = 8 - packetServiced->getPriority();
-			packetServiced->setOperationCounter(packetServiced->getOperationCounter()+onTop);
-			//std::cout << "packetServiced: " << packetServiced->getName()
-				//	<< std::endl;
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
+		//priority
+		while( _q7->length()>0 ) {
+			_q7->request(0);
 		}
+		vector<IPassiveQueue* >::iterator it;
+		for( it=_qs.begin();it!=_qs.end(); it++ ) {
+			while( (*it)->length()>0 ) {
+				(*it)->request(0);
+			}
+		}
+	} else {
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
 	}
 } // priority()
 
-void Server::feedback1(cMessage *msg) {
-	//std::cout << "fb1 " << msg->getName() << std::endl;
-	if (msg == triggerServiceMsg) {
+void Server::sevenfirst(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
 
-		if( _order7.size()>0 ) {
-			map<simtime_t, Packet*>::iterator it;
-			it = _order7.begin();
-			// oldest packet is first in map
-			int i=1;
-			for( it = _order7.begin(); it!=_order7.end(); it++ ) {
-				Packet * packet = it->second;
-				// sort for timestamps
-				packet->setOperationCounter(packet->getOperationCounter()+1+i);
-				send(packet, "out");
-				numSent++;
-				//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
-				_order7.erase(packet->getCreationTime());
-				i++;
-				//std::cout << " " << _order.size() << std::endl;
-			}
-		} else if (_order.size()>0 ) {
-			map<simtime_t, Packet*>::iterator it;
-			it = _order.begin();
-			// oldest packet is first in map
-			int i=1;
-			for( it = _order.begin(); it!=_order.end(); it++ ) {
-				Packet * packet = it->second;
-				packet->setOperationCounter(packet->getOperationCounter()+1+i);
-				// sort for timestamps
-				//send(packet, "out");
-				sendDelayed(packet, _serviceTime, "out");
-				numSent++;
-				//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
-				_order.erase(packet->getCreationTime());
-				i++;
-				//std::cout << " " << _order.size() << std::endl;
+		//priority
+		vector<IPassiveQueue* >::iterator it;
+		for( it=_qs.begin();it!=_qs.end(); it++ ) {
+			while( (*it)->length()>0 ) {
+				(*it)->request(0);
 			}
 		}
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
 	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
-			// fill internal storage
-			Packet *packetServiced = check_and_cast<Packet *>(msg);
-
-			packetServiced->setOperationCounter(packetServiced->getOperationCounter()+1);
-			if( packetServiced->getPriority()==7 ) {
-				_order7.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
-			} else {
-				_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), new Packet(*packetServiced)));
-			}
-			//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
-
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-		}
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
 	}
+} // sevenfirst()
 
-} // feedback1()
+void Server::feedback(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
 
-void Server::feedback2(cMessage *msg) {
-	if (msg == triggerServiceMsg) {
-		// check internal queues
-		vector<Packet*>::iterator it;
+		//priority
+		while( _q7->length()>0 ) {
+			_q7->request(0);
+		}
 
-		// TODO
-		simtime_t timeDist = simTime()-1;
+		_mapFeedback.clear();
+		// request oldest packet first (supposedly in longest queue)
+		vector<IPassiveQueue* >::iterator it;
+		int i=0;
+		for( it=_qs.begin(); it!=_qs.end(); it++, i++ ) {
+			//cout  << "i: " << i << " " << (*it)->length() << endl;
+			_mapFeedback.insert(pair<int, IPassiveQueue*>( (*it)->length(), (*it) ));
+		}
 
-		checkWaitingTimeAndCapacityAndMoveToOtherQueue(0, _iq0, _iq1, timeDist);
-		checkWaitingTimeAndCapacityAndMoveToOtherQueue(1, _iq1, _iq2, timeDist);
-		checkWaitingTimeAndCapacityAndMoveToOtherQueue(2, _iq2, _iq3, timeDist);
-		checkWaitingTimeAndCapacityAndMoveToOtherQueue(3, _iq3, _iq4, timeDist);
-		checkWaitingTimeAndCapacityAndMoveToOtherQueue(4, _iq4, _iq5, timeDist);
-		checkWaitingTimeAndCapacityAndMoveToOtherQueue(5, _iq5, _iq6, timeDist);
-		checkWaitingTimeAndCapacityAndMoveToOtherQueue(6, _iq6, _iq7, timeDist);
-
-		if (_iq7.size() > 0) {
-			it = _iq7.begin();
-			while( it!=_iq7.end() ) {
-				if( (simTime()-(*it)->getCreationTime())> timeDist ) {
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-					send(*it, "out");
-					_iq7.erase(it);
-				}
+		map<int, IPassiveQueue*>::iterator mit;
+		mit=_mapFeedback.end();
+		mit--;
+		for( ; mit!=_mapFeedback.begin(); mit-- ) {
+			if( (*mit).second->length() > 0 ) {
+				(*mit).second->request(0);
 			}
 		}
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
 	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
-			Packet *packetServiced = check_and_cast<Packet *>(msg);
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-
-			pushPacket2Queue(packetServiced);
-		}
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
 	}
+} // feedback()
 
-} // feedback2()
-
-void Server::feedback3(cMessage *msg) {
-	// send p7 directly, queue and sort rest
-	if (msg == triggerServiceMsg) {
-		if (_order.size()>0 ) {
-			map<simtime_t, Packet*>::iterator it;
-			it = _order.begin();
-			int i=1;
-			// oldest packet is first in map
-			for( it = _order.begin(); it!=_order.end(); it++ ) {
-				Packet * packet = it->second;
-				packet->setOperationCounter(packet->getOperationCounter()+1+i);
-				// sort for timestamps
-				//packet->setTimestamp();
-				//send(packet, "out");
-				sendDelayed(packet, _serviceTime, "out");
-				numSent++;
-				//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
-				_order.erase(packet->getCreationTime());
-				i++;
-				//std::cout << " " << _order.size() << std::endl;
+void Server::wfq1(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
+		int N=_weight7;
+		int i=0;
+		if( _q7->length()>0 ) {
+			for( i=0; i<N; i++ ) {
+				if( _q7->length()>0 ) {
+					_q7->request(0);
+				}
 			}
 		}
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
+		if( i==N || _q7->length()==0 ) {
+			vector<IPassiveQueue* >::iterator it;
+			for( it=_qs.begin();it!=_qs.end(); it++ ) {
+				if( (*it)->length()>0 ) {
+					(*it)->request(0);
+				}
+			}
+		}
 	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
-
-			Packet *packetServiced = check_and_cast<Packet *>(msg);
-			if( packetServiced->getPriority()==7 ) {
-				//send(packetServiced, "out");
-				packetServiced->setOperationCounter(packetServiced->getOperationCounter()+1);
-				sendDelayed(packetServiced, _serviceTime, "out");
-				numSent++;
-			} else {
-				Packet * p = new Packet(*packetServiced);
-				p->setOperationCounter(p->getOperationCounter()+1);
-				// fill internal storage and sort automatically for timestamps
-				_order.insert(pair<simtime_t, Packet*>(packetServiced->getCreationTime(), p));
-				//std::cout << "inserted " << packetServiced->getName() << " orders " << _order.size() << std::endl;
-
-				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-			}
-		}
-	}
-
-} // feedback3()
-
-// this is similar to the current scheduling strategy in the WRS
-void Server::seven_first(cMessage *msg) {
-	if (msg == triggerServiceMsg) {
-		//std::cout << " triggerServiceMsg: ";
-		serveCurrentPacket7First();
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
-	} else {
-		if (strcmp(msg->getName(), "trigger") == 0) {
-			// trigger test
-			//std::cout << " server triggered ";
-			// check all other queue gates
-			for (int i = 6; i > -1; i--) {
-				if (_qs.at(i)->length() > 0) {
-					//std::cout << "q" << i << " length " << _qs.at(i)->length();
-					while( _qs.at(i)->length()>0 ) {
-					//if (_qs.at(i)->length()) {
-						//std::cout << " request i " << i << std::endl;
-						_qs.at(i)->request(0);
-					}
-				}
-			}
-		} else {
-			Packet* p = check_and_cast<Packet *>(msg);
-			p->setOperationCounter(p->getOperationCounter()+1);
-
-			if( p->getPriority()==7 ) {
-				sendDelayed(p, _serviceTime, "out");
-			} else {
-				_iqX.push_back(p);
-				scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-			}
-		}
-	}
-} // seven_first()
-
-void Server::sendWFQ1() {
-	//cout << __FUNCTION__ ;
-	int i=0;
-	int N = 4;
-	vector<Packet*>::iterator it;
-	// check higher priority queues
-	if( _iq7.size()>0 ) {
-		// send up to 4 packets if available
-		for(i=0; i<N; i++) {
-			if( _iq7.size()>0 ) {
-				it = _iq7.begin();
-				(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-				send(*it, "out");
-				_iq7.erase(it);
-			}
-		}
-	}
-	if( i==N ) {
-		// if packets sent check lower priority queues
-		if( _iq6.size()>0 ) {
-			it = _iq6.begin();
-			(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-			send(*it, "out");
-			_iq6.erase(it);
-		}
-		if( _iq5.size()>0 ) {
-			it = _iq5.begin();
-			(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-			send(*it, "out");
-			_iq5.erase(it);
-		}
-		if( _iq4.size()>0 ) {
-			it = _iq4.begin();
-			(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-			send(*it, "out");
-			_iq4.erase(it);
-		}
-		if( _iq3.size()>0 ) {
-			it = _iq3.begin();
-			(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-			send(*it, "out");
-			_iq3.erase(it);
-		}
-		if( _iq2.size()>0 ) {
-			it = _iq2.begin();
-			(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-			send(*it, "out");
-			_iq2.erase(it);
-		}
-		if( _iq1.size()>0 ) {
-			it = _iq1.begin();
-			(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-			send(*it, "out");
-			_iq1.erase(it);
-		}
-		if( _iq0.size()>0 ) {
-			it = _iq0.begin();
-			(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-			send(*it, "out");
-			_iq0.erase(it);
-		}
-	}
-} // sendWFQ1()
-
-void Server::sendWFQ2() {
-	//cout << __FUNCTION__ ;
-	int i=0;
-	int N = 4;
-	vector<Packet*>::iterator it;
-	// check higher priority queues
-	if( _iq7.size()>0 ) {
-		// send up to 4 packets if available
-		for(i=0; i<N; i++) {
-			if( _iq7.size()>0 ) {
-				it = _iq7.begin();
-				(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-				send(*it, "out");
-				_iq7.erase(it);
-			}
-		}
-	}
-	if( i==N ) {
-		// if packets sent check lower priority queues
-		if( _iq6.size()>0 ) {
-			for(i=0; i<(N-1); i++) {
-				if( _iq6.size()>0 ) {
-					it = _iq6.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq6.erase(it);
-				}
-			}
-		}
-		if( _iq5.size()>0 ) {
-			for(i=0; i<(N-1); i++) {
-				if( _iq5.size()>0 ) {
-					it = _iq5.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq5.erase(it);
-				}
-			}
-		}
-		if( _iq4.size()>0 ) {
-			for(i=0; i<(N-2); i++) {
-				if( _iq4.size()>0 ) {
-					it = _iq4.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq4.erase(it);
-				}
-			}
-		}
-		if( _iq3.size()>0 ) {
-			for(i=0; i<(N-2); i++) {
-				if( _iq3.size()>0 ) {
-					it = _iq3.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq3.erase(it);
-				}
-			}
-		}
-		if( _iq2.size()>0 ) {
-			for(i=0; i<(N-2); i++) {
-				if( _iq2.size()>0 ) {
-					it = _iq2.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq2.erase(it);
-				}
-			}
-		}
-		if( _iq1.size()>0 ) {
-			for(i=0; i<(N-3); i++) {
-				if( _iq1.size()>0 ) {
-					it = _iq1.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq1.erase(it);
-				}
-			}
-		}
-		if( _iq0.size()>0 ) {
-			for(i=0; i<(N-3); i++) {
-				if( _iq0.size()>0 ) {
-					it = _iq0.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq0.erase(it);
-				}
-			}
-		}
-	}
-} // sendWFQ2()
-
-//rrCounter = (rrCounter + 1) % gateSize("out");
-// use round robin
-// works best with
-// _rrCounter = 7; _rrN = 5;
-void Server::sendWFQ3() {
-	//cout << __FUNCTION__ ;
-	vector<Packet*>::iterator it;
-	// check higher priority queues
-
-	switch ( _rrCounter ) {
-	case 7:
-		if( _iq7.size()>0 ) {
-			for( int i=0; i<_rrN; i++ ) {
-				if( _iq7.size()>0 ) {
-					it = _iq7.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq7.erase(it);
-				}
-			}
-		}
-		break;
-		// if packets sent check lower priority queues
-	case 6:
-		if( _iq6.size()>0 ) {
-			for( int i=0; i<(_rrN-1); i++ ) {
-				if( _iq6.size()>0 ) {
-				it = _iq6.begin();
-				(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-				send(*it, "out");
-				_iq6.erase(it);
-				}
-			}
-		}
-		break;
-	case 5:
-		if( _iq5.size()>0 ) {
-			for( int i=0; i<(_rrN-2); i++ ) {
-				if( _iq5.size()>0 ) {
-					it = _iq5.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq5.erase(it);
-				}
-			}
-		}
-		break;
-	case 4:
-		if( _iq4.size()>0 ) {
-			for( int i=0; i<(_rrN-2); i++ ) {
-				if( _iq4.size()>0 ) {
-					it = _iq4.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq4.erase(it);
-				}
-			}
-		}
-		break;
-	case 3:
-		if( _iq3.size()>0 ) {
-			for( int i=0; i<(_rrN-3); i++ ) {
-				if( _iq3.size()>0 ) {
-					it = _iq3.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq3.erase(it);
-				}
-			}
-		}
-		break;
-	case 2:
-		if( _iq2.size()>0 ) {
-			for( int i=0; i<(_rrN-3); i++ ) {
-				if( _iq2.size()>0 ) {
-					it = _iq2.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq2.erase(it);
-				}
-			}
-		}
-		break;
-	case 1:
-		if( _iq1.size()>0 ) {
-			for( int i=0; i<(_rrN-3); i++ ) {
-				if( _iq1.size()>0 ) {
-					it = _iq1.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq1.erase(it);
-				}
-			}
-		}
-		break;
-	case 0:
-		if( _iq0.size()>0 ) {
-			for( int i=0; i<(_rrN-3); i++ ) {
-				if( _iq0.size()>0 ) {
-					it = _iq0.begin();
-					(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-					send(*it, "out");
-					_iq0.erase(it);
-				}
-			}
-		}
-		break;
-	}
-	// reset counter
-	_rrCounter = _rrCounter - 1;
-	if( _rrCounter<0 )
-		_rrCounter = 7;
-	cout << " rrCounter = " << _rrCounter << endl;
-} // sendWFQ3()
-
-// consider number of packets in queue
-void Server::sendWFQ4() {
-	//int N = 5;
-	int N = _weightWFQ;
-
-	// map sorts automatically after the key from lowest size to largest queue size
-	map< int, vector<Packet *> > queuesizes;
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq7.size(), _iq7));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq6.size(), _iq6));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq5.size(), _iq5));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq4.size(), _iq4));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq3.size(), _iq3));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq2.size(), _iq2));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq1.size(), _iq1));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq0.size(), _iq0));
-
-	// pick first from map, this is the smallest queue
-	map<int, vector<Packet *> >::iterator it;
-	it = queuesizes.begin();
-
-	// adjust weight depending on queue size, remove most packets from fullest queue first
-	// find queue 7 first, empty it, then move on to queue with biggest size
-	for( it = queuesizes.begin(); it!=queuesizes.end(); it++ ) {
-		vector<Packet *> v = it->second;
-		//cout << v.size() << ", " << _iq7.size() << "  ";
-		if( v.size()== _iq7.size() && v.size()>0 && _iq7.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq7.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
-							v.erase(it);	// this doesn't erase in _iq7
-
-							it = _iq7.begin();
-							//cout << " _iq7: " << (*it)->getName()<< " ";
-							_iq7.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq7.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 6
-		//cout << v.size() << ", " << _iq6.size() << "  ";
-		if( v.size()== _iq6.size() && v.size()>0 && _iq6.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq6.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-1; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
-							v.erase(it);	// this doesn't erase in _iq6
-
-							it = _iq6.begin();
-							//cout << " _iq6: " << (*it)->getName()<< " ";
-							_iq6.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq6.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 5
-		//cout << v.size() << ", " << _iq5.size() << "  ";
-		if( v.size()== _iq5.size() && v.size()>0 && _iq5.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq5.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-2; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
-							v.erase(it);	// this doesn't erase in _iq5
-
-							it = _iq5.begin();
-							//cout << " _iq5: " << (*it)->getName()<< " ";
-							_iq5.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq5.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 4
-		//cout << v.size() << ", " << _iq4.size() << "  ";
-		if( v.size()== _iq4.size() && v.size()>0 && _iq4.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq4.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-2; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
-							v.erase(it);	// this doesn't erase in _iq4
-
-							it = _iq4.begin();
-							//cout << " _iq4: " << (*it)->getName()<< " ";
-							_iq4.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq4.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 3
-		//cout << v.size() << ", " << _iq3.size() << "  ";
-		if( v.size()== _iq3.size() && v.size()>0 && _iq3.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq3.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-2; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
-							v.erase(it);	// this doesn't erase in _iq3
-
-							it = _iq3.begin();
-							//cout << " _iq3: " << (*it)->getName()<< " ";
-							_iq3.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq3.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 2
-		//cout << v.size() << ", " << _iq2.size() << "  ";
-		if( v.size()== _iq2.size() && v.size()>0 && _iq2.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq2.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-3; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
-							v.erase(it);	// this doesn't erase in _iq2
-
-							it = _iq2.begin();
-							//cout << " _iq2: " << (*it)->getName()<< " ";
-							_iq2.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq2.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 1
-		//cout << v.size() << ", " << _iq1.size() << "  ";
-		if( v.size()== _iq1.size() && v.size()>0 && _iq1.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq1.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-3; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
-							v.erase(it);	// this doesn't erase in _iq1
-
-							it = _iq1.begin();
-							//cout << " _iq1: " << (*it)->getName()<< " ";
-							_iq1.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq1.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 0
-		//cout << v.size() << ", " << _iq0.size() << "  ";
-		if( v.size()== _iq0.size() && v.size()>0 && _iq0.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq0.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-3; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							send(*it, "out");
-							v.erase(it);	// this doesn't erase in _iq0
-
-							it = _iq0.begin();
-							//cout << " _iq0: " << (*it)->getName()<< " ";
-							_iq0.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq0.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-	}
-} // sendWFQ4()
-
-void Server::sendWFQ4_6to4() {
-	int N = _weightWFQ;
-
-	// map sorts automatically after the key from lowest size to largest queue size
-	map< int, vector<Packet *> > queuesizes;
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq6.size(), _iq6));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq5.size(), _iq5));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq4.size(), _iq4));
-
-	// pick first from map, this is the smallest queue
-	map<int, vector<Packet *> >::iterator it;
-	it = queuesizes.begin();
-
-	// adjust weight depending on queue size, remove most packets from fullest queue first
-	// find queue 7 first, empty it, then move on to queue with biggest size
-	for( it = queuesizes.begin(); it!=queuesizes.end(); it++ ) {
-		vector<Packet *> v = it->second;
-
-		// queue 6
-		//cout << v.size() << ", " << _iq6.size() << "  ";
-		if( v.size()== _iq6.size() && v.size()>0 && _iq6.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq6.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-1; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							//send(*it, "out");
-							sendDelayed(*it, _serviceTime, "out");
-							v.erase(it);	// this doesn't erase in _iq6
-
-							it = _iq6.begin();
-							//cout << " _iq6: " << (*it)->getName()<< " ";
-							_iq6.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq6.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 5
-		//cout << v.size() << ", " << _iq5.size() << "  ";
-		if( v.size()== _iq5.size() && v.size()>0 && _iq5.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq5.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-2; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							//send(*it, "out");
-							sendDelayed(*it, _serviceTime, "out");
-							v.erase(it);	// this doesn't erase in _iq5
-
-							it = _iq5.begin();
-							//cout << " _iq5: " << (*it)->getName()<< " ";
-							_iq5.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq5.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 4
-		//cout << v.size() << ", " << _iq4.size() << "  ";
-		if( v.size()== _iq4.size() && v.size()>0 && _iq4.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq4.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-2; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							//send(*it, "out");
-							sendDelayed(*it, _serviceTime, "out");
-							v.erase(it);	// this doesn't erase in _iq4
-
-							it = _iq4.begin();
-							//cout << " _iq4: " << (*it)->getName()<< " ";
-							_iq4.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq4.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-	}
-} // sendWFQ4_6to4()
-
-void Server::sendWFQ4_3to0() {
-	int N = _weightWFQ;
-
-	// map sorts automatically after the key from lowest size to largest queue size
-	map< int, vector<Packet *> > queuesizes;
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq3.size(), _iq3));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq2.size(), _iq2));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq1.size(), _iq1));
-	queuesizes.insert(pair<int, vector<Packet *> >(_iq0.size(), _iq0));
-
-	// pick first from map, this is the smallest queue
-	map<int, vector<Packet *> >::iterator it;
-	it = queuesizes.begin();
-
-	// adjust weight depending on queue size, remove most packets from fullest queue first
-	// find queue 7 first, empty it, then move on to queue with biggest size
-	for( it = queuesizes.begin(); it!=queuesizes.end(); it++ ) {
-		vector<Packet *> v = it->second;
-
-		// queue 3
-		//cout << v.size() << ", " << _iq6.size() << "  ";
-		if( v.size()== _iq3.size() && v.size()>0 && _iq3.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq3.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-1; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							//send(*it, "out");
-							sendDelayed(*it, _serviceTime, "out");
-							v.erase(it);	// this doesn't erase in _iq3
-
-							it = _iq3.begin();
-							//cout << " _iq3: " << (*it)->getName()<< " ";
-							_iq3.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq3.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 2
-		//cout << v.size() << ", " << _iq2.size() << "  ";
-		if( v.size()== _iq2.size() && v.size()>0 && _iq2.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq2.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-2; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							//send(*it, "out");
-							sendDelayed(*it, _serviceTime, "out");
-							v.erase(it);	// this doesn't erase in _iq2
-
-							it = _iq2.begin();
-							//cout << " _iq2: " << (*it)->getName()<< " ";
-							_iq2.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq2.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-
-		// queue 1
-		//cout << v.size() << ", " << _iq4.size() << "  ";
-		if( v.size()== _iq1.size() && v.size()>0 && _iq1.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq1.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-2; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							//send(*it, "out");
-							sendDelayed(*it, _serviceTime, "out");
-							v.erase(it);	// this doesn't erase in _iq1
-
-							it = _iq1.begin();
-							//cout << " _iq1: " << (*it)->getName()<< " ";
-							_iq1.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq1.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-		// queue 0
-		//cout << v.size() << ", " << _iq4.size() << "  ";
-		if( v.size()== _iq0.size() && v.size()>0 && _iq0.size()>0 ) {
-			// compare packet name of first packet to help find the proper queue
-			if( strcmp(v.at(0)->getName(), _iq0.at(0)->getName()) == 0 ) {
-				if( v.size()>0 ) {
-					for( int i=0; i<N-2; i++ ) {
-						if( v.size()>0 ) {
-							vector<Packet *>::iterator it = v.begin();
-							(*it)->setOperationCounter((*it)->getOperationCounter()+1+(i+1));
-							//cout << " v: " << (*it)->getName()<< " ";
-							//send(*it, "out");
-							sendDelayed(*it, _serviceTime, "out");
-							v.erase(it);	// this doesn't erase in _iq0
-
-							it = _iq0.begin();
-							//cout << " _iq0: " << (*it)->getName()<< " ";
-							_iq0.erase(it);
-							//cout << " after deletion " << v.size() << ", " << _iq0.size() << endl;
-						}
-					}
-				}
-			}
-			break;
-		}
-	}
-} // sendWFQ4_3to0()
-
-void Server::sendMixed1() {
-	// group queues into three classes
-	// queue 7: FCFS
-	// queue 6-4: WFQ
-	// queue 3-0: Feedback Scheduling
-	vector<Packet *>::iterator it;
-
-	/*// FCFS
-	if( _iq7.size()>0 ) {
-		for( unsigned int i=0; i<_iq7.size(); i++ ) {
-			it = _iq7.begin();
-			(*it)->setOperationCounter((*it)->getOperationCounter()+1);
-			send(*it, "out");
-			_iq7.erase(it);
-		}
-	}*/
-
-	// WFQ
-	if( _iq6.size()>0 || _iq5.size()>0 || _iq4.size()>0 ) {
-		sendWFQ4_6to4();
-	}
-
-	// Feedback Scheduling
-	if (_order.size()>0 ) {
-		map<simtime_t, Packet*>::iterator it;
-		it = _order.begin();
-		// oldest packet is first in map
-		int i=1;
-		for( it = _order.begin(); it!=_order.end(); it++ ) {
-			Packet * packet = it->second;
-			packet->setOperationCounter(packet->getOperationCounter()+1+i);
-			// sort for timestamps
-			//send(packet, "out");
-			sendDelayed(packet, _serviceTime, "out");
-			numSent++;
-			//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
-			_order.erase(packet->getCreationTime());
-			i++;
-			//std::cout << " " << _order.size() << std::endl;
-		}
-	}
-
-} // sendMixed1()
-
-void Server::sendMixed2() {
-	// group queues into three classes
-	// queue 7: FCFS
-	// queue 6-4: Feedback Scheduling
-	// queue 3-0: WFQ
-	vector<Packet *>::iterator it;
-
-	// Feedback Scheduling
-	if (_order.size()>0 ) {
-		map<simtime_t, Packet*>::iterator it;
-		it = _order.begin();
-		// oldest packet is first in map
-		int i=1;
-		for( it = _order.begin(); it!=_order.end(); it++ ) {
-			Packet * packet = it->second;
-			packet->setOperationCounter(packet->getOperationCounter()+1+i);
-			// sort for timestamps
-			//send(packet, "out");
-			sendDelayed(packet, _serviceTime, "out");
-			numSent++;
-			//std::cout << "x sent " << packet->getName() << " orders " << _order.size() << std::endl;
-			_order.erase(packet->getCreationTime());
-			i++;
-			//std::cout << " " << _order.size() << std::endl;
-		}
-	}
-	// WFQ
-	if( _iq3.size()>0 || _iq2.size()>0 || _iq1.size()>0 || _iq0.size()>0 ) {
-		sendWFQ4_3to0();
-	}
-} // sendMixed2()
-
-void Server::sendWRED1() {
-	//cout << __FUNCTION__ ;
-	vector<Packet*>::iterator it;
-	// check higher priority queues
-	if (_iq7.size() > 0) {
-		it = _iq7.begin();
-		(*it)->setOperationCounter(
-				(*it)->getOperationCounter() + 1);
-		send(*it, "out");
-		_iq7.erase(it);
-	}
-	// if packets sent check lower priority queues
-	if (_iq6.size() > 0) {
-		it = _iq6.begin();
-		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
-		send(*it, "out");
-		_iq6.erase(it);
-	}
-	if (_iq5.size() > 0) {
-		it = _iq5.begin();
-		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
-		send(*it, "out");
-		_iq5.erase(it);
-	}
-	if (_iq4.size() > 0) {
-		it = _iq4.begin();
-		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
-		send(*it, "out");
-		_iq4.erase(it);
-	}
-	if (_iq3.size() > 0) {
-		it = _iq3.begin();
-		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
-		send(*it, "out");
-		_iq3.erase(it);
-	}
-	if (_iq2.size() > 0) {
-		it = _iq2.begin();
-		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
-		send(*it, "out");
-		_iq2.erase(it);
-	}
-	if (_iq1.size() > 0) {
-		it = _iq1.begin();
-		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
-		send(*it, "out");
-		_iq1.erase(it);
-	}
-	if (_iq0.size() > 0) {
-		it = _iq0.begin();
-		(*it)->setOperationCounter((*it)->getOperationCounter() + 1);
-		send(*it, "out");
-		_iq0.erase(it);
-	}
-} // sendWRED1()
-
-// first approach to weighted fair queuing:
-// send for each packet sent from a lower priority queue
-// four packet from higher priority queues
-void Server::wfq1(cMessage *msg) {
-	if (msg == triggerServiceMsg) {
-		sendWFQ1();
-		//sendWFQ2();
-		//sendWFQ3();
-		//sendWFQ4();	// best approach so far!
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
-	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
-			Packet* p = check_and_cast<Packet *>(msg);
-
-			//cout << "packet arrived " << p->getName() << endl;
-			//Useful::getInstance()->appendToFile("out.txt", p->getName());
-
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-
-			// collect packets
-			//pushPacket2Queue(p);
-			pushPacket2QueueCheckNofPackets(p);
-			//pushPacket2QueueCheckSize(p);
-		}
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
 	}
 } // wfq1()
 
-void Server::wfq4(cMessage *msg) {
-	if (msg == triggerServiceMsg) {
-		sendWFQ4();	// best approach so far!
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
-	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
+// use round robin
+// works best with
+// _rrCounter = 7; _rrN = 5;
+void Server::wfq2(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
+		int i=0;
+		vector<IPassiveQueue* >::iterator it;
 
-			Packet* p = check_and_cast<Packet *>(msg);
-			p->setOperationCounter(0);
-			//cout << "packet arrived " << p->getName() << endl;
-			//Useful::getInstance()->appendToFile("out.txt", p->getName());
-
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-			p->setOperationCounter(p->getOperationCounter()+1);
-			// collect packets
-			pushPacket2QueueCheckNofPackets(p);
-		}
-	}
-} // wfq4()
-
-void Server::mixed1(cMessage *msg) {
-	if (msg == triggerServiceMsg) {
-		sendMixed1();
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
-	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
-			Packet* p = check_and_cast<Packet *>(msg);
-
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-
-			if( p->getPriority()==7 ) {	// FCFS
-				p->setOperationCounter(p->getOperationCounter()+1);
-				//send(p,"out");
-				sendDelayed(p, _serviceTime, "out");
-			} else if( p->getPriority()>=4 && p->getPriority()<7 ) {	// collect packets
-				pushPacket2QueueCheckNofPackets(p);
-			} else if( p->getPriority()>=0 && p->getPriority()<4 ) {
-				_order.insert(pair<simtime_t, Packet*>(p->getCreationTime(), new Packet(*p)));
+		if( _q7->length()>0 ) {
+			for( i=0; i<_rrN; i++ ) {
+				if( _q7->length()>0 ) {
+					_q7->request(0);
+				}
 			}
-
-			//cObject *owner = msg->getOwner();
-			//((Server*)owner)->dropAndDelete(msg);
-			//cout << owner->getName() << " " << msg->getName() << endl;
-			//dropAndDelete(msg);
 		}
+		switch (_rrCounter) {
+		case 6:
+			for (i = 0; i < _rrN - 1; i++) {
+				if (_qs.at(0)->length() > 0) {
+					_qs.at(0)->request(0);
+				}
+			}
+			break;
+		case 5:
+			for (i = 0; i < _rrN - 2; i++) {
+				if (_qs.at(1)->length() > 0) {
+					_qs.at(1)->request(0);
+				}
+			}
+			break;
+		case 4:
+			for (i = 0; i < _rrN - 3; i++) {
+				if (_qs.at(2)->length() > 0) {
+					_qs.at(2)->request(0);
+				}
+			}
+			break;
+		case 3:
+			for (i = 0; i < _rrN - 4; i++) {
+				if (_qs.at(3)->length() > 0) {
+					_qs.at(3)->request(0);
+				}
+			}
+			break;
+		case 2:
+			for (i = 0; i < _rrN - 5; i++) {
+				if (_qs.at(4)->length() > 0) {
+					_qs.at(4)->request(0);
+				}
+			}
+			break;
+		case 1:
+			for (i = 0; i < _rrN - 5; i++) {
+				if (_qs.at(5)->length() > 0) {
+					_qs.at(5)->request(0);
+				}
+			}
+			break;
+		case 0:
+			for (i = 0; i < _rrN - 5; i++) {
+				if (_qs.at(6)->length() > 0) {
+					_qs.at(6)->request(0);
+				}
+			}
+			break;
+		}
+
+		// reset counter
+		_rrCounter = _rrCounter - 1;
+		if (_rrCounter < 0)
+			_rrCounter = 6;
+
+
+		//cout << " rrCounter = " << _rrCounter << endl;
+	} else {
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
+	}
+} // wfq2()
+
+
+void Server::wfq3(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
+		int N=_weight7;
+		int i=0;
+
+		if( _q7->length()>0 ) {
+			for( i=0; i<N; i++ ) {
+				if( _q7->length()>0 ) {
+					_q7->request(0);
+				}
+			}
+		}
+
+		_mapFeedback.clear();
+		for( int i=0; i<7; i++ ) {
+			_mapFeedback.insert(pair<int, IPassiveQueue*>( _qs.at(i)->length(), _qs.at(i) ));
+		}
+		map<int, IPassiveQueue*>::iterator mit;
+		mit=_mapFeedback.end();
+		mit--;
+		// longest queue first
+		for( ; mit!=_mapFeedback.begin(); mit-- ) {
+			while( (*mit).second->length() > 0 ) {
+				(*mit).second->request(0);
+			}
+		}
+	} else {
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
+	}
+} // wfq3()
+
+void Server::mixed1(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
+
+		// 7, FIFO
+		// 6-4,
+		// request oldest packet first (supposedly in longest queue)
+		// _qs is sorted from 6 to 0
+
+		vector<IPassiveQueue* >::iterator it;
+		for( int i=0; i<=3; i++ ) {
+			//cout  << "i: " << i << " " << _qs.at(i)->length() << endl;
+			while( _qs.at(i)->length()>0 ) {
+				_qs.at(i)->request(0);
+			}
+		}
+
+		// 3-0,
+		_mapFeedback.clear();
+		for( int i=4; i<=6; i++ ) {
+			//cout  << "i: " << i << " " << _qs.at(i)->length() << endl;
+			_mapFeedback.insert(pair<int, IPassiveQueue*>( _qs.at(i)->length(), _qs.at(i) ));
+		}
+		map<int, IPassiveQueue*>::iterator mit;
+		mit=_mapFeedback.end();
+		mit--;
+		for( ; mit!=_mapFeedback.begin(); mit-- ) {
+			if( (*mit).second->length() > 0 ) {
+				(*mit).second->request(0);
+			}
+		}
+	} else {
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
 	}
 } // mixed1()
 
-void Server::mixed2(cMessage *msg) {
-	if (msg == triggerServiceMsg) {
-		sendMixed2();
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
-	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
-			Packet* p = check_and_cast<Packet *>(msg);
-
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-
-			if( p->getPriority()==7 ) {	// FCFS
-				p->setOperationCounter(p->getOperationCounter()+1);
-				//send(p,"out");
-				sendDelayed(p, _serviceTime, "out");
-			} else if( p->getPriority()>=4 && p->getPriority()<7 ) {	// collect packets
-				_order.insert(pair<simtime_t, Packet*>(p->getCreationTime(), new Packet(*p)));
-			} else if( p->getPriority()>=0 && p->getPriority()<4 ) {
-				pushPacket2QueueCheckNofPackets(p);
-			}
-		}
-	}
-} // mixed2()
-
-void Server::wred1(cMessage *msg) {
-	if (msg == triggerServiceMsg) {
-		sendWRED1();
-		if( triggerServiceMsg->isScheduled() )
-			cancelAndDelete(triggerServiceMsg);
-	} else {
-		if (strcmp(msg->getName(), "trigger") != 0) {
-			Packet* p = check_and_cast<Packet *>(msg);
-
-			//cout << "packet arrived " << p->getName() << endl;
-			//Useful::getInstance()->appendToFile("out.txt", p->getName());
-
-			scheduleAt(simTime() + _serviceTime, triggerServiceMsg);
-
-			// determine average queue suze and collect packets
-			avgQueueSizeWRED(p);
-		}
-	}
-} // wred1()
-
-void Server::avgQueueSizeWRED(Packet* p) {
-	// allow to change queue sizes dynamically depending on congestion
-
-	// calculate average queue size
-	// queue packet if average is less than minimum queue threshold
-	// if average is between minimum and maximum queue threshold the packet is dropped or queued depending on packet drop propability
-	// if average queue size is greater than maximum threshold the packet is automatically dropped
-	cout << "1 old Q size: " << _oldAvgQSize << " curr Q size: " << _currentQSize << " weight: " << _weight << "  ";
-	_oldAvgQSize = _currentQSize;
-	_currentQSize = (int)(_oldAvgQSize * (1-pow(2, (-1.)*_weight)) + (_currentQSize * (pow(2,(-1.)*_weight))));
-
-	cout << "2 old Q size: " << _oldAvgQSize << " curr Q size: " << _currentQSize << " weight: " << _weight << endl;
-	p->setOperationCounter(p->getOperationCounter()+2);
-	if( p!=NULL ) {
-		if( _currentQSize < _minQSize ) {
-			// queue packet
-			pushPacket2QueueWRED(p);
-		} else if( _minQSize<=_currentQSize && _currentQSize<_maxQSize ) {
-			// consider drop probability, decide whether to drop or to queue
-			//????
-			pushPacket2QueueWRED(p);
-		} else if( _currentQSize>=_maxQSize ) {
-			// drop packet
-			_dropped.push_back(p);
-			return;
-		}
-	}
-} // avgQueueSizeWRED()
-
-void Server::pushPacket2QueueWRED(Packet *p) {
-
-	if( p!=NULL ) {
-		p->setOperationCounter(p->getOperationCounter()+3);
-		switch (p->getPriority()) {
-		case 0:
-			if( _iq0.size()< _currentQSize )
-				_iq0.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 1:
-			if( _iq1.size()< _currentQSize )
-				_iq1.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 2:
-			if( _iq2.size()< _currentQSize )
-				_iq2.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 3:
-			if( _iq3.size()< _currentQSize )
-				_iq3.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 4:
-			if( _iq4.size()< _currentQSize )
-				_iq4.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 5:
-			if( _iq5.size()< _currentQSize )
-				_iq5.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 6:
-			if( _iq6.size()< _currentQSize )
-				_iq6.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 7:
-			if( _iq7.size()< _currentQSize )
-				_iq7.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		}
-	}
-} // pushPacket2QueueWRED()
-
-void Server::pushPacket2Queue(Packet *p) {
-	if( p!=NULL ) {
-		p->setOperationCounter(p->getOperationCounter()+3);
-		switch (p->getPriority()) {
-		case 0:
-			_iq0.push_back(p);
-			break;
-		case 1:
-			_iq1.push_back(p);
-			break;
-		case 2:
-			_iq2.push_back(p);
-			break;
-		case 3:
-			_iq3.push_back(p);
-			break;
-		case 4:
-			_iq4.push_back(p);
-			break;
-		case 5:
-			_iq5.push_back(p);
-			break;
-		case 6:
-			_iq6.push_back(p);
-			break;
-		case 7:
-			_iq7.push_back(p);
-			break;
-		}
-	}
-} // pushPacket2Queue()
-
-// check the number of packets in a queue
-void Server::pushPacket2QueueCheckNofPackets(Packet *p) {
-	//unsigned int N=16;	// current queue size (see Maciej's email from 04.05.12)
-	unsigned int N = _nofPointersInQueue;
-	if( p!=NULL ) {
-		p->setOperationCounter(p->getOperationCounter()+3);
-		switch (p->getPriority()) {
-		case 0:
-			if( _iq0.size()<N )
-				_iq0.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 1:
-			if( _iq1.size()<N )
-				_iq1.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 2:
-			if( _iq2.size()<N )
-				_iq2.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 3:
-			if( _iq3.size()<N )
-				_iq3.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 4:
-			if( _iq4.size()<N )
-				_iq4.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 5:
-			if( _iq5.size()<N )
-				_iq5.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 6:
-			if( _iq6.size()<N )
-				_iq6.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 7:
-			if( _iq7.size()<N )
-				_iq7.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		}
-	}
-} // pushPacket2QueueCheckNofPackets()
-
-// check the queue size (size of packets in queue)
-void Server::pushPacket2QueueCheckSize(Packet *p) {
-	//int N = 32768;	// current memory size (see Maciej's email from 04.05.12)
-	int N = _memorySize;	// /8??? not necessarily
-	if( p!=NULL ) {
-		switch (p->getPriority()) {
-		case 0:
-			if( determineQueueSize(_iq0)<N )
-				_iq0.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 1:
-			if( determineQueueSize(_iq1)<N )
-				_iq1.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 2:
-			if( determineQueueSize(_iq2)<N )
-				_iq2.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 3:
-			if( determineQueueSize(_iq3)<N )
-				_iq3.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 4:
-			if( determineQueueSize(_iq4)<N )
-				_iq4.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 5:
-			if( determineQueueSize(_iq5)<N )
-				_iq5.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 6:
-			if( determineQueueSize(_iq6)<N )
-				_iq6.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		case 7:
-			if( determineQueueSize(_iq7)<N )
-				_iq7.push_back(p);
-			else
-				_dropped.push_back(p);
-			break;
-		}
-	}
-} // pushPacket2QueueCheckSize()
-
-int Server::determineQueueSize(vector<Packet*> v) {
-	int queuesize = 0;
-	vector<Packet*>::iterator it = v.begin();
-	for( it = v.begin(); it!= v.end(); it++ ) {
-		queuesize += (*it)->getSize();
-	}
-
-	return queuesize;
-} // determineQueueSize()
-
-void Server::checkWaitingTimeAndCapacityAndMoveToOtherQueue(int priority, vector<Packet*> &v1, vector<Packet*> &v2, simtime_t timeDist) {
-	if (v1.size() > 0) {
-		vector<Packet*>::iterator it = v1.begin();
-		int queuesize = determineQueueSize(v1);
-		int i=1;
-		while (it != v1.end()) {
-			if( ((simTime()-(*it)->getCreationTime()) > timeDist ) ||
-			    ( queuesize>(_capacity-1500) ) ) {	// queue is almost full
-				// consider sizes of queues that gain packets
-				if( determineQueueSize(v2)<(_capacity-1500) ) {
-					(*it)->setOperationCounter((*it)->getOperationCounter()+i);
-					v2.push_back(*it); // move to higher queue
-					//std::cout << "moved from " << priority << " to " << (priority+1) << ": " << (simTime()-(*it)->getCreationTime()) << std::endl;
-					v1.erase(it);
-					//std::cout << ".";
-					if( v1.size()>0 )
-						it = v1.begin();
-					else {
-						it++;
-						break;
-					}
-				}
-			}
-			i++;
-		}
-		//std::cout << priority << " size: " << v1.size() << std::endl;
-	}
-}
-
-void Server::checkQueueSizeAndSend(vector<Packet*> &v) {
-	if (v.size() > 0) {
-			vector<Packet*>::iterator it = v.begin();
-			int queuesize = determineQueueSize(v);
-			while (it != v.end()) {
-				if( queuesize>(_capacity-1500) ) {	// queue is almost full
-					send((*it), "out");
-					v.erase(it);
-					it = v.begin();
-					std::cout << "*";
-				}
-			}
-			//std::cout << priority << " size: " << v1.size() << std::endl;
-		}
-} // checkQueueSizeAndSend()
-
 IPassiveQueue *Server::getQueue(int index) {
-	std::string queue = "passiveQueue";
+	std::string queue = "queue";
 	char buffer[3];
 
 	sprintf(buffer,"%d",index);
@@ -1758,55 +379,14 @@ IPassiveQueue *Server::getQueue(int index) {
 
 void Server::finish()
 {
-	std::cout << " iq7: " << _iq7.size();
-	std::cout << " iq6: " << _iq6.size() << " iq5: " << _iq5.size();
-	std::cout << " iq4: " << _iq4.size() << " iq3: " << _iq3.size();
-	std::cout << " iq2: " << _iq2.size() << " iq1: " << _iq1.size();
-	std::cout << " iq0: " << _iq0.size() << std::endl;
-	std::cout << " simTime() " << simTime() << " timeDist " << simTime()-1 << std::endl;
-
 	// remove all undisposed messages in the end!
 	this->setPerformFinalGC(true);
-
-} // finish()
+}
 
 bool Server::isIdle()
 {
-    return packetServiced == NULL;
-} // isIdle()
-
-void Server::original(cMessage *msg) {
-	int k=-1;
-	if (msg==endServiceMsg) {
-		ASSERT(packetServiced!=NULL);
-		simtime_t d = simTime() - endServiceMsg->getSendingTime();
-		packetServiced->setTotalServiceTime(packetServiced->getTotalServiceTime() + d);
-		send(packetServiced, "out");
-		numSent++;
-		packetServiced = NULL;
-		emit(busySignal, 0);
-
-		if (ev.isGUI()) getDisplayString().setTagArg("i",1,"");
-
-		// examine all input queues, and request a new packet from a non empty queue
-		k = selectionStrategy->select();
-		if (k >= 0)
-		{
-			EV << "requesting packet from queue " << k << endl;
-			cGate *gate = selectionStrategy->selectableGate(k);
-			check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
-		}
-	} else {
-		if (packetServiced)
-			error("packet arrived while already servicing one");
-
-		packetServiced = check_and_cast<Packet *>(msg);
-		scheduleAt(simTime()+_serviceTime, endServiceMsg);
-		emit(busySignal, 1);
-
-		if (ev.isGUI()) getDisplayString().setTagArg("i",1,"cyan");
-	}
-} // original()
+    return jobServiced == NULL;
+}
 
 }; //namespace
 

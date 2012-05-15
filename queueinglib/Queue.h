@@ -27,7 +27,7 @@ class QUEUEING_API Queue : public cSimpleModule
 		simsignal_t queueingTimeSignal;
 		simsignal_t busySignal;
 
-        Packet *packetServiced;
+        Packet *jobServiced;
         cMessage *endServiceMsg;
         cQueue queue;
         int capacity;
@@ -46,9 +46,9 @@ class QUEUEING_API Queue : public cSimpleModule
         virtual void finish();
 
         // hook functions to (re)define behaviour
-        virtual void arrival(Packet *packet);
-        virtual simtime_t startService(Packet *packet);
-        virtual void endService(Packet *packet);
+        virtual void arrival(Packet *job);
+        virtual simtime_t startService(Packet *job);
+        virtual void endService(Packet *job);
 };
 
 }; //namespace
