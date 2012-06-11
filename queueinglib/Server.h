@@ -75,11 +75,24 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
 		const char* _schedulingAlgorithm;
 
+		void fcfs(cMessage* msg);
+		vector<int> _fcfsQueueServeList;
+
     public:
         Server();
         virtual ~Server();
         vector<Packet*> getDropped(){ return _dropped; };
         const char* getSchedulingAlgorithm() { return _schedulingAlgorithm; };
+
+        void add2QueueServeList(int nr){
+        	_fcfsQueueServeList.push_back(nr);
+        }
+
+        int getFromQueueServeList() {
+        	if( _fcfsQueueServeList.size()>0 )
+        		return _fcfsQueueServeList.at(0);
+        	else return -1;
+        }
 
     protected:
         virtual void initialize();

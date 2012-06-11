@@ -1,4 +1,6 @@
 # Partial Tkenv config file -- see $HOME/.tkenvrc as well
 inspector "CallCenter" "CallCenter" "2" "565x338+221+161:normal"
 inspector "WRS" "WRS" "2" "607x338+0+52:normal"
+inspector "WRS2" "WRS2" "2" "869x722+0+52:normal"
+inspector "WRS2.server" "Server" "1" "831x802+192+469:iconic"
 

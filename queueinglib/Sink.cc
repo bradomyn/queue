@@ -147,6 +147,7 @@ void Sink::finish() {
 
 	// create comma separated text file for easy evaluation
 	Useful::getInstance()->appendToFile("out.csv", (check_and_cast<Server *>(server))->getSchedulingAlgorithm());
+	Useful::getInstance()->appendToFile("out.csv", psource->getInputDataFileName());
 	sprintf(buf,"%E,%d,%d", avg_lifetime(vq7), psource->getSent().at(7), _qs.at(0)->getDropped().size());
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.csv", str);

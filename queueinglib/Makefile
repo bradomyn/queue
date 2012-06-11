@@ -134,10 +134,13 @@ $O/Packet_m.o: Packet_m.cc \
 	QueueingDefs.h
 $O/PassiveQueue.o: PassiveQueue.cc \
 	IPassiveQueue.h \
+	IServer.h \
 	Packet.h \
 	Packet_m.h \
 	PassiveQueue.h \
-	QueueingDefs.h
+	QueueingDefs.h \
+	Server.h \
+	Useful.h
 $O/Queue.o: Queue.cc \
 	Packet.h \
 	Packet_m.h \

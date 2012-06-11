@@ -1,15 +1,15 @@
-file 577817 1332148878                                          
+file 488871 1336629123                                          
 version 2
-run WRS1-0-20120319-10:21:14-11439
+run WRS1-0-20120510-07:52:02-7249
 attr configname WRS1
-attr datetime 20120319-10:21:14
+attr datetime 20120510-07:52:02
 attr experiment WRS1
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network WRS1
-attr processid 11439
+attr processid 7249
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -28,28 +28,68 @@ attr title  "queue length, vector"
 vector 3  WRS1.passiveQueue3  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 5  WRS1.passiveQueue4  queueLength:vector  ETV
+vector 13  WRS1.passiveQueue4  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 6  WRS1.passiveQueue5  queueLength:vector  ETV
+vector 14  WRS1.passiveQueue5  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 7  WRS1.passiveQueue6  queueLength:vector  ETV
+vector 15  WRS1.passiveQueue6  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 8  WRS1.passiveQueue7  queueLength:vector  ETV
+vector 16  WRS1.passiveQueue7  queueLength:vector  ETV
 attr interpolationmode  sample-hold
 attr title  "queue length, vector"
-vector 4  WRS1.sink  lifeTime:vector  ETV
+vector 11  WRS1.sink  lifeTime7:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived packets prio 7, vector"
+attr unit  s
+vector 12  WRS1.sink  lifeTime:vector  ETV
 attr interpolationmode  none
 attr title  "lifetime of arrived packets, vector"
 attr unit  s
-0	1487 47732 0 223597 0 0.998907 2589 0 1 1294 1294
-1	49219 46346 0 223687 0 0.99931 2519 0 1 1259 1259
-2	95565 45769 0 223754 0 0.999609 2485 0 1 1242 1242
-3	141334 46604 0 223216 0 0.997204 2531 0 1 1265 1265
-4	187938 253018 25 223825 0.000117 0.999913 9999 1.3e-05 2.6e-05 0.19138399999998 3.8386819999999e-06
-5	440956 47081 0 223553 0 0.998712 2561 0 1 1280 1280
-6	488037 44959 0 223731 0 0.999505 2447 0 1 1223 1223
-7	532996 44813 0 223798 0 0.999804 2435 0 1 1217 1217
-8	577809 8 0 0 0 0 1 0 0 0 0
+vector 10  WRS1.sink  lifeTime6:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived packets prio 6, vector"
+attr unit  s
+vector 9  WRS1.sink  lifeTime5:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived packets prio 5, vector"
+attr unit  s
+vector 8  WRS1.sink  lifeTime4:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived packets prio 4, vector"
+attr unit  s
+vector 7  WRS1.sink  lifeTime3:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived packets prio 3, vector"
+attr unit  s
+vector 6  WRS1.sink  lifeTime2:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived packets prio 2, vector"
+attr unit  s
+vector 5  WRS1.sink  lifeTime1:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived packets prio 1, vector"
+attr unit  s
+vector 4  WRS1.sink  lifeTime0:vector  ETV
+attr interpolationmode  none
+attr title  "lifetime of arrived packets prio 0, vector"
+attr unit  s
+0	2628 8 0 0 0 0 1 0 0 0 0
+1	2636 8 0 0 0 0 1 0 0 0 0
+2	2644 8 0 0 0 0 1 0 0 0 0
+3	2652 8 0 0 0 0 1 0 0 0 0
+4	2660 6454 203 202896 0.000913 0.906413 244 0.000113 0.000613 0.032272 5.507836e-06
+5	9114 8544 202 203321 0.000913 0.908313 323 0.000113 0.000513 0.042899 7.170787e-06
+6	17658 8544 201 203320 0.000913 0.908313 323 0.000213 0.000613 0.075199 1.8980587e-05
+7	26202 12618 200 203566 0.000913 0.909413 477 0.000113 0.000613 0.067001 1.2381413e-05
+8	38820 24049 199 203455 0.000913 0.908913 909 0.000113 0.000513 0.121617 1.9008421e-05
+9	62869 24049 198 203454 0.000913 0.908913 909 0.000213 0.000613 0.212517 5.2421821e-05
+10	86918 24958 197 203453 0.000913 0.908913 909 0.000313 0.000713 0.303417 0.000104015221
+11	111876 132279 23 203565 0.000113 0.909413 5000 1.3e-05 1.3e-05 0.064999999999997 8.4500000000003e-07
+12	244155 244680 23 203566 0.000113 0.909413 9094 1.3e-05 0.000713 0.91992200000011 0.00022033108600001
+13	488835 9 0 0 0 0 1 0 0 0 0
+14	488844 9 0 0 0 0 1 0 0 0 0
+15	488853 9 0 0 0 0 1 0 0 0 0
+16	488862 9 0 0 0 0 1 0 0 0 0

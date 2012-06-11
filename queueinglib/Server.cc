@@ -77,6 +77,9 @@ void Server::initialize()
 	} else if (strcmp(_schedulingAlgorithm, "wfq4") == 0) {
 		_scheduling = 7;
 		cout << "server wfq4" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "fcfs") == 0) {
+		_scheduling = 8;
+		cout << "server fcfs" << endl;
 	}
 
 
@@ -110,6 +113,9 @@ void Server::handleMessage(cMessage *msg)
 	case 7:
 		wfq4(msg);
 		break;
+	case 8:
+		fcfs(msg);
+		break;
 	default:
 		break;
 	}
@@ -122,16 +128,19 @@ void Server::priority(cMessage* msg) {
 		//cout << "trigger " << _q7->length() << endl;
 
 		//priority
-		if( _q7->length()>0 ) {
+		//if( _q7->length()>0 ) {
+		while( _q7->length()>0 ) {
 			_q7->request(0);
 		}
 		vector<IPassiveQueue* >::iterator it;
 		for( it=_qs.begin();it!=_qs.end(); it++ ) {
 			if( _q7->length()>0 ) {	// check queue7 again
-				if( _q7->length()>0 )
+				//if( _q7->length()>0 )
+				while( _q7->length()>0 )
 					_q7->request(0);
 			}
-			if( (*it)->length()>0 ) {
+			//if( (*it)->length()>0 ) {
+			while( (*it)->length()>0 ) {
 				(*it)->request(0);
 			}
 		}
@@ -149,7 +158,8 @@ void Server::sevenfirst(cMessage* msg) {
 		//priority
 		vector<IPassiveQueue* >::iterator it;
 		for( it=_qs.begin();it!=_qs.end(); it++ ) {
-			if( (*it)->length()>0 ) {
+			//if( (*it)->length()>0 ) {
+			while( (*it)->length()>0 ) {
 				(*it)->request(0);
 			}
 		}
@@ -158,6 +168,29 @@ void Server::sevenfirst(cMessage* msg) {
 		send(packet, "out");
 	}
 } // sevenfirst()
+
+void Server::fcfs(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		// check order list
+		while(_fcfsQueueServeList.size()>0 ) {
+			int nr = getFromQueueServeList();
+			std::string queue;
+			char buffer[3];
+			queue = "queue";
+			sprintf(buffer, "%d", nr);
+			buffer[2] = '\0';
+			queue += buffer;
+			cModule *thisqueue = (cModule*)getParentModule()->findObject(queue.c_str(), true);
+			(check_and_cast<PassiveQueue *>(thisqueue))->request(0);
+			_fcfsQueueServeList.erase(_fcfsQueueServeList.begin());
+		}
+
+	} else {
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
+	}
+} // fcfs()
 
 void Server::feedback(cMessage* msg) {
 	if ( strcmp(msg->getName(), "trigger") == 0 ) {
@@ -182,7 +215,7 @@ void Server::feedback(cMessage* msg) {
 		mit=_mapFeedback.end();
 		mit--;
 		for( ; mit!=_mapFeedback.begin(); mit-- ) {
-			if( (*mit).second->length() > 0 ) {
+			while( (*mit).second->length() > 0 ) {
 				(*mit).second->request(0);
 			}
 		}
@@ -345,7 +378,8 @@ void Server::wfq4(cMessage* msg) {
 
 		if( _q7->length()>0 ) {
 			for( i=0; i<N; i++ ) {
-				if( _q7->length()>0 ) {
+				//if( _q7->length()>0 ) {
+				while( _q7->length()>0 ) {
 					_q7->request(0);
 				}
 			}
@@ -361,6 +395,7 @@ void Server::wfq4(cMessage* msg) {
 		mit--;
 		// biggest queue first
 		for( ; mit!=_mapFeedback.begin(); mit-- ) {
+			//if( (*mit).second->length() > 0 ) {
 			while( (*mit).second->length() > 0 ) {
 				(*mit).second->request(0);
 			}
@@ -399,7 +434,7 @@ void Server::mixed1(cMessage* msg) {
 		mit=_mapFeedback.end();
 		mit--;
 		for( ; mit!=_mapFeedback.begin(); mit-- ) {
-			if( (*mit).second->length() > 0 ) {
+			while( (*mit).second->length() > 0 ) {
 				(*mit).second->request(0);
 			}
 		}

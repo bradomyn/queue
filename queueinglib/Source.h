@@ -53,6 +53,7 @@ class QUEUEING_API Source : public SourceBase
 
         Sink *_sink;
         std::vector<int> _sent;
+        string _inputDataFile;
 
     protected:
         virtual void initialize();
@@ -65,6 +66,7 @@ class QUEUEING_API Source : public SourceBase
     public:
     	int getCreated() { return numCreated; };
     	std::vector<int> getSent() { return _sent; };
+    	string getInputDataFileName() { return _inputDataFile; };
 };
 
 

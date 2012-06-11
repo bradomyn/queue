@@ -43,6 +43,9 @@ void PassiveQueue::initialize()
 	} else if ( (strcmp(algName, "7first") == 0) || (strcmp(algName, "mixed1") == 0) ) {
 		_scheduling = 1;
 		std::cout << "server 7first" << endl;
+	} else if ( strcmp(algName, "fcfs") == 0 ) {
+		_scheduling = 2;	// ???
+		std::cout << "server fcfs" << endl;
 	}
 
     std::cout << this->getName() << endl;
@@ -58,28 +61,35 @@ void PassiveQueue::handleMessage(cMessage *msg)
 	//std::cout << " " << __FILE__ << ": "<< __FUNCTION__ << " " << msg->getName() << std::endl;
 	Packet *job = check_and_cast<Packet *>(msg);
 	job->setTimestamp();
+	cModule *server = NULL;
 
 	switch( _scheduling ) {
 	case 0:	// diverse
-	    enequeue(msg);
+	    enqueue(msg);
 		break;
 	case 1:	// 7first | mixed1
 		if( job->getPriority()==7 ) {
 			send(job, "out", 0);
 		} else {
-			enequeue(msg);
+			enqueue(msg);
 		}
+		break;
+	case 2:	// fcfs
+		enqueue(msg);
+
+		// write priority to vector in server
+		server = (cModule*)getParentModule()->findObject("server", true);
+		(check_and_cast<Server *>(server))->add2QueueServeList(job->getPriority());
 		break;
 	default: break;
 	}
-
 
     // change the icon color
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
 }
 
-void PassiveQueue::enequeue(cMessage* msg) {
+void PassiveQueue::enqueue(cMessage* msg) {
 	Packet *job = check_and_cast<Packet *>(msg);
 	job->setTimestamp();
 

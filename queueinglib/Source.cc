@@ -53,13 +53,13 @@ void Source::initialize() {
 	// schedule the first message timer for start time
 	scheduleAt(startTime, new cMessage("newPacketTimer"));
 
-	string inputDataFile = par("inputDataFile").stringValue();
-	_data = Useful::getInstance()->readDataList(inputDataFile);
-	Useful::getInstance()->appendToFile("out.txt", inputDataFile.c_str());
+	_inputDataFile = par("inputDataFile").stringValue();
+	_data = Useful::getInstance()->readDataList(_inputDataFile);
+	//Useful::getInstance()->appendToFile("out.txt", _inputDataFile.c_str());
 	//Useful::getInstance()->appendToFile("source_out.txt", int(_data.size()));
 	while (_data.size() < numPackets) {
 		std::vector<PacketDescription> v = Useful::getInstance()->readDataList(
-				inputDataFile);
+				_inputDataFile);
 		_data.insert(_data.end(), v.begin(), v.end());
 	}
 	//Useful::getInstance()->appendToFile("source_out.txt", int(_data.size()));

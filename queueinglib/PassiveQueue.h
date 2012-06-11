@@ -13,6 +13,7 @@
 #include "QueueingDefs.h"
 #include "IPassiveQueue.h"
 #include "Packet.h"
+#include "Server.h"
 
 #include <vector>
 
@@ -39,7 +40,7 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
 
         int _scheduling;
 
-        void enequeue(cMessage* msg);
+        void enqueue(cMessage* msg);
 
         vector<Packet* > _dropped;
 
