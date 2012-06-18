@@ -24,11 +24,14 @@ void Sink::initialize() {
 	generationSignal = registerSignal("generation");
 	keepJobs = par("keepJobs");
 
+	_nofCoS = par("nofCoS");
+
 	numReceived = 0;
 	WATCH(numReceived);
 
     // pointers to other queues
-    for( int i=7; i>-1; i-- )
+    //for( int i=_nofCoS; i>-1; i-- )
+	for( int i=0; i<_nofCoS;i++ )
     	_qs.push_back( getQueue(i) );
 }
 
@@ -113,21 +116,30 @@ void Sink::handleMessage(cMessage *msg) {
 }
 
 void Sink::finish() {
-	// TODO missing scalar statistics
 
 	cModule *module = getParentModule()->getSubmodule("source");
 	Source *psource = dynamic_cast<Source *>(module);
 
-	// overview
-	std::cout << "p 0: avg " << avg_lifetime(v0) << " size " << v0.size() << " Q time: " << avg_lifetime(vq0) << " sent: " << psource->getSent().at(0) << " dropped " << _qs.at(7)->getDropped().size() << std::endl;
-	std::cout << "p 1: avg " << avg_lifetime(v1) << " size " << v1.size() << " Q time: " << avg_lifetime(vq1) << " sent: " << psource->getSent().at(1) << " dropped " << _qs.at(6)->getDropped().size() << std::endl;
-	std::cout << "p 2: avg " << avg_lifetime(v2) << " size " << v2.size() << " Q time: " << avg_lifetime(vq2) << " sent: " << psource->getSent().at(2) << " dropped " << _qs.at(5)->getDropped().size() << std::endl;
-	std::cout << "p 3: avg " << avg_lifetime(v3) << " size " << v3.size() << " Q time: " << avg_lifetime(vq3) << " sent: " << psource->getSent().at(3) << " dropped " << _qs.at(4)->getDropped().size() << std::endl;
-	std::cout << "p 4: avg " << avg_lifetime(v4) << " size " << v4.size() << " Q time: " << avg_lifetime(vq4) << " sent: " << psource->getSent().at(4) << " dropped " << _qs.at(3)->getDropped().size() << std::endl;
-	std::cout << "p 5: avg " << avg_lifetime(v5) << " size " << v5.size() << " Q time: " << avg_lifetime(vq5) << " sent: " << psource->getSent().at(5) << " dropped " << _qs.at(2)->getDropped().size() << std::endl;
-	std::cout << "p 6: avg " << avg_lifetime(v6) << " size " << v6.size() << " Q time: " << avg_lifetime(vq6) << " sent: " << psource->getSent().at(6) << " dropped " << _qs.at(1)->getDropped().size() << std::endl;
-	std::cout << "p 7: avg " << avg_lifetime(v7) << " size " << v7.size() << " Q time: " << avg_lifetime(vq7) << " sent: " << psource->getSent().at(7) << " dropped " << _qs.at(0)->getDropped().size() << std::endl;
+	int qs_size = _qs.size();
 
+	// overview
+	cout << "CoS " << _qs.size() << endl;
+
+	std::cout << "p 0: avg " << avg_lifetime(v0) << " size " << v0.size() << " Q time: " << avg_lifetime(vq0) << " sent: " << psource->getSent().at(0) << " dropped " << _qs.at(0)->getDropped().size() << std::endl;
+	std::cout << "p 1: avg " << avg_lifetime(v1) << " size " << v1.size() << " Q time: " << avg_lifetime(vq1) << " sent: " << psource->getSent().at(1) << " dropped " << _qs.at(1)->getDropped().size() << std::endl;
+	std::cout << "p 2: avg " << avg_lifetime(v2) << " size " << v2.size() << " Q time: " << avg_lifetime(vq2) << " sent: " << psource->getSent().at(2) << " dropped " << _qs.at(2)->getDropped().size() << std::endl;
+	std::cout << "p 3: avg " << avg_lifetime(v3) << " size " << v3.size() << " Q time: " << avg_lifetime(vq3) << " sent: " << psource->getSent().at(3) << " dropped " << _qs.at(3)->getDropped().size() << std::endl;
+	std::cout << "p 4: avg " << avg_lifetime(v4) << " size " << v4.size() << " Q time: " << avg_lifetime(vq4) << " sent: " << psource->getSent().at(4) << " dropped " << _qs.at(4)->getDropped().size() << std::endl;
+
+	if( _qs.size()>=6 ) {
+		std::cout << "p 5: avg " << avg_lifetime(v5) << " size " << v5.size() << " Q time: " << avg_lifetime(vq5) << " sent: " << psource->getSent().at(5) << " dropped " << _qs.at(5)->getDropped().size() << std::endl;
+	}
+	if( _qs.size()>=7 ) {
+		std::cout << "p 6: avg " << avg_lifetime(v6) << " size " << v6.size() << " Q time: " << avg_lifetime(vq6) << " sent: " << psource->getSent().at(6) << " dropped " << _qs.at(6)->getDropped().size() << std::endl;
+	}
+	if( _qs.size()==8 ) {
+		std::cout << "p 7: avg " << avg_lifetime(v7) << " size " << v7.size() << " Q time: " << avg_lifetime(vq7) << " sent: " << psource->getSent().at(7) << " dropped " << _qs.at(7)->getDropped().size() << std::endl;
+	}
 	determineQueueSizes();
 
 	// find out number of objects still stuck in server
@@ -145,103 +157,77 @@ void Sink::finish() {
 	string str;
 	char buf[50];
 
+	int index = qs_size;
+	//cout << "huhu1 " << _nofCoS << " " << _qs.size() << " " << psource->getSent().size() << endl;
 	// create comma separated text file for easy evaluation
 	Useful::getInstance()->appendToFile("out.csv", (check_and_cast<Server *>(server))->getSchedulingAlgorithm());
 	Useful::getInstance()->appendToFile("out.csv", psource->getInputDataFileName());
-	sprintf(buf,"%E,%d,%d", avg_lifetime(vq7), psource->getSent().at(7), _qs.at(0)->getDropped().size());
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.csv", str);
-	sprintf(buf,"%E,%d,%d", avg_lifetime(vq6), psource->getSent().at(6), _qs.at(1)->getDropped().size());
+	if( _nofCoS==8 ) {
+		sprintf(buf,"%E,%d,%d", avg_lifetime(vq7), psource->getSent().at(7), _qs.at(7-1)->getDropped().size());
 		str = string(buf);
-	Useful::getInstance()->appendToFile("out.csv", str);
-	sprintf(buf, "%E,%d,%d", avg_lifetime(vq5), psource->getSent().at(5), _qs.at(2)->getDropped().size());
+		Useful::getInstance()->appendToFile("out.csv", str);
+	}
+	if( _nofCoS>=7 ) {
+		//cout << "huhu2 " << endl;
+		sprintf(buf,"%E,%d,%d", avg_lifetime(vq6), psource->getSent().at(6), _qs.at(6-1)->getDropped().size());
+		str = string(buf);
+		Useful::getInstance()->appendToFile("out.csv", str);
+	}
+	if( _nofCoS>=6 ) {
+		sprintf(buf, "%E,%d,%d", avg_lifetime(vq5), psource->getSent().at(5), _qs.at(5-1)->getDropped().size());
+		str = string(buf);
+		Useful::getInstance()->appendToFile("out.csv", str);
+	}
+	//cout << "huhu3 " << endl;
+	sprintf(buf, "%E,%d,%d", avg_lifetime(vq4), psource->getSent().at(4), _qs.at(4-1)->getDropped().size());
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.csv", str);
-	sprintf(buf, "%E,%d,%d", avg_lifetime(vq4), psource->getSent().at(4), _qs.at(3)->getDropped().size());
+	sprintf(buf, "%E,%d,%d", avg_lifetime(vq3), psource->getSent().at(3), _qs.at(3-1)->getDropped().size());
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.csv", str);
-	sprintf(buf, "%E,%d,%d", avg_lifetime(vq3), psource->getSent().at(3), _qs.at(4)->getDropped().size());
+	sprintf(buf, "%E,%d,%d", avg_lifetime(vq2), psource->getSent().at(2), _qs.at(2-1)->getDropped().size());
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.csv", str);
-	sprintf(buf, "%E,%d,%d", avg_lifetime(vq2), psource->getSent().at(2), _qs.at(5)->getDropped().size());
+	sprintf(buf, "%E,%d,%d", avg_lifetime(vq1), psource->getSent().at(1), _qs.at(1-1)->getDropped().size());
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.csv", str);
-	sprintf(buf, "%E,%d,%d", avg_lifetime(vq1), psource->getSent().at(1), _qs.at(6)->getDropped().size());
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.csv", str);
-	sprintf(buf, "%E,%d,%d", avg_lifetime(vq0), psource->getSent().at(0), _qs.at(7)->getDropped().size());
+	sprintf(buf, "%E,%d,%d", avg_lifetime(vq0), psource->getSent().at(0), _qs.at(0)->getDropped().size());
 	str = string(buf);
 	Useful::getInstance()->appendToFile("out.csv", str);
 
-/*
-	// evaluate operation counter from packet
-	double avg = avg_lifetime(v00q);
-	cout << avg << endl;
-	sprintf(buf, "op 0: %lf", avg);
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.txt", str);
-	avg = avg_lifetime(v01q);
-	cout <<  avg << endl;
-	sprintf(buf, "op 1: %lf", avg);
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.txt", str);
-	avg = avg_lifetime(v02q);
-	cout <<  avg << endl;
-	sprintf(buf, "op 2: %lf", avg);
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.txt", str);
-	avg = avg_lifetime(v03q);
-	cout <<  avg << endl;
-	sprintf(buf, "op 3: %lf", avg);
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.txt", str);
-	avg = avg_lifetime(v04q);
-	cout << avg << endl;
-	sprintf(buf, "op 4: %lf", avg);
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.txt", str);
-	avg = avg_lifetime(v05q);
-	cout << avg << endl;
-	sprintf(buf, "op 5: %lf", avg);
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.txt", str);
-	avg = avg_lifetime(v06q);
-	cout << avg << endl;
-	sprintf(buf, "op 6: %lf", avg);
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.txt", str);
-	avg = avg_lifetime(v07q);
-	cout << avg << endl;
-	sprintf(buf, "op 7: %lf", avg);
-	str = string(buf);
-	Useful::getInstance()->appendToFile("out.txt", str);
-	// 4e-08 = 4*10^-8 	 	= 0,00000004
-	// 4.8e-08 = 4.8*10^-8 	= 0,000000048
-*/
-	// remove all undisposed messages in the end!
+
+	// remove all indisposed messages in the end!
 	this->setPerformFinalGC(true);
 }
 
 double Sink::avg_lifetime(vector<double> v) {
-	double avg_lt = 0.;
-	std::vector<double>::iterator lit;
-	for (lit = v.begin(); lit != v.end(); lit++) {
-		avg_lt += (*lit);
+	if( v.size()>0 ) {
+		double avg_lt = 0.;
+		std::vector<double>::iterator lit;
+		for (lit = v.begin(); lit != v.end(); lit++) {
+			avg_lt += (*lit);
+		}
+		avg_lt /= v.size();
+		//std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
+		return (double) avg_lt;
+	} else {
+		return 0.0;
 	}
-	avg_lt /= v.size();
-	//std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
-	return (double) avg_lt;
 } // avg_lifetime()
 
 double Sink::avg_lifetime(vector<simtime_t> v) {
-	double avg_lt = 0.;
-	std::vector<simtime_t>::iterator lit;
-	for (lit = v.begin(); lit != v.end(); lit++) {
-		avg_lt += (*lit).dbl();
+	if( v.size()>0 ) {
+		double avg_lt = 0.;
+		std::vector<simtime_t>::iterator lit;
+		for (lit = v.begin(); lit != v.end(); lit++) {
+			avg_lt += (*lit).dbl();
+		}
+		avg_lt /= v.size();
+		//std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
+		return (double) avg_lt;
+	} else {
+		return 0.0;
 	}
-	avg_lt /= v.size();
-	//std:: cout << "    lifetime " << avg_lt << "s = " << avg_lt / 1000.0 << "ms" << std::endl;
-	return (double) avg_lt;
 } // avg_lifetime()
 
 void Sink::determineQueueSizes() {
@@ -249,7 +235,7 @@ void Sink::determineQueueSizes() {
 	std::string queue;
 	char buffer[3];
 
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < (_nofCoS+1); i++) {
 		queue = "passiveQueue";
 		sprintf(buffer, "%d", i);
 		buffer[2] = '\0';

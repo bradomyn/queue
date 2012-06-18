@@ -55,6 +55,8 @@ class QUEUEING_API Source : public SourceBase
         std::vector<int> _sent;
         string _inputDataFile;
 
+        int _nofCoS;
+
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);

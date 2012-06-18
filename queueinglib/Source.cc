@@ -47,6 +47,8 @@ void Source::initialize() {
 	stopTime = par("stopTime");
 	numPackets = par("numPackets");
 
+	_nofCoS = par ("nofCoS");
+
 	// schedule the first message timer for start time
 	//scheduleAt(startTime, new cMessage("newJobTimer"));
 
@@ -73,7 +75,7 @@ void Source::initialize() {
 	cModule *module = getParentModule()->getSubmodule("sink");
 	_sink =  dynamic_cast<Sink*>(module);
 
-	for( int i=0; i<8; i++ ) {
+	for( int i=0; i<_nofCoS; i++ ) {
 		_sent.push_back(0);
 	}
 
@@ -101,16 +103,23 @@ void Source::handleMessage(cMessage *msg) {
 			int i = 0;
 			vector<PacketDescription>::iterator it;
 
-			if (_data.size() > 8) {
-				for (it = _data.begin(), i = 0; it != _data.end(); it++, i++) {
-					if (i < 8) {
-						//cout << "huhu " << (*it).getPriority() << " " << (*it).getSize() << endl;
+			if (_data.size() > _nofCoS) {
+				//for (it = _data.begin(), i = 0; it != _data.end(); it++, i++)
+				it = _data.begin();
+				i=0;
+				while( it!=_data.end() ) {
+					if (i < _nofCoS) {
+						//cout << "huhu " << i << " " << (*it).getPriority() << " " << (*it).getSize() << endl;
 						Packet *p = generatePacket((*it).getPriority(), (*it).getSize());
 						send2Queue(p);
 						_data.erase(it);
+						it = _data.begin();
 					}
-					if (i == 8)
+					if (i == _nofCoS) {
+						i=0;
 						break;
+					}
+					i++;
 				}
 			}
 		}

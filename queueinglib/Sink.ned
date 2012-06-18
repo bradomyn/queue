@@ -32,6 +32,8 @@ simple Sink
         @statistic[delaysVisited](title="the total number of delays visited by arrived jobs";record=vector?,mean,max;interpolationmode=none);
         @statistic[generation](title="the generation of the arrived jobs";record=vector?,mean,max;interpolationmode=none);
         bool keepJobs = default(false); // whether to keep the received jobs till the end of simulation
+        
+        int nofCoS = default(8);	// default: 7..0
     gates:
         input in[];
 }

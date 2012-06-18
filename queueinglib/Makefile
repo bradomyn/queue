@@ -29,7 +29,6 @@ OBJS = \
     $O/PassiveQueue.o \
     $O/PacketList.o \
     $O/Packet.o \
-    $O/Queue.o \
     $O/Server.o \
     $O/Sink.o \
     $O/Packet_m.o
@@ -141,11 +140,6 @@ $O/PassiveQueue.o: PassiveQueue.cc \
 	QueueingDefs.h \
 	Server.h \
 	Useful.h
-$O/Queue.o: Queue.cc \
-	Packet.h \
-	Packet_m.h \
-	Queue.h \
-	QueueingDefs.h
 $O/Server.o: Server.cc \
 	IPassiveQueue.h \
 	IServer.h \

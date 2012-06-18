@@ -102,6 +102,7 @@ std::vector<PacketDescription> Useful::readDataList(std::string filename) {
 	FILE* filehandle = fopen( filename.c_str(),"r" );
 	if( filehandle ) {
 		while( fscanf(filehandle,"%d %d\n", &priority, &size)>0 ) {
+			//cout << "read " << priority << " " << size << endl;
 			v.push_back(PacketDescription(priority, size));
 		}
 		fclose(filehandle );

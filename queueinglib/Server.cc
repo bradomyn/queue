@@ -39,8 +39,10 @@ void Server::initialize()
     // keep a pointer to queue 7
     _q7 = getQueue(7);
 
+    _nofCoS = par("nofCoS");
+
     // pointers to other queues
-    for( int i=6; i>-1; i-- )
+    for( int i=_nofCoS-1; i>-1; i-- )
     	_qs.push_back( getQueue(i) );
 
     WATCH(numSent);
@@ -80,6 +82,9 @@ void Server::initialize()
 	} else if (strcmp(_schedulingAlgorithm, "fcfs") == 0) {
 		_scheduling = 8;
 		cout << "server fcfs" << endl;
+	} else if (strcmp(_schedulingAlgorithm, "original") == 0) {
+		_scheduling = 9;
+		cout << "server original" << endl;
 	}
 
 
@@ -116,28 +121,56 @@ void Server::handleMessage(cMessage *msg)
 	case 8:
 		fcfs(msg);
 		break;
+	case 9:
+		original(msg);
+		break;
 	default:
 		break;
 	}
 
-}
+} //handleMessage()
+
+void Server::original(cMessage* msg) {
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+
+		// priority
+		if( _q7 != NULL ) {
+			if( _q7->length()>0 ) {
+				_q7->request(0);
+			}
+		}
+		vector<IPassiveQueue* >::iterator it;
+		for( it=_qs.begin();it!=_qs.end(); it++ ) {
+			if( (*it)->length()>0 ) {
+				(*it)->request(0);
+			}
+		}
+	} else {
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
+	}
+} // original()
 
 void Server::priority(cMessage* msg) {
 	if ( strcmp(msg->getName(), "trigger") == 0 ) {
 		// request packet from queue and send to sink
-		//cout << "trigger " << _q7->length() << endl;
 
 		//priority
-		//if( _q7->length()>0 ) {
-		while( _q7->length()>0 ) {
-			_q7->request(0);
+		if( _q7 != NULL ) {
+			//if( _q7->length()>0 ) {
+			while( _q7->length()>0 ) {
+				_q7->request(0);
+			}
 		}
 		vector<IPassiveQueue* >::iterator it;
 		for( it=_qs.begin();it!=_qs.end(); it++ ) {
-			if( _q7->length()>0 ) {	// check queue7 again
-				//if( _q7->length()>0 )
-				while( _q7->length()>0 )
-					_q7->request(0);
+			if( _q7 != NULL ) {
+				if( _q7->length()>0 ) {	// check queue7 again
+					//if( _q7->length()>0 )
+					while( _q7->length()>0 )
+						_q7->request(0);
+				}
 			}
 			//if( (*it)->length()>0 ) {
 			while( (*it)->length()>0 ) {
@@ -153,7 +186,6 @@ void Server::priority(cMessage* msg) {
 void Server::sevenfirst(cMessage* msg) {
 	if ( strcmp(msg->getName(), "trigger") == 0 ) {
 		// request packet from queue and send to sink
-		//cout << "trigger " << _q7->length() << endl;
 
 		//priority
 		vector<IPassiveQueue* >::iterator it;
@@ -198,10 +230,11 @@ void Server::feedback(cMessage* msg) {
 		//cout << "trigger " << _q7->length() << endl;
 
 		//priority
-		while( _q7->length()>0 ) {
-			_q7->request(0);
+		if( _q7 != NULL ) {
+			while( _q7->length()>0 ) {
+				_q7->request(0);
+			}
 		}
-
 		_mapFeedback.clear();
 		// request oldest packet first (supposedly in longest queue)
 		vector<IPassiveQueue* >::iterator it;
@@ -231,18 +264,21 @@ void Server::wfq1(cMessage* msg) {
 		//cout << "trigger " << _q7->length() << endl;
 		int N=_weight7;
 		int i=0;
-		if( _q7->length()>0 ) {
-			for( i=0; i<N; i++ ) {
-				if( _q7->length()>0 ) {
-					_q7->request(0);
+		if( _q7 != NULL ) {
+			if( _q7->length()>0 ) {
+				for( i=0; i<N; i++ ) {
+					if( _q7->length()>0 ) {
+						_q7->request(0);
+					}
 				}
 			}
-		}
-		if( i==N || _q7->length()==0 ) {
-			vector<IPassiveQueue* >::iterator it;
-			for( it=_qs.begin();it!=_qs.end(); it++ ) {
-				if( (*it)->length()>0 ) {
-					(*it)->request(0);
+
+			if( i==N || _q7->length()==0 ) {
+				vector<IPassiveQueue* >::iterator it;
+				for( it=_qs.begin();it!=_qs.end(); it++ ) {
+					if( (*it)->length()>0 ) {
+						(*it)->request(0);
+					}
 				}
 			}
 		}
@@ -262,10 +298,12 @@ void Server::wfq2(cMessage* msg) {
 		int i=0;
 		vector<IPassiveQueue* >::iterator it;
 
-		if( _q7->length()>0 ) {
-			for( i=0; i<_rrN; i++ ) {
-				if( _q7->length()>0 ) {
-					_q7->request(0);
+		if( _q7 != NULL ) {
+			if( _q7->length()>0 ) {
+				for( i=0; i<_rrN; i++ ) {
+					if( _q7->length()>0 ) {
+						_q7->request(0);
+					}
 				}
 			}
 		}
@@ -342,16 +380,17 @@ void Server::wfq3(cMessage* msg) {
 		int N=_weight7;
 		int i=0;
 
-		if( _q7->length()>0 ) {
-			for( i=0; i<N; i++ ) {
-				if( _q7->length()>0 ) {
-					_q7->request(0);
+		if( _q7 != NULL ) {
+			if( _q7->length()>0 ) {
+				for( i=0; i<N; i++ ) {
+					if( _q7->length()>0 ) {
+						_q7->request(0);
+					}
 				}
 			}
 		}
-
 		_mapFeedback.clear();
-		for( int i=0; i<7; i++ ) {
+		for( int i=0; i<_nofCoS; i++ ) {
 			_mapFeedback.insert(pair<int, IPassiveQueue*>( _qs.at(i)->length(), _qs.at(i) ));
 		}
 		map<int, IPassiveQueue*>::iterator mit;
@@ -376,18 +415,19 @@ void Server::wfq4(cMessage* msg) {
 		int N=_weight7;
 		int i=0;
 
-		if( _q7->length()>0 ) {
-			for( i=0; i<N; i++ ) {
-				//if( _q7->length()>0 ) {
-				while( _q7->length()>0 ) {
-					_q7->request(0);
+		if( _q7 != NULL ) {
+			if( _q7->length()>0 ) {
+				for( i=0; i<N; i++ ) {
+					//if( _q7->length()>0 ) {
+					while( _q7->length()>0 ) {
+						_q7->request(0);
+					}
 				}
 			}
 		}
-
 		// consider packet sizes instead of queue lengths
 		_mapFeedback.clear();
-		for( int i=0; i<7; i++ ) {
+		for( int i=0; i<_nofCoS; i++ ) {
 			_mapFeedback.insert(pair<int, IPassiveQueue*>( _qs.at(i)->size(), _qs.at(i) ));
 		}
 		map<int, IPassiveQueue*>::iterator mit;
@@ -453,7 +493,6 @@ IPassiveQueue *Server::getQueue(int index) {
 	queue += buffer;
 	cModule *module = getParentModule()->getSubmodule(queue.c_str());
 	IPassiveQueue *pqueue = dynamic_cast<IPassiveQueue *>(module);
-
 	return pqueue;
 } // getQueue()
 

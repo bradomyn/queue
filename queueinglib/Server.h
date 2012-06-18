@@ -54,6 +54,10 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
 		int _scheduling;	// see Server.ned for possible values in enum
 
+		int _nofCoS;	// default: 7..0
+
+		void original(cMessage* msg);
+
 		void priority(cMessage* msg);
 		void sevenfirst(cMessage* msg);
 		void feedback(cMessage* msg);

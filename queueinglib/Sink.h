@@ -39,6 +39,8 @@ class QUEUEING_API Sink : public cSimpleModule
 	simsignal_t generationSignal;
     bool keepJobs;
 
+    int _nofCoS;
+
     int numReceived;
 
     void determineQueueSizes();
