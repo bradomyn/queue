@@ -225,6 +225,54 @@ void Server::fcfs(cMessage* msg) {
 } // fcfs()
 
 void Server::feedback(cMessage* msg) {
+#if 0
+	// parse queues for oldest packets
+	if ( strcmp(msg->getName(), "trigger") == 0 ) {
+		// request packet from queue and send to sink
+		//cout << "trigger " << _q7->length() << endl;
+
+		//priority
+		if( _q7 != NULL ) {
+			while( _q7->length()>0 ) {
+				_q7->request(0);
+			}
+		}
+
+		vector<IPassiveQueue* > order;
+
+		// request oldest packet first
+		vector<IPassiveQueue* >::iterator it;
+		for( it=_qs.begin(); it!=_qs.end(); it++) {
+			if( (*it)->length()>0 ) {
+				for( int i=0; i<(*it)->length(); i++ ) {
+					Packet* p = (*it)->front();
+					if( p!=NULL ) {
+						cout << "queue l " << (*it)->length() << " " << p->getName() << " map size " << _map.size() << endl;
+						_map.insert(pair<simtime_t,IPassiveQueue*>(p->getCreationTime(),*it));
+						order.push_back(*it);
+					}
+				}
+			}
+		}
+
+		if( _map.size()>0 ) {
+			std::map<simtime_t, IPassiveQueue*>::iterator mit;
+			mit=_map.end();
+			if( mit==_map.end() ) {
+				mit--;
+				for( ; mit!=_map.begin(); mit-- ) {
+					while( (*mit).second->length() > 0 ) {
+						(*mit).second->request(0);
+					}
+				}
+			}
+		}
+	} else {
+		Packet *packet = check_and_cast<Packet *>(msg);
+		send(packet, "out");
+	}
+
+#else
 	if ( strcmp(msg->getName(), "trigger") == 0 ) {
 		// request packet from queue and send to sink
 		//cout << "trigger " << _q7->length() << endl;
@@ -246,16 +294,19 @@ void Server::feedback(cMessage* msg) {
 
 		map<int, IPassiveQueue*>::iterator mit;
 		mit=_mapFeedback.end();
-		mit--;
-		for( ; mit!=_mapFeedback.begin(); mit-- ) {
-			while( (*mit).second->length() > 0 ) {
-				(*mit).second->request(0);
+		if( mit == _mapFeedback.end() ) {
+			mit--;
+			for( ; mit!=_mapFeedback.begin(); mit-- ) {
+				while( (*mit).second->length() > 0 ) {
+					(*mit).second->request(0);
+				}
 			}
 		}
 	} else {
 		Packet *packet = check_and_cast<Packet *>(msg);
 		send(packet, "out");
 	}
+#endif
 } // feedback()
 
 void Server::wfq1(cMessage* msg) {
@@ -395,11 +446,13 @@ void Server::wfq3(cMessage* msg) {
 		}
 		map<int, IPassiveQueue*>::iterator mit;
 		mit=_mapFeedback.end();
-		mit--;
-		// longest queue first
-		for( ; mit!=_mapFeedback.begin(); mit-- ) {
-			while( (*mit).second->length() > 0 ) {
-				(*mit).second->request(0);
+		if( mit == _mapFeedback.end() ) {
+			mit--;
+			// longest queue first
+			for( ; mit!=_mapFeedback.begin(); mit-- ) {
+				while( (*mit).second->length() > 0 ) {
+					(*mit).second->request(0);
+				}
 			}
 		}
 	} else {
@@ -418,8 +471,8 @@ void Server::wfq4(cMessage* msg) {
 		if( _q7 != NULL ) {
 			if( _q7->length()>0 ) {
 				for( i=0; i<N; i++ ) {
-					//if( _q7->length()>0 ) {
-					while( _q7->length()>0 ) {
+					if( _q7->length()>0 ) {
+					//while( _q7->length()>0 ) {
 						_q7->request(0);
 					}
 				}
@@ -432,12 +485,22 @@ void Server::wfq4(cMessage* msg) {
 		}
 		map<int, IPassiveQueue*>::iterator mit;
 		mit=_mapFeedback.end();
-		mit--;
-		// biggest queue first
-		for( ; mit!=_mapFeedback.begin(); mit-- ) {
-			//if( (*mit).second->length() > 0 ) {
-			while( (*mit).second->length() > 0 ) {
-				(*mit).second->request(0);
+		if( mit == _mapFeedback.end() ) {
+			mit--;
+			int j=0;
+			// biggest queue first, apply weights appropriately
+			for( ; mit!=_mapFeedback.begin(); mit-- ) {
+				if( (*mit).second->length() > 0 ) {
+				//while( (*mit).second->length() > 0 ) {
+					for( int i=0; i<N-j; i++ ) {
+						if( (*mit).second->length() > 0 ) {
+							(*mit).second->request(0);
+						} else {
+							break;
+						}
+					}
+				}
+				j+=1;
 			}
 		}
 	} else {

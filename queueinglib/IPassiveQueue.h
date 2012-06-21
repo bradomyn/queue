@@ -11,6 +11,7 @@
 #define __QUEUEING_IPASSIVEQUEUE_H
 
 #include "QueueingDefs.h"
+#include "Packet.h"
 
 namespace queueing {
 
@@ -30,6 +31,8 @@ class QUEUEING_API IPassiveQueue
 
         // the current amount of the packet sizes in the queue
         virtual int size() = 0;
+
+        virtual Packet* front() = 0;
 };
 
 }; //namespace

@@ -32,6 +32,9 @@ simple PassiveQueue
         bool fifo = default(true);   // whether the module works as a queue (fifo=true) or a stack (fifo=false)
                                              
         string schedulingAlgorithm @enum("original", "priority" , "feedback", "7first", "wfq1", "wfq2", "wfq3", "wfq4", "mixed1", "mixed2", "wred1") = default("7first");
+        
+        int size = default(6000);	// 6000 bytes
+        
     gates:
         input in;
         output out[];

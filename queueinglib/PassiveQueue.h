@@ -33,7 +33,8 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
 		simsignal_t queueingTimeSignal;
 
         bool fifo;
-        int capacity;
+        int _capacity;
+        int _size;
         cQueue queue;
 
         void queueLengthChanged();
@@ -56,6 +57,8 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
         virtual int length();
         virtual int size();
         virtual void request(int gateIndex);
+
+        Packet * front();
 
         cQueue getQueue() { return queue; };
 

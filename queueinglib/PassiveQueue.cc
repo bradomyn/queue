@@ -29,7 +29,8 @@ void PassiveQueue::initialize()
     queueLengthSignal = registerSignal("queueLength");
     emit(queueLengthSignal, 0);
 
-    capacity = par("capacity");
+    _capacity = par("capacity");
+    _size = par("size");
     queue.setName("queue");
 
     fifo = par("fifo");
@@ -94,7 +95,7 @@ void PassiveQueue::enqueue(cMessage* msg) {
 	job->setTimestamp();
 
 	// check for container capacity
-	if (capacity >= 0 && queue.length() >= capacity) {
+	if ((_capacity >= 0) && (queue.length() >= _capacity) && (size()>_size)) {
 		_dropped.push_back(job);
 		EV << "Queue full! Packet dropped.\n";
 		if (ev.isGUI())
@@ -130,7 +131,6 @@ void PassiveQueue::request(int gateIndex)
     Enter_Method("request()!");
 
     ASSERT(!queue.empty());
-
     Packet *job;
     if (fifo) {
         job = (Packet *)queue.pop();
@@ -154,6 +154,10 @@ void PassiveQueue::request(int gateIndex)
     if (ev.isGUI())
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");
 }
+
+Packet * PassiveQueue::front() {
+	return (Packet *)queue.front();
+} // at
 
 }; //namespace
 

@@ -20,6 +20,13 @@
 #include <set>
 #include <map>
 
+using std::vector;
+using std::set;
+using std::map;
+
+using std::cout;
+using std::endl;
+
 namespace queueing {
 
 class Packet;
@@ -76,6 +83,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		void mixed1(cMessage* msg);
 
 		map<int, IPassiveQueue*> _mapFeedback;
+		std::map<simtime_t, IPassiveQueue*> _map;
 
 		const char* _schedulingAlgorithm;
 
