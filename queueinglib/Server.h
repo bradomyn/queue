@@ -67,7 +67,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
 		void priority(cMessage* msg);
 		void sevenfirst(cMessage* msg);
-		void feedback(cMessage* msg);
+		void lqf(cMessage* msg);
 
 		void wfq1(cMessage* msg);
 		int _weight7;
@@ -82,7 +82,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
 		void mixed1(cMessage* msg);
 
-		map<int, IPassiveQueue*> _mapFeedback;
+		map<int, IPassiveQueue*> _mapQSizes;
 		std::map<simtime_t, IPassiveQueue*> _map;
 
 		const char* _schedulingAlgorithm;
