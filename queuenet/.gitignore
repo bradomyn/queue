@@ -1,9 +1,0 @@
-/results
-/out.txt
-/output.txt
-/queuenet
-*.o
-*.a
-*.dll
-*.so
-out*

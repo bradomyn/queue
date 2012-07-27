@@ -1,4 +1,0 @@
-#! /bin/sh
-
-chmod +x queuenet
-./queuenet -u Cmdenv -c WRS6 >> output6.txt
