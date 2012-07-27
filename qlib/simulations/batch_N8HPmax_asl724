@@ -8,9 +8,7 @@ SIMDIR=/common/home/bel/matthies/lnx/whiteRabbit/
 echo $SRCDIR
 echo $SIMDIR
 
-cd $SIMDIR/asl724/
-pwd
-ls
+cd $SIMDIR/asl724/qlib/simulations
 
 EDIR=../out/gcc-release/src
 EXECUTABLE=qlib
