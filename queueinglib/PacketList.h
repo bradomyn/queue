@@ -20,9 +20,9 @@ namespace queueing {
  */
 class QUEUEING_API PacketList : public cSimpleModule
 {
-    friend class Packet;
+    friend class WRPacket;
     protected:
-        std::set<Packet*> packets;
+        std::set<WRPacket*> packets;
         static PacketList *defaultInstance;
     public:
         PacketList();
@@ -30,8 +30,8 @@ class QUEUEING_API PacketList : public cSimpleModule
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
-        void registerPacket(Packet *packet);
-        void deregisterPacket(Packet *packet);
+        void registerPacket(WRPacket *packet);
+        void deregisterPacket(WRPacket *packet);
     public:
         /**
          * Returns pointer to the default instance of PacketList, which is
@@ -43,7 +43,7 @@ class QUEUEING_API PacketList : public cSimpleModule
         /**
          * Returns the pointers of the packets currently existing in the model.
          */
-        const std::set<Packet*> getPackets();
+        const std::set<WRPacket*> getPackets();
 };
 
 }; // namespace

@@ -8,12 +8,12 @@
 //
 
 #include <algorithm>
-#include "Packet.h"
+#include "WRPacket.h"
 #include "PacketList.h"
 
 namespace queueing {
 
-Packet::Packet(const char *name, int kind, PacketList *packetList) : Packet_Base(name, kind)
+WRPacket::WRPacket(const char *name, int kind, PacketList *packetList) : WRPacket_Base(name, kind)
 {
     parent = NULL;
     if (packetList==NULL && PacketList::getDefaultInstance()!=NULL)
@@ -23,7 +23,7 @@ Packet::Packet(const char *name, int kind, PacketList *packetList) : Packet_Base
         packetList->registerPacket(this);
 }
 
-Packet::Packet(const Packet& packet)
+WRPacket::WRPacket(const WRPacket& packet)
 {
     setName(packet.getName());
     operator=(packet);
@@ -33,7 +33,7 @@ Packet::Packet(const Packet& packet)
         packetList->registerPacket(this);
 }
 
-Packet::~Packet()
+WRPacket::~WRPacket()
 {
     if (parent)
         parent->childDeleted(this);
@@ -43,56 +43,56 @@ Packet::~Packet()
         packetList->deregisterPacket(this);
 }
 
-Packet& Packet::operator=(const Packet& packet)
+WRPacket& WRPacket::operator=(const WRPacket& packet)
 {
     if (this==&packet) return *this;
-    Packet_Base::operator=(packet);
+    WRPacket_Base::operator=(packet);
     // leave parent and packetList untouched
     return *this;
 }
 
-Packet *Packet::getParent()
+WRPacket *WRPacket::getParent()
 {
     return parent;
 }
 
-void Packet::setParent(Packet *parent)
+void WRPacket::setParent(WRPacket *parent)
 {
     this->parent = parent;
 }
 
-int Packet::getNumChildren() const
+int WRPacket::getNumChildren() const
 {
     return children.size();
 }
 
-Packet *Packet::getChild(int k)
+WRPacket *WRPacket::getChild(int k)
 {
     if (k<0 || k>=(int)children.size())
         throw cRuntimeError(this, "child index %d out of bounds", k);
     return children[k];
 }
 
-void Packet::makeChildOf(Packet *parent)
+void WRPacket::makeChildOf(WRPacket *parent)
 {
     parent->addChild(this);
 }
 
-void Packet::addChild(Packet *child)
+void WRPacket::addChild(WRPacket *child)
 {
     child->setParent(this);
     ASSERT(std::find(children.begin(), children.end(), child)==children.end());
     children.push_back(child);
 }
 
-void Packet::parentDeleted()
+void WRPacket::parentDeleted()
 {
     parent = NULL;
 }
 
-void Packet::childDeleted(Packet *child)
+void WRPacket::childDeleted(WRPacket *child)
 {
-    std::vector<Packet*>::iterator it = std::find(children.begin(), children.end(), child);
+    std::vector<WRPacket*>::iterator it = std::find(children.begin(), children.end(), child);
     ASSERT(it!=children.end());
     children.erase(it);
 }

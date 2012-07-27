@@ -7,7 +7,7 @@
 // `license' for details on this and other legal matters.
 //
 
-#include "Packet.h"
+#include "WRPacket.h"
 #include "PacketList.h"
 
 namespace queueing {
@@ -27,7 +27,7 @@ PacketList::~PacketList()
 {
     if (defaultInstance == this)
         defaultInstance = NULL;
-    for (std::set<Packet*>::iterator it=packets.begin(); it!=packets.end(); ++it)
+    for (std::set<WRPacket*>::iterator it=packets.begin(); it!=packets.end(); ++it)
         (*it)->packetList = NULL;
 }
 
@@ -41,14 +41,14 @@ void PacketList::handleMessage(cMessage *msg)
     throw cRuntimeError("this module does not process messages");
 }
 
-void PacketList::registerPacket(Packet *packet)
+void PacketList::registerPacket(WRPacket *packet)
 {
     packets.insert(packet);
 }
 
-void PacketList::deregisterPacket(Packet *packet)
+void PacketList::deregisterPacket(WRPacket *packet)
 {
-    std::set<Packet*>::iterator it = packets.find(packet);
+    std::set<WRPacket*>::iterator it = packets.find(packet);
     ASSERT(it != packets.end());
     packets.erase(it);
 }
@@ -58,7 +58,7 @@ PacketList *PacketList::getDefaultInstance()
     return defaultInstance;
 }
 
-const std::set<Packet*> PacketList::getPackets()
+const std::set<WRPacket*> PacketList::getPackets()
 {
     return packets;
 }

@@ -8,7 +8,7 @@
 //
 
 #include "Sink.h"
-#include "Packet.h"
+#include "WRPacket.h"
 
 namespace queueing {
 
@@ -50,10 +50,18 @@ PassiveQueue *Sink::getQueue(int index) {
 
 void Sink::handleMessage(cMessage *msg) {
 
+
 	if (strcmp(msg->getName(), "trigger") != 0) {
 		simtime_t currentTime = simTime();
-		simtime_t lifetime = currentTime - msg->getCreationTime();
-		Packet *packet = check_and_cast<Packet *>(msg);
+		//simtime_t lifetime = currentTime - msg->getCreationTime();
+		simtime_t lifetime = msg->getArrivalTime() - msg->getCreationTime();
+
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+
+		/*cout << packet->getPriority() << " 1: " << currentTime - msg->getCreationTime() <<
+				" 2: " << msg->getArrivalTime() - msg->getCreationTime() <<
+				" 3: " << currentTime - msg->getSendingTime() <<
+				" q: " << packet->getTotalQueueingTime() << endl;*/
 
 		numReceived++;
 		switch (packet->getPriority()) {
@@ -123,6 +131,7 @@ void Sink::finish() {
 	int qs_size = _qs.size();
 
 	// overview
+	cout << this->getName() << endl;
 	cout << "CoS " << _qs.size() << endl;
 
 	std::cout << "p 0: avg " << avg_lifetime(v0) << " size " << v0.size() << " Q time: " << avg_lifetime(vq0) << " sent: " << psource->getSent().at(0) << " dropped " << _qs.at(0)->getDropped().size() << std::endl;

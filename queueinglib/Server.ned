@@ -33,6 +33,7 @@ simple Server
     gates:
         input in[];
         output out;
+        output pppg[] @labels(PPPFrame-conn);
 }
 
 

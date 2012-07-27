@@ -60,23 +60,24 @@ void PassiveQueue::finish()
 void PassiveQueue::handleMessage(cMessage *msg)
 {
 	//std::cout << " " << __FILE__ << ": "<< __FUNCTION__ << " " << msg->getName() << std::endl;
-	Packet *job = check_and_cast<Packet *>(msg);
+	WRPacket *job = check_and_cast<WRPacket *>(msg);
 	job->setTimestamp();
 	cModule *server = NULL;
 
 	switch( _scheduling ) {
 	case 0:	// diverse
-	    enqueue(msg);
+	    enqueue(job);
+	    //send(job, "out", 0);
 		break;
 	case 1:	// 7first | mixed1
 		if( job->getPriority()==7 ) {
 			send(job, "out", 0);
 		} else {
-			enqueue(msg);
+			enqueue(job);
 		}
 		break;
 	case 2:	// fcfs
-		enqueue(msg);
+		enqueue(job);
 
 		// write priority to vector in server
 		server = (cModule*)getParentModule()->findObject("server", true);
@@ -90,8 +91,8 @@ void PassiveQueue::handleMessage(cMessage *msg)
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan3");
 }
 
-void PassiveQueue::enqueue(cMessage* msg) {
-	Packet *job = check_and_cast<Packet *>(msg);
+void PassiveQueue::enqueue(cPacket* msg) {
+	WRPacket *job = check_and_cast<WRPacket *>(msg);
 	job->setTimestamp();
 
 	// check for container capacity
@@ -110,6 +111,11 @@ void PassiveQueue::enqueue(cMessage* msg) {
 	emit(queueLengthSignal, length());
 	job->setQueueCount(job->getQueueCount() + 1);
 	//std::cout << this->getName() << " Q size " << queue.length() << std::endl;
+
+	// trigger server once
+	cMessage* trigger = new cMessage("startServiceMessage");
+	send(trigger, "outTrigger");
+
 } // enequeue()
 
 int PassiveQueue::length()
@@ -121,7 +127,7 @@ int PassiveQueue::size()
 {
 	int size = 0;
 	for( int i=0; i<length(); i++ ) {
-		size += check_and_cast<Packet *>(queue.get(i))->getSize();
+		size += check_and_cast<WRPacket *>(queue.get(i))->getByteLength();
 	}
     return size;
 }
@@ -131,12 +137,12 @@ void PassiveQueue::request(int gateIndex)
     Enter_Method("request()!");
 
     ASSERT(!queue.empty());
-    Packet *job;
+    WRPacket *job;
     if (fifo) {
-        job = (Packet *)queue.pop();
+        job = (WRPacket *)queue.pop();
     }
     else {
-        job = (Packet *)queue.back();
+        job = (WRPacket *)queue.back();
         // FIXME this may have bad performance as remove uses linear search
         queue.remove(job);
     }
@@ -147,6 +153,7 @@ void PassiveQueue::request(int gateIndex)
     job->setQueueCount(job->getQueueCount()+1);
     simtime_t d = simTime() - job->getTimestamp();
     job->setTotalQueueingTime(job->getTotalQueueingTime() + d);
+    //cout << "queuingTime " << job->getTotalQueueingTime() << endl;
     emit(queueingTimeSignal, d);
 
     send(job, "out", gateIndex);
@@ -155,8 +162,8 @@ void PassiveQueue::request(int gateIndex)
         getDisplayString().setTagArg("i",1, queue.empty() ? "" : "cyan");
 }
 
-Packet * PassiveQueue::front() {
-	return (Packet *)queue.front();
+WRPacket * PassiveQueue::front() {
+	return (WRPacket *)queue.front();
 } // at
 
 }; //namespace

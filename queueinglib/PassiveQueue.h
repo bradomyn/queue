@@ -12,8 +12,9 @@
 
 #include "QueueingDefs.h"
 #include "IPassiveQueue.h"
-#include "Packet.h"
+#include "Packet_m.h"
 #include "Server.h"
+#include "WRPacket.h"
 
 #include <vector>
 
@@ -21,6 +22,7 @@ using std::vector;
 
 namespace queueing {
 
+class WRPacket;
 
 /**
  * A passive queue, designed to co-operate with IServer using method calls.
@@ -41,9 +43,9 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
 
         int _scheduling;
 
-        void enqueue(cMessage* msg);
+        void enqueue(cPacket* msg);
 
-        vector<Packet* > _dropped;
+        vector<WRPacket* > _dropped;
 
     protected:
         virtual void initialize();
@@ -58,11 +60,11 @@ class QUEUEING_API PassiveQueue : public cSimpleModule, public IPassiveQueue
         virtual int size();
         virtual void request(int gateIndex);
 
-        Packet * front();
+        WRPacket * front();
 
         cQueue getQueue() { return queue; };
 
-        vector<Packet* > getDropped() {return _dropped;};
+        vector<WRPacket* > getDropped() {return _dropped;};
 };
 
 }; //namespace

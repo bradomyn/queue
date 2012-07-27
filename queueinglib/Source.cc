@@ -8,7 +8,7 @@
 //
 
 #include "Source.h"
-#include "Packet.h"
+#include "Packet_m.h"
 
 namespace queueing {
 
@@ -21,10 +21,10 @@ void SourceBase::initialize() {
 		packetName = getName();
 }
 
-Packet *SourceBase::createJob() {
+WRPacket *SourceBase::createJob() {
 	char buf[80];
 	sprintf(buf, "%.60s-%d", packetName.c_str(), ++packetCounter);
-	Packet *packet = new Packet(buf);
+	WRPacket *packet = new WRPacket(buf);
 	//packet->setKind(par("packetType"));
 	int prio = Useful::getInstance()->generateRandomPriority();
 	packet->setPriority(prio); //par("packetPriority"));
@@ -55,6 +55,8 @@ void Source::initialize() {
 	// schedule the first message timer for start time
 	scheduleAt(startTime, new cMessage("newPacketTimer"));
 
+	startSendingPacket = new cMessage("startSendingPacket");
+
 	_inputDataFile = par("inputDataFile").stringValue();
 	_data = Useful::getInstance()->readDataList(_inputDataFile);
 	//Useful::getInstance()->appendToFile("out.txt", _inputDataFile.c_str());
@@ -75,26 +77,65 @@ void Source::initialize() {
 	cModule *module = getParentModule()->getSubmodule("sink");
 	_sink =  dynamic_cast<Sink*>(module);
 
+	cModule *module1 = getParentModule()->getSubmodule("sink1");
+	_sink1 =  dynamic_cast<Sink*>(module1);
+
 	for( int i=0; i<_nofCoS; i++ ) {
 		_sent.push_back(0);
 	}
 
+	for( int i=_nofCoS-1; i>-1; i-- ) {
+		outputgates.push_back(getGate(i));
+		channels.push_back(check_and_cast<cDatarateChannel *> (getGate(i)->getTransmissionChannel()));
+	}
 } // initialize()
 
 void Source::handleMessage(cMessage *msg) {
 	ASSERT(msg->isSelfMessage());
 	//cout << __FILE__ << ": " << __FUNCTION__ << endl;
 	int numReceived = _sink->getNumReceived();
+	int numReceived1 = _sink1->getNumReceived();
 	//cout << "numPackets: " << numPackets << " numCreated " << numCreated << " numReceived: " << numReceived << endl;
 
-	if ( numReceived != numPackets ) {
+#if 1
+	// 1000000000 bits per second = 1000 bits per us
+	if(msg = startSendingPacket ) {
+		WRPacket *p = check_and_cast<WRPacket*>(msg);
+		send2Queue(p);
+	} else {
+		if ( (numReceived != numPackets) && (numReceived1!=numPackets)) {
+
+		if ((numCreated < numPackets || numPackets < 0
+						|| numPackets > numCreated )) {
+			vector<PacketDescription>::iterator it;
+
+			if (_data.size() > _nofCoS) {
+				it = _data.begin();
+				while( it!=_data.end() ) {
+					//cout << "huhu " << i << " " << (*it).getPriority() << " " << (*it).getSize() << endl;
+					WRPacket *p = generatePacket((*it).getPriority(), (*it).getSize());
+					p->setTimestamp(simTime());
+					//cout << "bitl: " << p->getBitLength() << " bytes: " << p->getByteLength() << endl;
+					//send2Queue(p);
+					//_data.erase(it);
+					//it = _data.begin();
+					//switch prio, determine datarate, schedule message
+					channels[0]->getTransmissionFinishTime();
+					scheduleAt(p, startSendingPacket);
+					}
+				}
+			}
+		}
+	}
+#else
+	if ( (numReceived != numPackets) && (numReceived1!=numPackets)) {
 		simtime_t sourceTime = simTime()
 				+ par("interArrivalTime").doubleValue();
 		scheduleAt(sourceTime, msg);
 
 		// trigger the server
-		cMessage* trigger = new cMessage("trigger");
-		send(trigger, "outTrigger");
+		//cMessage* trigger = new cMessage("trigger");
+		//send(trigger, "outTrigger");
 
 		if ((numCreated < numPackets || numPackets < 0
 				|| numPackets > numCreated )) {
@@ -110,7 +151,9 @@ void Source::handleMessage(cMessage *msg) {
 				while( it!=_data.end() ) {
 					if (i < _nofCoS) {
 						//cout << "huhu " << i << " " << (*it).getPriority() << " " << (*it).getSize() << endl;
-						Packet *p = generatePacket((*it).getPriority(), (*it).getSize());
+						WRPacket *p = generatePacket((*it).getPriority(), (*it).getSize());
+						p->setTimestamp(simTime());
+						cout << "bitl: " << p->getBitLength() << " bytes: " << p->getByteLength() << endl;
 						send2Queue(p);
 						_data.erase(it);
 						it = _data.begin();
@@ -124,10 +167,12 @@ void Source::handleMessage(cMessage *msg) {
 			}
 		}
 	}
+#endif
 }
 
-void Source::send2Queue(Packet* packet) {
+void Source::send2Queue(WRPacket* packet) {
 	numCreated++;
+
 	switch (packet->getPriority()) {
 	case 0:
 		send(packet, "out", 0);
@@ -164,21 +209,19 @@ void Source::send2Queue(Packet* packet) {
 	}
 }
 
-Packet * Source::generatePacket() {
+WRPacket * Source::generatePacket() {
 	//log("test");
 	char buf[80];
 	std::string packetName = "j";
 	sprintf(buf, "%.60s-%d", packetName.c_str(), ++packetCounter);
-	Packet *packet = new Packet(buf);
+	WRPacket *packet = new WRPacket(buf);
 	int randomP = Useful::getInstance()->generateRandomPriority();
 
 	// TODO work with a fixed, repeatable data set
 	packet->setPriority(randomP);
 
 	int randomS = Useful::getInstance()->generateRandomSize();
-
-	// TODO work with a fixed, repeatable data set
-	packet->setSize(randomS);
+	packet->setByteLength(randomS);
 
 	// to build a data file:
 	//Useful::getInstance()->writeRandomDataToList("data.txt", randomP, randomS);
@@ -197,15 +240,15 @@ Packet * Source::generatePacket() {
 	return packet;
 } // generatePacket()
 
-Packet * Source::generatePacket(int priority, int size) {
+WRPacket * Source::generatePacket(int priority, int size) {
 	//log("test");
 	char buf[80];
 	std::string packetName = "j";
 	sprintf(buf, "%.60s-%d", packetName.c_str(), ++packetCounter);
 
-	Packet *packet = new Packet(buf);
+	WRPacket *packet = new WRPacket(buf);
 	packet->setPriority(priority);
-	packet->setSize(size);
+	packet->setByteLength(size);
 
 	simtime_t creationTime = simTime();
 	char name[80];
@@ -220,6 +263,12 @@ Packet * Source::generatePacket(int priority, int size) {
 
 	return packet;
 } // generatePacket()
+
+
+cGate * Source::getGate(int index) {
+	cGate *outputgate = gate("pppg", index);
+	return outputgate;
+} // getGate()
 
 //----
 
@@ -237,7 +286,7 @@ void SourceOnce::handleMessage(cMessage *msg) {
 
 	int n = par("numJobs");
 	for (int i = 0; i < n; i++) {
-		Packet *job = createJob();
+		WRPacket *job = createJob();
 		send(job, "out");
 	}
 }

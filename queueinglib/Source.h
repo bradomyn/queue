@@ -12,13 +12,14 @@
 
 #include "QueueingDefs.h"
 #include "Sink.h"
-#include "Packet.h"
+#include "Packet_m.h"
 #include "Useful.h"
+#include "WRPacket.h"
 
 namespace queueing {
 
 class Sink;
-class Packet;
+class WRPacket;
 
 /**
  * Abstract base class for job generator modules
@@ -33,7 +34,7 @@ class QUEUEING_API SourceBase : public cSimpleModule
 
     protected:
         virtual void initialize();
-        virtual Packet *createJob();
+        virtual WRPacket *createJob();
         virtual void finish();
 };
 
@@ -46,24 +47,31 @@ class QUEUEING_API Source : public SourceBase
     private:
         simtime_t startTime;
         simtime_t stopTime;
-        //int numJobs;
         int numPackets;
         int numCreated;
         std::vector<PacketDescription> _data;
 
         Sink *_sink;
+        Sink *_sink1;
         std::vector<int> _sent;
         string _inputDataFile;
 
         int _nofCoS;
 
+        vector<cGate *> outputgates;
+        vector<cDatarateChannel *> channels;
+
+        cGate * getGate(int index);
+
+        cMessage *startSendingPacket;
+
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
 
-        Packet * generatePacket();
-        Packet * generatePacket( int priority, int size );
-        void send2Queue(Packet* packet);
+        WRPacket * generatePacket();
+        WRPacket * generatePacket( int priority, int size );
+        void send2Queue(WRPacket* packet);
 
     public:
     	int getCreated() { return numCreated; };

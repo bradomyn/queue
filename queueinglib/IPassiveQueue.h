@@ -11,9 +11,11 @@
 #define __QUEUEING_IPASSIVEQUEUE_H
 
 #include "QueueingDefs.h"
-#include "Packet.h"
+#include "Packet_m.h"
 
 namespace queueing {
+
+class WRPacket;
 
 /**
  * The following interface must be implemented by a queue which can't process
@@ -32,7 +34,7 @@ class QUEUEING_API IPassiveQueue
         // the current amount of the packet sizes in the queue
         virtual int size() = 0;
 
-        virtual Packet* front() = 0;
+        virtual WRPacket* front() = 0;
 };
 
 }; //namespace

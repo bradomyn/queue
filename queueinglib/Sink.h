@@ -13,7 +13,7 @@
 #include "QueueingDefs.h"
 #include "IPassiveQueue.h"
 #include "PassiveQueue.h"
-#include "Packet.h"
+#include "Packet_m.h"
 #include "Server.h"
 #include "Source.h"
 
@@ -23,6 +23,8 @@
 using namespace std;
 
 namespace queueing {
+
+class WRPacket;
 
 /**
  * Consumes jobs; see NED file for more info.

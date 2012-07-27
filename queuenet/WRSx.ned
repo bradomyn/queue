@@ -12,12 +12,24 @@ import org.omnetpp.queueing.Server;
 import org.omnetpp.queueing.Sink;
 import org.omnetpp.queueing.Source;
 
+import ned.DatarateChannel;
+
+
 
 //
 // A call center simulation.
 //
 network WRSx
 {
+    types:
+        channel pppline extends DatarateChannel
+        {
+            delay = 0 s; // propagation delay
+            datarate = 1000000000 bps; // bits per second 1Gbps
+            disabled = false;
+            ber = 0; // bit-error rate
+            per = 0; // packet-error rate
+        }
     submodules:
         source: Source {
             @display("p=38,236");
@@ -52,6 +64,9 @@ network WRSx
         queue7: PassiveQueue {
             @display("p=225,431");
         }
+        sink1: Sink {
+            @display("p=408,324;b=7,51");
+        }
     connections:
         queue0.out++ --> server.in++;
         queue1.out++ --> server.in++;
@@ -61,14 +76,26 @@ network WRSx
         queue5.out++ --> server.in++;
         queue6.out++ --> server.in++;
         queue7.out++ --> server.in++;
-        server.out --> sink.in++;
+
+		source.pppg++ --> pppline --> queue0.in;
+		source.pppg++ --> pppline --> queue1.in;
+		source.pppg++ --> pppline --> queue2.in;
+		source.pppg++ --> pppline --> queue3.in;
+		source.pppg++ --> pppline --> queue4.in;
+		source.pppg++ --> pppline --> queue5.in;
+		source.pppg++ --> pppline --> queue6.in;
+		source.pppg++ --> pppline --> queue7.in;
+
         source.outTrigger --> server.in++;
-        source.out++ --> queue0.in;
-        source.out++ --> queue1.in;
-        source.out++ --> queue2.in;
-        source.out++ --> queue3.in;
-        source.out++ --> queue4.in;
-        source.out++ --> queue5.in;
-        source.out++ --> queue6.in;
-        source.out++ --> queue7.in;
+        server.pppg++ --> pppline --> sink.in++;
+        server.out --> sink1.in++;
+        queue6.outTrigger --> server.in++;
+        queue5.outTrigger --> server.in++;
+        queue4.outTrigger --> server.in++;
+        queue3.outTrigger --> server.in++;
+        queue2.out++ --> server.in++;
+        queue1.outTrigger --> server.in++;
+        queue0.outTrigger --> server.in++;
+        queue2.outTrigger --> server.in++;
+        queue7.outTrigger --> server.in++;
 }

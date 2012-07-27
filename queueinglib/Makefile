@@ -26,9 +26,9 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 OBJS = \
     $O/Useful.o \
     $O/Source.o \
+    $O/WRPacket.o \
     $O/PassiveQueue.o \
     $O/PacketList.o \
-    $O/Packet.o \
     $O/Server.o \
     $O/Sink.o \
     $O/Packet_m.o
@@ -118,59 +118,59 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc templates/*.cc templates/queueing/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-$O/Packet.o: Packet.cc \
-	Packet.h \
-	PacketList.h \
-	Packet_m.h \
-	QueueingDefs.h
 $O/PacketList.o: PacketList.cc \
-	Packet.h \
 	PacketList.h \
 	Packet_m.h \
-	QueueingDefs.h
+	QueueingDefs.h \
+	WRPacket.h
 $O/Packet_m.o: Packet_m.cc \
 	Packet_m.h \
 	QueueingDefs.h
 $O/PassiveQueue.o: PassiveQueue.cc \
 	IPassiveQueue.h \
 	IServer.h \
-	Packet.h \
 	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	Server.h \
-	Useful.h
+	Useful.h \
+	WRPacket.h
 $O/Server.o: Server.cc \
 	IPassiveQueue.h \
 	IServer.h \
-	Packet.h \
 	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	Server.h \
-	Useful.h
+	Useful.h \
+	WRPacket.h
 $O/Sink.o: Sink.cc \
 	IPassiveQueue.h \
 	IServer.h \
-	Packet.h \
 	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	Server.h \
 	Sink.h \
 	Source.h \
-	Useful.h
+	Useful.h \
+	WRPacket.h
 $O/Source.o: Source.cc \
 	IPassiveQueue.h \
 	IServer.h \
-	Packet.h \
 	Packet_m.h \
 	PassiveQueue.h \
 	QueueingDefs.h \
 	Server.h \
 	Sink.h \
 	Source.h \
-	Useful.h
+	Useful.h \
+	WRPacket.h
 $O/Useful.o: Useful.cc \
 	Useful.h
+$O/WRPacket.o: WRPacket.cc \
+	PacketList.h \
+	Packet_m.h \
+	QueueingDefs.h \
+	WRPacket.h
 

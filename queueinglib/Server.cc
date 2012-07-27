@@ -8,7 +8,7 @@
 //
 
 #include "Server.h"
-#include "Packet.h"
+#include "WRPacket.h"
 #include "IPassiveQueue.h"
 
 namespace queueing {
@@ -35,6 +35,16 @@ void Server::initialize()
     jobServiced = NULL;
 
     triggerServiceMsg = new cMessage("triggerServiceMessage");
+
+
+    outputgate = gate("pppg",0);
+    channel = check_and_cast<cDatarateChannel *> (outputgate->getTransmissionChannel());
+    endServiceMsg = new cMessage("endServiceMessage");
+
+    cout << "channel datarate: " << channel->getDatarate() << " " << endl;
+
+    outQueue = new cQueue();
+
 
     // keep a pointer to queue 7
     _q7 = getQueue(7);
@@ -93,42 +103,142 @@ void Server::initialize()
 void Server::handleMessage(cMessage *msg)
 {
 	//cout << __FILE__ << ": " << __FUNCTION__ << " " << msg->getName() << endl;
-	switch(_scheduling ) {
-	case 0:
-		priority(msg);
-		break;
-	case 1:
-		sevenfirst(msg);
-		break;
-	case 2:
-		lqf(msg);
-		break;
-	case 3:
-		wfq1(msg);
-		break;
-	case 4:
-		mixed1(msg);
-		break;
-	case 5:
-		wfq2(msg);
-		break;
-	case 6:
-		wfq3(msg);
-		break;
-	case 7:
-		wfq4(msg);
-		break;
-	case 8:
-		fcfs(msg);
-		break;
-	case 9:
-		original(msg);
-		break;
-	default:
-		break;
-	}
 
+#if 1
+#if 1
+	if(msg==endServiceMsg) {
+		// server is idle
+		if( outQueue->length()>0 ) {
+			cout << "q 1: " << outQueue->length() << endl;
+			WRPacket* p = check_and_cast<WRPacket*>(outQueue->pop());
+			cout << "q 2: " << outQueue->length() << " " << p->getName() << endl;
+			sendPacketOverChannel(p);
+			cancelEvent(endServiceMsg);
+		} else if( _q7 ) {
+			if( _q7->length()>0 ) {
+				_q7->request(0);
+			}
+		}
+	} else if( msg->arrivedOn("in") ) {
+		if( strcmp(msg->getName(), "startServiceMessage") == 0 ) {
+			if( _q7->length()>0 ) {
+				_q7->request(0);
+			}
+		} else {
+			WRPacket* packet = check_and_cast<WRPacket*>(msg);
+			cout << packet->getName() << endl;
+			 if( endServiceMsg->isScheduled() ) {
+				outQueue->insert(packet);
+			} else {
+				sendPacketOverChannel(packet);
+			}
+		}
+	}
+#else
+	if( msg == endServiceMsg ) {
+		if( outQueue->length()>0 ) {
+			cout << "q 1: " << outQueue->length() << endl;
+			WRPacket* p = check_and_cast<WRPacket*>(outQueue->pop());
+			cout << "q 2: " << outQueue->length() << " " << p->getName() << endl;
+			sendPacketOverChannel(p);
+			cancelEvent(endServiceMsg);
+		}
+	} else {
+		if( strcmp(msg->getName(), "trigger") == 0 ) {
+			if( _q7 != NULL ) {
+				if( _q7->length()>0 ) {
+					_q7->request(0);
+				}
+			}
+
+		} else {
+			WRPacket* packet = check_and_cast<WRPacket*>(msg);
+			sendPacketOverChannel(packet);
+			sendPacket(packet);
+		}
+	}
+#endif
+#else
+	if( msg == endServiceMsg ) {
+		/*while( outQueue->length()>0 ) {
+			cout << "q 1: " << outQueue->length() << endl;
+			WRPacket* p = check_and_cast<WRPacket*>(outQueue->pop());
+			cout << "q 2: " << outQueue->length() << " " << p->getName() << endl;
+			sendPacketOverChannel(p);
+			cancelEvent(endServiceMsg);
+		}*/
+	} else {
+		switch(_scheduling ) {
+		case 0:
+			priority(msg);
+			break;
+		case 1:
+			sevenfirst(msg);
+			break;
+		case 2:
+			lqf(msg);
+			break;
+		case 3:
+			wfq1(msg);
+			break;
+		case 4:
+			mixed1(msg);
+			break;
+		case 5:
+			wfq2(msg);
+			break;
+		case 6:
+			wfq3(msg);
+			break;
+		case 7:
+			wfq4(msg);
+			break;
+		case 8:
+			fcfs(msg);
+			break;
+		case 9:
+			original(msg);
+			break;
+		default:
+			break;
+		}
+	}
+#endif
 } //handleMessage()
+
+void Server::sendPacket(WRPacket* packet) {
+
+	// test: send a duplicate over an ideal connection without limitations
+	WRPacket* p = packet->dup();
+	send(p, "out");
+
+} // sendPacket()
+
+void Server::sendPacketOverChannel(WRPacket* packet) {
+	//cout << "dur " << channel->calculateDuration(packet) << " " << channel->getDatarate() << " " << channel->getTransmissionFinishTime() << endl;
+
+	simtime_t t = channel->calculateDuration(packet);
+	simtime_t txFinishTime = channel->getTransmissionFinishTime();
+	cout << "duration " << packet->getBitLength() << "/" << channel->getDatarate() << " = " << packet->getBitLength()/channel->getDatarate()  << " " << t << endl;
+	cout << "finish: " << txFinishTime << " sim: " << simTime() << " packet: " << packet->getName() << " size: " << packet->getBitLength() << " bit, " << packet->getByteLength() << " byte."<< endl;
+
+	if( txFinishTime <= simTime() || !channel->isBusy() ) {
+		// channel free; send out packet immediately
+		send(packet, outputgate);
+		cout << "sent " << numSent << endl;
+		numSent++;
+		send(packet, outputgate);
+
+		// schedule an event for the time when last bit will leave the gate.
+		if( !endServiceMsg->isScheduled() )
+			scheduleAt(txFinishTime, endServiceMsg);
+	} else {
+		// store packet and schedule timer; when the timer expires,
+		// the packet should be removed from the queue and sent out
+		outQueue->insert(packet);
+		cout << "outQueue: " << outQueue->length() << endl;
+	}
+} // sendPacketOverChannel()
 
 void Server::original(cMessage* msg) {
 	if ( strcmp(msg->getName(), "trigger") == 0 ) {
@@ -149,8 +259,9 @@ void Server::original(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // original()
 
@@ -177,8 +288,9 @@ void Server::priority(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // priority()
 
@@ -194,8 +306,9 @@ void Server::sevenfirst(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // sevenfirst()
 
@@ -217,8 +330,9 @@ void Server::fcfs(cMessage* msg) {
 		}
 
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // fcfs()
 
@@ -243,7 +357,7 @@ void Server::lqf(cMessage* msg) {
 		for( it=_qs.begin(); it!=_qs.end(); it++) {
 			if( (*it)->length()>0 ) {
 				for( int i=0; i<(*it)->length(); i++ ) {
-					Packet* p = (*it)->front();
+					WRPacket* p = (*it)->front();
 					if( p!=NULL ) {
 						cout << "queue l " << (*it)->length() << " " << p->getName() << " map size " << _map.size() << endl;
 						_map.insert(pair<simtime_t,IPassiveQueue*>(p->getCreationTime(),*it));
@@ -266,7 +380,7 @@ void Server::lqf(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
 		send(packet, "out");
 	}
 
@@ -299,8 +413,9 @@ void Server::lqf(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 #endif
 } // lqf()
@@ -329,8 +444,9 @@ void Server::wfq1(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // wfq1()
 
@@ -412,8 +528,9 @@ void Server::wfq2(cMessage* msg) {
 
 		//cout << " rrCounter = " << _rrCounter << endl;
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // wfq2()
 
@@ -449,8 +566,9 @@ void Server::wfq3(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // wfq3()
 
@@ -496,8 +614,9 @@ void Server::wfq4(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // wfq4()
 
@@ -532,8 +651,9 @@ void Server::mixed1(cMessage* msg) {
 			}
 		}
 	} else {
-		Packet *packet = check_and_cast<Packet *>(msg);
-		send(packet, "out");
+		WRPacket *packet = check_and_cast<WRPacket *>(msg);
+		sendPacket(packet);
+		sendPacketOverChannel(packet);
 	}
 } // mixed1()
 
@@ -551,7 +671,7 @@ IPassiveQueue *Server::getQueue(int index) {
 
 void Server::finish()
 {
-	// remove all undisposed messages in the end!
+	// remove all indisposed messages in the end!
 	this->setPerformFinalGC(true);
 }
 

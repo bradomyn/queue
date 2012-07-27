@@ -14,7 +14,7 @@
 #include "Useful.h"
 
 #include "PassiveQueue.h"
-#include "Packet.h"
+#include "Packet_m.h"
 
 #include <vector>
 #include <set>
@@ -29,7 +29,7 @@ using std::endl;
 
 namespace queueing {
 
-class Packet;
+class WRPacket;
 
 /**
  * The queue server. It cooperates with several Queues that which queue up
@@ -44,12 +44,17 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 
         int numQueues;
 
-        Packet *jobServiced;
+        WRPacket *jobServiced;
 
         int numSent;
 
         // receive trigger messages
         cMessage *triggerServiceMsg;
+
+        cGate *outputgate;
+        cDatarateChannel *channel;
+        cQueue *outQueue;
+        cMessage *endServiceMsg;
 
         IPassiveQueue *getQueue(int index);
 		IPassiveQueue *_q7;
@@ -57,11 +62,14 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
 		// pointer to other queues
 		std::vector<IPassiveQueue*> _qs;
 
-		vector<Packet*> _dropped;
+		vector<WRPacket*> _dropped;
 
 		int _scheduling;	// see Server.ned for possible values in enum
 
 		int _nofCoS;	// default: 7..0
+
+		void sendPacket(WRPacket* packet);
+		void sendPacketOverChannel(WRPacket* packet);
 
 		void original(cMessage* msg);
 
@@ -93,7 +101,7 @@ class QUEUEING_API Server : public cSimpleModule, public IServer
     public:
         Server();
         virtual ~Server();
-        vector<Packet*> getDropped(){ return _dropped; };
+        vector<WRPacket*> getDropped(){ return _dropped; };
         const char* getSchedulingAlgorithm() { return _schedulingAlgorithm; };
 
         void add2QueueServeList(int nr){

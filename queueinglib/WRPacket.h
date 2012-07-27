@@ -35,54 +35,54 @@ class PacketList;
  * The default PacketList can be obtained with the PacketList::getDefaultInstance()
  * method. Then one can query PacketList for the set of packets currently present.
  */
-class QUEUEING_API Packet: public Packet_Base
+class QUEUEING_API WRPacket: public WRPacket_Base
 {
     friend class PacketList;
     protected:
-        Packet *parent;
-        std::vector<Packet*> children;
+        WRPacket *parent;
+        std::vector<WRPacket*> children;
         PacketList *packetList;
-        virtual void setParent(Packet *parent); // only for addChild()
+        virtual void setParent(WRPacket *parent); // only for addChild()
         virtual void parentDeleted();
-        virtual void childDeleted(Packet *child);
+        virtual void childDeleted(WRPacket *child);
     public:
         /**
-         * Creates a Packet with the given name, message kind, and PacketList. If
-         * PacketList==NULL, the default one (or none if none exist) will be chosen.
+         * Creates a WRPacket with the given name, message kind, and WRPacketList. If
+         * WRPacketList==NULL, the default one (or none if none exist) will be chosen.
          */
-        Packet(const char *name=NULL, int kind=0, PacketList *table=NULL);
+        WRPacket(const char *name=NULL, int kind=0, PacketList *table=NULL);
 
         /** Copy constructor */
-        Packet(const Packet& packet);
+        WRPacket(const WRPacket& packet);
 
         /** Destructor */
-        virtual ~Packet();
+        virtual ~WRPacket();
 
         /** Duplicates this packet */
-        virtual Packet *dup() const {return new Packet(*this);}
+        virtual WRPacket *dup() const {return new WRPacket(*this);}
 
-        /** Assignment operator. Does not affect parent, children and PacketList. */
-        Packet& operator=(const Packet& packet);
+        /** Assignment operator. Does not affect parent, children and WRPacketList. */
+        WRPacket& operator=(const WRPacket& packet);
 
         /** @name Parent-child relationships */
         //@{
-        /** Returns the parent Packet. Returns NULL if there's no parent or it no longer exists. */
-        virtual Packet *getParent();
+        /** Returns the parent WRPacket. Returns NULL if there's no parent or it no longer exists. */
+        virtual WRPacket *getParent();
 
         /** Returns the number of children. Deleted children are automatically removed from this list. */
         virtual int getNumChildren() const;
 
         /** Returns the kth child. Throws an error if index is out of range. */
-        virtual Packet *getChild(int k);
+        virtual WRPacket *getChild(int k);
 
         /** Marks the given packet as the child of this one. */
-        void addChild(Packet *child);
+        void addChild(WRPacket *child);
 
         /** Same as addChild(), but has to be invoked on the child packet */
-        virtual void makeChildOf(Packet *parent);
+        virtual void makeChildOf(WRPacket *parent);
         //@}
 
-        /** Returns the PacketList where this Packet has been registered. */
+        /** Returns the WRPacketList where this WRPacket has been registered. */
         PacketList *getContainingPacketList() {return packetList;}
 
 };

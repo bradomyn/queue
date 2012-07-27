@@ -33,7 +33,8 @@ simple Source
     	string inputDataFile = default("data_full_load.txt");
     	int nofCoS = default(8);	// default: 7..0 
     gates:
-        output out[];
+        //output out[];
         output outTrigger;
+        output pppg[] @labels(PPPFrame-conn);
 }
 

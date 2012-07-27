@@ -38,4 +38,5 @@ simple PassiveQueue
     gates:
         input in;
         output out[];
+        output outTrigger;
 }
