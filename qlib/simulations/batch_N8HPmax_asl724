@@ -20,6 +20,8 @@ chmod +x $EDIR/$EXECUTABLE
 
 rm -rf *.csv *.tex
 
+# run batch simulation
 ./$EDIR/$EXECUTABLE -f omnetppN8maxHP.ini -u Cmdenv -c $NED8
 mkdir N8HPmax
 mv *.csv N8HPmax
+mv *.tex N8HPmax

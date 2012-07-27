@@ -23,6 +23,7 @@ mkdir $SIMDIR/asl724
 #copy qlib to its pc specific directory to avoid file clashes
 cp -r $SRCDIR/ $SIMDIR/asl723/
 cp -r $SRCDIR/ $SIMDIR/asl724/
+cp $SRCDIR/simulations/batch_N8* ~
 
 chmod +x $EDIR/$EXECUTABLE
 #echo $(pwd)
@@ -34,15 +35,3 @@ gnome-terminal -x sh -c 'ssh -X matthies@asl723; cd /common/home/bel/matthies/ln
 gnome-terminal -x sh -c 'ssh -X matthies@asl724; cd /common/home/bel/matthies/lnx/whiteRabbit/asl724/; ./batch_N8HPmin_asl724; exec bash'
 
 # after login execute manually ./batch_N8HPmin_asl723 / ./batch_N8HPmax_asl724
-
-
-#start run there
-#./$EDIR/$EXECUTABLE -f omnetppN8minHP.ini -u Cmdenv -c $NED8
-#mkdir N8HPmin
-#mv *.csv N8HPmin
-
-#TODO ssh to asl724
-#start run there
-#./$EDIR/$EXECUTABLE -f omnetppN8maxHP.ini -u Cmdenv -c $NED8
-#mkdir N8HPmax
-#mv *.csv N8HPmax
